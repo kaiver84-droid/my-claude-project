@@ -344,6 +344,74 @@
   .dex-item.locked .ct{color:#b3c3cc;}
   .dex-legend{font-size:11.5px;font-weight:700;color:#7b93a3;text-align:center;line-height:1.5;}
 
+  /* ---------- 전설의 보스 ---------- */
+  .dex-sec{display:flex;align-items:center;gap:7px;margin:3px 0 0;}
+  .dex-sec .line{flex:1 1 auto;height:2px;border-radius:2px;
+    background:linear-gradient(90deg,rgba(150,90,230,0),#b98cff 45%,#ffd76a 55%,rgba(255,215,106,0));}
+  .dex-sec b{flex:0 0 auto;font-size:12.5px;font-weight:900;color:#7a3fbf;letter-spacing:.02em;}
+  .dex-item.boss{background:linear-gradient(#2a1244,#123050 70%,#0d2740);border-color:#6e56a8;}
+  .dex-item.boss canvas{filter:drop-shadow(0 0 6px rgba(255,180,255,.45));}
+  .dex-item.boss .nm{color:#ffe9a8;}
+  .dex-item.boss .ct{color:#ffc766;}
+  .dex-item.boss.locked{background:#1b2333;border-color:#3b4a63;}
+  .dex-item.boss.locked .nm{color:#93a3b8;}
+  .dex-item.boss.locked .ct{color:#7d8ea3;}
+  .dex-item.boss.locked canvas{opacity:.30;filter:grayscale(.7) brightness(.75);}
+  .boss-note{
+    display:flex;align-items:center;justify-content:center;gap:5px;text-align:center;
+    font-size:11px;font-weight:900;color:#7a2fb8;line-height:1.3;
+    background:linear-gradient(90deg,#f5ebff,#fff8e6,#f5ebff);
+    border:2px solid #e9d8ff;border-radius:12px;padding:4px 8px;margin-top:7px;
+  }
+  .boss-note b{color:#8a3ad0;}
+
+  /* 보스전 퀴즈 카드 상단 */
+  .boss-bar{
+    display:flex;align-items:center;gap:9px;padding:7px 9px;border-radius:16px;
+    background:linear-gradient(120deg,#2a0f45,#123b5e 58%,#0b2740);
+    border:2.5px solid #ffd76a;
+    box-shadow:0 0 0 2px rgba(255,215,106,.16), inset 0 0 18px rgba(140,90,255,.35);
+  }
+  .boss-bar canvas{width:72px;height:48px;display:block;flex:0 0 auto;
+    filter:drop-shadow(0 0 8px rgba(255,170,255,.55));}
+  .boss-meta{flex:1 1 auto;min-width:0;}
+  .boss-top{display:flex;align-items:center;gap:5px;}
+  .boss-top b{font-size:14px;font-weight:900;color:#ffe9a8;letter-spacing:-.01em;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .boss-tag{flex:0 0 auto;font-size:9.5px;font-weight:900;color:#3a0a2a;
+    background:linear-gradient(#ffe38a,#ff9ec4);border-radius:99px;padding:1px 6px;white-space:nowrap;}
+  .boss-hp{display:flex;gap:4px;margin-top:4px;}
+  .boss-hp i{flex:1 1 0;height:9px;border-radius:99px;
+    background:linear-gradient(#ff6b8a,#e51e46);
+    box-shadow:0 0 7px rgba(255,80,120,.8);transition:background .18s,box-shadow .18s;}
+  .boss-hp i.off{background:#2b4155;box-shadow:none;}
+  .boss-state{margin-top:3px;font-size:10.5px;font-weight:900;color:#9fc3dc;}
+
+  /* 보스 출현 / 포획 배너 */
+  .boss-banner{
+    position:absolute;left:50%;top:46%;z-index:36;pointer-events:none;
+    transform:translate(-50%,-50%);text-align:center;opacity:0;
+  }
+  .boss-banner.show{animation:bossBanner 2.6s ease-out both;}
+  @keyframes bossBanner{
+    0%{opacity:0;transform:translate(-50%,-50%) scale(.62)}
+    12%{opacity:1;transform:translate(-50%,-50%) scale(1.08)}
+    20%{transform:translate(-50%,-50%) scale(1)}
+    78%{opacity:1;transform:translate(-50%,-50%) scale(1)}
+    100%{opacity:0;transform:translate(-50%,-52%) scale(1.04)}
+  }
+  .boss-banner .t{
+    font-size:clamp(24px,8vw,34px);font-weight:900;color:#fff;letter-spacing:.01em;
+    text-shadow:0 0 10px rgba(255,90,150,.95),0 0 24px rgba(255,190,80,.8),0 4px 0 #7a1030;
+  }
+  .boss-banner.win .t{text-shadow:0 0 12px rgba(255,215,90,.95),0 0 26px rgba(255,140,60,.8),0 4px 0 #8a4a00;}
+  .boss-banner .s{margin-top:4px;font-size:13px;font-weight:900;color:#ffe9a8;
+    text-shadow:0 2px 6px rgba(10,10,30,.75);}
+  .boss-flash{position:absolute;inset:0;z-index:34;pointer-events:none;opacity:0;
+    background:radial-gradient(60% 45% at 50% 58%,rgba(255,90,150,0) 30%,rgba(190,40,120,.55) 100%);}
+  .boss-flash.show{animation:bossFlash 1.5s ease-out both;}
+  @keyframes bossFlash{0%{opacity:0}12%{opacity:.9}100%{opacity:0}}
+
   /* ---------- result ---------- */
   .result-card{max-width:400px;text-align:center;}
   .result-card h2{margin:2px 0 0;font-size:23px;font-weight:900;letter-spacing:-.02em;}
@@ -409,6 +477,10 @@
     .hint-note{font-size:11.5px;margin-top:7px;}
     .hint-steps .st{font-size:12px;}
     .colcalc td{font-size:18px;}
+    .boss-bar canvas{width:58px;height:39px;}
+    .boss-top b{font-size:13px;}
+    .boss-hp i{height:8px;}
+    .boss-note{font-size:10px;margin-top:5px;padding:3px 6px;}
   }
   @media (max-height:560px){
     .title-wrap{display:block;margin:0 0 4px 0;}
@@ -425,6 +497,7 @@
     .best-line{margin-bottom:4px;padding:2px 8px;font-size:10px;}
     .seg-title{margin-bottom:3px;font-size:10px;}
     .grade-desc{display:none;}
+    .boss-note{display:none;}
     .card{max-height:96vh;}
   }
   @media (min-width:820px){
@@ -538,6 +611,7 @@
         </button>
       </div>
       <div class="best-line" id="bestLine">1학년 · 자유 낚시 최고 점수 0점</div>
+      <div class="boss-note" id="bossNote">물고기 <b>5마리</b>마다 <b>전설의 보스</b>가 나타나요!</div>
       <button class="big-btn" id="startBtn">
         <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
           <path d="M8 5.5l11 6.5-11 6.5z" fill="#fff" stroke="none"/>
@@ -551,6 +625,17 @@
   <!-- quiz -->
   <div id="quizWrap" class="modal hidden">
     <div class="card" id="quizCard">
+      <div class="boss-bar hidden" id="bossBar">
+        <canvas id="bossBadgeCv" width="144" height="96"></canvas>
+        <div class="boss-meta">
+          <div class="boss-top">
+            <b id="bossName">전설의 크라켄</b>
+            <span class="boss-tag" id="bossTag">전설의 보스</span>
+          </div>
+          <div class="boss-hp" id="bossHp"><i></i><i></i><i></i></div>
+          <div class="boss-state" id="bossState">체력 3/3</div>
+        </div>
+      </div>
       <div class="quiz-top">
         <div class="badge"><canvas id="badgeCv" width="152" height="104"></canvas></div>
         <div class="say">
@@ -586,10 +671,14 @@
       </div>
       <div class="dex-stats">
         <div class="stat"><small>잡은 물고기</small><b id="dexTotal">0</b></div>
-        <div class="stat"><small>모은 종류</small><b id="dexKinds">0/9</b></div>
+        <div class="stat"><small>모은 종류</small><b id="dexKinds">0/12</b></div>
         <div class="stat"><small>푼 문제</small><b id="dexSolved">0</b></div>
       </div>
       <div class="dex-grid" id="dexGrid"></div>
+      <div class="dex-sec" id="dexBossSec">
+        <span class="line"></span><b>전설의 보스</b><span class="line"></span>
+      </div>
+      <div class="dex-grid boss" id="dexBossGrid"></div>
       <div class="dex-legend" id="dexLegend">낚시를 하면 저절로 모여요. 희귀한 물고기일수록 점수가 커요!</div>
     </div>
   </div>
@@ -613,6 +702,11 @@
     </div>
   </div>
 
+  <div id="bossFlash" class="boss-flash"></div>
+  <div id="bossBanner" class="boss-banner" aria-live="polite">
+    <div class="t" id="bossBannerT">보스 출현!</div>
+    <div class="s" id="bossBannerS">전설의 크라켄</div>
+  </div>
   <div id="toast" class="toast"><canvas id="toastCv" width="88" height="60"></canvas><span id="toastText"></span><span class="pts" id="toastPts"></span></div>
 </div>
 
@@ -1376,7 +1470,24 @@
     win(){
       [523,659,784,1047,1319].forEach((f,i)=>tone(f,0.26,{type:'triangle',vol:0.10,when:i*0.1}));
     },
-    start(){ tone(392,0.1,{type:'triangle',vol:0.08}); tone(587,0.16,{type:'triangle',vol:0.08,when:0.09}); }
+    start(){ tone(392,0.1,{type:'triangle',vol:0.08}); tone(587,0.16,{type:'triangle',vol:0.08,when:0.09}); },
+    bossAppear(){
+      tone(110,0.5,{type:'sawtooth',vol:0.07,to:64});
+      tone(147,0.5,{type:'square',vol:0.045,when:0.06,to:92});
+      tone(220,0.62,{type:'triangle',vol:0.06,when:0.2,to:104});
+      noiseBurst(0.5,0.11,300);
+    },
+    bossHit(){
+      tone(196,0.12,{type:'square',vol:0.07});
+      tone(262,0.13,{type:'square',vol:0.07,when:0.1});
+      noiseBurst(0.2,0.09,1500);
+    },
+    reel(){ tone(520,0.1,{type:'triangle',vol:0.05,to:620}); },
+    bossWin(){
+      [392,523,659,784,1047,1319].forEach((f,i)=>tone(f,0.3,{type:'triangle',vol:0.1,when:i*0.11}));
+      tone(196,0.6,{type:'sine',vol:0.06,when:0.12});
+      noiseBurst(0.5,0.13,2200);
+    }
   };
 
   /* ---------------------------------------------------------------
@@ -1400,7 +1511,214 @@
     return SPECIES[0];
   }
 
+  /* ---- 전설의 보스 3종 (일반 물고기 풀에는 섞이지 않는다) ---- */
+  const BOSSES = [
+    {id:'whaleshark', name:'대왕 고래상어', pts:500, w:0, len:196, color:'#4f9fc8', accent:'#eafbff',
+     speed:[9,14], boss:true, tag:'바다의 거인', aura:[150,228,255]},
+    {id:'kraken',     name:'전설의 크라켄', pts:700, w:0, len:210, color:'#b06bd8', accent:'#ff9de0',
+     speed:[7,12],  boss:true, tag:'심해의 포식자', aura:[208,132,255]},
+    {id:'golddragon', name:'심해 황금용',  pts:1000, w:0, len:224, color:'#ffd24a', accent:'#ff7a2f',
+     speed:[10,15], boss:true, tag:'바다의 왕', aura:[255,205,96]}
+  ];
+  BOSSES.forEach(b=>{ b.hp = 3; });
+  const ALL_SPECIES = SPECIES.concat(BOSSES);
+
   function ell(c,x,y,rx,ry){ c.beginPath(); c.ellipse(x,y,rx,ry,0,0,Math.PI*2); }
+
+  /* ---- 보스 물고기 벡터 그림 ----
+     일반 물고기와 같은 44단위 좌표계에서 그린 뒤 drawFish 가 size 배율로 확대한다.
+     (외부 파일·라이브러리 없이 캔버스 패스 + 그라디언트로만 그리는 벡터 그림) */
+  function bezPoint(p0,p1,p2,p3,t){
+    const u = 1-t;
+    return {
+      x: u*u*u*p0.x + 3*u*u*t*p1.x + 3*u*t*t*p2.x + t*t*t*p3.x,
+      y: u*u*u*p0.y + 3*u*u*t*p1.y + 3*u*t*t*p2.y + t*t*t*p3.y
+    };
+  }
+  function drawBossBody(c, sp, phase){
+    const wag = Math.sin(phase*0.9), wag2 = Math.sin(phase*0.9-1.15);
+    c.lineJoin = 'round';
+    c.lineCap = 'round';
+
+    if(sp.id === 'whaleshark'){
+      /* 꼬리 */
+      c.fillStyle = '#2d6f96';
+      c.beginPath();
+      c.moveTo(-15,0);
+      c.quadraticCurveTo(-26,-8+wag*2.2, -36,-16+wag*3.4);
+      c.quadraticCurveTo(-31,-4, -31,0);
+      c.quadraticCurveTo(-31,4, -36,16+wag*3.4);
+      c.quadraticCurveTo(-26,8+wag*2.2, -15,0);
+      c.closePath(); c.fill();
+      c.strokeStyle = '#1c5074'; c.lineWidth = 0.7; c.stroke();
+      /* 몸통 */
+      const g = c.createLinearGradient(0,-13,0,13);
+      g.addColorStop(0,'#7cc0e0'); g.addColorStop(.42,sp.color); g.addColorStop(1,'#164a6e');
+      c.fillStyle = g;
+      c.beginPath();
+      c.moveTo(23,-4);
+      c.quadraticCurveTo(21,-12.5, 5,-13);
+      c.quadraticCurveTo(-13,-13.5, -18,-4);
+      c.quadraticCurveTo(-20,0, -18,4);
+      c.quadraticCurveTo(-13,13.5, 5,13);
+      c.quadraticCurveTo(21,12.5, 23,4);
+      c.quadraticCurveTo(25.5,0, 23,-4);
+      c.closePath(); c.fill();
+      c.strokeStyle = '#154767'; c.lineWidth = 0.8; c.stroke();
+      /* 배 (밝은 살색) */
+      c.fillStyle = 'rgba(230,248,255,.88)';
+      c.beginPath();
+      c.moveTo(22,2.6);
+      c.quadraticCurveTo(8,12.2, -14,4.6);
+      c.quadraticCurveTo(6,8.6, 22,2.6);
+      c.closePath(); c.fill();
+      /* 등지느러미 */
+      c.fillStyle = '#2d6f96';
+      c.beginPath(); c.moveTo(1,-10.5); c.quadraticCurveTo(-3,-22-wag*0.6, -11,-9.5); c.closePath(); c.fill();
+      /* 가슴지느러미 */
+      c.fillStyle = '#2d6f96';
+      c.beginPath(); c.moveTo(9,8); c.quadraticCurveTo(3,20+wag*1.6, 15,10); c.closePath(); c.fill();
+      /* 흰 반점 무늬 */
+      c.fillStyle = 'rgba(255,255,255,.9)';
+      [[15,-6.5,1.5],[10,-8.5,1.2],[4,-7,1.7],[-2,-6,1.1],[-8,-5,1.4],[-13,-2,1.0],
+       [13,4.5,1.3],[7,7,1.5],[-1,6,1.2],[-7,3.5,1.0],[0,-2.5,1.05],[17,1,0.9]
+      ].forEach(s=>{ c.beginPath(); c.arc(s[0],s[1],s[2],0,Math.PI*2); c.fill(); });
+      /* 아가미 */
+      c.strokeStyle = 'rgba(16,58,82,.5)'; c.lineWidth = 0.65;
+      for(let i=0;i<4;i++){ c.beginPath(); c.moveTo(14-i*2.2,-4.4); c.lineTo(14-i*2.2,2.4); c.stroke(); }
+      /* 넓은 입 */
+      c.strokeStyle = '#123a52'; c.lineWidth = 1.05;
+      c.beginPath(); c.moveTo(23.5,1.2); c.quadraticCurveTo(17,7.4, 8,6.2); c.stroke();
+      /* 눈 */
+      c.fillStyle = '#ffffff'; c.beginPath(); c.arc(19.2,-5,1.9,0,Math.PI*2); c.fill();
+      c.fillStyle = '#0a2334'; c.beginPath(); c.arc(19.6,-5,1.0,0,Math.PI*2); c.fill();
+      c.fillStyle = 'rgba(255,255,255,.9)'; c.beginPath(); c.arc(20.1,-5.6,0.4,0,Math.PI*2); c.fill();
+
+    } else if(sp.id === 'kraken'){
+      /* 촉수 6개 (몸 뒤) */
+      const base = [-11,-7,-2.5,2.5,7,11];
+      for(let i=0;i<base.length;i++){
+        const bx = base[i]*1.5;
+        const sw = Math.sin(phase*1.3 + i*0.95);
+        const p0 = {x:bx*0.5, y:2};
+        const p3 = {x:bx*1.45 + sw*4.6, y:21 + Math.abs(bx)*0.14};
+        const p1 = {x:bx*0.6, y:11};
+        const p2 = {x:bx*1.15 + sw*3, y:17};
+        c.strokeStyle = i%2 ? '#8b3dc2' : '#a95bd6';
+        c.lineWidth = 3.8 - Math.abs(i-2.5)*0.42;
+        c.beginPath(); c.moveTo(p0.x,p0.y); c.bezierCurveTo(p1.x,p1.y,p2.x,p2.y,p3.x,p3.y); c.stroke();
+        /* 흡반 */
+        c.fillStyle = 'rgba(255,196,240,.8)';
+        [0.5,0.72,0.9].forEach(t=>{
+          const q = bezPoint(p0,p1,p2,p3,t);
+          c.beginPath(); c.arc(q.x, q.y, 0.55, 0, Math.PI*2); c.fill();
+        });
+      }
+      /* 머리(망토) */
+      const hg = c.createRadialGradient(-2,-6,2, 1,0,16.5);
+      hg.addColorStop(0,'#e9bcff'); hg.addColorStop(.55,'#b56ae0'); hg.addColorStop(1,'#5a2688');
+      c.fillStyle = hg;
+      c.beginPath(); c.ellipse(1,-1,15.5,13.6,0,0,Math.PI*2); c.fill();
+      c.strokeStyle = '#461b6e'; c.lineWidth = 0.85; c.stroke();
+      /* 머리 위 지느러미 가시 */
+      c.fillStyle = '#d68cf4';
+      for(let i=0;i<3;i++){
+        const bx = -5 + i*4.2;
+        c.beginPath(); c.moveTo(bx,-12.6); c.quadraticCurveTo(bx+1.4,-19.4, bx+3.4,-12.4); c.closePath(); c.fill();
+      }
+      /* 부리 */
+      c.fillStyle = '#2a0b3d';
+      c.beginPath(); c.moveTo(14.4,-1.6); c.lineTo(20.4,-0.2); c.lineTo(14.4,2.2); c.closePath(); c.fill();
+      /* 발광하는 눈 2개 */
+      c.save();
+      c.shadowColor = '#ff5ad0'; c.shadowBlur = 9;
+      c.fillStyle = '#fff8ff';
+      c.beginPath(); c.ellipse(9.6,-4.6,3.5,3.9,0,0,Math.PI*2); c.fill();
+      c.beginPath(); c.ellipse(9.6,4.4,3.5,3.9,0,0,Math.PI*2); c.fill();
+      c.restore();
+      c.fillStyle = '#3b0a52';
+      c.beginPath(); c.ellipse(10.5,-4.6,1.35,2.5,0,0,Math.PI*2); c.fill();
+      c.beginPath(); c.ellipse(10.5,4.4,1.35,2.5,0,0,Math.PI*2); c.fill();
+      c.fillStyle = 'rgba(255,255,255,.95)';
+      c.beginPath(); c.arc(8.9,-5.6,1.05,0,Math.PI*2); c.fill();
+      c.beginPath(); c.arc(8.9,3.4,1.05,0,Math.PI*2); c.fill();
+      /* 몸 점무늬 */
+      c.fillStyle = 'rgba(255,214,255,.35)';
+      [[-6,-7,1.6],[-9,-1,1.3],[-5,5,1.5],[-11,6,1.1],[0,-9,1.2],[2,8,1.3]].forEach(s=>{
+        c.beginPath(); c.arc(s[0],s[1],s[2],0,Math.PI*2); c.fill();
+      });
+
+    } else { /* golddragon */
+      const w1 = Math.sin(phase*1.1)*2.4;
+      /* 꼬리지느러미 */
+      c.fillStyle = '#ff8a2f';
+      c.beginPath();
+      c.moveTo(-19,4+w1);
+      c.quadraticCurveTo(-30,-7+w1, -34,3+w1);
+      c.quadraticCurveTo(-30,7+w1, -33,12+w1);
+      c.quadraticCurveTo(-26,11+w1, -19,7+w1);
+      c.closePath(); c.fill();
+      /* 몸통 (물결치는 띠) */
+      c.save();
+      c.shadowColor = 'rgba(255,180,50,.85)'; c.shadowBlur = 9;
+      const bg = c.createLinearGradient(-22,-12,20,12);
+      bg.addColorStop(0,'#f08c1c'); bg.addColorStop(.45,'#ffd24a'); bg.addColorStop(1,'#fff4b8');
+      c.strokeStyle = bg; c.lineWidth = 7.4;
+      c.beginPath();
+      c.moveTo(-19,5+w1);
+      c.bezierCurveTo(-11,-9+w1, -1,10-w1*1.2, 8,-2+w1*0.5);
+      c.stroke();
+      c.restore();
+      /* 배 밝은 선 */
+      c.strokeStyle = 'rgba(255,252,220,.75)'; c.lineWidth = 1.5;
+      c.beginPath();
+      c.moveTo(-17,6.5+w1);
+      c.bezierCurveTo(-10,-5+w1, -1,11-w1*1.2, 7,1+w1*0.5);
+      c.stroke();
+      /* 등 가시 */
+      c.fillStyle = '#ff7a2f';
+      for(let i=0;i<4;i++){
+        const bx = -13 + i*5.4;
+        const by = -3.4 + Math.sin(i*1.7)*1.1;
+        c.beginPath(); c.moveTo(bx,by); c.quadraticCurveTo(bx+1.6,by-7.6, bx+3.8,by-0.6); c.closePath(); c.fill();
+      }
+      /* 머리 */
+      const hgd = c.createLinearGradient(6,-10,21,8);
+      hgd.addColorStop(0,'#fff0a8'); hgd.addColorStop(.55,'#ffd24a'); hgd.addColorStop(1,'#f09a18');
+      c.fillStyle = hgd;
+      c.beginPath();
+      c.moveTo(5,-6);
+      c.quadraticCurveTo(12,-11.5, 19,-6.4);
+      c.quadraticCurveTo(24.4,-3, 20.6,1.6);
+      c.quadraticCurveTo(15,6.6, 6,5.2);
+      c.closePath(); c.fill();
+      c.strokeStyle = '#c97a08'; c.lineWidth = 0.7; c.stroke();
+      /* 뿔 2개 */
+      c.strokeStyle = '#e07a10'; c.lineWidth = 1.5;
+      c.beginPath(); c.moveTo(9.4,-8.6); c.quadraticCurveTo(8,-15.6, 13.4,-17.2); c.stroke();
+      c.beginPath(); c.moveTo(15,-8.4); c.quadraticCurveTo(17.6,-14.4, 22.4,-13.6); c.stroke();
+      /* 콧수염 */
+      c.strokeStyle = '#ffcf5a'; c.lineWidth = 1.1;
+      c.beginPath(); c.moveTo(19.4,2.2); c.quadraticCurveTo(26,5.6+wag2*0.8, 24.6,11.4+wag2); c.stroke();
+      c.beginPath(); c.moveTo(19.4,-2.4); c.quadraticCurveTo(26.6,-4.6+wag2*0.8, 27,2.2); c.stroke();
+      /* 눈 */
+      c.fillStyle = '#fff'; c.beginPath(); c.ellipse(15.6,-4.2,2.05,2.3,0,0,Math.PI*2); c.fill();
+      c.fillStyle = '#a3121b'; c.beginPath(); c.ellipse(16.1,-4.2,1.0,1.5,0,0,Math.PI*2); c.fill();
+      c.fillStyle = 'rgba(255,255,255,.95)'; c.beginPath(); c.arc(15.4,-4.9,0.5,0,Math.PI*2); c.fill();
+      /* 입과 이빨 */
+      c.strokeStyle = '#a34a00'; c.lineWidth = 0.9;
+      c.beginPath(); c.moveTo(19.6,2.6); c.quadraticCurveTo(16.4,6, 11.4,5.2); c.stroke();
+      c.fillStyle = '#fffdf2';
+      for(let i=0;i<3;i++){ c.beginPath(); c.moveTo(18.4-i*2.2,3.9+i*0.2); c.lineTo(17.4-i*2.2,5.6+i*0.15); c.lineTo(16.4-i*2.2,3.9+i*0.2); c.closePath(); c.fill(); }
+      /* 비늘 */
+      c.strokeStyle = 'rgba(190,110,20,.45)'; c.lineWidth = 0.6;
+      for(let i=0;i<5;i++){
+        const bx = -8 + i*4.2;
+        const by = 1 + Math.sin(i*1.3+w1*0.2)*1.6;
+        c.beginPath(); c.arc(bx,by,2.1,Math.PI*0.15,Math.PI*0.85); c.stroke();
+      }
+    }
+  }
 
   /* 물고기 한 마리 그리기: (x,y) 중심, size = 전체 길이(px), dir 1=오른쪽 */
   function drawFish(c, sp, x, y, size, phase, dir, alpha){
@@ -1554,6 +1872,8 @@
       c.fillStyle='#fff';
       c.beginPath(); c.moveTo(-6,-18); c.lineTo(-4,-14.5); c.lineTo(-1,-13); c.lineTo(-4,-11.5); c.lineTo(-6,-8); c.lineTo(-8,-11.5); c.lineTo(-11,-13); c.lineTo(-8,-14.5); c.closePath(); c.fill();
       c.globalAlpha = 1;
+    } else if(sp.boss){
+      drawBossBody(c, sp, phase);
     } else { // chest
       const bob = Math.sin(phase)*0.8;
       c.save();
@@ -1622,8 +1942,12 @@
     quiz: null, wrong: 0, hintOpen: false,
     catchT: 0, catchFrom: null,
     particles: [], floats: [], t: 0,
-    dexOpen: false, paused: false
+    dexOpen: false, paused: false,
+    /* 보스 */
+    boss: null, bossFight: false, bossHp: 0, bossMaxHp: 3,
+    fishCaught: 0, bossCaught: 0, bossSpawns: 0
   };
+  const bossMaxHpNow = () => (G.mode === 'timed' ? 1 : 3);
 
   const FISH_MIN = () => (W < 420 ? 8 : W < 760 ? 10 : 13);
   function spawnFish(initial){
@@ -1649,6 +1973,193 @@
   function removeFish(f){
     const i = G.fish.indexOf(f);
     if(i>=0) G.fish.splice(i,1);
+  }
+
+  /* ---------------------------------------------------------------
+     전설의 보스 (출현 · 보스전 · 포획)
+  ----------------------------------------------------------------*/
+  function bossCandidates(){
+    const un = BOSSES.filter(b=> (Number(save.caught[b.id])||0) === 0);
+    return un.length ? un : BOSSES;
+  }
+  function syncCastLabel(){
+    const s = $('castBtn').querySelector('span');
+    if(s) s.textContent = G.boss ? '보스에게 던지기' : '낚싯대 던지기';
+  }
+  function showBossBanner(title, sub, win){
+    const b = $('bossBanner');
+    $('bossBannerT').textContent = title;
+    $('bossBannerS').textContent = sub || '';
+    b.classList.toggle('win', !!win);
+    b.classList.remove('show');
+    void b.offsetWidth;
+    b.classList.add('show');
+    clearTimeout(showBossBanner._h);
+    showBossBanner._h = setTimeout(()=>b.classList.remove('show'), 2700);
+  }
+  function flashBoss(){
+    const f = $('bossFlash');
+    f.classList.remove('show');
+    void f.offsetWidth;
+    f.classList.add('show');
+    clearTimeout(flashBoss._h);
+    flashBoss._h = setTimeout(()=>f.classList.remove('show'), 1600);
+  }
+  function spawnBoss(){
+    if(G.boss) return G.boss;                 /* 이미 보스가 떠 있으면 중복 출현 없음 */
+    if(G.state !== 'playing') return null;
+    const sp = pick(bossCandidates());
+    const size = sp.len * SCALE;
+    const baseY = clamp(H - (H - waterY)*0.30, waterY + 78*SCALE, H - 96);
+    G.boss = {
+      sp, size,
+      x: W*0.5, y: baseY + 30*SCALE, baseY,
+      dir: Math.random() < 0.5 ? 1 : -1,
+      speed: R(sp.speed[0], sp.speed[1]) * clamp(SCALE, 0.85, 1.3),
+      phase: Math.random()*6.28,
+      amp: 4*SCALE, rise: 0, wig: 0
+    };
+    showBossBanner('보스 출현!', G.mode === 'timed'
+      ? sp.name + ' · 문제 1개면 포획!'
+      : sp.name + ' · 3문제 연속!');
+    flashBoss();
+    sfx.bossAppear();
+    syncCastLabel();
+    G.bossSpawns++;
+    return G.boss;
+  }
+  function castToBoss(){
+    if(G.state !== 'playing' || !G.boss) return;
+    const b = G.boss;
+    sfx.cast();
+    G.state = 'casting';
+    G.hooked = b;
+    G.castT = 0;
+    G.castDelay = 0;
+    G.bossFight = true;
+    G.bossMaxHp = bossMaxHpNow();
+    G.bossHp = G.bossMaxHp;
+    G.bob = { x: rodTip().x, y: rodTip().y, tx: b.x, ty: b.y, biting:false };
+    b.wig = 0;
+    updateBossHpUI();
+  }
+  function updateBossHpUI(){
+    const wrap = $('bossHp');
+    if(!wrap) return;
+    const pips = Array.prototype.slice.call(wrap.children);
+    pips.forEach((p, i)=>{
+      p.style.display = i < G.bossMaxHp ? '' : 'none';
+      p.classList.toggle('off', i >= G.bossHp);
+    });
+    $('bossState').textContent = '체력 ' + G.bossHp + '/' + G.bossMaxHp;
+  }
+  function bossHit(){
+    const b = G.boss;
+    if(!b) return;
+    G.bossHp = Math.max(0, G.bossHp - 1);
+    updateBossHpUI();
+    sfx.bossHit();
+    if(G.bossHp > 0){
+      $('feedback').className = 'feedback ok';
+      $('feedback').textContent = '줄을 당겼어요! (남은 체력 ' + G.bossHp + '/' + G.bossMaxHp + ')';
+      floatText(b.x, b.y - 24*SCALE, '쭉!', '#9ef0ff');
+      clearTimeout(bossHit._h);
+      bossHit._h = setTimeout(()=>{
+        if(G.state === 'quiz' && G.bossFight && G.boss) openQuiz(G.boss, true, true);
+      }, 950);
+    } else {
+      $('feedback').className = 'feedback ok';
+      $('feedback').textContent = '보스의 체력이 다 됐어요! 끌어 올려요!';
+      setTimeout(()=>catchStart(), 520);
+    }
+  }
+  function finishBossCatch(fish){
+    const sp = fish.sp;
+    const bonus = G.mode === 'timed' ? 100 : 0;
+    const pts = sp.pts + bonus;
+    G.score += pts;
+    G.caughtCount++;
+    G.bossCaught++;
+    G.streak = Math.max(1, G.streak);
+    save.caught[sp.id] = (Number(save.caught[sp.id])||0) + 1;
+    const bestKey = save.best[G.mode];
+    if(G.score > (bestKey[G.grade]||0)) bestKey[G.grade] = G.score;
+    if(G.mode === 'timed') G.timeLeft = clamp(G.timeLeft + 5, 0, 60);
+    persist();
+    updateHUD(true);
+    G.boss = null;
+    G.bossFight = false;
+    G.bossHp = 0;
+    G.hooked = null;
+    G.bob = null;
+    G.quiz = null;
+    G.state = 'playing';
+    $('bossBar').classList.add('hidden');
+    const top = $('quizCard').querySelector('.quiz-top');
+    if(top) top.classList.remove('hidden');
+    syncCastLabel();
+    updateBossHpUI();
+    toast(sp, pts, josa(sp.name,'을','를') + ' 잡았어요!' + (bonus ? ' 보스 보너스' : ''));
+    floatText(boat.x, boat.y - 88*SCALE, '+'+pts, '#ffe07a');
+    if(G.mode === 'timed') floatText(boat.x, boat.y - 46*SCALE, '+5초', '#8ff3ff');
+    sparkle(fish.x, waterY);
+    splash(fish.x, waterY+8);
+    splash(fish.x-26, waterY+8);
+    splash(fish.x+28, waterY+8);
+    showBossBanner(sp.name + ' 포획!', bonus ? '+' + pts + '점 · 남은 시간 +5초' : '+' + pts + '점', true);
+    sfx.bossWin();
+    ensureFish();
+  }
+  function drawBossAura(sp, x, y, size, t){
+    const pulse = 0.62 + 0.38*Math.sin(t*2.1);
+    const col = sp.aura || [255,200,120];
+    const cs = col.join(',');
+    const outer = ctx.createRadialGradient(x, y, size*0.16, x, y, size*0.92);
+    outer.addColorStop(0, 'rgba(' + cs + ',' + (0.32*pulse).toFixed(3) + ')');
+    outer.addColorStop(0.55, 'rgba(' + cs + ',' + (0.18*pulse).toFixed(3) + ')');
+    outer.addColorStop(1, 'rgba(' + cs + ',0)');
+    ctx.save();
+    ctx.fillStyle = outer;
+    ctx.beginPath(); ctx.arc(x, y, size*0.92, 0, Math.PI*2); ctx.fill();
+    ctx.strokeStyle = 'rgba(' + cs + ',' + (0.26*pulse).toFixed(3) + ')';
+    ctx.lineWidth = 2*SCALE;
+    for(let i=0;i<2;i++){
+      const rr = size*(0.54 + 0.30*i) + Math.sin(t*1.6 + i*1.7)*size*0.03;
+      ctx.beginPath(); ctx.arc(x, y, rr, 0, Math.PI*2); ctx.stroke();
+    }
+    for(let i=0;i<5;i++){
+      const a = -t*0.9 + i*Math.PI*2/5;
+      const sx = x + Math.cos(a)*size*0.62;
+      const sy = y + Math.sin(a)*size*0.36;
+      const tw = 0.45 + 0.55*Math.sin(t*3 + i*1.3);
+      ctx.globalAlpha = 0.55*tw;
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath(); ctx.arc(sx, sy, 2.2*SCALE*tw + 1, 0, Math.PI*2); ctx.fill();
+    }
+    ctx.restore();
+  }
+  function drawBossTag(sp, x, y, size, t){
+    const txt = '전설의 보스';
+    const ly = y - size*0.54 - 15*SCALE;
+    const fs = Math.round(12*SCALE);
+    ctx.save();
+    ctx.font = '900 ' + fs + 'px system-ui, -apple-system, "Apple SD Gothic Neo", sans-serif';
+    const w = ctx.measureText(txt).width + 15*SCALE;
+    const h = 19*SCALE;
+    ctx.globalAlpha = 0.94;
+    ctx.fillStyle = 'rgba(42,10,52,.74)';
+    ctx.beginPath();
+    if(ctx.roundRect) ctx.roundRect(x-w/2, ly-h/2, w, h, h/2); else ctx.rect(x-w/2, ly-h/2, w, h);
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(255,215,120,' + (0.6 + 0.3*Math.sin(t*3)).toFixed(2) + ')';
+    ctx.lineWidth = 1.5*SCALE; ctx.stroke();
+    ctx.fillStyle = '#ffe9a8';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(txt, x, ly + 0.5*SCALE);
+    ctx.fillStyle = 'rgba(255,215,120,.9)';
+    const ay = ly + h/2 + 4*SCALE + Math.abs(Math.sin(t*3))*3*SCALE;
+    ctx.beginPath(); ctx.moveTo(x-5*SCALE, ay); ctx.lineTo(x+5*SCALE, ay); ctx.lineTo(x, ay+6*SCALE); ctx.closePath(); ctx.fill();
+    ctx.restore();
   }
 
   /* ---------------------------------------------------------------
@@ -1722,11 +2233,19 @@
     const gname = GRADE_INFO[save.grade].name;
     const md = save.mode==='timed'?'60초 도전':'자유 낚시';
     $('bestLine').textContent = `${gname} · ${md} 최고 점수 ${best}점`;
+    $('bossNote').innerHTML = save.mode === 'timed'
+      ? '물고기 <b>4마리</b>마다 <b>전설의 보스</b>가 나타나요!'
+      : '물고기 <b>5마리</b>마다 <b>전설의 보스</b>가 나타나요!';
     G.grade = save.grade; G.mode = save.mode;
   }
   function showStart(){
     G.state = 'title';
     G.paused = false;
+    G.boss = null; G.bossFight = false; G.bossHp = 0;
+    $('bossBar').classList.add('hidden');
+    const top = $('quizCard').querySelector('.quiz-top');
+    if(top) top.classList.remove('hidden');
+    syncCastLabel();
     $('startScreen').classList.remove('hidden');
     $('hud').classList.add('hidden');
     $('bottomBar').classList.add('hidden');
@@ -1748,6 +2267,12 @@
     G.timeLeft = 60; G.elapsed = 0;
     G.fish = []; G.hooked = null; G.bob = null; G.quiz = null; G.wrong = 0; G.hintOpen = false;
     G.particles = []; G.floats = [];
+    G.boss = null; G.bossFight = false; G.bossHp = 0; G.bossMaxHp = bossMaxHpNow();
+    G.fishCaught = 0;
+    $('bossBar').classList.add('hidden');
+    const qtop = $('quizCard').querySelector('.quiz-top');
+    if(qtop) qtop.classList.remove('hidden');
+    syncCastLabel();
     ensureFish();
     $('startScreen').classList.add('hidden');
     $('hud').classList.remove('hidden');
@@ -1771,11 +2296,13 @@
     G.hooked = fish;
     G.castT = 0;
     G.castDelay = 0;
+    G.bossFight = false;
     G.bob = { x: rodTip().x, y: rodTip().y, tx: fish.x, ty: fish.y, biting:false };
     fish.wig = 0;
   }
   function castButton(){
     if(G.state !== 'playing') return;
+    if(G.boss){ castToBoss(); return; }   /* 보스가 떠 있으면 낚싯대는 보스에게 */
     if(!G.fish.length){ ensureFish(); }
     const target = { x: W*0.5, y: waterY + (H-waterY)*0.45 };
     let best = null, bd = 1e9;
@@ -1798,13 +2325,28 @@
     }
   }
 
-  function openQuiz(fish){
+  function openQuiz(fish, isBoss, quiet){
     const prob = makeProblemFor(G.grade);
     G.quiz = prob;
     G.state = 'quiz';
     G.wrong = 0;
     G.hintOpen = false;
-    G.bob.biting = false;
+    if(G.bob) G.bob.biting = false;
+
+    /* 보스전: 카드 상단에 보스 아이콘·이름·체력 게이지 */
+    $('bossBar').classList.toggle('hidden', !isBoss);
+    const qtop = $('quizCard').querySelector('.quiz-top');
+    if(qtop) qtop.classList.toggle('hidden', !!isBoss);
+    if(isBoss){
+      const bcv = $('bossBadgeCv').getContext('2d');
+      bcv.setTransform(1,0,0,1,0,0);
+      bcv.clearRect(0,0,144,96);
+      const bs = 84 / Math.max(40, fish.sp.len);
+      drawFish(bcv, fish.sp, 72, 50, fish.sp.len*bs, 1.5, 1);
+      $('bossName').textContent = fish.sp.name;
+      $('bossTag').textContent = fish.sp.tag || '전설의 보스';
+      updateBossHpUI();
+    }
 
     $('question').innerHTML = prob.prompt;
     fitQuestion();
@@ -1816,17 +2358,21 @@
     $('quizCard').classList.remove('shake');
 
     /* 물고기 배지 */
-    const bc = $('badgeCv').getContext('2d');
-    bc.setTransform(1,0,0,1,0,0);
-    bc.clearRect(0,0,152,104);
-    const targetLen = 104;
-    const s = targetLen / Math.max(30, fish.sp.len);
-    drawFish(bc, fish.sp, 76, 52, fish.sp.len*s, 1.4, 1);
+    if(!isBoss){
+      const bc = $('badgeCv').getContext('2d');
+      bc.setTransform(1,0,0,1,0,0);
+      bc.clearRect(0,0,152,104);
+      const targetLen = 104;
+      const s = targetLen / Math.max(30, fish.sp.len);
+      drawFish(bc, fish.sp, 76, 52, fish.sp.len*s, 1.4, 1);
+    }
 
-    $('quizSay').textContent = `${josa(fish.sp.name,'이','가')} 입질했어요!`;
-    $('quizSaySub').textContent = prob.blank
-      ? '빈칸에 들어갈 수를 골라 보세요'
-      : '답을 고르면 물고기를 잡을 수 있어요';
+    $('quizSay').textContent = isBoss
+      ? `${fish.sp.name}와의 승부!`
+      : `${josa(fish.sp.name,'이','가')} 입질했어요!`;
+    $('quizSaySub').textContent = isBoss
+      ? (prob.blank ? '빈칸에 들어갈 수를 고르세요' : '맞히면 줄을 당길 수 있어요')
+      : (prob.blank ? '빈칸에 들어갈 수를 골라 보세요' : '답을 고르면 물고기를 잡을 수 있어요');
     $('hintBtnLabel').textContent = prob.hint.type === 'apples' ? '그림으로 세어보기' : '풀이 힌트';
 
     const ch = $('choices');
@@ -1841,7 +2387,7 @@
       ch.appendChild(b);
     });
     $('quizWrap').classList.remove('hidden');
-    sfx.bite();
+    if(quiet) sfx.reel(); else sfx.bite();
     $('hintBtn').focus({preventScroll:true});
   }
 
@@ -1928,7 +2474,8 @@
       save.solved++; save.correct++; persist();
       G.streak++;
       sfx.right();
-      setTimeout(()=>catchStart(), 420);
+      if(G.bossFight && G.boss){ bossHit(); }
+      else setTimeout(()=>catchStart(), 420);
     } else {
       G.wrong++;
       save.solved++; persist();
@@ -1937,9 +2484,14 @@
       btn.disabled = true;
       $('feedback').className = 'feedback';
       const hintWord = prob.hint.type === 'apples' ? '그림 힌트' : '풀이 힌트';
-      $('feedback').textContent = G.wrong >= 2
-        ? `앗, 물고기가 힘을 내고 있어요! ${hintWord}를 보며 다시 풀어 볼까요?`
-        : '앗, 물고기가 힘을 내고 있어요! 다시 한 번 풀어 볼까요?';
+      const bn = (G.bossFight && G.boss) ? G.boss.sp.name : '';
+      $('feedback').textContent = G.bossFight
+        ? (G.wrong >= 2
+            ? `앗, ${josa(bn,'이','가')} 버텨요! ${hintWord}를 보며 다시 풀어 볼까요?`
+            : `앗, ${josa(bn,'이','가')} 버텨요! 다시 한 번 풀어 볼까요?`)
+        : (G.wrong >= 2
+            ? `앗, 물고기가 힘을 내고 있어요! ${hintWord}를 보며 다시 풀어 볼까요?`
+            : '앗, 물고기가 힘을 내고 있어요! 다시 한 번 풀어 볼까요?');
       const card = $('quizCard');
       card.classList.remove('shake');
       void card.offsetWidth;
@@ -1962,11 +2514,13 @@
     $('quizWrap').classList.add('hidden');
     sfx.splash();
     splash(fish.x, Math.min(waterY+10, fish.y));
+    if(fish.sp.boss){ splash(fish.x-26, waterY+10); splash(fish.x+28, waterY+10); }
   }
 
   function finishCatch(){
     const fish = G.hooked;
     if(!fish) return;
+    if(fish.sp.boss){ finishBossCatch(fish); return; }
     const sp = fish.sp;
     G.streak = Math.max(1, G.streak);
     const comboBonus = G.streak >= 2 ? Math.min(5, G.streak-1) * 10 : 0;
@@ -1987,19 +2541,33 @@
     G.quiz = null;
     ensureFish();
     G.state = 'playing';
+
+    /* 물고기를 잡을 때마다 세고, 정해진 마리 수마다 전설의 보스 출현 */
+    G.fishCaught++;
+    const need = G.mode === 'timed' ? 4 : 5;
+    if(!G.boss && G.fishCaught % need === 0) spawnBoss();
   }
 
   function quitQuiz(){
     if(G.state !== 'quiz') return;
     const fish = G.hooked;
+    const wasBoss = !!G.bossFight;
     $('quizWrap').classList.add('hidden');
+    $('bossBar').classList.add('hidden');
+    const qtop = $('quizCard').querySelector('.quiz-top');
+    if(qtop) qtop.classList.remove('hidden');
+    G.bossFight = false;
     G.quiz = null;
     G.hooked = null;
     G.bob = null;
     G.streak = 0;
     updateHUD();
     G.state = 'playing';
-    toast(null, null, fish ? `${josa(fish.sp.name,'을','를')} 놓아주었어요` : '다음 물고기를 기다려요');
+    toast(null, null, fish
+      ? (wasBoss
+          ? `${josa(fish.sp.name,'이','가')} 다시 깊은 곳으로 숨어 버렸어요`
+          : `${josa(fish.sp.name,'을','를')} 놓아주었어요`)
+      : '다음 물고기를 기다려요');
   }
 
   function splash(x,y){
@@ -2033,32 +2601,42 @@
     G.dexOpen = false;
     if(G.state === 'result') $('resultWrap').classList.remove('hidden');
   }
+  function dexItem(sp, isBoss){
+    const c = Number(save.caught[sp.id])||0;
+    const box = document.createElement('div');
+    box.className = 'dex-item' + (isBoss?' boss':'') + (c>0?'':' locked');
+    const cvs = document.createElement('canvas');
+    cvs.width = 144; cvs.height = 88;
+    const cc = cvs.getContext('2d');
+    const target = isBoss ? 118 : 76;
+    const s = target / Math.max(isBoss?40:30, sp.len);
+    drawFish(cc, sp, 72, isBoss?46:44, sp.len*s, 1.1, 1);
+    const nm = document.createElement('div'); nm.className='nm';
+    nm.textContent = c>0 ? sp.name : '???';
+    const ct = document.createElement('div'); ct.className='ct';
+    ct.textContent = c>0 ? `${c}마리 · ${sp.pts}점` : '아직 못 만났어요';
+    box.appendChild(cvs); box.appendChild(nm); box.appendChild(ct);
+    return box;
+  }
   function buildDex(){
     let total = 0, kinds = 0;
-    SPECIES.forEach(s=>{ const c = Number(save.caught[s.id])||0; total += c; if(c>0) kinds++; });
+    ALL_SPECIES.forEach(s=>{ const c = Number(save.caught[s.id])||0; total += c; if(c>0) kinds++; });
     $('dexTotal').textContent = total;
-    $('dexKinds').textContent = kinds+'/'+SPECIES.length;
+    $('dexKinds').textContent = kinds+'/'+ALL_SPECIES.length;
     $('dexSolved').textContent = save.solved;
     const grid = $('dexGrid');
     grid.innerHTML = '';
-    SPECIES.forEach(sp=>{
-      const c = Number(save.caught[sp.id])||0;
-      const box = document.createElement('div');
-      box.className = 'dex-item' + (c>0?'':' locked');
-      const cvs = document.createElement('canvas');
-      cvs.width = 144; cvs.height = 88;
-      const cc = cvs.getContext('2d');
-      const s = 76 / Math.max(30, sp.len);
-      drawFish(cc, sp, 72, 44, sp.len*s, 1.1, 1);
-      const nm = document.createElement('div'); nm.className='nm'; nm.textContent = c>0?sp.name:'???';
-      const ct = document.createElement('div'); ct.className='ct';
-      ct.textContent = c>0 ? `${c}마리 · ${sp.pts}점` : `아직 못 만났어요`;
-      box.appendChild(cvs); box.appendChild(nm); box.appendChild(ct);
-      grid.appendChild(box);
-    });
-    $('dexLegend').textContent = kinds===SPECIES.length
+    SPECIES.forEach(sp=>{ grid.appendChild(dexItem(sp, false)); });
+    const bgrid = $('dexBossGrid');
+    bgrid.innerHTML = '';
+    BOSSES.forEach(sp=>{ bgrid.appendChild(dexItem(sp, true)); });
+    const bossKinds = BOSSES.filter(b=> (Number(save.caught[b.id])||0) > 0).length;
+    $('dexBossSec').classList.toggle('done', bossKinds === BOSSES.length);
+    $('dexLegend').textContent = kinds === ALL_SPECIES.length
       ? '모든 물고기를 다 모았어요! 정말 대단해요!'
-      : '낚시를 하면 저절로 모여요. 희귀한 물고기일수록 점수가 커요!';
+      : (bossKinds === BOSSES.length
+          ? '전설의 보스를 모두 잡았어요! 낚시의 왕이에요!'
+          : '낚시를 하면 저절로 모여요. 물고기 5마리마다 전설의 보스가 나타나요!');
   }
 
   /* ---------------------------------------------------------------
@@ -2070,8 +2648,11 @@
     const isNew = G.score > prevBest;
     if(isNew){ save.best[G.mode][G.grade] = G.score; persist(); }
     G.state = 'result';
-    G.quiz = null; G.hooked = null; G.bob = null;
+    G.quiz = null; G.hooked = null; G.bob = null; G.bossFight = false;
     $('quizWrap').classList.add('hidden');
+    $('bossBar').classList.add('hidden');
+    const qt = $('quizCard').querySelector('.quiz-top');
+    if(qt) qt.classList.remove('hidden');
     $('resultTitle').textContent = reason==='time' ? '시간이 다 됐어요!' : '낚시를 마쳤어요!';
     $('resultSub').textContent = `${GRADE_INFO[G.grade].name} · ${G.mode==='timed'?'60초 도전':'자유 낚시'}`;
     $('resultScore').textContent = G.score;
@@ -2169,6 +2750,19 @@
         ctx.restore();
       }
     });
+
+    /* 전설의 보스 (발광 오라와 함께) */
+    if(G.boss){
+      const b = G.boss;
+      if(!(G.state === 'catching' && G.hooked === b)){
+        const e = 1 - Math.pow(1 - clamp(b.rise,0,1), 2);
+        const by = b.y + (1-e)*30*SCALE;
+        const al = 0.30 + 0.70*e;
+        drawBossAura(b.sp, b.x, by, b.size, t);
+        drawFish(ctx, b.sp, b.x, by, b.size, b.phase, b.dir, al);
+        if(b.rise > 0.15) drawBossTag(b.sp, b.x, by, b.size, t);
+      }
+    }
 
     ctx.save();
     bubbles.forEach(b=>{
@@ -2362,6 +2956,21 @@
         f.phase += dt*(3.2 + f.speed*0.04);
       });
 
+      /* 보스 물고기 움직임 */
+      if(G.boss){
+        const b = G.boss;
+        const engaged = (G.hooked === b) && (G.state==='casting'||G.state==='quiz'||G.state==='catching');
+        if(b.rise < 1) b.rise = Math.min(1, b.rise + dt*1.1);
+        if(!engaged){
+          b.x += b.dir * b.speed * dt;
+          const m = b.size*0.55;
+          if(b.dir > 0 && b.x > W + m) b.x = -m;
+          if(b.dir < 0 && b.x < -m) b.x = W + m;
+        }
+        b.y = b.baseY + Math.sin(t*0.8 + b.phase)*4*SCALE;
+        b.phase += dt*1.5;
+      }
+
       if(G.state === 'casting' && G.hooked){
         G.castT += dt*2.4;
         const tip = rodTip();
@@ -2374,7 +2983,7 @@
           G.bob.biting = true;
           if(!G.bob._bit){ G.bob._bit = true; sfx.bite(); splash(G.bob.x, waterY+6); }
           G.castDelay += dt;
-          if(G.castDelay > 0.55){ openQuiz(G.hooked); }
+          if(G.castDelay > 0.55){ openQuiz(G.hooked, G.bossFight); }
         }
       }
       if(G.state === 'catching'){
@@ -2422,6 +3031,12 @@
     if(G.state !== 'playing' || G.dexOpen) return;
     const p = canvasPoint(ev);
     if(p.y < waterY - 10) return;
+    /* 보스를 직접 터치하면 보스전 */
+    if(G.boss){
+      const b = G.boss;
+      const d = Math.hypot(b.x - p.x, (b.y - p.y)*1.05);
+      if(d < Math.max(b.size*0.5, 54)){ castToBoss(); return; }
+    }
     const f = fishAt(p.x, p.y);
     if(f) castTo(f);
   }, {passive:true});
@@ -2481,6 +3096,7 @@
   G.grade = save.grade; G.mode = save.mode;
   setMuteUI();
   refreshStart();
+  syncCastLabel();
   resize();
   for(let i=0;i<FISH_MIN();i++) spawnFish(true);
   updateHUD();
@@ -2506,6 +3122,19 @@
     hintType: ()=> G.quiz ? G.quiz.hint.type : null,
     save: ()=> JSON.parse(JSON.stringify(save)),
     cast: ()=> castButton(),
+    boss: ()=> G.boss ? {
+      id:G.boss.sp.id, name:G.boss.sp.name, pts:G.boss.sp.pts,
+      x:G.boss.x, y:G.boss.y, size:G.boss.size, rise:G.boss.rise,
+      hp: G.bossFight ? G.bossHp : null,
+      maxHp: G.bossFight ? G.bossMaxHp : null,
+      fighting:G.bossFight, mode:G.mode
+    } : null,
+    bossList: ()=> BOSSES.map(b=>({id:b.id, name:b.name, pts:b.pts})),
+    bossCaught: ()=> G.bossCaught,
+    bossSpawns: ()=> G.bossSpawns,
+    fishCaught: ()=> G.fishCaught,
+    spawnBoss: ()=> !!spawnBoss(),
+    screen: ()=> ({W:W, H:H, waterY:waterY, scale:SCALE}),
     selectGrade: (g)=>{ save.grade=Number(g); persist(); refreshStart(); },
     selectMode: (m)=>{ save.mode=m; persist(); refreshStart(); },
     chooseCorrect: ()=>{
