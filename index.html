@@ -446,6 +446,123 @@
   .toast canvas{width:44px;height:30px;flex:0 0 auto;}
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
 
+  /* ---------- 내 포인트 · 꾸미기 상점 ---------- */
+  .play-top{
+    position:absolute;left:10px;right:10px;z-index:19;
+    top:calc(var(--hudTop, 58px) + 4px);
+    display:flex;align-items:center;gap:7px;pointer-events:none;
+  }
+  .mode-pill{display:flex;gap:6px;flex:0 0 auto;}
+  .play-top .mode-pill{position:static;top:auto;left:auto;right:auto;background:none;}
+  .timer{position:static;flex:1 1 auto;display:flex;align-items:center;gap:8px;}
+  .play-top .timer{top:auto;left:auto;right:auto;}
+  .coin-pill{
+    flex:0 0 auto;display:flex;align-items:baseline;gap:3px;
+    background:linear-gradient(#fff7d8,#ffe08a);
+    border:2px solid #ffcf3f;border-radius:99px;padding:3px 9px;
+    box-shadow:0 3px 10px rgba(6,50,74,.18);white-space:nowrap;
+    font-size:11.5px;font-weight:900;color:#9a6a00;
+  }
+  .coin-pill span{font-size:10.5px;font-weight:900;color:#a37400;}
+  .coin-pill b{font-size:14px;font-weight:900;color:#8a4f00;letter-spacing:-.02em;}
+  .coin-pill i{font-style:normal;font-size:10px;font-weight:900;color:#a37400;}
+  .coin-pill.big{padding:5px 12px;box-shadow:0 4px 12px rgba(6,50,74,.22);}
+  .coin-pill.big b{font-size:16px;}
+  .start-top{display:flex;justify-content:space-between;align-items:center;gap:6px;}
+  .start-links{display:flex;gap:7px;margin-top:8px;}
+  .start-links .ghost-btn{margin-top:0;flex:1 1 0;font-size:14px;padding:0 4px;}
+  .start-links .ghost-btn.shop{
+    border-color:#ffd97a;background:#fff8e2;color:#a86a00;
+  }
+  .chip.coin{background:linear-gradient(#fff7d8,#ffe08a);border-color:#ffcf3f;}
+  .chip.coin b{color:#8a4f00;}
+
+  .shop-card{max-width:440px;gap:9px;}
+  .shop-head{display:flex;align-items:center;gap:8px;}
+  .shop-head h2{margin:0;font-size:20px;font-weight:900;letter-spacing:-.02em;flex:1 1 auto;}
+  .wallet{
+    flex:0 0 auto;display:flex;align-items:baseline;gap:3px;
+    background:linear-gradient(#fff7d8,#ffe08a);border:2.5px solid #ffcf3f;
+    border-radius:13px;padding:4px 9px;
+  }
+  .wallet small{font-size:10px;font-weight:900;color:#a37400;}
+  .wallet b{font-size:15px;font-weight:900;color:#8a4f00;}
+  .wallet i{font-style:normal;font-size:10px;font-weight:900;color:#a37400;}
+  .shop-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
+  .shop-tabs button{
+    height:42px;border-radius:14px;border:2.5px solid #d7ecf6;background:#f2f9fd;
+    font-family:inherit;font-size:14.5px;font-weight:900;color:#2f7ea6;cursor:pointer;
+  }
+  .shop-tabs button.on{background:#fff7dc;border-color:var(--sun);color:#7a4c00;
+    box-shadow:0 0 0 2px rgba(255,207,63,.3) inset;}
+  .shop-tabs button:active{transform:scale(.98);}
+  .shop-list{display:flex;flex-direction:column;gap:7px;}
+  .shop-item{
+    display:flex;align-items:center;gap:8px;background:#fff;
+    border:2.5px solid #eaf5fa;border-radius:16px;padding:6px 8px;
+  }
+  .shop-item.on{border-color:#ffcf3f;background:#fffdf3;box-shadow:0 0 0 2px rgba(255,207,63,.16) inset;}
+  .shop-item.shake{animation:shake .42s;}
+  .shop-item .prev{
+    flex:0 0 auto;width:96px;height:60px;border-radius:12px;overflow:hidden;
+    background:linear-gradient(#effaff,#c9e9f8);border:2px solid #dceff8;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .shop-item .prev canvas{width:96px;height:60px;display:block;}
+  .shop-item .meta{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:1px;}
+  .shop-item .nm{font-size:13.5px;font-weight:900;color:var(--ink);letter-spacing:-.01em;
+    line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .shop-item .ds{font-size:10.5px;font-weight:700;color:#7b93a3;line-height:1.25;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .shop-item .ln{display:flex;align-items:center;gap:6px;margin-top:1px;}
+  .shop-item .ln .pr{font-size:12px;font-weight:900;color:#2f7ea6;}
+  .shop-item .ln .pr.poor{color:#d0554c;}
+  .shop-item .ln .st{font-size:10.5px;font-weight:900;color:#5a9a3a;}
+  .shop-item .ln .st.lack{color:#d0554c;}
+  .shop-item.on .ln .st{color:#a35a00;}
+  .buy-btn{
+    flex:0 0 auto;min-width:80px;height:44px;padding:0 9px;border:none;border-radius:13px;
+    font-family:inherit;font-size:12.5px;font-weight:900;cursor:pointer;
+    background:linear-gradient(#5ed08b,#2fb457);color:#fff;box-shadow:0 3px 0 #1d8340;
+    line-height:1.1;
+  }
+  .buy-btn.equip{background:linear-gradient(#7cc9f6,#2f8fd6);box-shadow:0 3px 0 #1c6b9f;}
+  .buy-btn.equipped{background:#eef5f9;color:#7b93a3;border:2px solid #e0eef6;box-shadow:none;}
+  .buy-btn:active{transform:translateY(2px);box-shadow:none;}
+  .shop-msg{
+    min-height:36px;border-radius:13px;padding:7px 10px;font-size:12px;font-weight:900;
+    line-height:1.35;text-align:center;color:#5a7c8e;background:#f4f8fa;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .shop-msg.ok{color:#1b7a3c;background:#e9f9ef;}
+  .shop-msg.warn{color:#b8452f;background:#fdeeea;}
+  .shop-msg.gold{color:#8a5a00;background:#fff6dc;}
+
+  @media (max-width:430px){
+    .chip{padding:4px 8px;font-size:12px;}
+    .chip .lbl{font-size:10px;}
+    .chip b{font-size:15px;}
+    .icon-btn{width:40px;height:40px;border-radius:12px;}
+    .icon-btn svg{width:22px;height:22px;}
+    .hud-right{gap:5px;}
+    .play-top{gap:6px;}
+    .coin-pill{padding:2px 8px;}
+    .coin-pill b{font-size:13px;}
+  }
+  @media (max-width:380px){
+    .chip{padding:4px 6px;}
+    .chip .lbl{font-size:9.5px;}
+    .chip b{font-size:14px;}
+    .icon-btn{width:38px;height:38px;}
+    .icon-btn svg{width:21px;height:21px;}
+    .play-top{gap:5px;}
+    .mode-pill span{font-size:11px;padding:3px 8px;}
+    .coin-pill span{font-size:9.5px;}
+    .shop-item .prev{width:82px;height:54px;}
+    .shop-item .prev canvas{width:82px;height:54px;}
+    .buy-btn{min-width:72px;font-size:12px;}
+  }
+
   @media (max-height:700px){
     .title-wrap h1{font-size:27px;}
     .title-wrap p{display:none;}
@@ -500,6 +617,18 @@
     .boss-note{display:none;}
     .card{max-height:96vh;}
   }
+  @media (max-height:700px){
+    .shop-card{gap:7px;padding:11px;}
+    .shop-tabs button{height:36px;font-size:13px;}
+    .shop-item{padding:5px 7px;gap:6px;}
+    .shop-item .prev{width:82px;height:52px;}
+    .shop-item .prev canvas{width:82px;height:52px;}
+    .shop-item .nm{font-size:12.5px;}
+    .shop-item .ds{font-size:10px;}
+    .buy-btn{height:40px;min-width:74px;font-size:12px;}
+    .shop-msg{min-height:30px;font-size:11.5px;padding:5px 8px;}
+    .start-links .ghost-btn{height:38px;font-size:13px;}
+  }
   @media (min-width:820px){
     .chip{font-size:14px;padding:6px 12px;}
     .chip b{font-size:19px;}
@@ -523,6 +652,13 @@
       <div class="chip combo hidden" id="comboChip"><span class="lbl">연속</span><b id="comboVal">2</b></div>
     </div>
     <div class="hud-right">
+      <button class="icon-btn" id="shopBtn" aria-label="상점 열기" title="상점">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5.5 8h13l-1.1 11.2a1.4 1.4 0 0 1-1.4 1.3H8a1.4 1.4 0 0 1-1.4-1.3z"/>
+          <path d="M9 8V6.4a3 3 0 0 1 6 0V8"/>
+          <path d="M9.4 12.2c.7.9 1.6 1.3 2.6 1.3s1.9-.4 2.6-1.3" stroke-width="1.9"/>
+        </svg>
+      </button>
       <button class="icon-btn" id="muteBtn" aria-label="소리 끄기" title="소리">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M4 9.5h3L12 5.5v13L7 14.5H4z"/><path class="snd-on" d="M15.5 9a4.2 4.2 0 0 1 0 6"/><path class="snd-on" d="M18 6.5a8 8 0 0 1 0 11"/>
@@ -536,11 +672,14 @@
       </button>
     </div>
   </div>
-  <div id="timerWrap" class="timer hidden">
-    <div class="bar"><i id="timerFill"></i></div>
-    <div class="txt" id="timerText">60초</div>
+  <div id="playTop" class="play-top hidden">
+    <div id="modePill" class="mode-pill hidden"><span id="modePillText">1학년 · 자유 낚시</span></div>
+    <div id="coinPill" class="coin-pill" title="내 포인트"><span>내 포인트</span><b id="playCoins">0</b><i>P</i></div>
+    <div id="timerWrap" class="timer hidden">
+      <div class="bar"><i id="timerFill"></i></div>
+      <div class="txt" id="timerText">60초</div>
+    </div>
   </div>
-  <div id="modePill" class="mode-pill hidden"><span id="modePillText">1학년 · 자유 낚시</span></div>
 
   <!-- bottom -->
   <div id="bottomBar" class="bottom hidden">
@@ -563,6 +702,7 @@
   <!-- start screen -->
   <div id="startScreen" class="screen">
     <div class="start-top">
+      <div class="coin-pill big" id="startCoinPill" title="내 포인트"><span>내 포인트</span><b id="startCoins">0</b><i>P</i></div>
       <button class="icon-btn" id="muteBtnStart" aria-label="소리 끄기" title="소리">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M4 9.5h3L12 5.5v13L7 14.5H4z"/><path class="snd-on" d="M15.5 9a4.2 4.2 0 0 1 0 6"/><path class="snd-on" d="M18 6.5a8 8 0 0 1 0 11"/>
@@ -618,7 +758,10 @@
         </svg>
         낚시 시작
       </button>
-      <button class="ghost-btn" id="dexBtnStart">내 어망 도감 보기</button>
+      <div class="start-links">
+        <button class="ghost-btn" id="dexBtnStart">내 어망 도감</button>
+        <button class="ghost-btn shop" id="shopBtnStart">상점 · 꾸미기</button>
+      </div>
     </div>
   </div>
 
@@ -680,6 +823,26 @@
       </div>
       <div class="dex-grid boss" id="dexBossGrid"></div>
       <div class="dex-legend" id="dexLegend">낚시를 하면 저절로 모여요. 희귀한 물고기일수록 점수가 커요!</div>
+    </div>
+  </div>
+
+  <!-- shop -->
+  <div id="shopWrap" class="modal hidden">
+    <div class="card shop-card">
+      <div class="shop-head">
+        <h2>상점</h2>
+        <div class="wallet"><small>내 포인트</small><b id="shopCoins">0</b><i>P</i></div>
+        <button class="close-btn" id="shopClose" aria-label="닫기">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <div class="shop-tabs" id="shopTabs">
+        <button type="button" data-tab="boat">배</button>
+        <button type="button" data-tab="rod">낚싯대</button>
+        <button type="button" data-tab="outfit">꾸미기</button>
+      </div>
+      <div class="shop-list" id="shopList"></div>
+      <div class="shop-msg" id="shopMsg">물고기를 잡으면 포인트가 쌓여요. 모은 포인트로 배·낚싯대·꾸미기를 바꿔 보세요!</div>
     </div>
   </div>
 
@@ -1388,7 +1551,11 @@
   const defaultSave = () => ({
     grade:1, mode:'free', mute:false,
     caught:{}, solved:0, correct:0,
-    best:{ free:{1:0,2:0,3:0,4:0}, timed:{1:0,2:0,3:0,4:0} }
+    best:{ free:{1:0,2:0,3:0,4:0}, timed:{1:0,2:0,3:0,4:0} },
+    /* 상점: 쓸 수 있는 포인트 지갑 / 보유 아이템 / 장착 아이템 */
+    coins:0,
+    owned:{ boat:['wood'], rod:['bamboo'], outfit:['fisher'] },
+    equipped:{ boat:'wood', rod:'bamboo', outfit:'fisher' }
   });
   let save = defaultSave();
   function loadSave(){
@@ -1408,10 +1575,69 @@
         free: Object.assign({1:0,2:0,3:0,4:0}, (o.best && o.best.free) || {}),
         timed: Object.assign({1:0,2:0,3:0,4:0}, (o.best && o.best.timed) || {})
       };
+      /* 지갑 · 보유 · 장착 (없거나 깨졌으면 기본값으로 되돌린다) */
+      save.coins = Math.max(0, Math.floor(Number(o.coins) || 0));
+      const own = (o.owned && typeof o.owned === 'object') ? o.owned : {};
+      const eq  = (o.equipped && typeof o.equipped === 'object') ? o.equipped : {};
+      ['boat','rod','outfit'].forEach(function(cat){
+        const base = CAT[cat].items[0].id;
+        let list = Array.isArray(own[cat]) ? own[cat].filter(function(id){ return !!itemOf(cat, id); }) : [];
+        if(list.indexOf(base) < 0) list.unshift(base);
+        save.owned[cat] = list;
+        const want = eq[cat];
+        save.equipped[cat] = (itemOf(cat, want) && list.indexOf(want) >= 0) ? want : base;
+      });
     }catch(e){ /* 저장소를 쓸 수 없어도 플레이는 가능 */ }
   }
   function persist(){
     try{ localStorage.setItem(SAVE_KEY, JSON.stringify(save)); }catch(e){}
+  }
+
+  /* ---------------------------------------------------------------
+     상점 아이템 — 낚싯대 4종 · 배 4종 · 꾸미기 4종
+     (가짜 목록이 아니라 실제 캔버스 그림이 이 값으로 바뀐다)
+  ----------------------------------------------------------------*/
+  const RODS = [
+    {id:'bamboo', name:'기본 대나무',     price:0,   line:'rgba(255,255,255,.92)', lineW:1.6,
+     desc:'가볍고 튼튼한 대나무'},
+    {id:'silver', name:'은빛 스피닝',     price:150, line:'rgba(206,244,255,.95)', lineW:1.8,
+     desc:'반짝이는 은빛 스피닝 릴'},
+    {id:'rainbow',name:'무지개 빛 낚싯대', price:400, line:'rgba(255,206,250,.95)', lineW:2.0, glow:'#ff9ae8',
+     desc:'일곱 빛깔 마법 낚싯대'},
+    {id:'goldrod',name:'전설의 황금 낚싯대', price:800, line:'rgba(255,232,150,.95)', lineW:2.2, glow:'#ffd24a',
+     desc:'바다의 왕의 황금 낚싯대'}
+  ];
+  const BOATS = [
+    {id:'wood',       name:'기본 나뭇배',   price:0,    desc:'든든한 나무 나룻배'},
+    {id:'motor',      name:'푸른 모터보트', price:200,  desc:'빠르게 달리는 푸른 보트'},
+    {id:'pirate',     name:'해적선',        price:500,  desc:'검은 돛과 해골 깃발'},
+    {id:'goldcruiser',name:'황금 크루저',   price:1000, desc:'금빛으로 빛나는 유람선'}
+  ];
+  const OUTFITS = [
+    {id:'fisher', name:'기본 낚시꾼',    price:0,   desc:'파란 셔츠의 꾸러기 낚시꾼'},
+    {id:'straw',  name:'밀짚모자',       price:100, desc:'볕을 가려 주는 밀짚모자'},
+    {id:'captain',name:'해적 선장 모자', price:300, desc:'해골 장식 선장 모자와 코트'},
+    {id:'crown',  name:'황금 왕관',      price:700, desc:'보석 박힌 황금 왕관과 망토'}
+  ];
+  const CATS = [
+    {key:'boat',   label:'배',     items:BOATS},
+    {key:'rod',    label:'낚싯대', items:RODS},
+    {key:'outfit', label:'꾸미기', items:OUTFITS}
+  ];
+  const CAT = {};
+  CATS.forEach(function(c){ CAT[c.key] = c; });
+  function itemOf(cat, id){
+    const c = CAT[cat]; if(!c) return null;
+    for(let i=0;i<c.items.length;i++) if(c.items[i].id === id) return c.items[i];
+    return null;
+  }
+  function isOwned(cat, id){ return (save.owned[cat] || []).indexOf(id) >= 0; }
+  function rodNow(){ return itemOf('rod', save.equipped.rod) || RODS[0]; }
+  function boatNow(){ return itemOf('boat', save.equipped.boat) || BOATS[0]; }
+  function outfitNow(){ return itemOf('outfit', save.equipped.outfit) || OUTFITS[0]; }
+  function fmtP(n){
+    const s = String(Math.max(0, Math.floor(Number(n)||0)));
+    return s.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 
   /* ---------------------------------------------------------------
@@ -1642,6 +1868,14 @@
       noiseBurst(0.2,0.09,1500);
     },
     reel(){ tone(520,0.1,{type:'triangle',vol:0.05,to:620}); },
+    /* 상점: 구매 성공(경쾌한 아르페지오) · 장착 · 포인트 부족 */
+    buy(){
+      [784, 988, 1319, 1568].forEach((f,i)=>tone(f,0.18,{type:'triangle',vol:0.10,when:i*0.06}));
+      tone(196,0.30,{type:'sine',vol:0.06});
+      noiseBurst(0.30,0.09,2600);
+    },
+    equip(){ tone(660,0.1,{type:'triangle',vol:0.07}); tone(990,0.12,{type:'triangle',vol:0.06,when:0.08}); },
+    poor(){ tone(300,0.14,{type:'square',vol:0.05,to:220}); tone(240,0.16,{type:'square',vol:0.05,when:0.12,to:180}); },
     bossWin(){
       [392,523,659,784,1047,1319].forEach((f,i)=>tone(f,0.3,{type:'triangle',vol:0.1,when:i*0.11}));
       tone(196,0.6,{type:'sine',vol:0.06,when:0.12});
@@ -2085,6 +2319,7 @@
     if(G.fish.length){
       G.fish.forEach(f=>{ f.y = clamp(f.y, waterY+30, H-90); f.baseY = clamp(f.baseY, waterY+34, H-96); });
     }
+    syncTopOffset();
   }
   window.addEventListener('resize', resize);
   window.addEventListener('orientationchange', ()=>setTimeout(resize, 120));
@@ -2101,7 +2336,7 @@
     quiz: null, wrong: 0, hintOpen: false,
     catchT: 0, catchFrom: null,
     particles: [], floats: [], t: 0,
-    dexOpen: false, paused: false,
+    dexOpen: false, shopOpen: false, paused: false, frozen: false,
     /* 보스 */
     boss: null, bossFight: false, bossHp: 0, bossMaxHp: 3,
     fishCaught: 0, bossCaught: 0, bossSpawns: 0
@@ -2237,6 +2472,7 @@
     const bonus = G.mode === 'timed' ? 100 : 0;
     const pts = sp.pts + bonus;
     G.score += pts;
+    save.coins += pts;              /* 잡은 점수가 바로 쓸 수 있는 포인트로 쌓인다 */
     G.caughtCount++;
     G.bossCaught++;
     G.streak = Math.max(1, G.streak);
@@ -2324,8 +2560,28 @@
   /* ---------------------------------------------------------------
      HUD / 화면
   ----------------------------------------------------------------*/
-  const hudCache = {score:-1, caught:-1, streak:-1, sec:-1, mode:'', grade:-1};
+  const hudCache = {score:-1, caught:-1, streak:-1, sec:-1, mode:'', grade:-1, coins:-1};
+  /* 보유 포인트를 HUD · 시작 화면 · 상점 세 곳에 같이 맞춘다 */
+  function syncCoins(force){
+    if(!force && hudCache.coins === save.coins) return;
+    hudCache.coins = save.coins;
+    const t = fmtP(save.coins);
+    ['playCoins','startCoins','shopCoins'].forEach(function(id){
+      const el = $(id); if(el) el.textContent = t;
+    });
+  }
+  /* HUD 칩이 두 줄로 넘칠 때 타이머·포인트 줄을 그 아래로 내린다 */
+  function syncTopOffset(){
+    const h = $('hud');
+    let v = 58;
+    if(h && !h.classList.contains('hidden')){
+      const bh = Math.round(h.getBoundingClientRect().height);
+      if(bh) v = bh + 3;
+    }
+    document.documentElement.style.setProperty('--hudTop', v + 'px');
+  }
   function updateHUD(force){
+    syncCoins(force);
     if(force || hudCache.score !== G.score){ $('scoreVal').textContent = G.score; hudCache.score = G.score; }
     if(force || hudCache.caught !== G.caughtCount){ $('caughtVal').textContent = G.caughtCount; hudCache.caught = G.caughtCount; }
     if(force || hudCache.streak !== G.streak){
@@ -2333,6 +2589,7 @@
       if(G.streak >= 2){ comboChip.classList.remove('hidden'); $('comboVal').textContent = G.streak; }
       else comboChip.classList.add('hidden');
       hudCache.streak = G.streak;
+      syncTopOffset();
     }
     const fill = $('timerFill'), txt = $('timerText'), wrap = $('timerWrap');
     if(G.mode === 'timed'){
@@ -2396,6 +2653,7 @@
       ? '물고기 <b>4마리</b>마다 <b>전설의 보스</b>가 나타나요!'
       : '물고기 <b>5마리</b>마다 <b>전설의 보스</b>가 나타나요!';
     G.grade = save.grade; G.mode = save.mode;
+    syncCoins(true);
   }
   function showStart(){
     G.state = 'title';
@@ -2410,12 +2668,14 @@
     $('bottomBar').classList.add('hidden');
     $('timerWrap').classList.add('hidden');
     $('modePill').classList.add('hidden');
+    $('playTop').classList.add('hidden');
     hideAllModals();
     refreshStart();
   }
   function hideAllModals(){
-    ['quizWrap','dexWrap','resultWrap'].forEach(id=>$(id).classList.add('hidden'));
+    ['quizWrap','dexWrap','resultWrap','shopWrap'].forEach(id=>$(id).classList.add('hidden'));
     G.dexOpen = false;
+    G.shopOpen = false;
   }
 
   function startGame(){
@@ -2437,8 +2697,10 @@
     $('hud').classList.remove('hidden');
     $('bottomBar').classList.remove('hidden');
     $('modePill').classList.remove('hidden');
+    $('playTop').classList.remove('hidden');
     hideAllModals();
     updateHUD(true);
+    syncTopOffset();
     toast(null, null, `${GRADE_INFO[G.grade].name} · ${G.mode==='timed'?'60초 도전':'자유 낚시'} 시작!`);
   }
 
@@ -2686,6 +2948,7 @@
     const comboBonus = G.streak >= 2 ? Math.min(5, G.streak-1) * 10 : 0;
     const pts = sp.pts + comboBonus;
     G.score += pts;
+    save.coins += pts;              /* 잡은 점수가 바로 쓸 수 있는 포인트로 쌓인다 */
     G.caughtCount++;
     save.caught[sp.id] = (Number(save.caught[sp.id])||0) + 1;
     const bestKey = save.best[G.mode];
@@ -2800,6 +3063,113 @@
   }
 
   /* ---------------------------------------------------------------
+     상점 — 배 · 낚싯대 · 꾸미기
+     구매는 지갑(coins)만 쓰고, 학년·모드별 최고 점수는 건드리지 않는다.
+  ----------------------------------------------------------------*/
+  let shopTab = 'boat';
+  function shopMessage(text, kind){
+    const m = $('shopMsg');
+    m.className = 'shop-msg' + (kind ? ' ' + kind : '');
+    m.textContent = text;
+  }
+  function openShop(tab){
+    if(G.state === 'quiz' || G.state === 'catching') return;   /* 문제 푸는 중에는 열지 않는다 */
+    if(tab && CAT[tab]) shopTab = tab;
+    syncCoins(true);
+    buildShop();
+    $('shopWrap').classList.remove('hidden');
+    G.shopOpen = true;
+    shopMessage('물고기를 잡으면 포인트가 쌓여요. 모은 포인트로 배·낚싯대·꾸미기를 바꿔 보세요!', '');
+  }
+  function closeShop(){
+    $('shopWrap').classList.add('hidden');
+    G.shopOpen = false;
+    if(G.state === 'result') $('resultWrap').classList.remove('hidden');
+  }
+  function buildShop(){
+    Array.prototype.forEach.call(document.querySelectorAll('#shopTabs button'), function(b){
+      b.classList.toggle('on', b.dataset.tab === shopTab);
+    });
+    $('shopCoins').textContent = fmtP(save.coins);
+    const list = $('shopList');
+    list.innerHTML = '';
+    CAT[shopTab].items.forEach(function(it){
+      const owned = isOwned(shopTab, it.id);
+      const on = save.equipped[shopTab] === it.id;
+      const lack = !owned && save.coins < it.price;
+
+      const row = document.createElement('div');
+      row.className = 'shop-item' + (on ? ' on' : '');
+      row.dataset.id = it.id;
+
+      const prev = document.createElement('div');
+      prev.className = 'prev';
+      const cv = document.createElement('canvas');
+      cv.width = 192; cv.height = 120;
+      prev.appendChild(cv);
+      drawPreview(cv, shopTab, it);
+
+      const meta = document.createElement('div');
+      meta.className = 'meta';
+      const nm = document.createElement('b');
+      nm.className = 'nm'; nm.textContent = it.name;
+      const ds = document.createElement('span');
+      ds.className = 'ds'; ds.textContent = it.desc;
+      const ln = document.createElement('span');
+      ln.className = 'ln';
+      const pr = document.createElement('i');
+      pr.className = 'pr' + (lack ? ' poor' : '');
+      pr.style.fontStyle = 'normal';
+      pr.textContent = it.price === 0 ? '기본' : fmtP(it.price) + 'P';
+      const st = document.createElement('i');
+      st.className = 'st' + (lack ? ' lack' : '');
+      st.style.fontStyle = 'normal';
+      st.textContent = on ? '지금 쓰고 있어요'
+        : owned ? '보유 중'
+        : lack ? fmtP(it.price - save.coins) + 'P 부족'
+        : '바로 살 수 있어요';
+      ln.appendChild(pr); ln.appendChild(st);
+      meta.appendChild(nm); meta.appendChild(ds); meta.appendChild(ln);
+
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'buy-btn' + (on ? ' equipped' : (owned ? ' equip' : ''));
+      btn.textContent = on ? '장착 중' : (owned ? '장착하기' : '구매하기');
+      btn.addEventListener('click', function(){ tapShopItem(shopTab, it.id, row); });
+
+      row.appendChild(prev); row.appendChild(meta); row.appendChild(btn);
+      list.appendChild(row);
+    });
+  }
+  function tapShopItem(cat, id, row){
+    const it = itemOf(cat, id);
+    if(!it) return;
+    if(isOwned(cat, id)){
+      if(save.equipped[cat] === id){ sfx.tap(); shopMessage('이미 장착하고 있어요: ' + it.name, ''); return; }
+      save.equipped[cat] = id;
+      persist();
+      sfx.equip();
+      buildShop(); updateHUD(true); refreshStart();
+      shopMessage(it.name + ' 장착 완료! 낚시 화면에서 바로 보여요.', 'ok');
+      return;
+    }
+    if(save.coins < it.price){
+      const need = it.price - save.coins;
+      sfx.poor();
+      if(row){ row.classList.remove('shake'); void row.offsetWidth; row.classList.add('shake'); }
+      shopMessage(fmtP(need) + 'P가 부족해요. 물고기를 잡아 포인트를 ' + fmtP(need) + 'P 더 모아 보세요!', 'warn');
+      return;
+    }
+    save.coins -= it.price;
+    save.owned[cat].push(id);
+    save.equipped[cat] = id;            /* 구매하면 바로 장착 */
+    persist();
+    sfx.buy();
+    buildShop(); updateHUD(true); refreshStart();
+    shopMessage(it.name + ' 구매 완료! 포인트 ' + fmtP(it.price) + 'P를 썼어요. 바로 장착했어요!', 'gold');
+  }
+
+  /* ---------------------------------------------------------------
      게임 종료
   ----------------------------------------------------------------*/
   function endGame(reason){
@@ -2895,7 +3265,7 @@
       ctx.closePath(); ctx.fill();
     });
 
-    G.fish.forEach(f=>{
+    if(!G.hideFish) G.fish.forEach(f=>{
       if(f === G.hooked && (G.state==='casting'||G.state==='quiz'||G.state==='catching')) return;
       drawFish(ctx, f.sp, f.x, f.y, f.size, f.phase, f.dir);
       if(f.sp.rare){
@@ -2990,66 +3360,400 @@
     ctx.restore();
   }
 
+  /* ---------------------------------------------------------------
+     배 · 낚싯대 · 캐릭터 꾸미기 그림 (상점 아이템이 실제로 바뀐다)
+     - 배 좌표계: 배 가운데 (0,0), 수면 y≈0, 갑판 위 y≈-11
+     - 낚싯대: 손 (16,-31) → 끝 (40,-66) / rodTip() 과 같은 끝점
+  ----------------------------------------------------------------*/
+  const ROD_P0 = {x:16, y:-31}, ROD_PC = {x:30, y:-48}, ROD_P1 = {x:40, y:-66};
+  function bez2(p0,pc,p1,t){
+    const u = 1-t;
+    return { x: u*u*p0.x + 2*u*t*pc.x + t*t*p1.x,
+             y: u*u*p0.y + 2*u*t*pc.y + t*t*p1.y };
+  }
+  function rodPoint(t){
+    const a = bez2(ROD_P0, ROD_PC, ROD_P1, Math.max(0, t-0.05));
+    const b = bez2(ROD_P0, ROD_PC, ROD_P1, Math.min(1, t+0.05));
+    return { x: b.x, y: b.y, ang: Math.atan2(b.y-a.y, b.x-a.x) };
+  }
+  function rodTick(c, t, len){
+    const p = rodPoint(t);
+    const nx = Math.cos(p.ang + Math.PI/2), ny = Math.sin(p.ang + Math.PI/2);
+    c.beginPath();
+    c.moveTo(p.x - nx*len, p.y - ny*len);
+    c.lineTo(p.x + nx*len, p.y + ny*len);
+    c.stroke();
+  }
+  function star4(c, x, y, r, color){
+    c.save();
+    c.fillStyle = color;
+    c.beginPath();
+    c.moveTo(x, y-r);
+    c.quadraticCurveTo(x+r*0.16, y-r*0.16, x+r, y);
+    c.quadraticCurveTo(x+r*0.16, y+r*0.16, x, y+r);
+    c.quadraticCurveTo(x-r*0.16, y+r*0.16, x-r, y);
+    c.quadraticCurveTo(x-r*0.16, y-r*0.16, x, y-r);
+    c.closePath(); c.fill();
+    c.restore();
+  }
+
+  function drawRodShape(c, rod, t){
+    c.save();
+    c.lineCap = 'round';
+    c.lineJoin = 'round';
+    const id = rod.id;
+    const curve = function(){
+      c.beginPath();
+      c.moveTo(ROD_P0.x, ROD_P0.y);
+      c.quadraticCurveTo(ROD_PC.x, ROD_PC.y, ROD_P1.x, ROD_P1.y);
+    };
+    if(id === 'silver'){
+      const g = c.createLinearGradient(16,-31,40,-66);
+      g.addColorStop(0,'#8ba3b6'); g.addColorStop(.45,'#f6fbff'); g.addColorStop(.72,'#c2d6e5'); g.addColorStop(1,'#eef8fd');
+      c.strokeStyle = '#496478'; c.lineWidth = 4.2;
+      c.beginPath(); c.moveTo(15.6,-30.2); c.lineTo(18.4,-33.6); c.stroke();
+      c.strokeStyle = g; c.lineWidth = 2.9;
+      curve(); c.stroke();
+      c.fillStyle = '#5f7d93'; ell(c, 19.6, -35.6, 2.9, 2.9); c.fill();
+      c.fillStyle = '#eaf5fb'; ell(c, 19.6, -35.6, 1.15, 1.15); c.fill();
+      c.strokeStyle = '#f4fcff'; c.lineWidth = 0.9;
+      [0.36,0.62,0.86].forEach(function(p){
+        const q = rodPoint(p);
+        c.beginPath(); c.arc(q.x, q.y, 1.35, 0, Math.PI*2); c.stroke();
+      });
+    } else if(id === 'rainbow'){
+      const g = c.createLinearGradient(16,-31,40,-66);
+      g.addColorStop(0,'#ff7b7b'); g.addColorStop(.22,'#ffb14d'); g.addColorStop(.44,'#ffe763');
+      g.addColorStop(.66,'#6ee08a'); g.addColorStop(.84,'#5cb6f5'); g.addColorStop(1,'#b98cff');
+      c.strokeStyle = '#d05aa0'; c.lineWidth = 4.2;
+      c.beginPath(); c.moveTo(15.4,-29.9); c.lineTo(18.0,-33.3); c.stroke();
+      c.save();
+      c.shadowColor = 'rgba(255,150,235,.8)'; c.shadowBlur = 6;
+      c.strokeStyle = g; c.lineWidth = 3.4;
+      curve(); c.stroke();
+      c.restore();
+      star4(c, ROD_P1.x, ROD_P1.y, 3.6, '#fff9d0');
+      star4(c, 24.2, -40.2, 1.9, '#ffffff');
+      c.strokeStyle = 'rgba(255,255,255,.85)'; c.lineWidth = 0.9;
+      curve(); c.stroke();
+    } else if(id === 'goldrod'){
+      const g = c.createLinearGradient(16,-31,40,-66);
+      g.addColorStop(0,'#a97900'); g.addColorStop(.35,'#ffe27a'); g.addColorStop(.62,'#fff6c9'); g.addColorStop(1,'#e0a200');
+      c.strokeStyle = '#a97900'; c.lineWidth = 4.6;
+      c.beginPath(); c.moveTo(15.3,-29.8); c.lineTo(17.9,-33.2); c.stroke();
+      c.save();
+      c.shadowColor = 'rgba(255,210,90,.85)'; c.shadowBlur = 7;
+      c.strokeStyle = g; c.lineWidth = 3.8;
+      curve(); c.stroke();
+      c.restore();
+      c.strokeStyle = '#fff3b0'; c.lineWidth = 1.1;
+      rodTick(c, 0.42, 1.9);
+      rodTick(c, 0.68, 1.6);
+      c.fillStyle = '#ffd24a'; ell(c, 19.4, -35.4, 2.6, 2.6); c.fill();
+      c.strokeStyle = '#b98a00'; c.lineWidth = 0.8;
+      c.beginPath(); c.arc(19.4, -35.4, 2.6, 0, Math.PI*2); c.stroke();
+      c.fillStyle = '#ff4d6a'; ell(c, 16.6, -32.6, 1.5, 1.5); c.fill();
+      star4(c, ROD_P1.x, ROD_P1.y, 3.0, '#fff8d0');
+    } else {
+      /* 기본 대나무 */
+      c.strokeStyle = '#5b3a1e'; c.lineWidth = 4.6;
+      c.beginPath(); c.moveTo(15.4,-29.8); c.lineTo(18.2,-33.4); c.stroke();
+      c.strokeStyle = '#8a5a2b'; c.lineWidth = 3.4;
+      curve(); c.stroke();
+      c.strokeStyle = 'rgba(246,220,164,.6)'; c.lineWidth = 1;
+      c.beginPath(); c.moveTo(17,-32.6); c.quadraticCurveTo(30,-48.6, 39.3,-64.8); c.stroke();
+      c.strokeStyle = 'rgba(90,58,28,.95)'; c.lineWidth = 1.3;
+      rodTick(c, 0.30, 2.0);
+      rodTick(c, 0.56, 1.8);
+      rodTick(c, 0.80, 1.5);
+    }
+    c.restore();
+  }
+
+  function drawHullShape(c, bt, t){
+    c.save();
+    c.lineJoin = 'round';
+    c.lineCap = 'round';
+    c.fillStyle = 'rgba(3,45,68,.20)';
+    ell(c, 0, 13, 48, 9); c.fill();
+
+    if(bt.id === 'motor'){
+      const g = c.createLinearGradient(0,-12,0,18);
+      g.addColorStop(0,'#79c8f4'); g.addColorStop(.45,'#2f86d0'); g.addColorStop(1,'#11538c');
+      c.fillStyle = g;
+      c.beginPath();
+      c.moveTo(-46,-9); c.lineTo(24,-9);
+      c.quadraticCurveTo(42,-8.5, 50,1);
+      c.quadraticCurveTo(34,14, 0,15.5);
+      c.quadraticCurveTo(-32,15, -46,1);
+      c.closePath(); c.fill();
+      c.strokeStyle = '#0f4a7e'; c.lineWidth = 1.8; c.stroke();
+      c.strokeStyle = 'rgba(255,255,255,.92)'; c.lineWidth = 2.6;
+      c.beginPath(); c.moveTo(-44,1.6); c.quadraticCurveTo(0,12.6, 46,3.4); c.stroke();
+      c.fillStyle = '#eef7fc';
+      c.beginPath(); c.moveTo(-40,-9); c.lineTo(28,-9); c.lineTo(34,-4); c.lineTo(-38,-4); c.closePath(); c.fill();
+      c.strokeStyle = '#bcd9e8'; c.lineWidth = 1.4; c.stroke();
+      /* 유리 앞창 */
+      c.fillStyle = 'rgba(206,242,255,.92)';
+      c.beginPath(); c.moveTo(27,-9); c.lineTo(33,-20); c.lineTo(39,-20); c.lineTo(35,-8.6); c.closePath(); c.fill();
+      c.strokeStyle = '#8fbfd8'; c.lineWidth = 1.2; c.stroke();
+      /* 선외기 */
+      c.fillStyle = '#31404c';
+      if(c.roundRect) c.beginPath(), c.roundRect(-58,-16,12,23,3), c.fill();
+      else c.fillRect(-58,-16,12,23);
+      c.fillStyle = '#556a78'; c.fillRect(-57,-1,3.4,10);
+      c.fillStyle = '#eaf4fb'; c.fillRect(-54,-13,4.4,6);
+
+    } else if(bt.id === 'pirate'){
+      /* 돛대 + 검은 돛 + 해골 깃발 (몸 뒤) */
+      c.strokeStyle = '#6b4526'; c.lineWidth = 3.2;
+      c.beginPath(); c.moveTo(-30,-11); c.lineTo(-30,-62); c.stroke();
+      c.fillStyle = '#d0342c';
+      c.beginPath(); c.moveTo(-30,-63); c.lineTo(-17,-59.5); c.lineTo(-30,-56); c.closePath(); c.fill();
+      c.fillStyle = '#2c2c36';
+      c.beginPath();
+      c.moveTo(-30,-60);
+      c.quadraticCurveTo(-12,-55, -10,-44);
+      c.quadraticCurveTo(-12,-34, -30,-30);
+      c.closePath(); c.fill();
+      c.strokeStyle = '#4a4a58'; c.lineWidth = 1.2; c.stroke();
+      c.fillStyle = '#f5f0e2';
+      c.beginPath(); c.arc(-20,-45,3.4,0,Math.PI*2); c.fill();
+      c.fillRect(-21.4,-43.8,2.8,2.8);
+      c.strokeStyle = '#f5f0e2'; c.lineWidth = 1.1;
+      c.beginPath(); c.moveTo(-25.5,-39.6); c.lineTo(-14.5,-50.4); c.stroke();
+      c.beginPath(); c.moveTo(-14.5,-39.6); c.lineTo(-25.5,-50.4); c.stroke();
+      /* 선체 */
+      const pg = c.createLinearGradient(0,-12,0,17);
+      pg.addColorStop(0,'#6d4c31'); pg.addColorStop(.5,'#46301f'); pg.addColorStop(1,'#281a11');
+      c.fillStyle = pg;
+      c.beginPath();
+      c.moveTo(-46,-2); c.quadraticCurveTo(0,27,46,-2);
+      c.quadraticCurveTo(22,4,0,4); c.quadraticCurveTo(-22,4,-46,-2);
+      c.closePath(); c.fill();
+      c.strokeStyle = '#1f140d'; c.lineWidth = 1.8; c.stroke();
+      c.strokeStyle = '#ffcf3f'; c.lineWidth = 1.6;
+      c.beginPath(); c.moveTo(-42,-3.6); c.quadraticCurveTo(0,22,42,-3.6); c.stroke();
+      c.fillStyle = '#8a6238';
+      c.beginPath(); c.moveTo(-40,-2); c.lineTo(40,-2); c.lineTo(36,-11); c.lineTo(-36,-11); c.closePath(); c.fill();
+      c.strokeStyle = '#5d3f22'; c.lineWidth = 1.4; c.stroke();
+      c.fillStyle = '#1b1b22';
+      [-25,-7,12].forEach(function(x){ c.beginPath(); c.arc(x,1.2,2.2,0,Math.PI*2); c.fill(); });
+
+    } else if(bt.id === 'goldcruiser'){
+      const gg = c.createLinearGradient(0,-12,0,18);
+      gg.addColorStop(0,'#fff3b8'); gg.addColorStop(.35,'#ffd34f'); gg.addColorStop(.72,'#e6ab12'); gg.addColorStop(1,'#a97c06');
+      c.fillStyle = gg;
+      c.beginPath();
+      c.moveTo(-48,-3); c.lineTo(30,-3);
+      c.quadraticCurveTo(46,-2, 50,5);
+      c.quadraticCurveTo(24,19, -6,18);
+      c.quadraticCurveTo(-34,17, -48,4);
+      c.closePath(); c.fill();
+      c.strokeStyle = '#8a6206'; c.lineWidth = 1.8; c.stroke();
+      c.strokeStyle = 'rgba(255,255,255,.8)'; c.lineWidth = 2.2;
+      c.beginPath(); c.moveTo(-40,0.4); c.quadraticCurveTo(0,11.4, 44,2.6); c.stroke();
+      /* 붉은 카펫 갑판 + 금 테두리 */
+      c.fillStyle = '#b02a3a';
+      c.beginPath(); c.moveTo(-40,-3); c.lineTo(34,-3); c.lineTo(30,-10); c.lineTo(-36,-10); c.closePath(); c.fill();
+      c.strokeStyle = '#ffd24a'; c.lineWidth = 1.8; c.stroke();
+      /* 금 난간 */
+      c.fillStyle = '#ffd24a';
+      [-30,-12,10,28].forEach(function(x){ c.fillRect(x,-16,2.4,6); });
+      c.fillRect(-33,-17.4,64,2.2);
+      c.fillStyle = '#5ad8ff';
+      c.beginPath(); c.arc(41,-1.4,2.6,0,Math.PI*2); c.fill();
+      star4(c, -42, 6, 3.0, '#fffbe0');
+      star4(c, 21, -22, 2.4, '#fffbe0');
+
+    } else {
+      /* 기본 나뭇배 */
+      const wg = c.createLinearGradient(0,-12,0,16);
+      wg.addColorStop(0,'#cb9760'); wg.addColorStop(.5,'#a9743c'); wg.addColorStop(1,'#7a4f26');
+      c.fillStyle = wg;
+      c.beginPath();
+      c.moveTo(-44,-2); c.quadraticCurveTo(0,26,44,-2);
+      c.quadraticCurveTo(20,4,0,4); c.quadraticCurveTo(-20,4,-44,-2);
+      c.closePath(); c.fill();
+      c.strokeStyle = '#6d451f'; c.lineWidth = 1.7; c.stroke();
+      c.strokeStyle = 'rgba(96,62,30,.5)'; c.lineWidth = 1;
+      c.beginPath(); c.moveTo(-41,3); c.quadraticCurveTo(0,17,41,3); c.stroke();
+      c.beginPath(); c.moveTo(-35,9.6); c.quadraticCurveTo(0,22,35,9.6); c.stroke();
+      c.fillStyle = '#efdab0';
+      c.beginPath(); c.moveTo(-40,-2); c.lineTo(40,-2); c.lineTo(36,-11); c.lineTo(-36,-11); c.closePath(); c.fill();
+      c.strokeStyle = '#c39a5e'; c.lineWidth = 1.6; c.stroke();
+      c.fillStyle = '#c09a63'; c.fillRect(-30,-6.4,26,3);
+    }
+    c.restore();
+  }
+
+  function drawAnglerShape(c, of, t){
+    const id = of.id;
+    const armWag = Math.sin(t*1.6)*1.4;
+    c.save();
+    c.lineJoin = 'round';
+    c.lineCap = 'round';
+
+    /* 옷 */
+    let shirt = '#3a6ea5';
+    if(id === 'straw') shirt = '#f6f1df';
+    else if(id === 'captain') shirt = '#b02a2a';
+    else if(id === 'crown') shirt = '#7a4fbe';
+    c.fillStyle = shirt;
+    c.beginPath();
+    if(c.roundRect) c.roundRect(-13,-30,26,22,8); else c.rect(-13,-30,26,22);
+    c.fill();
+    if(id === 'straw'){
+      c.fillStyle = 'rgba(255,255,255,.6)'; c.fillRect(-13,-30,26,3.6);
+      c.strokeStyle = '#dccf9f'; c.lineWidth = 1.1;
+      c.beginPath(); c.moveTo(-13,-26.4); c.lineTo(13,-26.4); c.stroke();
+    } else if(id === 'captain'){
+      c.fillStyle = '#ffd24a';
+      [-24,-19,-14].forEach(function(y){ c.beginPath(); c.arc(-5,y,1.4,0,Math.PI*2); c.fill(); });
+      c.strokeStyle = '#ffd24a'; c.lineWidth = 2;
+      c.beginPath(); c.moveTo(-11,-28.5); c.lineTo(5,-14.5); c.stroke();
+      c.strokeStyle = '#7a1414'; c.lineWidth = 1.2;
+      c.beginPath(); c.moveTo(-13,-21); c.lineTo(13,-21); c.stroke();
+    } else if(id === 'crown'){
+      c.fillStyle = '#5a3596';
+      c.beginPath(); c.moveTo(-13,-30); c.lineTo(-19,-8); c.lineTo(19,-8); c.lineTo(13,-30); c.closePath(); c.fill();
+      c.strokeStyle = '#ffd24a'; c.lineWidth = 1.6;
+      c.beginPath(); c.moveTo(-13,-29); c.lineTo(-18,-10); c.stroke();
+      c.beginPath(); c.moveTo(13,-29); c.lineTo(18,-10); c.stroke();
+      star4(c, 0, -22.5, 2.2, '#ffe9a8');
+    }
+
+    /* 얼굴 */
+    c.fillStyle = '#ffd9b8';
+    ell(c, 0, -38, 12, 12); c.fill();
+    c.fillStyle = '#4a3122';
+    c.beginPath(); c.arc(0,-40,12,Math.PI*1.05,Math.PI*1.95); c.fill();
+
+    /* 눈 */
+    c.fillStyle = '#2b1c12';
+    if(id === 'captain'){
+      c.beginPath(); c.arc(4,-38,1.5,0,Math.PI*2); c.fill();
+      c.fillStyle = '#1b1b22';
+      c.beginPath(); c.ellipse(-4.2,-38.2,4.2,3.5,-0.15,0,Math.PI*2); c.fill();
+      c.strokeStyle = '#1b1b22'; c.lineWidth = 1.2;
+      c.beginPath(); c.moveTo(-8,-41.4); c.lineTo(-11.6,-45.4); c.stroke();
+      c.beginPath(); c.moveTo(-0.6,-41.4); c.lineTo(3,-44.6); c.stroke();
+    } else {
+      c.beginPath(); c.arc(-4,-38,1.5,0,Math.PI*2); c.fill();
+      c.beginPath(); c.arc(4,-38,1.5,0,Math.PI*2); c.fill();
+    }
+    c.strokeStyle = '#e08a6a'; c.lineWidth = 1.5;
+    c.beginPath(); c.arc(0,-34.5,3,0.2*Math.PI,0.8*Math.PI); c.stroke();
+
+    /* 모자 */
+    if(id === 'straw'){
+      c.fillStyle = '#f0c86a';
+      c.beginPath(); c.ellipse(0,-47,19,5.5,0,0,Math.PI*2); c.fill();
+      c.beginPath(); c.ellipse(0,-52,10,8,0,Math.PI,Math.PI*2); c.fill();
+      c.strokeStyle = '#d9a83f'; c.lineWidth = 1.6;
+      c.beginPath(); c.ellipse(0,-47,19,5.5,0,0,Math.PI*2); c.stroke();
+    } else if(id === 'captain'){
+      c.fillStyle = '#23232b';
+      c.beginPath();
+      c.moveTo(-20,-47.4);
+      c.quadraticCurveTo(-20,-62, 0,-63);
+      c.quadraticCurveTo(20,-62, 20,-47.4);
+      c.closePath(); c.fill();
+      c.beginPath(); c.ellipse(0,-47.2,23,5.4,0,0,Math.PI*2); c.fill();
+      c.strokeStyle = '#ffd24a'; c.lineWidth = 1.5;
+      c.beginPath(); c.ellipse(0,-47.2,23,5.4,0,0,Math.PI*2); c.stroke();
+      c.fillStyle = '#f7f2e4';
+      c.beginPath(); c.arc(0,-54,3.6,0,Math.PI*2); c.fill();
+      c.fillRect(-1.6,-52.2,3.2,2.6);
+      c.strokeStyle = '#f7f2e4'; c.lineWidth = 1.1;
+      c.beginPath(); c.moveTo(-6.4,-49.8); c.lineTo(-2.4,-53.4); c.stroke();
+      c.beginPath(); c.moveTo(2.4,-53.4); c.lineTo(6.4,-49.8); c.stroke();
+    } else if(id === 'crown'){
+      c.save();
+      c.shadowColor = 'rgba(255,210,90,.9)'; c.shadowBlur = 6;
+      c.fillStyle = '#ffd24a';
+      c.beginPath();
+      c.moveTo(-13,-45.6); c.lineTo(-13,-58.4); c.lineTo(-7,-51.6); c.lineTo(0,-62);
+      c.lineTo(7,-51.6); c.lineTo(13,-58.4); c.lineTo(13,-45.6);
+      c.closePath(); c.fill();
+      c.restore();
+      c.strokeStyle = '#c9930a'; c.lineWidth = 1.2; c.stroke();
+      c.fillStyle = '#ff4d6a'; c.beginPath(); c.arc(0,-49.6,1.8,0,Math.PI*2); c.fill();
+      c.fillStyle = '#5ad8ff'; c.beginPath(); c.arc(-7.6,-49.6,1.4,0,Math.PI*2); c.fill();
+      c.fillStyle = '#6ee08a'; c.beginPath(); c.arc(7.6,-49.6,1.4,0,Math.PI*2); c.fill();
+    }
+
+    /* 팔 */
+    c.strokeStyle = '#ffd9b8'; c.lineWidth = 5;
+    c.beginPath(); c.moveTo(9,-27); c.lineTo(20+armWag,-33); c.stroke();
+    c.restore();
+  }
+
   function drawBoat(t){
     const s = SCALE;
     const bobY = boat.y + Math.sin(t*1.6)*2.2*s;
+    const bt = boatNow(), of = outfitNow(), rd = rodNow();
     ctx.save();
     ctx.translate(boat.x, bobY);
-    ctx.scale(s,s);
-
-    ctx.fillStyle = 'rgba(3,45,68,.20)';
-    ell(ctx, 0, 12, 48, 9); ctx.fill();
-
-    ctx.fillStyle = '#c85c37';
-    ctx.beginPath();
-    ctx.moveTo(-44,-2);
-    ctx.quadraticCurveTo(0,26,44,-2);
-    ctx.quadraticCurveTo(20,4,0,4);
-    ctx.quadraticCurveTo(-20,4,-44,-2);
-    ctx.closePath(); ctx.fill();
-    ctx.fillStyle = '#f3f0e4';
-    ctx.beginPath();
-    ctx.moveTo(-40,-2); ctx.lineTo(40,-2); ctx.lineTo(36,-11); ctx.lineTo(-36,-11); ctx.closePath();
-    ctx.fill();
-    ctx.strokeStyle = '#b04b2b'; ctx.lineWidth = 2;
-    ctx.beginPath(); ctx.moveTo(-40,-2); ctx.quadraticCurveTo(0,20,40,-2); ctx.stroke();
-    ctx.fillStyle = '#c85c37';
-    ctx.beginPath(); ctx.moveTo(-38,-8); ctx.lineTo(38,-8); ctx.lineTo(36,-4); ctx.lineTo(-36,-4); ctx.closePath(); ctx.fill();
-
-    const armWag = Math.sin(t*1.6)*1.4;
-    ctx.fillStyle = '#3a6ea5';
-    ctx.beginPath(); ctx.roundRect ? ctx.roundRect(-13,-30,26,22,8) : ctx.rect(-13,-30,26,22); ctx.fill();
-    ctx.fillStyle = '#ffd9b8';
-    ell(ctx,0,-38,12,12); ctx.fill();
-    ctx.fillStyle = '#4a3122';
-    ctx.beginPath(); ctx.arc(0,-40,12,Math.PI*1.05,Math.PI*1.95); ctx.fill();
-    ctx.fillStyle = '#f0c86a';
-    ctx.beginPath(); ctx.ellipse(0,-47,19,5.5,0,0,Math.PI*2); ctx.fill();
-    ctx.beginPath(); ctx.ellipse(0,-52,10,8,0,Math.PI,Math.PI*2); ctx.fill();
-    ctx.strokeStyle = '#d9a83f'; ctx.lineWidth = 1.6;
-    ctx.beginPath(); ctx.ellipse(0,-47,19,5.5,0,0,Math.PI*2); ctx.stroke();
-    ctx.fillStyle = '#2b1c12';
-    ctx.beginPath(); ctx.arc(-4,-38,1.5,0,Math.PI*2); ctx.fill();
-    ctx.beginPath(); ctx.arc(4,-38,1.5,0,Math.PI*2); ctx.fill();
-    ctx.strokeStyle = '#e08a6a'; ctx.lineWidth = 1.5;
-    ctx.beginPath(); ctx.arc(0,-34.5,3,0.2*Math.PI,0.8*Math.PI); ctx.stroke();
-    ctx.strokeStyle = '#ffd9b8'; ctx.lineWidth = 5; ctx.lineCap = 'round';
-    ctx.beginPath(); ctx.moveTo(9,-27); ctx.lineTo(20+armWag,-33); ctx.stroke();
-    ctx.strokeStyle = '#8a5a2b'; ctx.lineWidth = 3.2; ctx.lineCap='round';
-    ctx.beginPath(); ctx.moveTo(16,-31); ctx.quadraticCurveTo(30,-48,40,-66); ctx.stroke();
+    ctx.scale(s, s);
+    drawHullShape(ctx, bt, t);
+    drawAnglerShape(ctx, of, t);
+    drawRodShape(ctx, rd, t);
+    /* 빠른 배는 물보라가 생긴다 */
+    if(bt.id === 'motor' || bt.id === 'goldcruiser'){
+      ctx.strokeStyle = 'rgba(255,255,255,.55)';
+      ctx.lineWidth = 2;
+      for(let k=0;k<2;k++){
+        const off = k === 0 ? 0 : 4;
+        ctx.beginPath();
+        ctx.moveTo(-46, 7 + off*0.4);
+        ctx.quadraticCurveTo(-60 + Math.sin(t*4)*2, 10 + off, -74, 13 + off);
+        ctx.stroke();
+      }
+    }
     ctx.restore();
+  }
+
+  /* 상점 미리보기 그림 (96x60 CSS / 192x120 캔버스) */
+  function drawPreview(cv, cat, item){
+    const c = cv.getContext('2d');
+    c.setTransform(1,0,0,1,0,0);
+    c.clearRect(0,0,cv.width,cv.height);
+    c.save();
+    if(cat === 'rod'){
+      c.translate(cv.width*0.46, cv.height*0.56);
+      c.scale(2.95, 2.95);
+      c.translate(-27, 46);
+      drawRodShape(c, item, 0);
+    } else if(cat === 'boat'){
+      c.translate(cv.width*0.5, cv.height*0.62);
+      c.scale(1.22, 1.22);
+      c.translate(0, 6);
+      drawHullShape(c, item, 0);
+      drawAnglerShape(c, outfitNow(), 0);
+      drawRodShape(c, rodNow(), 0);
+    } else {
+      c.translate(cv.width*0.5, cv.height*0.56);
+      c.scale(1.32, 1.32);
+      c.translate(0, 26);
+      drawAnglerShape(c, item, 0);
+    }
+    c.restore();
   }
 
   function drawLineAndBobber(t){
     const tip = rodTip();
+    const rd = rodNow();
     let bx = tip.x + 4*SCALE, by = tip.y + 16*SCALE;
     if(G.bob){
       bx = G.bob.x; by = G.bob.y;
     }
     if(G.state==='casting' || G.state==='quiz' || G.state==='catching'){
       ctx.save();
-      ctx.strokeStyle = 'rgba(255,255,255,.9)';
-      ctx.lineWidth = 1.6;
+      /* 장착한 낚싯대마다 낚싯줄 색·굵기가 다르다 */
+      if(rd.glow){ ctx.shadowColor = rd.glow; ctx.shadowBlur = 7; }
+      ctx.strokeStyle = rd.line || 'rgba(255,255,255,.9)';
+      ctx.lineWidth = rd.lineW || 1.6;
       ctx.beginPath();
       ctx.moveTo(tip.x, tip.y);
       const mx = (tip.x+bx)/2 + 6;
@@ -3058,8 +3762,9 @@
       ctx.restore();
     } else if(G.state==='playing'){
       ctx.save();
-      ctx.strokeStyle = 'rgba(255,255,255,.45)';
-      ctx.lineWidth = 1.3;
+      ctx.globalAlpha = 0.5;
+      ctx.strokeStyle = rd.line || 'rgba(255,255,255,.45)';
+      ctx.lineWidth = Math.max(1.2, (rd.lineW || 1.6) * 0.85);
       ctx.beginPath(); ctx.moveTo(tip.x, tip.y); ctx.lineTo(tip.x+3, tip.y+14); ctx.stroke();
       ctx.restore();
     }
@@ -3098,10 +3803,11 @@
     let dt = (now - last)/1000;
     last = now;
     dt = clamp(dt, 0, 0.05);
+    if(G.frozen) dt = 0;
     G.t += dt;
     const t = G.t;
 
-    const modalPause = G.dexOpen || G.state==='result' || G.state==='title';
+    const modalPause = G.dexOpen || G.shopOpen || G.state==='result' || G.state==='title';
 
     if(!modalPause){
       G.fish.forEach(f=>{
@@ -3188,7 +3894,7 @@
   }
   cv.addEventListener('pointerdown', (ev)=>{
     audioCtx();
-    if(G.state !== 'playing' || G.dexOpen) return;
+    if(G.state !== 'playing' || G.dexOpen || G.shopOpen) return;
     const p = canvasPoint(ev);
     if(p.y < waterY - 10) return;
     /* 보스를 직접 터치하면 보스전 */
@@ -3233,6 +3939,18 @@
   $('retryBtn').addEventListener('click', ()=>{ startGame(); });
   $('resultDexBtn').addEventListener('click', ()=>{ $('resultWrap').classList.add('hidden'); openDex(); });
   $('resultHomeBtn').addEventListener('click', showStart);
+  $('shopBtn').addEventListener('click', function(){ openShop(); });
+  $('shopBtnStart').addEventListener('click', function(){ openShop(); });
+  $('shopClose').addEventListener('click', closeShop);
+  $('shopWrap').addEventListener('click', function(ev){ if(ev.target === $('shopWrap')) closeShop(); });
+  $('shopTabs').addEventListener('click', function(ev){
+    const b = ev.target.closest('button[data-tab]');
+    if(!b) return;
+    shopTab = b.dataset.tab;
+    sfx.tap();
+    buildShop();
+    shopMessage('물고기를 잡으면 포인트가 쌓여요. 모은 포인트로 배·낚싯대·꾸미기를 바꿔 보세요!', '');
+  });
   ['muteBtn','muteBtnStart'].forEach(id=>{
     $(id).addEventListener('click', ()=>{
       save.mute = !save.mute; persist(); setMuteUI();
@@ -3243,7 +3961,8 @@
   document.addEventListener('dblclick', (e)=>e.preventDefault(), {passive:false});
   window.addEventListener('keydown', (ev)=>{
     if(ev.key==='Escape'){
-      if(G.dexOpen) closeDex();
+      if(G.shopOpen) closeShop();
+      else if(G.dexOpen) closeDex();
       else if(G.state==='quiz') quitQuiz();
     }
     if(G.state==='playing' && (ev.key===' '||ev.key==='Enter')){ ev.preventDefault(); castButton(); }
@@ -3294,6 +4013,28 @@
     bossSpawns: ()=> G.bossSpawns,
     fishCaught: ()=> G.fishCaught,
     spawnBoss: ()=> !!spawnBoss(),
+    /* 상점·지갑 (테스트/확인용) */
+    coins: ()=> save.coins,
+    wallet: ()=> ({ coins: save.coins,
+      owned: JSON.parse(JSON.stringify(save.owned)),
+      equipped: Object.assign({}, save.equipped) }),
+    shopItems: (cat)=> (CAT[cat] ? CAT[cat].items : []).map(function(it){
+      return { id: it.id, name: it.name, price: it.price,
+               owned: isOwned(cat, it.id), equipped: save.equipped[cat] === it.id };
+    }),
+    shopTab: ()=> shopTab,
+    /* 그림 확인용: 화면 애니메이션을 잠깐 멈추거나 물고기를 숨긴다 (테스트 전용) */
+    freeze: (on, tv)=>{ G.frozen = !!on; if(tv != null) G.t = Number(tv) || 0; return G.frozen; },
+    showFish: (on)=>{ G.hideFish = !on; return !!G.hideFish; },
+    shopOpen: ()=> !$('shopWrap').classList.contains('hidden'),
+    openShop: (tab)=> { openShop(tab); return !$('shopWrap').classList.contains('hidden'); },
+    closeShop: ()=> { closeShop(); return $('shopWrap').classList.contains('hidden'); },
+    grantCoins: (n)=>{
+      save.coins = Math.max(0, Math.floor(Number(n) || 0));
+      persist(); syncCoins(true); refreshStart(); updateHUD(true);
+      if(!$('shopWrap').classList.contains('hidden')) buildShop();
+      return save.coins;
+    },
     screen: ()=> ({W:W, H:H, waterY:waterY, scale:SCALE}),
     selectGrade: (g)=>{ save.grade=Number(g); persist(); refreshStart(); },
     selectMode: (m)=>{ save.mode=m; persist(); refreshStart(); },
