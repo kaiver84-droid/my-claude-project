@@ -524,8 +524,9 @@
   .chip.coin{background:linear-gradient(#fff7d8,#ffe08a);border-color:#ffcf3f;}
   .chip.coin b{color:#8a4f00;}
 
-  .shop-card{max-width:440px;gap:9px;}
-  .shop-head{display:flex;align-items:center;gap:8px;}
+  /* 목록이 길어져도 헤더·탭·지갑·안내는 고정되고 아이템 목록만 내부 스크롤 */
+  .shop-card{max-width:440px;gap:9px;overflow:hidden;}
+  .shop-head{display:flex;align-items:center;gap:8px;flex:0 0 auto;}
   .shop-head h2{margin:0;font-size:20px;font-weight:900;letter-spacing:-.02em;flex:1 1 auto;}
   .wallet{
     flex:0 0 auto;display:flex;align-items:baseline;gap:3px;
@@ -535,7 +536,7 @@
   .wallet small{font-size:10px;font-weight:900;color:#a37400;}
   .wallet b{font-size:15px;font-weight:900;color:#8a4f00;}
   .wallet i{font-style:normal;font-size:10px;font-weight:900;color:#a37400;}
-  .shop-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
+  .shop-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;flex:0 0 auto;}
   .shop-tabs button{
     height:42px;border-radius:14px;border:2.5px solid #d7ecf6;background:#f2f9fd;
     font-family:inherit;font-size:14.5px;font-weight:900;color:#2f7ea6;cursor:pointer;
@@ -543,12 +544,24 @@
   .shop-tabs button.on{background:#fff7dc;border-color:var(--sun);color:#7a4c00;
     box-shadow:0 0 0 2px rgba(255,207,63,.3) inset;}
   .shop-tabs button:active{transform:scale(.98);}
-  .shop-list{display:flex;flex-direction:column;gap:7px;}
+  .shop-list{
+    display:flex;flex-direction:column;gap:7px;
+    flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;
+    -webkit-overflow-scrolling:touch;padding:1px 3px 2px 1px;
+    scrollbar-width:thin;scrollbar-color:#cfe6f2 transparent;
+  }
+  .shop-list::-webkit-scrollbar{width:6px;}
+  .shop-list::-webkit-scrollbar-thumb{background:#cfe6f2;border-radius:99px;}
+  .shop-list::-webkit-scrollbar-track{background:transparent;}
   .shop-item{
     display:flex;align-items:center;gap:8px;background:#fff;
     border:2.5px solid #eaf5fa;border-radius:16px;padding:6px 8px;
   }
   .shop-item.on{border-color:#ffcf3f;background:#fffdf3;box-shadow:0 0 0 2px rgba(255,207,63,.16) inset;}
+  .shop-item.vip{border-color:#ffe3ab;background:linear-gradient(180deg,#fffdf6,#fff8e6);}
+  .shop-item.vip.on{border-color:#ffcf3f;background:#fffdf3;}
+  .shop-item.vip .nm{color:#8a4f00;}
+  .shop-item.vip .ln .pr{color:#b5761a;}
   .shop-item.shake{animation:shake .42s;}
   .shop-item .prev{
     flex:0 0 auto;width:96px;height:60px;border-radius:12px;overflow:hidden;
@@ -579,7 +592,7 @@
   .shop-msg{
     min-height:36px;border-radius:13px;padding:7px 10px;font-size:12px;font-weight:900;
     line-height:1.35;text-align:center;color:#5a7c8e;background:#f4f8fa;
-    display:flex;align-items:center;justify-content:center;
+    display:flex;align-items:center;justify-content:center;flex:0 0 auto;
   }
   .shop-msg.ok{color:#1b7a3c;background:#e9f9ef;}
   .shop-msg.warn{color:#b8452f;background:#fdeeea;}
@@ -1689,25 +1702,51 @@
     {id:'rainbow',name:'무지개 빛 낚싯대', price:400, line:'rgba(255,206,250,.95)', lineW:2.0, glow:'#ff9ae8',
      desc:'일곱 빛깔 마법 낚싯대'},
     {id:'goldrod',name:'전설의 황금 낚싯대', price:800, line:'rgba(255,232,150,.95)', lineW:2.2, glow:'#ffd24a',
-     desc:'바다의 왕의 황금 낚싯대'}
+     desc:'바다의 왕의 황금 낚싯대'},
+    /* ---- 고가 희귀 낚싯대 (VIP) ---- */
+    {id:'diamond', name:'다이아몬드 낚싯대', price:1800, vip:true,
+     line:'rgba(224,250,255,.96)', lineW:2.4, glow:'#8fe8ff',
+     desc:'얼음빛 보석과 다이아 릴'},
+    {id:'galaxy', name:'은하수 별빛 낚싯대', price:4000, vip:true,
+     line:'rgba(246,228,168,.96)', lineW:2.6, glow:'#b18cff',
+     desc:'별가루가 흐르는 밤하늘'},
+    {id:'thunder', name:'마스터 번개 낚싯대', price:7500, vip:true,
+     line:'rgba(198,252,255,.98)', lineW:2.8, glow:'#6fe6ff',
+     desc:'번개가 감긴 전설의 낚싯대'}
   ];
   const BOATS = [
     {id:'wood',       name:'기본 나뭇배',   price:0,    desc:'든든한 나무 나룻배'},
     {id:'motor',      name:'푸른 모터보트', price:200,  desc:'빠르게 달리는 푸른 보트'},
     {id:'pirate',     name:'해적선',        price:500,  desc:'검은 돛과 해골 깃발'},
-    {id:'goldcruiser',name:'황금 크루저',   price:1000, desc:'금빛으로 빛나는 유람선'}
+    {id:'goldcruiser',name:'황금 크루저',   price:1000, desc:'금빛으로 빛나는 유람선'},
+    /* ---- 고가 희귀 배 (VIP) ---- */
+    {id:'submarine',  name:'탐험 잠수함',   price:2000, vip:true,
+     desc:'노란 잠수함과 둥근 창문'},
+    {id:'neon',       name:'네온 우주선',   price:4500, vip:true, wake:true,
+     desc:'은빛 선체와 푸른 불꽃'},
+    {id:'dragon',     name:'전설의 드래곤함', price:8000, vip:true,
+     desc:'용머리와 홍금빛 비늘 선체'}
   ];
   const OUTFITS = [
     {id:'fisher', name:'기본 낚시꾼',    price:0,   desc:'파란 셔츠의 꾸러기 낚시꾼'},
     {id:'straw',  name:'밀짚모자',       price:100, desc:'볕을 가려 주는 밀짚모자'},
     {id:'captain',name:'해적 선장 모자', price:300, desc:'해골 장식 선장 모자와 코트'},
-    {id:'crown',  name:'황금 왕관',      price:700, desc:'보석 박힌 황금 왕관과 망토'}
+    {id:'crown',  name:'황금 왕관',      price:700, desc:'보석 박힌 황금 왕관과 망토'},
+    /* ---- 고가 희귀 꾸미기 (VIP) ---- */
+    {id:'astro',  name:'우주비행사',     price:1500, vip:true,
+     desc:'투명 바이저 우주 헬멧'},
+    {id:'wizard', name:'별빛 마법사',    price:3500, vip:true,
+     desc:'별무늬 모자와 남색 망토'},
+    {id:'emperor',name:'은하수 제왕',    price:9000, vip:true,
+     desc:'보석 왕관과 황금 후광'}
   ];
   const CATS = [
     {key:'boat',   label:'배',     items:BOATS},
     {key:'rod',    label:'낚싯대', items:RODS},
     {key:'outfit', label:'꾸미기', items:OUTFITS}
   ];
+  /* 상점 목록은 언제나 가격이 낮은 것부터 (기본 아이템이 맨 위) */
+  CATS.forEach(function(c){ c.items.sort(function(a,b){ return a.price - b.price; }); });
   const CAT = {};
   CATS.forEach(function(c){ CAT[c.key] = c; });
   function itemOf(cat, id){
@@ -1979,13 +2018,26 @@
     {id:'bream',   name:'참돔',     pts:60,  w:7,  len:58, color:'#ff8894', accent:'#d84b60', speed:[26,40]},
     {id:'shark',   name:'상어',     pts:80,  w:5,  len:84, color:'#93a8bd', accent:'#5b7186', speed:[34,52]},
     {id:'golden',  name:'황금잉어', pts:150, w:3,  len:62, color:'#ffd24a', accent:'#f0a800', speed:[16,26], rare:true},
-    {id:'chest',   name:'보물상자', pts:200, w:2,  len:52, color:'#a9743c', accent:'#ffd24a', speed:[10,16], rare:true}
+    {id:'chest',   name:'보물상자', pts:200, w:2,  len:52, color:'#a9743c', accent:'#ffd24a', speed:[10,16], rare:true},
+    /* ---- 추가된 물고기 9종 (일반·희귀 18종) ---- */
+    {id:'mackerel',name:'고등어',      pts:15,  w:24,  len:44, color:'#7fb8cf', accent:'#2e6f8e', speed:[30,46]},
+    {id:'trout',   name:'무지개 송어', pts:35,  w:17,  len:50, color:'#9fd8b8', accent:'#e08fb0', speed:[26,40]},
+    {id:'seahorse',name:'해마',        pts:50,  w:11,  len:40, color:'#ffcf6a', accent:'#e08a2f', speed:[10,18]},
+    {id:'ray',     name:'가오리',      pts:75,  w:8,   len:62, color:'#9a8fbf', accent:'#5d4f86', speed:[16,26]},
+    {id:'angler',  name:'초롱아귀',    pts:90,  w:6,   len:46, color:'#4b3b6b', accent:'#ffdf6a', speed:[8,14]},
+    {id:'sunfish', name:'개복치',      pts:110, w:5,   len:56, color:'#a9bcc9', accent:'#7c93a3', speed:[8,14]},
+    {id:'goldcrab',name:'황금 꽃게',   pts:140, w:3.6, len:48, color:'#ffd24a', accent:'#e0951a', speed:[12,20], rare:true},
+    {id:'marlin',  name:'청새치',      pts:180, w:2.6, len:78, color:'#4f7fc8', accent:'#ff8a3d', speed:[38,52]},
+    {id:'jelly',   name:'별빛 해파리', pts:250, w:1.6, len:50, color:'#c9a9ff', accent:'#8fe8ff', speed:[8,14], rare:true}
   ];
   function speciesWeight(sp){
     /* 포켓몬: 등급 기본 무게 × (아직 못 만난 종이면 2.4배) → 도감 100종 수집 재미 */
-    if(sp.kind !== 'mon') return sp.w;
-    const base = sp.tier === 'super' ? 3 : sp.tier === 'rare' ? 10 : 30;
-    return dexCount(sp.id) > 0 ? base : base * 2.4;
+    if(sp.kind === 'mon'){
+      const base = sp.tier === 'super' ? 3 : sp.tier === 'rare' ? 10 : 30;
+      return dexCount(sp.id) > 0 ? base : base * 2.4;
+    }
+    /* 물고기: 아직 못 잡은 종은 1.7배 더 자주 나온다 → 도감 24종 채우기 */
+    return dexCount(sp.id) > 0 ? sp.w : sp.w * 1.7;
   }
   function pickSpecies(){
     const list = th().species;
@@ -1995,14 +2047,21 @@
     return list[0];
   }
 
-  /* ---- 전설의 보스 3종 (일반 물고기 풀에는 섞이지 않는다) ---- */
+  /* ---- 전설의 보스 6종 (일반 물고기 풀에는 섞이지 않는다) ---- */
   const BOSSES = [
     {id:'whaleshark', name:'대왕 고래상어', pts:500, w:0, len:196, color:'#4f9fc8', accent:'#eafbff',
      speed:[9,14], boss:true, tag:'바다의 거인', aura:[150,228,255]},
     {id:'kraken',     name:'전설의 크라켄', pts:700, w:0, len:210, color:'#b06bd8', accent:'#ff9de0',
      speed:[7,12],  boss:true, tag:'심해의 포식자', aura:[208,132,255]},
     {id:'golddragon', name:'심해 황금용',  pts:1000, w:0, len:224, color:'#ffd24a', accent:'#ff7a2f',
-     speed:[10,15], boss:true, tag:'바다의 왕', aura:[255,205,96]}
+     speed:[10,15], boss:true, tag:'바다의 왕', aura:[255,205,96]},
+    /* ---- 추가된 전설의 보스 3종 (보스 총 6종) ---- */
+    {id:'gws',        name:'거대 백상아리', pts:600, w:0, len:196, color:'#6f8496', accent:'#eef4f8',
+     speed:[11,16], boss:true, tag:'바다의 사냥개', aura:[200,232,255]},
+    {id:'megalodon',  name:'고대 메갈로돈', pts:850, w:0, len:238, color:'#4a5a6e', accent:'#d8e4ee',
+     speed:[9,14],  boss:true, tag:'고대의 지배자', aura:[150,190,255]},
+    {id:'starwhale',  name:'우주 별고래',  pts:1200, w:0, len:212, color:'#6a5fd0', accent:'#ffe9a8',
+     speed:[8,12],  boss:true, tag:'은하수의 노래', aura:[190,150,255]}
   ];
   BOSSES.forEach(b=>{ b.hp = 3; });
 
@@ -3187,7 +3246,7 @@
       flee:'다시 깊은 곳으로 숨어 버렸어요',
       release:'놓아주었어요',
       shopMsg:'물고기를 잡으면 포인트가 쌓여요. 모은 포인트로 배·낚싯대·꾸미기를 바꿔 보세요!',
-      legend:'낚시를 하면 저절로 모여요. 희귀한 물고기일수록 점수가 커요!',
+      legend:'낚시를 하면 저절로 모여요. 아직 못 만난 물고기가 더 자주 나타나요!',
       legendAll:'모든 물고기를 다 모았어요! 정말 대단해요!',
       legendBoss:'전설의 보스를 모두 잡았어요! 낚시의 왕이에요!',
       legendHint:'낚시를 하면 저절로 모여요. 물고기 5마리마다 전설의 보스가 나타나요!'
@@ -3401,6 +3460,165 @@
       [[-6,-7,1.6],[-9,-1,1.3],[-5,5,1.5],[-11,6,1.1],[0,-9,1.2],[2,8,1.3]].forEach(s=>{
         c.beginPath(); c.arc(s[0],s[1],s[2],0,Math.PI*2); c.fill();
       });
+
+    } else if(sp.id === 'gws'){
+      /* 꼬리 (황갈퀴 초승달) */
+      c.fillStyle = '#4c6072';
+      c.beginPath();
+      c.moveTo(-16,0);
+      c.quadraticCurveTo(-24,-9+wag*2.2, -30,-19+wag*3.2);
+      c.quadraticCurveTo(-25,-5, -22,0);
+      c.quadraticCurveTo(-25,3, -29,12+wag*2.4);
+      c.quadraticCurveTo(-24,7+wag*2, -16,0);
+      c.closePath(); c.fill();
+      /* 몸통: 남회색 등 + 흰 배 */
+      const g = c.createLinearGradient(0,-13,0,13);
+      g.addColorStop(0,'#8899a8'); g.addColorStop(.42,sp.color); g.addColorStop(.62,'#c9d6e0'); g.addColorStop(1,'#ffffff');
+      c.fillStyle=g;
+      c.beginPath();
+      c.moveTo(25,-3.4);
+      c.quadraticCurveTo(23,-11.4, 10,-12.4);
+      c.quadraticCurveTo(-6,-13, -16,-3.4);
+      c.quadraticCurveTo(-19,0, -16,3.4);
+      c.quadraticCurveTo(-6,11, 8,10.4);
+      c.quadraticCurveTo(20,9.6, 25,-3.4);
+      c.closePath(); c.fill();
+      c.strokeStyle='#3f5265'; c.lineWidth=1; c.stroke();
+      /* 등지느러미 */
+      c.fillStyle='#4c6072';
+      c.beginPath(); c.moveTo(2,-11.4); c.quadraticCurveTo(-2,-22-wag*0.5, -9,-10.4); c.closePath(); c.fill();
+      /* 가슴·뒷지느러미 */
+      c.beginPath(); c.moveTo(7,7); c.quadraticCurveTo(1,18+wag*1.4, 14,8); c.closePath(); c.fill();
+      c.beginPath(); c.moveTo(-10,7.4); c.quadraticCurveTo(-14,13, -6,8); c.closePath(); c.fill();
+      /* 아가미 */
+      c.strokeStyle='rgba(255,255,255,.55)'; c.lineWidth=0.7;
+      for(let i=0;i<4;i++){ c.beginPath(); c.moveTo(14-i*1.9,-5.4); c.lineTo(14-i*1.9,1.4); c.stroke(); }
+      /* 입 + 날카로운 이빨 */
+      c.strokeStyle='#22303c'; c.lineWidth=1.1;
+      c.beginPath(); c.moveTo(25,-1.6); c.quadraticCurveTo(18,3.2, 11,2.4); c.stroke();
+      c.fillStyle='#fffdf2';
+      for(let i=0;i<4;i++){
+        const bx = 13+i*2.6;
+        c.beginPath(); c.moveTo(bx,2.4); c.lineTo(bx+0.9,0.4); c.lineTo(bx+1.8,2.5); c.closePath(); c.fill();
+      }
+      /* 코 + 눈 */
+      c.fillStyle='#7a8c9c'; c.beginPath(); c.arc(23.6,-4.6,1.2,0,Math.PI*2); c.fill();
+      c.fillStyle='#1b2733'; c.beginPath(); c.arc(19.4,-5.4,1.9,0,Math.PI*2); c.fill();
+      c.fillStyle='rgba(255,255,255,.85)'; c.beginPath(); c.arc(20,-6.0,0.6,0,Math.PI*2); c.fill();
+      /* 상처 자국 */
+      c.strokeStyle='rgba(230,240,248,.6)'; c.lineWidth=0.7;
+      c.beginPath(); c.moveTo(8,-8); c.lineTo(11,-3.6); c.stroke();
+      c.beginPath(); c.moveTo(10.4,-7.4); c.lineTo(7.6,-4.2); c.stroke();
+
+    } else if(sp.id === 'megalodon'){
+      /* 거대한 꼬리 */
+      c.fillStyle = '#2f3f52';
+      c.beginPath();
+      c.moveTo(-18,0);
+      c.quadraticCurveTo(-26,-12+wag*2.6, -33,-22+wag*3.4);
+      c.quadraticCurveTo(-27,-6, -24,0);
+      c.quadraticCurveTo(-27,4, -32,15+wag*2.8);
+      c.quadraticCurveTo(-26,8+wag*2.4, -18,0);
+      c.closePath(); c.fill();
+      /* 육중한 몸통 */
+      const g = c.createLinearGradient(0,-15,0,15);
+      g.addColorStop(0,'#6d7c8c'); g.addColorStop(.4,sp.color); g.addColorStop(.68,'#a9b7c4'); g.addColorStop(1,'#f2f7fb');
+      c.fillStyle=g;
+      c.beginPath();
+      c.moveTo(26,-4.4);
+      c.quadraticCurveTo(24,-13.4, 8,-14.4);
+      c.quadraticCurveTo(-10,-15, -18,-4);
+      c.quadraticCurveTo(-21,0, -18,4);
+      c.quadraticCurveTo(-8,12.6, 8,12);
+      c.quadraticCurveTo(22,11, 26,-4.4);
+      c.closePath(); c.fill();
+      c.strokeStyle='#26323f'; c.lineWidth=1.1; c.stroke();
+      /* 두꺼운 지느러미 */
+      c.fillStyle='#2f3f52';
+      c.beginPath(); c.moveTo(4,-13); c.quadraticCurveTo(-1,-27-wag*0.6, -11,-12); c.closePath(); c.fill();
+      c.beginPath(); c.moveTo(8,8); c.quadraticCurveTo(0,21+wag*1.6, 16,9.4); c.closePath(); c.fill();
+      c.beginPath(); c.moveTo(-11,8.6); c.quadraticCurveTo(-16,15, -6,9.4); c.closePath(); c.fill();
+      /* 거대하게 벌린 입 + 두 줄 이빨 */
+      c.fillStyle='#101a24';
+      c.beginPath();
+      c.moveTo(26,-1.2);
+      c.quadraticCurveTo(18,5.6, 8,5.0);
+      c.quadraticCurveTo(17,9.4, 26,-1.2);
+      c.closePath(); c.fill();
+      c.fillStyle='#fffdf2';
+      for(let i=0;i<6;i++){
+        const bx = 9.6 + i*2.8;
+        c.beginPath(); c.moveTo(bx,5.0); c.lineTo(bx+0.9,1.6); c.lineTo(bx+1.8,5.4); c.closePath(); c.fill();
+      }
+      /* 이빨 자국 상처 */
+      c.strokeStyle='rgba(232,242,250,.55)'; c.lineWidth=0.8;
+      c.beginPath(); c.moveTo(-2,-8.6); c.lineTo(2,-3.4); c.stroke();
+      c.beginPath(); c.moveTo(1.4,-9); c.lineTo(-1.6,-4); c.stroke();
+      c.beginPath(); c.moveTo(-7,-2); c.lineTo(-4,1.4); c.stroke();
+      /* 아가미 */
+      c.strokeStyle='rgba(255,255,255,.45)'; c.lineWidth=0.7;
+      for(let i=0;i<4;i++){ c.beginPath(); c.moveTo(15-i*2.1,-7); c.lineTo(15-i*2.1,0.6); c.stroke(); }
+      /* 눈 */
+      c.fillStyle='#e8f2fa'; c.beginPath(); c.arc(20.6,-6.4,2.1,0,Math.PI*2); c.fill();
+      c.fillStyle='#0f1822'; c.beginPath(); c.arc(21.0,-6.4,1.2,0,Math.PI*2); c.fill();
+      c.fillStyle='rgba(255,255,255,.9)'; c.beginPath(); c.arc(20.3,-7.0,0.55,0,Math.PI*2); c.fill();
+
+    } else if(sp.id === 'starwhale'){
+      /* 별빛 꼬리 */
+      c.save();
+      c.shadowColor='rgba(150,120,255,.85)'; c.shadowBlur=10;
+      c.fillStyle='#5b4bbd';
+      c.beginPath();
+      c.moveTo(-17,0);
+      c.quadraticCurveTo(-25,-8+wag*2.2, -32,-16+wag*3);
+      c.quadraticCurveTo(-26,-2, -23,0);
+      c.quadraticCurveTo(-26,2, -32,16+wag*3);
+      c.quadraticCurveTo(-25,8+wag*2.2, -17,0);
+      c.closePath(); c.fill();
+      c.restore();
+      /* 몸통 (보랏빚 고래) */
+      const g = c.createLinearGradient(0,-14,0,14);
+      g.addColorStop(0,'#3b2f86'); g.addColorStop(.45,sp.color); g.addColorStop(1,'#241a5e');
+      c.fillStyle=g;
+      c.beginPath();
+      c.moveTo(23,-3);
+      c.quadraticCurveTo(20,-12, 6,-13.4);
+      c.quadraticCurveTo(-10,-14, -18,-3.6);
+      c.quadraticCurveTo(-21,0, -18,3.6);
+      c.quadraticCurveTo(-8,12, 6,11.4);
+      c.quadraticCurveTo(20,10.4, 23,-3);
+      c.closePath(); c.fill();
+      c.strokeStyle='#1c1450'; c.lineWidth=1; c.stroke();
+      /* 등 위의 밤하늘 별무늬 */
+      c.save();
+      c.beginPath();
+      c.moveTo(23,-3); c.quadraticCurveTo(20,-12, 6,-13.4);
+      c.quadraticCurveTo(-10,-14, -18,-3.6);
+      c.quadraticCurveTo(-10,-2, 4,-3.2); c.closePath(); c.clip();
+      const sky = c.createLinearGradient(0,-14,0,0);
+      sky.addColorStop(0,'rgba(20,14,52,.92)'); sky.addColorStop(1,'rgba(58,46,120,.2)');
+      c.fillStyle=sky; c.fillRect(-22,-16,48,18);
+      [[14,-6,1.2],[-8,-9,1.0],[0,-11,1.4],[6,-7,0.9],[-14,-5,0.9],[17,-8.6,0.9]].forEach(function(p){
+        star4(c, p[0], p[1], p[2], '#fff8d0');
+      });
+      c.restore();
+      /* 배 밝은 줄 */
+      c.strokeStyle='rgba(214,206,255,.5)'; c.lineWidth=1.4;
+      c.beginPath(); c.moveTo(-14,5.4); c.quadraticCurveTo(2,10, 19,2.4); c.stroke();
+      /* 가슴지느러미 */
+      c.fillStyle='#4b3e9e';
+      c.beginPath(); c.moveTo(6,8); c.quadraticCurveTo(-2,19+wag*1.4, 12,9.4); c.closePath(); c.fill();
+      /* 입 + 빛나는 눈 */
+      c.strokeStyle='#d6ceff'; c.lineWidth=1;
+      c.beginPath(); c.moveTo(23,2.6); c.quadraticCurveTo(17,6.6, 10,6); c.stroke();
+      c.save();
+      c.shadowColor='rgba(255,240,180,.95)'; c.shadowBlur=8;
+      c.fillStyle='#fff6c4'; c.beginPath(); c.arc(18,-4.6,1.9,0,Math.PI*2); c.fill();
+      c.restore();
+      /* 떠다니는 별가루 */
+      const tw = 0.5+0.5*Math.sin(phase*2);
+      star4(c, -20,-12, 1.6, 'rgba(255,250,220,'+(0.4+0.5*tw).toFixed(2)+')');
+      star4(c, 22,-13, 1.4, 'rgba(200,240,255,'+(0.3+0.6*tw).toFixed(2)+')');
 
     } else { /* golddragon */
       const w1 = Math.sin(phase*1.1)*2.4;
@@ -3636,6 +3854,347 @@
       c.fillStyle='#fff';
       c.beginPath(); c.moveTo(-6,-18); c.lineTo(-4,-14.5); c.lineTo(-1,-13); c.lineTo(-4,-11.5); c.lineTo(-6,-8); c.lineTo(-8,-11.5); c.lineTo(-11,-13); c.lineTo(-8,-14.5); c.closePath(); c.fill();
       c.globalAlpha = 1;
+    } else if(sp.id==='mackerel'){
+      /* 제비꼬리 */
+      c.fillStyle = sp.accent;
+      c.beginPath();
+      c.moveTo(-12,0);
+      c.lineTo(-23,-9+wag*2.2); c.lineTo(-19,0); c.lineTo(-23,9+wag*2.2);
+      c.closePath(); c.fill();
+      /* 몸통 (등 푸름 · 배 희끗) */
+      const g = c.createLinearGradient(0,-9,0,9);
+      g.addColorStop(0,'#3d8aa8'); g.addColorStop(.38,'#8fcbdd'); g.addColorStop(.72,'#dff2fa'); g.addColorStop(1,'#ffffff');
+      c.fillStyle = g;
+      c.beginPath();
+      c.moveTo(20,1);
+      c.quadraticCurveTo(14,-8, 2,-8.6);
+      c.quadraticCurveTo(-8,-8.6,-12,-2.6);
+      c.lineTo(-12,2.6);
+      c.quadraticCurveTo(-8,8.6, 2,8.6);
+      c.quadraticCurveTo(14,8, 20,1);
+      c.closePath(); c.fill();
+      c.strokeStyle='#3b7d99'; c.lineWidth=1; c.stroke();
+      /* 등쪽 물결무늬 */
+      c.strokeStyle='rgba(26,74,102,.7)'; c.lineWidth=1.4;
+      for(let i=0;i<6;i++){
+        const bx = 4 - i*3.2;
+        c.beginPath();
+        c.moveTo(bx,-7.6);
+        c.quadraticCurveTo(bx-1.4,-4.6+Math.sin(i)*0.6, bx-0.4,-2.6);
+        c.stroke();
+      }
+      /* 가슴지느러미 */
+      c.fillStyle='rgba(120,180,205,.9)';
+      c.beginPath(); c.moveTo(9,4); c.quadraticCurveTo(4,11, 12,7.4); c.closePath(); c.fill();
+      /* 눈 */
+      c.fillStyle='#f7fdff'; ell(c,13.4,-1.6,2.8,2.8); c.fill();
+      c.fillStyle='#14232e'; ell(c,14.2,-1.6,1.4,1.4); c.fill();
+      c.fillStyle='rgba(255,255,255,.9)'; c.beginPath(); c.arc(13.6,-2.4,0.5,0,Math.PI*2); c.fill();
+
+    } else if(sp.id==='trout'){
+      c.fillStyle = sp.accent;
+      c.beginPath(); c.moveTo(-13,0); c.lineTo(-25,-8+wag*2.2); c.lineTo(-22,0); c.lineTo(-25,8+wag*2.2); c.closePath(); c.fill();
+      /* 무지개빛 비늘 몸통 */
+      const g = c.createLinearGradient(-14,-10,16,10);
+      g.addColorStop(0,'#a8e6c8'); g.addColorStop(.32,'#cdebcf'); g.addColorStop(.62,'#f7dbe8'); g.addColorStop(1,'#e0c4de');
+      c.fillStyle=g;
+      c.beginPath();
+      c.moveTo(21,0);
+      c.quadraticCurveTo(12,-10, 0,-10);
+      c.quadraticCurveTo(-10,-10,-14,-3);
+      c.lineTo(-14,3);
+      c.quadraticCurveTo(-10,10, 0,10);
+      c.quadraticCurveTo(12,10, 21,0);
+      c.closePath(); c.fill();
+      c.strokeStyle='#8fae94'; c.lineWidth=1.1; c.stroke();
+      /* 분홍 무지개 띠 */
+      c.strokeStyle='rgba(255,138,180,.75)'; c.lineWidth=2.4;
+      c.beginPath(); c.moveTo(-12,1.6); c.quadraticCurveTo(2,4.6, 18,1.0); c.stroke();
+      /* 점무늬 */
+      c.fillStyle='rgba(90,110,120,.5)';
+      [[6,-5.4],[1,-6.6],[-5,-4.6],[-8,0.4],[3,5.6],[-3,4.4],[10,3.4]].forEach(function(p){
+        c.beginPath(); c.arc(p[0],p[1],0.9,0,Math.PI*2); c.fill();
+      });
+      /* 등지느러미 */
+      c.fillStyle='rgba(150,200,180,.85)';
+      c.beginPath(); c.moveTo(-2,-9.6); c.quadraticCurveTo(0,-16, 6,-9.2); c.closePath(); c.fill();
+      /* 눈 */
+      c.fillStyle='#fff'; ell(c,14,-1.6,2.9,2.9); c.fill();
+      c.fillStyle='#20303a'; ell(c,14.8,-1.6,1.4,1.4); c.fill();
+
+    } else if(sp.id==='seahorse'){
+      const sw = Math.sin(phase)*1.4;
+      c.save();
+      c.rotate(-0.05 + sw*0.015);
+      /* 말린 꼬리 */
+      c.strokeStyle = sp.accent; c.lineWidth = 3.4; c.lineCap='round';
+      c.beginPath();
+      c.moveTo(-1,6);
+      c.bezierCurveTo(5,12, -2,18, -8,14);
+      c.bezierCurveTo(-12,11, -9,7, -5,8);
+      c.stroke();
+      /* 몸통 */
+      const g = c.createLinearGradient(0,-14,0,10);
+      g.addColorStop(0,'#ffe6a8'); g.addColorStop(.55,sp.color); g.addColorStop(1,'#e09b32');
+      c.fillStyle=g;
+      c.beginPath();
+      c.moveTo(-4,-12);
+      c.bezierCurveTo(-10,-8, -9,0, -6,4);
+      c.bezierCurveTo(-3,8, 2,7, 4,3);
+      c.bezierCurveTo(6,-1, 5,-7, 2,-11);
+      c.closePath(); c.fill();
+      c.strokeStyle='#c98a22'; c.lineWidth=1; c.stroke();
+      /* 배 마디 */
+      c.strokeStyle='rgba(190,120,26,.45)'; c.lineWidth=1;
+      for(let i=0;i<4;i++){
+        c.beginPath(); c.arc(-1, -6+i*3.4, 3.4-i*0.4, -0.4*Math.PI, 0.4*Math.PI); c.stroke();
+      }
+      /* 등지느러미 */
+      c.fillStyle='rgba(255,214,140,.9)';
+      c.beginPath(); c.moveTo(-8,-4); c.quadraticCurveTo(-15,-2, -13,3); c.quadraticCurveTo(-10,1,-8,2); c.closePath(); c.fill();
+      /* 머리 + 길쭉한 주둥이 */
+      c.fillStyle=sp.color;
+      c.beginPath();
+      c.moveTo(-4,-13); c.quadraticCurveTo(-2,-19, 3,-18);
+      c.quadraticCurveTo(7,-17, 6,-13);
+      c.lineTo(10,-12.4); c.lineTo(10,-10.6); c.lineTo(5,-11);
+      c.quadraticCurveTo(4,-9, 2,-8.6);
+      c.quadraticCurveTo(-3,-9, -4,-13);
+      c.closePath(); c.fill();
+      c.strokeStyle='#c98a22'; c.lineWidth=0.9; c.stroke();
+      /* 머리 볏 */
+      c.fillStyle='#ffd24a';
+      [[-2,-18.6],[1.5,-19.6],[4.5,-18.2]].forEach(function(p){
+        c.beginPath(); c.arc(p[0],p[1],1.2,0,Math.PI*2); c.fill();
+      });
+      /* 눈 */
+      c.fillStyle='#fff'; c.beginPath(); c.arc(2.6,-14.6,2.2,0,Math.PI*2); c.fill();
+      c.fillStyle='#3a2a12'; c.beginPath(); c.arc(3.0,-14.6,1.1,0,Math.PI*2); c.fill();
+      c.restore();
+
+    } else if(sp.id==='ray'){
+      const flap = Math.sin(phase)*3.4;
+      /* 길고 가느다란 꼬리 + 가시 */
+      c.strokeStyle = sp.accent; c.lineWidth = 1.9; c.lineCap='round';
+      c.beginPath(); c.moveTo(-11,2.4); c.bezierCurveTo(-22,5.4, -30,3, -38,-3+flap*0.5); c.stroke();
+      c.fillStyle='#3d3260';
+      c.beginPath(); c.moveTo(-26,4.2); c.lineTo(-28,9.4); c.lineTo(-22.6,5.4); c.closePath(); c.fill();
+      /* 넓은 마름모 날개 */
+      const g = c.createLinearGradient(0,-17,0,10);
+      g.addColorStop(0,'#cdc3e8'); g.addColorStop(.42,sp.color); g.addColorStop(1,'#64578c');
+      c.fillStyle=g;
+      c.beginPath();
+      c.moveTo(21,0.4);
+      c.quadraticCurveTo(12,-15-flap, -3,-13.4);
+      c.quadraticCurveTo(-16,-11, -23,-2.4);
+      c.quadraticCurveTo(-20,4, -8,6.4);
+      c.quadraticCurveTo(6,9.4, 21,0.4);
+      c.closePath(); c.fill();
+      c.strokeStyle='#5a4d80'; c.lineWidth=1.1; c.stroke();
+      /* 날개 무늬 (점) */
+      c.fillStyle='rgba(255,255,255,.45)';
+      [[6,-7],[-2,-8.4],[-9,-5.6],[2,-1.4],[-6,0.6],[9,2.6],[13,-3]].forEach(function(p){
+        c.beginPath(); c.arc(p[0],p[1],1.2,0,Math.PI*2); c.fill();
+      });
+      /* 몸 가운데 밝은 등줄 */
+      c.strokeStyle='rgba(255,255,255,.6)'; c.lineWidth=1.2;
+      c.beginPath(); c.moveTo(17,0); c.quadraticCurveTo(6,-3.4, -6,-2.6); c.stroke();
+      /* 위쪽에 붙은 두 눈 */
+      c.fillStyle='#2a2244';
+      c.beginPath(); c.arc(11.4,-4.4,1.8,0,Math.PI*2); c.fill();
+      c.beginPath(); c.arc(6.4,-5.8,1.8,0,Math.PI*2); c.fill();
+      c.fillStyle='rgba(255,255,255,.9)';
+      c.beginPath(); c.arc(11.9,-5.1,0.6,0,Math.PI*2); c.fill();
+      c.beginPath(); c.arc(6.9,-6.5,0.6,0,Math.PI*2); c.fill();
+
+    } else if(sp.id==='angler'){
+      /* 꼬리 */
+      c.fillStyle='#2e2148';
+      c.beginPath(); c.moveTo(-13,0); c.lineTo(-22,-6+wag*1.8); c.lineTo(-19,0); c.lineTo(-22,6+wag*1.8); c.closePath(); c.fill();
+      /* 심해어 몸통 (남보라) */
+      const g = c.createRadialGradient(-2,-3,2, 0,0,20);
+      g.addColorStop(0,'#7a5fa8'); g.addColorStop(.6,sp.color); g.addColorStop(1,'#241a38');
+      c.fillStyle=g;
+      c.beginPath();
+      c.moveTo(18,3);
+      c.quadraticCurveTo(12,-9, -2,-9.4);
+      c.quadraticCurveTo(-12,-9, -14,-1);
+      c.quadraticCurveTo(-14,8, -2,10);
+      c.quadraticCurveTo(12,10, 18,3);
+      c.closePath(); c.fill();
+      c.strokeStyle='#1d1430'; c.lineWidth=1; c.stroke();
+      /* 큰 아가리 */
+      c.fillStyle='#150e24';
+      c.beginPath();
+      c.moveTo(17.6,3.4); c.quadraticCurveTo(9,6.6, 1.6,5.2);
+      c.quadraticCurveTo(9,9.6, 17.6,3.4);
+      c.closePath(); c.fill();
+      /* 날카로운 이빨 */
+      c.fillStyle='#fffdf2';
+      for(let i=0;i<5;i++){
+        const bx = 4.4 + i*2.8;
+        c.beginPath(); c.moveTo(bx,5.0); c.lineTo(bx+1.0,2.2); c.lineTo(bx+2.0,5.2); c.closePath(); c.fill();
+      }
+      /* 빛나는 초롱 */
+      c.strokeStyle='#8a7bb8'; c.lineWidth=1.7;
+      c.beginPath(); c.moveTo(5,-8.4); c.quadraticCurveTo(7,-16, 13.4,-17.4); c.stroke();
+      c.save();
+      c.shadowColor='rgba(255,236,140,1)'; c.shadowBlur=11;
+      c.fillStyle='#fff6c4'; c.beginPath(); c.arc(14.6,-18,3.1,0,Math.PI*2); c.fill();
+      c.restore();
+      c.fillStyle='rgba(255,255,255,.95)'; c.beginPath(); c.arc(13.8,-19,1.0,0,Math.PI*2); c.fill();
+      /* 작고 빛나는 눈 */
+      c.fillStyle='#f7fdff'; ell(c,11.4,-3.4,2.0,2.0); c.fill();
+      c.fillStyle='#1a1024'; c.beginPath(); c.arc(11.8,-3.4,1.0,0,Math.PI*2); c.fill();
+
+    } else if(sp.id==='sunfish'){
+      /* 위·아래 커다란 지느러미 */
+      c.fillStyle='#8fa6b6';
+      c.beginPath(); c.moveTo(-3,-10.4); c.quadraticCurveTo(-9,-25, 8,-21.6); c.quadraticCurveTo(6,-14, 8.6,-10.4); c.closePath(); c.fill();
+      c.beginPath(); c.moveTo(-3,10.4); c.quadraticCurveTo(-9,25, 8,21.6); c.quadraticCurveTo(6,14, 8.6,10.4); c.closePath(); c.fill();
+      /* 짧은 꼬리 */
+      c.beginPath(); c.moveTo(-13,-4); c.lineTo(-20,-8+wag*1.6); c.lineTo(-20,8+wag*1.6); c.lineTo(-13,4); c.closePath(); c.fill();
+      /* 둥글납작한 몸통 */
+      const g = c.createLinearGradient(0,-14,0,14);
+      g.addColorStop(0,'#cbdae4'); g.addColorStop(.5,sp.color); g.addColorStop(1,'#889dab');
+      c.fillStyle=g;
+      c.beginPath(); c.ellipse(0,0,15,14.4,0,0,Math.PI*2); c.fill();
+      c.strokeStyle='#7d93a3'; c.lineWidth=1.2; c.stroke();
+      /* 얼룩무늬 */
+      c.fillStyle='rgba(255,255,255,.45)';
+      [[-6,-6,2.6],[-2,4.4,2.2],[5,-3,1.9],[-8,2.6,1.6],[3,7,1.5]].forEach(function(p){
+        c.beginPath(); c.arc(p[0],p[1],p[2],0,Math.PI*2); c.fill();
+      });
+      /* 작은 입 */
+      c.fillStyle='#5f7280';
+      c.beginPath(); c.ellipse(14.4,1.4,2.2,1.5,0,0,Math.PI*2); c.fill();
+      /* 눈 */
+      c.fillStyle='#fff'; c.beginPath(); c.arc(9.4,-3.4,3.0,0,Math.PI*2); c.fill();
+      c.fillStyle='#1e2c38'; c.beginPath(); c.arc(10.2,-3.4,1.5,0,Math.PI*2); c.fill();
+
+    } else if(sp.id==='goldcrab'){
+      const cw = Math.sin(phase*1.4)*1.8;
+      /* 다리 8개 */
+      c.strokeStyle='#c98a12'; c.lineWidth=2.2; c.lineCap='round';
+      for(let i=0;i<4;i++){
+        const y = -4.4 + i*3.2;
+        c.beginPath(); c.moveTo(-6,y); c.quadraticCurveTo(-14,y-2, -18,y+2+cw*0.4); c.stroke();
+        c.beginPath(); c.moveTo(6,y); c.quadraticCurveTo(14,y-2, 18,y+2-cw*0.4); c.stroke();
+      }
+      /* 집게발 2개 */
+      [-1,1].forEach(function(sd){
+        c.save();
+        c.translate(sd*14.4, -8.4);
+        c.rotate(sd*(-0.5 + cw*0.05));
+        c.fillStyle='#ffd24a'; c.strokeStyle='#b57b08'; c.lineWidth=1;
+        c.beginPath(); c.moveTo(0,0); c.lineTo(sd*8.4,-1.4); c.lineTo(sd*8.4,3.4); c.closePath(); c.fill(); c.stroke();
+        c.beginPath(); c.moveTo(sd*7.6,-2.2); c.quadraticCurveTo(sd*14,-4.6, sd*13,-0.2); c.quadraticCurveTo(sd*10,0.8, sd*7.6,-0.2); c.closePath(); c.fill(); c.stroke();
+        c.beginPath(); c.moveTo(sd*7.6,1.6); c.quadraticCurveTo(sd*13.4,3.8, sd*12.4,0.4); c.quadraticCurveTo(sd*10,0.6, sd*7.6,0.8); c.closePath(); c.fill(); c.stroke();
+        c.restore();
+      });
+      /* 금빛 등딱지 */
+      const g = c.createRadialGradient(-3,-4,2, 0,0,14);
+      g.addColorStop(0,'#fff6c4'); g.addColorStop(.55,sp.color); g.addColorStop(1,'#d99410');
+      c.fillStyle=g;
+      c.beginPath(); c.ellipse(0,1,13,10.4,0,0,Math.PI*2); c.fill();
+      c.strokeStyle='#b57b08'; c.lineWidth=1.2; c.stroke();
+      /* 등딱지 가시 */
+      c.fillStyle='#ffe9a8';
+      [[-8,-5.6],[-3,-8.4],[3,-8.4],[8,-5.6]].forEach(function(p){
+        c.beginPath(); c.moveTo(p[0],p[1]); c.lineTo(p[0]+1.6,p[1]-3.6); c.lineTo(p[0]+3.2,p[1]); c.closePath(); c.fill();
+      });
+      /* 눈자루 */
+      c.strokeStyle='#c98a12'; c.lineWidth=1.4;
+      c.beginPath(); c.moveTo(-4,-8); c.lineTo(-4,-12); c.stroke();
+      c.beginPath(); c.moveTo(4,-8); c.lineTo(4,-12); c.stroke();
+      c.fillStyle='#fff'; c.beginPath(); c.arc(-4,-13.2,2.1,0,Math.PI*2); c.fill();
+      c.beginPath(); c.arc(4,-13.2,2.1,0,Math.PI*2); c.fill();
+      c.fillStyle='#3a2a12'; c.beginPath(); c.arc(-4,-13.2,1.1,0,Math.PI*2); c.fill();
+      c.beginPath(); c.arc(4,-13.2,1.1,0,Math.PI*2); c.fill();
+      /* 입 거품 */
+      c.strokeStyle='rgba(255,255,255,.8)'; c.lineWidth=1.2;
+      c.beginPath(); c.arc(0,4,4.4,0.15*Math.PI,0.85*Math.PI); c.stroke();
+
+    } else if(sp.id==='marlin'){
+      /* 초승달 꼬리 */
+      c.fillStyle=sp.accent;
+      c.beginPath();
+      c.moveTo(-16,0);
+      c.quadraticCurveTo(-26,-9+wag*2.4, -30,-14+wag*2.4);
+      c.quadraticCurveTo(-25,-4, -22,0);
+      c.quadraticCurveTo(-25,4, -30,14+wag*2.4);
+      c.quadraticCurveTo(-26,9+wag*2.4, -16,0);
+      c.closePath(); c.fill();
+      /* 돛 등지느러미 */
+      c.fillStyle='#3f6fb8';
+      c.beginPath(); c.moveTo(-3,-8.4); c.quadraticCurveTo(2,-24, 10.4,-20); c.quadraticCurveTo(12,-12, 12.4,-7); c.closePath(); c.fill();
+      c.strokeStyle='rgba(255,255,255,.4)'; c.lineWidth=0.8;
+      for(let i=0;i<3;i++){ c.beginPath(); c.moveTo(0+i*3,-9); c.lineTo(2+i*2.6,-18.4+i*1.6); c.stroke(); }
+      /* 몸통 */
+      const g = c.createLinearGradient(0,-9,0,9);
+      g.addColorStop(0,'#2e63a8'); g.addColorStop(.45,sp.color); g.addColorStop(1,'#dceaf6');
+      c.fillStyle=g;
+      c.beginPath();
+      c.moveTo(20,1.2);
+      c.quadraticCurveTo(12,-8, 0,-8.6);
+      c.quadraticCurveTo(-12,-8, -17,-1);
+      c.quadraticCurveTo(-12,7, 0,8);
+      c.quadraticCurveTo(12,8, 20,1.2);
+      c.closePath(); c.fill();
+      c.strokeStyle='#2b5a99'; c.lineWidth=1; c.stroke();
+      /* 가슴지느러미 */
+      c.fillStyle='#2e63a8';
+      c.beginPath(); c.moveTo(6,4); c.quadraticCurveTo(0,10.4, 10.4,6.6); c.closePath(); c.fill();
+      /* 밝은 옆줄 */
+      c.strokeStyle='rgba(255,255,255,.55)'; c.lineWidth=1;
+      c.beginPath(); c.moveTo(-14,0.4); c.quadraticCurveTo(2,2.4, 17,0.8); c.stroke();
+      /* 긴 뾰족 부리 */
+      c.strokeStyle='#20364f'; c.lineWidth=2.2; c.lineCap='round';
+      c.beginPath(); c.moveTo(19,0.4); c.lineTo(34,-1.4); c.stroke();
+      /* 눈 */
+      c.fillStyle='#fff'; ell(c,12,-2.6,2.2,2.2); c.fill();
+      c.fillStyle='#12233a'; ell(c,12.6,-2.6,1.1,1.1); c.fill();
+
+    } else if(sp.id==='jelly'){
+      const pl = 0.5 + 0.5*Math.sin(phase*1.2);
+      /* 반짝이는 촉수 5줄 */
+      for(let i=0;i<5;i++){
+        const bx = -8 + i*4;
+        const ty = 22 + Math.sin(phase + i*1.3)*2;
+        c.strokeStyle = i%2 ? 'rgba(202,180,255,.9)' : 'rgba(150,235,255,.9)';
+        c.lineWidth = 1.5;
+        c.beginPath();
+        c.moveTo(bx,4);
+        c.bezierCurveTo(bx-2.6,10+Math.sin(phase+i)*1.6, bx+2.6,16+Math.sin(phase+i)*2, bx-1.2,ty);
+        c.stroke();
+        star4(c, bx-1.2, ty, 1.5, 'rgba(255,250,220,' + (0.45+0.45*pl).toFixed(2) + ')');
+      }
+      /* 별빛 우산(종) */
+      c.save();
+      c.shadowColor='rgba(190,170,255,.85)'; c.shadowBlur=10;
+      const g = c.createLinearGradient(0,-18,0,8);
+      g.addColorStop(0,'rgba(255,255,255,.94)'); g.addColorStop(.42,'rgba(214,192,255,.84)'); g.addColorStop(1,'rgba(150,120,220,.62)');
+      c.fillStyle=g;
+      c.beginPath();
+      c.moveTo(-15,4);
+      c.bezierCurveTo(-15,-12, -6,-18.4, 0,-18.4);
+      c.bezierCurveTo(8,-18.4, 15,-11, 15,4);
+      c.quadraticCurveTo(8,8.4, 0,8.4);
+      c.quadraticCurveTo(-8,8.4, -15,4);
+      c.closePath(); c.fill();
+      c.restore();
+      /* 우산 무늬 */
+      c.strokeStyle='rgba(255,255,255,.7)'; c.lineWidth=0.9;
+      [-8,-3,2,7].forEach(function(x){
+        c.beginPath(); c.moveTo(x*0.35,-16.4); c.quadraticCurveTo(x*0.8,-6, x,4.4); c.stroke();
+      });
+      c.strokeStyle='rgba(255,255,255,.55)'; c.lineWidth=0.9;
+      c.beginPath(); c.arc(0,-8,9.4,0.62*Math.PI,1.38*Math.PI); c.stroke();
+      /* 별빛 반짝임 */
+      star4(c, -6.4,-11, 2.2, 'rgba(255,255,255,' + (0.6+0.4*pl).toFixed(2) + ')');
+      star4(c, 5.6,-6.4, 1.6, 'rgba(255,246,200,' + (0.4+0.55*pl).toFixed(2) + ')');
+      star4(c, 1.6,-15.4, 1.3, 'rgba(230,255,255,' + (0.5+0.4*(1-pl)).toFixed(2) + ')');
+
     } else if(sp.boss){
       drawBossBody(c, sp, phase);
     } else { // chest
@@ -4500,22 +5059,24 @@
     if(G.state === 'quiz' || G.state === 'catching') return;   /* 문제 푸는 중에는 열지 않는다 */
     if(tab && CAT[tab]) shopTab = tab;
     syncCoins(true);
-    buildShop();
+    buildShop(true);
     $('shopWrap').classList.remove('hidden');
     G.shopOpen = true;
     shopMessage(th().shopMsg, '');
+    scrollShopToEquipped();
   }
   function closeShop(){
     $('shopWrap').classList.add('hidden');
     G.shopOpen = false;
     if(G.state === 'result') $('resultWrap').classList.remove('hidden');
   }
-  function buildShop(){
+  function buildShop(resetScroll){
     Array.prototype.forEach.call(document.querySelectorAll('#shopTabs button'), function(b){
       b.classList.toggle('on', b.dataset.tab === shopTab);
     });
     $('shopCoins').textContent = fmtP(save.coins);
     const list = $('shopList');
+    const keep = resetScroll ? 0 : list.scrollTop;   /* 구매한 뒤에도 보던 위치를 지킨다 */
     list.innerHTML = '';
     CAT[shopTab].items.forEach(function(it){
       const owned = isOwned(shopTab, it.id);
@@ -4523,7 +5084,7 @@
       const lack = !owned && save.coins < it.price;
 
       const row = document.createElement('div');
-      row.className = 'shop-item' + (on ? ' on' : '');
+      row.className = 'shop-item' + (on ? ' on' : '') + (it.vip ? ' vip' : '');
       row.dataset.id = it.id;
 
       const prev = document.createElement('div');
@@ -4564,6 +5125,19 @@
       row.appendChild(prev); row.appendChild(meta); row.appendChild(btn);
       list.appendChild(row);
     });
+    list.scrollTop = keep;
+  }
+  /* 상점을 열었을 때 지금 장착한 아이템이 목록 안에 보이도록 맞춘다 */
+  function scrollShopToEquipped(){
+    const list = $('shopList');
+    if(!list) return;
+    if(list.scrollHeight <= list.clientHeight + 2) return;
+    const row = list.querySelector('.shop-item.on');
+    if(!row) return;
+    const lr = list.getBoundingClientRect(), rr = row.getBoundingClientRect();
+    if(rr.top < lr.top + 2 || rr.bottom > lr.bottom - 2){
+      list.scrollTop += Math.round(rr.top - lr.top) - 6;
+    }
   }
   function tapShopItem(cat, id, row){
     const it = itemOf(cat, id);
@@ -4879,6 +5453,93 @@
       c.beginPath(); c.arc(19.4, -35.4, 2.6, 0, Math.PI*2); c.stroke();
       c.fillStyle = '#ff4d6a'; ell(c, 16.6, -32.6, 1.5, 1.5); c.fill();
       star4(c, ROD_P1.x, ROD_P1.y, 3.0, '#fff8d0');
+    } else if(id === 'diamond'){
+      /* 투명 하늘빛 보석 로드 + 다이아 릴 + 얼음 장식 */
+      const g = c.createLinearGradient(16,-31,40,-66);
+      g.addColorStop(0,'#e8fcff'); g.addColorStop(.32,'#9fe6ff'); g.addColorStop(.6,'#f5feff'); g.addColorStop(1,'#79cfee');
+      c.strokeStyle = '#2f7fa6'; c.lineWidth = 4.4;
+      c.beginPath(); c.moveTo(15.3,-29.7); c.lineTo(18.1,-33.5); c.stroke();
+      c.save();
+      c.shadowColor = 'rgba(150,235,255,.9)'; c.shadowBlur = 7;
+      c.strokeStyle = g; c.lineWidth = 3.7;
+      curve(); c.stroke();
+      c.restore();
+      /* 보석처럼 깎인 반짝이는 면 */
+      c.strokeStyle = 'rgba(255,255,255,.95)'; c.lineWidth = 1.1;
+      c.beginPath(); c.moveTo(17.4,-32.4); c.quadraticCurveTo(29,-47.6, 39.2,-64.4); c.stroke();
+      c.strokeStyle = 'rgba(110,200,232,.8)'; c.lineWidth = 0.9;
+      c.beginPath(); c.moveTo(16.4,-31.2); c.quadraticCurveTo(28.2,-46.4, 38.2,-63.4); c.stroke();
+      /* 얼음 결정 마디 */
+      c.strokeStyle = 'rgba(242,254,255,.95)'; c.lineWidth = 1.5;
+      rodTick(c, 0.34, 2.4); rodTick(c, 0.60, 2.0); rodTick(c, 0.84, 1.6);
+      /* 다이아몬드 릴 */
+      c.save(); c.translate(21.8,-37.6);
+      c.beginPath(); c.moveTo(0,-4.8); c.lineTo(3.8,0); c.lineTo(0,4.8); c.lineTo(-3.8,0); c.closePath();
+      c.fillStyle = '#dff8ff'; c.fill();
+      c.strokeStyle = '#4f9ec2'; c.lineWidth = 1; c.stroke();
+      c.strokeStyle = 'rgba(255,255,255,.9)'; c.lineWidth = 0.7;
+      c.beginPath(); c.moveTo(0,-4.8); c.lineTo(0,4.8); c.moveTo(-3.8,0); c.lineTo(3.8,0); c.stroke();
+      c.restore();
+      star4(c, ROD_P1.x, ROD_P1.y, 3.4, '#ffffff');
+      star4(c, 27.6,-44.8, 1.9, '#eafcff');
+      star4(c, 21.2,-36.0, 1.3, '#ffffff');
+    } else if(id === 'galaxy'){
+      /* 밤하늘 보라·금빛 로드 + 별 장식 + 별가루 줄 */
+      const g = c.createLinearGradient(16,-31,40,-66);
+      g.addColorStop(0,'#2a1b4d'); g.addColorStop(.34,'#5b3a9e'); g.addColorStop(.64,'#a97ff0');
+      g.addColorStop(.86,'#e9c8ff'); g.addColorStop(1,'#ffe9a8');
+      c.strokeStyle = '#241641'; c.lineWidth = 4.6;
+      c.beginPath(); c.moveTo(15.2,-29.6); c.lineTo(18.0,-33.4); c.stroke();
+      c.save();
+      c.shadowColor = 'rgba(185,140,255,.95)'; c.shadowBlur = 9;
+      c.strokeStyle = g; c.lineWidth = 3.8;
+      curve(); c.stroke();
+      c.restore();
+      /* 별가루가 흐르는 낚싯줄처럼 보이는 밝은 선 */
+      c.strokeStyle = 'rgba(255,246,210,.9)'; c.lineWidth = 1.05;
+      c.beginPath(); c.moveTo(15.6,-30.4); c.quadraticCurveTo(30,-47.4, 40.4,-66.6); c.stroke();
+      [0.18,0.32,0.46,0.60,0.74,0.88].forEach(function(pp, i){
+        const q = rodPoint(pp);
+        star4(c, q.x, q.y - 1.7, 1.3 + (i % 2) * 0.5, '#fff6d0');
+      });
+      /* 초승달 장식 */
+      c.fillStyle = '#ffe9a8';
+      c.beginPath();
+      c.arc(23.8,-41.6,3.3,-0.62*Math.PI,0.72*Math.PI,false);
+      c.arc(25.5,-41.9,2.7,0.72*Math.PI,-0.62*Math.PI,true);
+      c.closePath(); c.fill();
+      /* 금빛 릴 */
+      c.fillStyle = '#c9a3ff'; ell(c,19.8,-35.6,2.7,2.7); c.fill();
+      c.strokeStyle = '#ffe9a8'; c.lineWidth = 0.9;
+      c.beginPath(); c.arc(19.8,-35.6,2.7,0,Math.PI*2); c.stroke();
+      star4(c, ROD_P1.x, ROD_P1.y, 3.8, '#fffbe0');
+    } else if(id === 'thunder'){
+      /* 청백·황금 전기 스파크 로드 + 번개 빛 낚싯줄 */
+      const g = c.createLinearGradient(16,-31,40,-66);
+      g.addColorStop(0,'#ffe27a'); g.addColorStop(.3,'#fffbe0'); g.addColorStop(.58,'#8ff0ff');
+      g.addColorStop(.82,'#f6ffff'); g.addColorStop(1,'#ffe9a8');
+      c.strokeStyle = '#1f6d94'; c.lineWidth = 4.8;
+      c.beginPath(); c.moveTo(15.1,-29.5); c.lineTo(17.9,-33.6); c.stroke();
+      c.save();
+      c.shadowColor = 'rgba(110,235,255,.95)'; c.shadowBlur = 11;
+      c.strokeStyle = g; c.lineWidth = 4.2;
+      curve(); c.stroke();
+      c.restore();
+      /* 번개 스파크 */
+      c.save();
+      c.strokeStyle = '#fffbd0'; c.lineWidth = 1.7; c.lineJoin = 'miter';
+      c.shadowColor = 'rgba(130,240,255,.9)'; c.shadowBlur = 6;
+      c.beginPath(); c.moveTo(24.4,-44.4); c.lineTo(28.4,-47.4); c.lineTo(26.2,-49.8); c.lineTo(30.6,-52.8); c.stroke();
+      c.beginPath(); c.moveTo(27.6,-40.2); c.lineTo(32.4,-42.2); c.lineTo(30.2,-45.0); c.lineTo(35.2,-46.8); c.stroke();
+      c.restore();
+      /* 황금 고리 2개 + 금속 릴 */
+      c.strokeStyle = '#ffd24a'; c.lineWidth = 1.9;
+      rodTick(c, 0.38, 2.3); rodTick(c, 0.64, 1.9);
+      c.fillStyle = '#ffd24a'; ell(c,19.8,-35.6,2.9,2.9); c.fill();
+      c.strokeStyle = '#a97900'; c.lineWidth = 0.9;
+      c.beginPath(); c.arc(19.8,-35.6,2.9,0,Math.PI*2); c.stroke();
+      c.fillStyle = '#2f7fa6'; ell(c,19.8,-35.6,1.0,1.0); c.fill();
+      star4(c, ROD_P1.x, ROD_P1.y, 3.8, '#ffffff');
     } else {
       /* 기본 대나무 */
       c.strokeStyle = '#5b3a1e'; c.lineWidth = 4.6;
@@ -4991,6 +5652,251 @@
       star4(c, -42, 6, 3.0, '#fffbe0');
       star4(c, 21, -22, 2.4, '#fffbe0');
 
+    } else if(bt.id === 'submarine'){
+      /* 물방울 (프로펠러가 만든 거푸) */
+      c.fillStyle = 'rgba(226,250,255,.9)';
+      [[-55,-10,3.4],[-62,-19,2.5],[-55,-26,1.9],[-67,-30,1.6]].forEach(function(bb){
+        c.beginPath(); c.arc(bb[0], bb[1] + Math.sin(t*2 + bb[0])*1.2, bb[2], 0, Math.PI*2); c.fill();
+      });
+      /* 프로펠러 */
+      c.save();
+      c.translate(-47, 4);
+      c.rotate(t*3.4);
+      c.fillStyle = '#9db4c2';
+      for(let i=0;i<3;i++){ c.rotate(Math.PI*2/3); c.beginPath(); c.ellipse(0,-5.6,2.1,5.6,0,0,Math.PI*2); c.fill(); }
+      c.fillStyle = '#5d7280';
+      c.beginPath(); c.arc(0,0,1.9,0,Math.PI*2); c.fill();
+      c.restore();
+      /* 잠망경 */
+      c.strokeStyle = '#c9a227'; c.lineWidth = 3.2; c.lineCap = 'round';
+      c.beginPath(); c.moveTo(-30,-10); c.lineTo(-30,-30); c.lineTo(-23,-37); c.stroke();
+      c.fillStyle = '#2b3b46';
+      if(c.roundRect){ c.beginPath(); c.roundRect(-26,-44.4,10,7.4,2); c.fill(); }
+      else c.fillRect(-26,-44.4,10,7.4);
+      c.fillStyle = '#7fe3ff'; c.fillRect(-24.6,-43.2,6.4,4.4);
+      /* 선체 (노란 잠수함) */
+      const sg = c.createLinearGradient(0,-12,0,16);
+      sg.addColorStop(0,'#ffe98a'); sg.addColorStop(.42,'#f9c92a'); sg.addColorStop(.78,'#e0a90c'); sg.addColorStop(1,'#b08205');
+      c.fillStyle = sg;
+      c.beginPath();
+      c.moveTo(-46,-1);
+      c.quadraticCurveTo(-46,-11, -28,-11.4);
+      c.lineTo(20,-11.4);
+      c.quadraticCurveTo(42,-11, 51,-1.2);
+      c.quadraticCurveTo(44,13, 12,15);
+      c.quadraticCurveTo(-18,16.6, -38,9);
+      c.quadraticCurveTo(-46,6, -46,-1);
+      c.closePath(); c.fill();
+      c.strokeStyle = '#a97900'; c.lineWidth = 1.8; c.stroke();
+      /* 흰 띠 */
+      c.fillStyle = 'rgba(255,255,255,.88)';
+      c.beginPath();
+      c.moveTo(-40,4.6); c.quadraticCurveTo(0,12.6, 45,3.6);
+      c.lineTo(45,6.4); c.quadraticCurveTo(0,15.6, -40,7.6);
+      c.closePath(); c.fill();
+      /* 둥근 황동 창문 3개 */
+      [-27, -4, 19].forEach(function(x){
+        c.fillStyle = '#4f6472';
+        c.beginPath(); c.arc(x, -2.4, 5.4, 0, Math.PI*2); c.fill();
+        c.fillStyle = '#8fe6ff';
+        c.beginPath(); c.arc(x, -2.4, 4.1, 0, Math.PI*2); c.fill();
+        c.fillStyle = 'rgba(255,255,255,.9)';
+        c.beginPath(); c.arc(x-1.4, -4.0, 1.4, 0, Math.PI*2); c.fill();
+      });
+      /* 앞 유리창 */
+      c.fillStyle = 'rgba(190,245,255,.92)';
+      c.beginPath(); c.ellipse(40,-1.6,6.4,4.6,0.5,0,Math.PI*2); c.fill();
+      c.strokeStyle = '#a97900'; c.lineWidth = 1.4; c.stroke();
+      /* 수평 지느러미 */
+      c.fillStyle = '#e0a90c';
+      c.beginPath(); c.moveTo(46,7); c.lineTo(58,3.4); c.lineTo(49,11.6); c.closePath(); c.fill();
+      c.strokeStyle = '#a97900'; c.lineWidth = 1; c.stroke();
+
+    } else if(bt.id === 'neon'){
+      /* 1) 호버 빛 (수면에서 살짝 떠 있는 느낌) */
+      c.save();
+      const hg = c.createLinearGradient(0,0,0,18);
+      hg.addColorStop(0,'rgba(150,245,255,.55)'); hg.addColorStop(1,'rgba(90,160,255,0)');
+      c.fillStyle = hg;
+      c.beginPath(); c.ellipse(2,9,46,11,0,0,Math.PI*2); c.fill();
+      c.shadowColor = 'rgba(120,240,255,.95)'; c.shadowBlur = 10;
+      c.fillStyle = 'rgba(190,250,255,.75)';
+      c.beginPath(); c.ellipse(-14,8.6,10,4.2,0,0,Math.PI*2); c.fill();
+      c.beginPath(); c.ellipse(16,8.6,10,4.2,0,0,Math.PI*2); c.fill();
+      c.restore();
+      /* 2) 세로 꼬리날개 */
+      const tfg = c.createLinearGradient(-34,-32,-22,-8);
+      tfg.addColorStop(0,'#f4faff'); tfg.addColorStop(1,'#8ba0b8');
+      c.fillStyle = tfg;
+      c.beginPath(); c.moveTo(-30,-6); c.lineTo(-34,-33); c.lineTo(-21,-9); c.closePath(); c.fill();
+      c.strokeStyle = '#5b7188'; c.lineWidth = 1.1; c.stroke();
+      c.save(); c.shadowColor='rgba(120,240,255,.9)'; c.shadowBlur=7;
+      c.strokeStyle = '#7ef0ff'; c.lineWidth = 1.4;
+      c.beginPath(); c.moveTo(-34,-33); c.lineTo(-30.4,-8); c.stroke();
+      c.restore();
+      /* 3) 노즐 + 뒤쪽 푸른 부스터 불꽃 */
+      c.fillStyle = '#33465c';
+      c.beginPath(); c.arc(-40,0.4,6,0,Math.PI*2); c.fill();
+      c.fillStyle = '#9fb4c8';
+      c.beginPath(); c.arc(-40,0.4,3.8,0,Math.PI*2); c.fill();
+      c.save();
+      const fl = 1 + Math.sin(t*13)*0.16;
+      c.shadowColor = 'rgba(90,225,255,.98)'; c.shadowBlur = 18;
+      const fg2 = c.createLinearGradient(-44,0,-84,0);
+      fg2.addColorStop(0,'rgba(224,255,255,1)'); fg2.addColorStop(.34,'rgba(120,225,255,.95)'); fg2.addColorStop(.7,'rgba(90,170,255,.6)'); fg2.addColorStop(1,'rgba(70,120,255,0)');
+      c.fillStyle = fg2;
+      c.beginPath();
+      c.moveTo(-42,-7.4); c.quadraticCurveTo(-64,-2.6, -84*fl,0.4);
+      c.quadraticCurveTo(-62,7.4, -42,10.4);
+      c.closePath(); c.fill();
+      c.fillStyle = 'rgba(255,255,255,.98)';
+      c.beginPath();
+      c.moveTo(-42,1.2); c.quadraticCurveTo(-58,2.0, -66*fl,1.2);
+      c.quadraticCurveTo(-56,5.4, -42,6.6);
+      c.closePath(); c.fill();
+      c.restore();
+      c.fillStyle = 'rgba(200,250,255,.8)';
+      [[-54,13,1.8],[-66,17,1.3],[-46,18,1.5]].forEach(function(bb){
+        c.beginPath(); c.arc(bb[0], bb[1] + Math.sin(t*3 + bb[0])*1.4, bb[2], 0, Math.PI*2); c.fill();
+      });
+      /* 4) 은빛 선체 (앞으로 뾰족한 로켓 모양) */
+      const ng = c.createLinearGradient(0,-13,0,9);
+      ng.addColorStop(0,'#ffffff'); ng.addColorStop(.2,'#dfeefa'); ng.addColorStop(.46,'#a9c2d8');
+      ng.addColorStop(.74,'#7c95ae'); ng.addColorStop(1,'#4e6478');
+      c.fillStyle = ng;
+      c.beginPath();
+      c.moveTo(56,-1.4);
+      c.quadraticCurveTo(40,-7.4, 16,-9.4);
+      c.lineTo(-18,-8.4);
+      c.quadraticCurveTo(-34,-7.4, -36,0.6);
+      c.quadraticCurveTo(-34,7.4, -18,8.4);
+      c.lineTo(14,9.4);
+      c.quadraticCurveTo(42,7.4, 56,-1.4);
+      c.closePath(); c.fill();
+      c.strokeStyle = '#31465c'; c.lineWidth = 1.6; c.stroke();
+      /* 바닥이 빛나는 네온 띠 */
+      c.save();
+      c.shadowColor = 'rgba(120,240,255,.95)'; c.shadowBlur = 10;
+      c.strokeStyle = 'rgba(126,240,255,.85)'; c.lineWidth = 2.8;
+      c.beginPath(); c.moveTo(-30,6.8); c.quadraticCurveTo(10,9.4, 50,-1.0); c.stroke();
+      c.restore();
+      /* 5) 바닥 네온 띠 + 뾰족한 노즈 */
+      c.fillStyle = '#dbe9f4';
+      c.beginPath(); c.moveTo(56,-1.4); c.lineTo(66,-1.2); c.lineTo(56,1.6); c.closePath(); c.fill();
+      c.strokeStyle = '#31465c'; c.lineWidth = 1; c.stroke();
+      /* 6) 네온 라인 */
+      c.save();
+      c.shadowColor = 'rgba(120,240,255,.95)'; c.shadowBlur = 10;
+      c.strokeStyle = '#7ef0ff'; c.lineWidth = 2.8;
+      c.beginPath(); c.moveTo(-34,2.2); c.quadraticCurveTo(8,4.4, 52,0.2); c.stroke();
+      c.strokeStyle = '#ff6ae0'; c.lineWidth = 1.9;
+      c.beginPath(); c.moveTo(-30,-6.6); c.quadraticCurveTo(8,-9.0, 48,-1.6); c.stroke();
+      c.restore();
+      /* 7) 조종석 캐노피 (앞쪽 반투명 유리) */
+      const cg = c.createLinearGradient(18,-17,34,-6);
+      cg.addColorStop(0,'rgba(232,253,255,.96)'); cg.addColorStop(.6,'rgba(130,226,255,.92)'); cg.addColorStop(1,'rgba(54,132,176,.92)');
+      c.fillStyle = cg;
+      c.beginPath(); c.ellipse(30,-9.4,10.4,8.2,0,Math.PI,Math.PI*2); c.fill();
+      c.strokeStyle = '#dff3ff'; c.lineWidth = 1.7; c.stroke();
+      c.fillStyle = 'rgba(255,255,255,.92)';
+      c.beginPath(); c.ellipse(27,-12.6,4.6,2.4,-0.35,0,Math.PI*2); c.fill();
+      /* 8) 은빛 날개 */
+      const wg = c.createLinearGradient(-16,-26,4,-8);
+      wg.addColorStop(0,'#f6fbff'); wg.addColorStop(1,'#93a9c0');
+      c.fillStyle = wg;
+      c.beginPath(); c.moveTo(8,-8.6); c.lineTo(-14,-26.6); c.lineTo(-24,-7.4); c.closePath(); c.fill();
+      c.strokeStyle = '#5b7188'; c.lineWidth = 1; c.stroke();
+      c.save(); c.shadowColor = 'rgba(120,240,255,.9)'; c.shadowBlur = 7;
+      c.strokeStyle = '#7ef0ff'; c.lineWidth = 1.6;
+      c.beginPath(); c.moveTo(8,-8.6); c.lineTo(-14,-26.6); c.stroke();
+      c.restore();
+      /* 9) 앞쪽 등불 */
+      c.save(); c.shadowColor = 'rgba(150,245,255,.95)'; c.shadowBlur = 9;
+      c.fillStyle = '#ecfeff'; c.beginPath(); c.arc(50,-0.8,2.1,0,Math.PI*2); c.fill();
+      c.restore();
+
+    } else if(bt.id === 'dragon'){
+      /* 용의 오라 */
+      c.save();
+      const ag = c.createRadialGradient(6,0,8, 6,0,62);
+      ag.addColorStop(0,'rgba(255,170,70,.38)'); ag.addColorStop(.58,'rgba(255,90,60,.17)'); ag.addColorStop(1,'rgba(255,80,40,0)');
+      c.fillStyle = ag; c.beginPath(); c.arc(6,0,62,0,Math.PI*2); c.fill();
+      c.restore();
+      /* 용 꼬리 (뒤로 솟은 금빛 지느러미) */
+      c.strokeStyle = '#8f1f24'; c.lineWidth = 6.6; c.lineCap = 'round';
+      c.beginPath(); c.moveTo(-40,1); c.bezierCurveTo(-52,-2+Math.sin(t*2.2)*1.6, -53,-13, -46,-24); c.stroke();
+      c.fillStyle = '#ffcf5a';
+      c.beginPath();
+      c.moveTo(-45,-21);
+      c.lineTo(-62,-32); c.lineTo(-55,-19); c.lineTo(-64,-8); c.lineTo(-45,-14);
+      c.closePath(); c.fill();
+      c.strokeStyle = '#a97900'; c.lineWidth = 1; c.stroke();
+      c.strokeStyle = 'rgba(255,120,60,.85)'; c.lineWidth = 1;
+      c.beginPath(); c.moveTo(-46,-21); c.lineTo(-58,-30); c.stroke();
+      c.beginPath(); c.moveTo(-46,-18); c.lineTo(-60,-9); c.stroke();
+      /* 홍금빛 비늘 선체 */
+      const dg = c.createLinearGradient(0,-13,0,17);
+      dg.addColorStop(0,'#f2624a'); dg.addColorStop(.45,'#cf3a34'); dg.addColorStop(1,'#7e1519');
+      c.fillStyle = dg;
+      c.beginPath();
+      c.moveTo(-44,-3); c.lineTo(26,-3);
+      c.quadraticCurveTo(44,-2.6, 52,6);
+      c.quadraticCurveTo(30,18, -4,17.4);
+      c.quadraticCurveTo(-34,16.6, -44,5);
+      c.closePath(); c.fill();
+      c.strokeStyle = '#5e0d12'; c.lineWidth = 1.8; c.stroke();
+      /* 금빛 물결 띠 + 비늘 */
+      c.strokeStyle = '#ffcf5a'; c.lineWidth = 2;
+      c.beginPath(); c.moveTo(-40,2); c.quadraticCurveTo(0,13, 46,4); c.stroke();
+      c.strokeStyle = 'rgba(255,214,120,.6)'; c.lineWidth = 0.9;
+      for(let i=0;i<7;i++){
+        const bx = -34 + i*8;
+        c.beginPath(); c.arc(bx, 4 + Math.sin(i)*1.2, 3.2, Math.PI*0.12, Math.PI*0.88); c.stroke();
+        c.beginPath(); c.arc(bx+4, 8.8, 2.8, Math.PI*0.12, Math.PI*0.88); c.stroke();
+      }
+      /* 금빛 갑판 */
+      c.fillStyle = '#ffcf5a';
+      c.beginPath(); c.moveTo(-38,-3); c.lineTo(28,-3); c.lineTo(24,-9.8); c.lineTo(-34,-9.8); c.closePath(); c.fill();
+      c.strokeStyle = '#a97900'; c.lineWidth = 1.3; c.stroke();
+      /* 뱃머리 용머리 */
+      const dh = c.createLinearGradient(38,-14, 58,8);
+      dh.addColorStop(0,'#ffd25a'); dh.addColorStop(.5,'#f0623c'); dh.addColorStop(1,'#a51e22');
+      c.fillStyle = dh;
+      c.beginPath();
+      c.moveTo(36,-2);
+      c.quadraticCurveTo(40,-16.4, 52,-14.4);
+      c.quadraticCurveTo(62,-13, 60,-4.2);
+      c.quadraticCurveTo(64,-1, 60,2.4);
+      c.quadraticCurveTo(54,6, 48,4.6);
+      c.quadraticCurveTo(40,6, 36,-2);
+      c.closePath(); c.fill();
+      c.strokeStyle = '#7e1519'; c.lineWidth = 1.2; c.stroke();
+      /* 뿔 */
+      c.strokeStyle = '#ffe9a8'; c.lineWidth = 2; c.lineCap = 'round';
+      c.beginPath(); c.moveTo(44,-13); c.quadraticCurveTo(41,-22, 46,-25.4); c.stroke();
+      c.beginPath(); c.moveTo(50,-13.4); c.quadraticCurveTo(50,-21, 56,-22); c.stroke();
+      /* 이빨 */
+      c.fillStyle = '#fffdf2';
+      for(let i=0;i<4;i++){
+        c.beginPath(); c.moveTo(50+i*2.6, 4.2); c.lineTo(51.2+i*2.6, 6.6); c.lineTo(52.4+i*2.6, 4.2); c.closePath(); c.fill();
+      }
+      /* 빛나는 눈 */
+      c.save(); c.shadowColor = 'rgba(255,220,120,.95)'; c.shadowBlur = 6;
+      c.fillStyle = '#fff8d0'; c.beginPath(); c.ellipse(50,-6.6,2.7,2.2,0,0,Math.PI*2); c.fill();
+      c.restore();
+      c.fillStyle = '#3b0a0a'; c.beginPath(); c.ellipse(50.4,-6.6,1.1,1.7,0,0,Math.PI*2); c.fill();
+      /* 금빛 갈기 (불꽃 모양) */
+      c.fillStyle = '#ffb43a';
+      [[39,-9],[36,-4],[35,1]].forEach(function(p, i){
+        c.beginPath(); c.moveTo(p[0], p[1]);
+        c.quadraticCurveTo(p[0]-9, p[1]-2.4-i, p[0]-10, p[1]-8-i*2.2);
+        c.quadraticCurveTo(p[0]-4.4, p[1]-3.2, p[0], p[1]);
+        c.closePath(); c.fill();
+      });
+      /* 금빛 수염 */
+      c.strokeStyle = '#ffe9a8'; c.lineWidth = 1.3;
+      c.beginPath(); c.moveTo(58.6,2.2); c.quadraticCurveTo(65,6.4+Math.sin(t*2)*1.2, 62.4,11.6); c.stroke();
+
     } else {
       /* 기본 나뭇배 */
       const wg = c.createLinearGradient(0,-12,0,16);
@@ -5024,6 +5930,9 @@
     if(id === 'straw') shirt = '#f6f1df';
     else if(id === 'captain') shirt = '#b02a2a';
     else if(id === 'crown') shirt = '#7a4fbe';
+    else if(id === 'astro') shirt = '#eef4fb';
+    else if(id === 'wizard') shirt = '#2b2f7a';
+    else if(id === 'emperor') shirt = '#5b2a86';
     c.fillStyle = shirt;
     c.beginPath();
     if(c.roundRect) c.roundRect(-13,-30,26,22,8); else c.rect(-13,-30,26,22);
@@ -5046,6 +5955,60 @@
       c.beginPath(); c.moveTo(-13,-29); c.lineTo(-18,-10); c.stroke();
       c.beginPath(); c.moveTo(13,-29); c.lineTo(18,-10); c.stroke();
       star4(c, 0, -22.5, 2.2, '#ffe9a8');
+    } else if(id === 'astro'){
+      /* 흰 우주복: 주황 띠 + 가슴 계기판 + 산소 탱크 */
+      c.fillStyle = '#ff8a3d'; c.fillRect(-13,-24.4,26,2.4);
+      c.fillStyle = '#dbe6ef';
+      if(c.roundRect){ c.beginPath(); c.roundRect(-7.4,-20.4,14.8,9.4,3); c.fill(); } else c.fillRect(-7.4,-20.4,14.8,9.4);
+      c.fillStyle = '#7fd6ff'; c.fillRect(-5,-18.4,2.8,2.8);
+      c.fillStyle = '#ffd24a'; c.beginPath(); c.arc(0.6,-17.0,1.6,0,Math.PI*2); c.fill();
+      c.fillStyle = '#8ff3b0'; c.beginPath(); c.arc(4.6,-17.0,1.6,0,Math.PI*2); c.fill();
+      /* 등 뒤 산소 탱크 */
+      c.fillStyle = '#cfdae6';
+      if(c.roundRect){ c.beginPath(); c.roundRect(-21.6,-29.4,8.4,20,4); c.fill(); } else c.fillRect(-21.6,-29.4,8.4,20);
+      c.strokeStyle = '#a7b7c6'; c.lineWidth = 1; c.stroke();
+      c.fillStyle = '#ff8a3d'; c.fillRect(-21.6,-25.4,8.4,2.2);
+      c.strokeStyle = '#b8c6d4'; c.lineWidth = 2;
+      c.beginPath(); c.moveTo(-15.4,-27); c.quadraticCurveTo(-11,-24.6, -7,-23.6); c.stroke();
+    } else if(id === 'wizard'){
+      /* 남색 마법 망토 (양옆으로 펼쳐짐) */
+      c.fillStyle = '#1f2258';
+      c.beginPath(); c.moveTo(-12,-30); c.lineTo(-21.4,-6); c.lineTo(-9.6,-8.8); c.lineTo(-6.4,-30); c.closePath(); c.fill();
+      c.beginPath(); c.moveTo(12,-30); c.lineTo(21.4,-6); c.lineTo(9.6,-8.8); c.lineTo(6.4,-30); c.closePath(); c.fill();
+      c.strokeStyle = '#6a6fd0'; c.lineWidth = 1.1;
+      c.beginPath(); c.moveTo(-19.4,-8.4); c.lineTo(-12,-30); c.stroke();
+      c.beginPath(); c.moveTo(19.4,-8.4); c.lineTo(12,-30); c.stroke();
+      /* 망토 별무늬 */
+      star4(c, -14,-20, 1.2, '#ffe9a8');
+      star4(c, -10.4,-13, 0.9, '#fff6d0');
+      star4(c, 13.6,-19, 1.1, '#ffe9a8');
+      star4(c, 15.4,-12.4, 0.9, '#fff6d0');
+      /* 금빛 단추 */
+      c.fillStyle = '#ffd24a';
+      [-26,-20.4,-14.8].forEach(function(y){ c.beginPath(); c.arc(0,y,1.2,0,Math.PI*2); c.fill(); });
+      /* 별 목걸이 */
+      star4(c, 0,-28.4, 1.7, '#fff6d0');
+    } else if(id === 'emperor'){
+      /* 빛나는 후광 (머리 뒤) */
+      c.save();
+      const eh = c.createRadialGradient(0,-40,4, 0,-40,26);
+      eh.addColorStop(0,'rgba(255,238,175,.85)'); eh.addColorStop(.55,'rgba(255,206,90,.34)'); eh.addColorStop(1,'rgba(255,190,80,0)');
+      c.fillStyle = eh; c.beginPath(); c.arc(0,-40,26,0,Math.PI*2); c.fill();
+      c.restore();
+      /* 황금 망토 + 별빛 안감 */
+      c.fillStyle = '#e0a91a';
+      c.beginPath(); c.moveTo(-12,-30); c.lineTo(-22.4,-5.4); c.lineTo(-9.4,-9); c.lineTo(-6.2,-30); c.closePath(); c.fill();
+      c.beginPath(); c.moveTo(12,-30); c.lineTo(22.4,-5.4); c.lineTo(9.4,-9); c.lineTo(6.2,-30); c.closePath(); c.fill();
+      c.strokeStyle = '#a97900'; c.lineWidth = 1;
+      c.beginPath(); c.moveTo(-20.4,-6.6); c.lineTo(-12,-30); c.stroke();
+      c.beginPath(); c.moveTo(20.4,-6.6); c.lineTo(12,-30); c.stroke();
+      star4(c, -14.4,-18, 1.2, '#fff6d0');
+      star4(c, 14.4,-18, 1.2, '#fff6d0');
+      star4(c, -17,-11, 0.9, '#fffbe8');
+      /* 보석 브로치 */
+      c.fillStyle = '#ff4d6a'; c.beginPath(); c.arc(0,-24,2.3,0,Math.PI*2); c.fill();
+      c.strokeStyle = '#fff6d0'; c.lineWidth = 0.9;
+      c.beginPath(); c.arc(0,-24,3.0,0,Math.PI*2); c.stroke();
     }
 
     /* 얼굴 */
@@ -5106,6 +6069,57 @@
       c.fillStyle = '#ff4d6a'; c.beginPath(); c.arc(0,-49.6,1.8,0,Math.PI*2); c.fill();
       c.fillStyle = '#5ad8ff'; c.beginPath(); c.arc(-7.6,-49.6,1.4,0,Math.PI*2); c.fill();
       c.fillStyle = '#6ee08a'; c.beginPath(); c.arc(7.6,-49.6,1.4,0,Math.PI*2); c.fill();
+    } else if(id === 'astro'){
+      /* 투명 바이저 우주 헬멧 */
+      c.save();
+      const hg = c.createRadialGradient(-5.6,-46,3, 0,-38,20);
+      hg.addColorStop(0,'rgba(238,252,255,.55)'); hg.addColorStop(.7,'rgba(162,216,240,.32)'); hg.addColorStop(1,'rgba(90,150,185,.4)');
+      c.fillStyle = hg;
+      c.beginPath(); c.arc(0,-38,17.6,0,Math.PI*2); c.fill();
+      c.strokeStyle = '#f4fbff'; c.lineWidth = 2.7;
+      c.beginPath(); c.arc(0,-38,17.6,0,Math.PI*2); c.stroke();
+      c.strokeStyle = 'rgba(120,180,210,.7)'; c.lineWidth = 1;
+      c.beginPath(); c.arc(0,-38,15.2,0,Math.PI*2); c.stroke();
+      /* 유리 반사 */
+      c.strokeStyle = 'rgba(255,255,255,.95)'; c.lineWidth = 2.6; c.lineCap = 'round';
+      c.beginPath(); c.arc(0,-38,12.6, Math.PI*1.12, Math.PI*1.46); c.stroke();
+      c.strokeStyle = 'rgba(255,255,255,.75)'; c.lineWidth = 1.3;
+      c.beginPath(); c.arc(0,-38,9.4, Math.PI*1.55, Math.PI*1.72); c.stroke();
+      /* 목 연결부 */
+      c.fillStyle = '#cfdae6';
+      if(c.roundRect){ c.beginPath(); c.roundRect(-9.6,-22.6,19.2,4.4,2); c.fill(); } else c.fillRect(-9.6,-22.6,19.2,4.4);
+      c.restore();
+    } else if(id === 'wizard'){
+      /* 별무늬 뾰족 모자 */
+      c.fillStyle = '#232a6e';
+      c.beginPath(); c.moveTo(-12,-47); c.quadraticCurveTo(-6,-58, 2.4,-66.4);
+      c.quadraticCurveTo(8.4,-59, 12,-47); c.closePath(); c.fill();
+      c.strokeStyle = '#3f4bb8'; c.lineWidth = 1.1; c.stroke();
+      c.beginPath(); c.ellipse(0,-46.4,20,5.4,0,0,Math.PI*2);
+      c.fill(); c.stroke();
+      /* 별무늬 + 끝 별 */
+      star4(c, 2.4,-67.4, 3.2, '#ffe9a8');
+      star4(c, -4.4,-56.4, 1.5, '#fff6d0');
+      star4(c, 5.2,-52.4, 1.2, '#fff6d0');
+      /* 금빛 띠 */
+      c.fillStyle = '#ffd24a'; c.fillRect(-12.8,-49.8,25.6,2.4);
+    } else if(id === 'emperor'){
+      /* 보석 왕관 */
+      c.save();
+      c.shadowColor = 'rgba(255,214,90,.95)'; c.shadowBlur = 9;
+      c.fillStyle = '#ffd24a';
+      c.beginPath();
+      c.moveTo(-15,-45.4); c.lineTo(-15,-61.6); c.lineTo(-7.6,-53.4); c.lineTo(0,-65.4);
+      c.lineTo(7.6,-53.4); c.lineTo(15,-61.6); c.lineTo(15,-45.4);
+      c.closePath(); c.fill();
+      c.restore();
+      c.strokeStyle = '#c9930a'; c.lineWidth = 1.3; c.stroke();
+      /* 보석 */
+      c.fillStyle = '#b46bff'; c.beginPath(); c.arc(0,-50.2,2.7,0,Math.PI*2); c.fill();
+      c.fillStyle = '#5ad8ff'; c.beginPath(); c.arc(-8.6,-50.2,1.9,0,Math.PI*2); c.fill();
+      c.fillStyle = '#ff4d6a'; c.beginPath(); c.arc(8.6,-50.2,1.9,0,Math.PI*2); c.fill();
+      c.fillStyle = 'rgba(255,255,255,.9)'; c.beginPath(); c.arc(-0.9,-51.2,0.9,0,Math.PI*2); c.fill();
+      star4(c, 0,-67.2, 2.8, '#fffbe0');
     }
 
     /* 팔 */
@@ -5125,7 +6139,7 @@
     drawAnglerShape(ctx, of, t);
     drawRodShape(ctx, rd, t);
     /* 빠른 배는 물보라가 생긴다 */
-    if(bt.id === 'motor' || bt.id === 'goldcruiser'){
+    if(bt.wake || bt.id === 'motor' || bt.id === 'goldcruiser'){
       ctx.strokeStyle = 'rgba(255,255,255,.55)';
       ctx.lineWidth = 2;
       for(let k=0;k<2;k++){
@@ -5385,7 +6399,7 @@
     if(!b) return;
     shopTab = b.dataset.tab;
     sfx.tap();
-    buildShop();
+    buildShop(true);
     shopMessage(th().shopMsg, '');
   });
   ['muteBtn','muteBtnStart'].forEach(id=>{
@@ -5436,6 +6450,7 @@
     score: ()=> G.score,
     caught: ()=> G.caughtCount,
     fishCount: ()=> G.fish.length,
+    fishList: ()=> G.fish.map(f=> f.sp.id),
     hintType: ()=> G.quiz ? G.quiz.hint.type : null,
     save: ()=> JSON.parse(JSON.stringify(save)),
     /* 테마 (테스트/확인용) */
@@ -5443,6 +6458,13 @@
     selectTheme: (t)=>{ setTheme(t); return save.theme; },
     themeSpecies: ()=> th().species.map(s=>({id:s.id, name:s.name, pts:s.pts})),
     themeBosses: ()=> th().bosses.map(s=>({id:s.id, name:s.name, pts:s.pts, tag:s.tag})),
+    /* 출현 가중치 확인용: pickSpecies 를 n번 돌려 종별 횟수 (테스트 전용) */
+    spawnStats: (n)=>{
+      const cnt = {};
+      const total = Math.max(1, Math.floor(Number(n) || 3000));
+      for(let i=0;i<total;i++){ const sp = pickSpecies(); cnt[sp.id] = (cnt[sp.id]||0) + 1; }
+      return cnt;
+    },
     dexCount: (id)=> dexCount(id),
     johto: ()=> MON_ALL.map(function(s){
       return { dex:s.dex, name:s.name, types:s.types, bst:s.bst, pts:s.pts, tier:s.tier, boss:!!s.boss };
@@ -5477,6 +6499,40 @@
       return { id: it.id, name: it.name, price: it.price,
                owned: isOwned(cat, it.id), equipped: save.equipped[cat] === it.id };
     }),
+    /* 그림 확인용: 상점 아이템 한 개를 투명 바탕에 그려 본다 (테스트 전용) */
+    paintItem: (cv, cat, id)=>{
+      const it = itemOf(cat, id);
+      if(!it) return null;
+      const c2 = cv.getContext('2d');
+      c2.setTransform(1,0,0,1,0,0);
+      c2.clearRect(0,0,cv.width,cv.height);
+      c2.save();
+      if(cat === 'rod'){
+        c2.translate(cv.width*0.46, cv.height*0.56); c2.scale(2.95, 2.95); c2.translate(-27, 46);
+        drawRodShape(c2, it, 0);
+      } else if(cat === 'boat'){
+        c2.translate(cv.width*0.5, cv.height*0.62); c2.scale(1.22, 1.22); c2.translate(0, 6);
+        drawHullShape(c2, it, 0);
+      } else {
+        c2.translate(cv.width*0.5, cv.height*0.56); c2.scale(1.32, 1.32); c2.translate(0, 26);
+        drawAnglerShape(c2, it, 0);
+      }
+      c2.restore();
+      return { id: it.id, name: it.name, price: it.price };
+    },
+    /* 그림 확인용: 한 종만 캔버스에 크게 그려 본다 (테스트 전용) */
+    paintFish: (cv, id, size)=>{
+      const all = SPECIES.concat(BOSSES);
+      const sp = all.filter(function(s){ return s.id === id; })[0];
+      if(!sp) return null;
+      const c2 = cv.getContext('2d');
+      c2.setTransform(1,0,0,1,0,0);
+      c2.clearRect(0,0,cv.width,cv.height);
+      const target = Number(size) || 120;
+      const s2 = target / Math.max(sp.boss ? 40 : 30, sp.len);
+      drawFish(c2, sp, cv.width/2, cv.height/2, sp.len*s2, 1.1, 1);
+      return { id: sp.id, name: sp.name, pts: sp.pts, boss: !!sp.boss };
+    },
     shopTab: ()=> shopTab,
     /* 그림 확인용: 화면 애니메이션을 잠깐 멈추거나 물고기를 숨긴다 (테스트 전용) */
     freeze: (on, tv)=>{ G.frozen = !!on; if(tv != null) G.t = Number(tv) || 0; return G.frozen; },
