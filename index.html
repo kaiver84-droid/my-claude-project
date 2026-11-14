@@ -845,12 +845,12 @@
     background:linear-gradient(180deg,rgba(32,74,32,.96),rgba(20,52,22,.97));
     border:3px solid #ffd24a;box-shadow:0 16px 38px rgba(4,22,6,.5);
   }
-  .lv-banner.show{animation:lvBanner 3.3s ease-out both;}
+  .lv-banner.show{animation:lvBanner 3.8s ease-out both;}
   @keyframes lvBanner{
     0%{opacity:0;transform:translate(-50%,-50%) scale(.7)}
     10%{opacity:1;transform:translate(-50%,-50%) scale(1.06)}
     17%{transform:translate(-50%,-50%) scale(1)}
-    80%{opacity:1;transform:translate(-50%,-50%) scale(1)}
+    92%{opacity:1;transform:translate(-50%,-50%) scale(1)}
     100%{opacity:0;transform:translate(-50%,-54%) scale(1.03)}
   }
   .lv-banner .t{
@@ -7455,7 +7455,7 @@
       void el.offsetWidth;
       el.classList.add('show');
       clearTimeout(showBanner._h);
-      showBanner._h = setTimeout(function(){ el.classList.remove('show'); }, 3400);
+      showBanner._h = setTimeout(function(){ el.classList.remove('show'); }, 3900);
       try{ if(up) sfx.win(); else sfx.tap(); }catch(e){}
     }
 
