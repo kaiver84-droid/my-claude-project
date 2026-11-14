@@ -2374,6 +2374,7 @@
       ? (prob.blank ? '빈칸에 들어갈 수를 고르세요' : '맞히면 줄을 당길 수 있어요')
       : (prob.blank ? '빈칸에 들어갈 수를 골라 보세요' : '답을 고르면 물고기를 잡을 수 있어요');
     $('hintBtnLabel').textContent = prob.hint.type === 'apples' ? '그림으로 세어보기' : '풀이 힌트';
+    $('quitQuiz').textContent = isBoss ? '그만 풀기 (보스 놓아주기)' : '그만 풀기 (물고기 놓아주기)';
 
     const ch = $('choices');
     ch.innerHTML = '';
