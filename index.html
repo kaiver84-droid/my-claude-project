@@ -630,7 +630,7 @@
     .title-wrap h1{font-size:27px;}
     .title-wrap p{display:none;}
     .title-wrap{margin:2px 0 auto 0;}
-    .start-card{padding:10px;border-radius:22px;}
+    .start-card{padding:8px;border-radius:22px;}
     .opt{min-height:44px;padding:5px 9px;}
     .opt .txt b{font-size:15px;}
     .opt .txt small{font-size:10px;}
@@ -706,6 +706,124 @@
     .start-card{max-width:470px;}
     .card{max-width:500px;}
   }
+
+  /* ---------- 학습 설정 (시작 화면 요약 + ⚙️ 모달) ---------- */
+  .study-row{
+    display:flex;align-items:center;gap:8px;width:100%;text-align:left;
+    padding:7px 8px 7px 10px;border-radius:16px;margin:0 0 9px;
+    background:linear-gradient(180deg,#f7fcef,#eef8e4);
+    border:2.5px solid #cfe6c2;font-family:inherit;color:#1f4d24;cursor:pointer;
+  }
+  .study-row .ic{flex:0 0 auto;font-size:17px;line-height:1;}
+  .study-row .txt{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:1px;}
+  .study-row .txt b{font-size:13.5px;font-weight:900;letter-spacing:-.01em;line-height:1.22;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .study-row .txt small{font-size:10.5px;font-weight:700;color:#5d7d52;line-height:1.25;}
+  .study-row .go{
+    flex:0 0 auto;display:flex;align-items:center;gap:3px;
+    font-size:11px;font-weight:900;color:#2f7a3a;background:#fff;
+    border:2px solid #cfe6c2;border-radius:11px;padding:5px 7px;white-space:nowrap;
+  }
+  .study-row:active{transform:scale(.995);}
+
+  #studyWrap{z-index:42;}
+  .study-card{
+    max-width:440px;padding:0;gap:0;overflow:hidden;
+    background:#fbfce9;border:3px solid #efd190;
+  }
+  .study-head{
+    flex:0 0 auto;display:flex;align-items:center;gap:8px;
+    padding:9px 9px 9px 12px;
+    background:linear-gradient(180deg,#357a35,#27602a);
+    border-bottom:2px solid #1d4a20;
+  }
+  .study-head h2{
+    margin:0;flex:1 1 auto;display:flex;align-items:center;gap:6px;
+    font-size:16.5px;font-weight:900;letter-spacing:-.02em;color:#f4ffe9;
+  }
+  .study-head .close-btn{
+    width:36px;height:36px;border-radius:11px;
+    background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.34);color:#eaffdd;
+  }
+  .study-body{
+    flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;
+    padding:11px 11px 3px;display:flex;flex-direction:column;gap:10px;
+    scrollbar-width:thin;scrollbar-color:#d8e6c2 transparent;
+  }
+  .study-body::-webkit-scrollbar{width:6px;}
+  .study-body::-webkit-scrollbar-thumb{background:#d8e6c2;border-radius:99px;}
+  .st-sec{display:flex;flex-direction:column;gap:7px;}
+  .st-sec-title{font-size:13.5px;font-weight:900;color:#1f4d24;letter-spacing:-.01em;margin:0 1px;}
+  .st-ways{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+  .st-way{
+    display:flex;align-items:center;gap:6px;text-align:left;padding:8px;
+    min-height:52px;border-radius:14px;background:#fff;border:2.5px solid #d6e8cc;
+    font-family:inherit;color:#20402a;cursor:pointer;
+  }
+  .st-way .ic{flex:0 0 auto;font-size:17px;line-height:1;}
+  .st-way .t{display:flex;flex-direction:column;gap:1px;min-width:0;}
+  .st-way .t b{font-size:12.5px;font-weight:900;line-height:1.2;letter-spacing:-.01em;}
+  .st-way .t small{font-size:9.5px;font-weight:700;color:#6b8a5e;line-height:1.2;}
+  .st-way:active{transform:scale(.99);}
+  .st-way.on{background:linear-gradient(#ffe9a8,#ffcf5a);border-color:#e8a300;
+    box-shadow:0 2px 0 #d09300;color:#5a3a00;}
+  .st-way.on .t small{color:#7a5610;}
+  .st-ops{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+  .st-op{
+    display:flex;align-items:center;justify-content:center;gap:6px;
+    min-height:47px;border-radius:14px;background:#fff;border:2.5px solid #d6e8cc;
+    font-family:inherit;font-size:15px;font-weight:900;color:#20402a;cursor:pointer;
+  }
+  .st-op b{font-size:19px;font-weight:900;line-height:1;color:#2f7a3a;}
+  .st-op:active{transform:scale(.98);}
+  .st-op.on{background:linear-gradient(#ffe9a8,#ffcf5a);border-color:#e8a300;
+    box-shadow:0 2px 0 #d09300;color:#5a3a00;}
+  .st-op.on b{color:#8a5a00;}
+  .st-op.mix{grid-column:1 / -1;}
+  .st-sub{
+    display:flex;flex-direction:column;gap:6px;padding:8px;
+    border:2.5px dashed #9fd18b;border-radius:14px;background:#f4fbe9;
+  }
+  .st-sub-title{font-size:11px;font-weight:900;color:#5d7d52;margin:0 1px 1px;}
+  .st-sub button{
+    display:flex;align-items:center;justify-content:center;gap:6px;
+    min-height:42px;border-radius:12px;background:#fff;border:2.5px solid #d6e8cc;
+    font-family:inherit;font-size:13.5px;font-weight:900;color:#20402a;cursor:pointer;
+  }
+  .st-sub button:active{transform:scale(.99);}
+  .st-sub button.on{background:linear-gradient(#a9e07e,#63ba42);border-color:#3f8a26;
+    color:#143701;box-shadow:0 2px 0 #35801f;}
+  .st-levels{display:flex;flex-direction:column;gap:7px;}
+  .st-lv{
+    display:flex;flex-direction:column;gap:1px;text-align:left;padding:8px 10px;
+    border-radius:14px;background:#fff;border:2.5px solid #d6e8cc;
+    font-family:inherit;color:#20402a;cursor:pointer;
+  }
+  .st-lv b{font-size:14px;font-weight:900;line-height:1.25;letter-spacing:-.01em;}
+  .st-lv small{font-size:10.5px;font-weight:700;color:#6b8a5e;line-height:1.3;}
+  .st-lv:active{transform:scale(.99);}
+  .st-lv.on{background:linear-gradient(#ffe9a8,#ffcf5a);border-color:#e8a300;
+    box-shadow:0 2px 0 #d09300;color:#5a3a00;}
+  .st-lv.on small{color:#7a5610;}
+  .study-preview{
+    flex:0 0 auto;font-size:12px;font-weight:800;color:#3d6b33;text-align:center;line-height:1.35;
+    background:#fff;border:2px dashed #cfe6c2;border-radius:12px;padding:6px 8px;
+  }
+  .study-preview b{font-weight:900;color:#1f4d24;}
+  .study-foot{flex:0 0 auto;padding:9px 11px 11px;background:#fbfce9;border-top:1px solid #e7eecf;}
+  .study-foot .big-btn{height:50px;font-size:17px;}
+  @media (max-height:700px){
+    .study-row{padding:4px 7px 4px 9px;margin-bottom:5px;}
+    .study-row .txt b{font-size:13px;}
+    .study-row .txt small{font-size:10px;}
+    .st-way{min-height:46px;padding:6px;}
+    .st-op{min-height:43px;}
+    .st-lv{padding:6px 9px;}
+    .st-lv b{font-size:13.5px;}
+    .st-lv small{font-size:10px;}
+    .study-body{padding:9px 9px 2px;gap:8px;}
+    .study-foot .big-btn{height:46px;font-size:16px;}
+  }
 </style>
 </head>
 <body>
@@ -720,6 +838,12 @@
       <div class="chip combo hidden" id="comboChip"><span class="lbl">연속</span><b id="comboVal">2</b></div>
     </div>
     <div class="hud-right">
+      <button class="icon-btn" id="studyBtn" aria-label="학습 난이도 설정" title="학습 설정">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+          <circle cx="12" cy="12" r="3"/>
+        </svg>
+      </button>
       <button class="icon-btn" id="shopBtn" aria-label="상점 열기" title="상점">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M5.5 8h13l-1.1 11.2a1.4 1.4 0 0 1-1.4 1.3H8a1.4 1.4 0 0 1-1.4-1.3z"/>
@@ -797,6 +921,14 @@
       <p id="startSub">문제를 풀어 물고기를 잡아 보세요!</p>
     </div>
     <div class="start-card">
+      <button class="study-row" id="studyRow" type="button">
+        <span class="ic" id="studyRowIcon">📚</span>
+        <span class="txt">
+          <b id="studySummary">1학년 과정</b>
+        </span>
+        <span class="go">⚙️ 설정</span>
+      </button>
+      <div id="gradeBlock">
       <div class="seg-title">학년</div>
       <div class="grade-grid" id="gradeList">
         <button class="opt" data-grade="1">
@@ -815,6 +947,7 @@
           <span class="num">4</span>
           <span class="txt"><b>4학년</b><small>소수·혼합</small></span>
         </button>
+      </div>
       </div>
       <div class="grade-desc" id="gradeDesc">한 자리 수 덧셈·뺄셈, 10 만들기, 받아올림·내림</div>
       <div class="seg-title">놀이 모드</div>
@@ -936,6 +1069,66 @@
       </div>
       <div class="shop-list" id="shopList"></div>
       <div class="shop-msg" id="shopMsg">물고기를 잡으면 포인트가 쌓여요. 모은 포인트로 배·낚싯대·꾸미기를 바꿔 보세요!</div>
+    </div>
+  </div>
+
+  <!-- 학습 난이도·연산 설정 -->
+  <div id="studyWrap" class="modal hidden">
+    <div class="card study-card">
+      <div class="study-head">
+        <h2><span aria-hidden="true">⚙️</span><span>학습 난이도 설정</span></h2>
+        <button class="close-btn" id="studyClose" aria-label="닫기">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <div class="study-body" id="studyBody">
+        <div class="st-sec">
+          <div class="st-sec-title">학습 방식</div>
+          <div class="st-ways" id="wayList">
+            <button type="button" class="st-way" data-way="grade">
+              <span class="ic">📚</span>
+              <span class="t"><b>학년 과정</b><small>1~4학년 과정 그대로</small></span>
+            </button>
+            <button type="button" class="st-way" data-way="custom">
+              <span class="ic">🎯</span>
+              <span class="t"><b>연산·난이도 직접 설정</b><small>연산과 난이도를 골라요</small></span>
+            </button>
+          </div>
+        </div>
+        <div class="st-sec" id="calcBlock">
+          <div class="st-sec-title">어떤 계산을 연습할까요?</div>
+          <div class="st-ops" id="opList">
+            <button type="button" class="st-op" data-op="add"><b>+</b><span>덧셈</span></button>
+            <button type="button" class="st-op" data-op="sub"><b>−</b><span>뺄셈</span></button>
+            <button type="button" class="st-op" data-op="mul"><b>×</b><span>곱셈</span></button>
+            <button type="button" class="st-op" data-op="div"><b>÷</b><span>나눗셈</span></button>
+            <button type="button" class="st-op mix" data-op="mix"><b>🎲</b><span>섞어서</span></button>
+          </div>
+          <div class="st-sub" id="mixSub">
+            <div class="st-sub-title">섞어서 — 어떤 문제를 섞을까요?</div>
+            <button type="button" data-mix="mix2"><b>+</b><b>−</b> 덧셈 + 뺄셈만</button>
+            <button type="button" data-mix="mix4"><b>+</b><b>−</b><b>×</b><b>÷</b> 사칙연산 다 섞기</button>
+          </div>
+        </div>
+        <div class="st-sec" id="levelBlock">
+          <div class="st-sec-title">난이도</div>
+          <div class="st-levels" id="levelList">
+            <button type="button" class="st-lv" data-level="1">
+              <b>🌱 1단계 (쉬움)</b><small>한 자릿수 덧·뺄셈 · 쉬운 2~5단 곱셈·나눗셈</small>
+            </button>
+            <button type="button" class="st-lv" data-level="2">
+              <b>🌿 2단계 (보통)</b><small>두 자릿수 ± · 2~9단 구구단·나눗셈</small>
+            </button>
+            <button type="button" class="st-lv" data-level="3">
+              <b>⚡ 3단계 (도전)</b><small>받아올림/내림 두~세 자릿수 · 두 자리×한 자리 · 두 자리÷한 자리</small>
+            </button>
+          </div>
+        </div>
+        <div class="study-preview" id="studyPreview">지금 설정: <b>1학년 과정</b></div>
+      </div>
+      <div class="study-foot">
+        <button class="big-btn" id="studyDone"><span>확인</span></button>
+      </div>
     </div>
   </div>
 
@@ -1631,6 +1824,260 @@
     if(g === 2) return genG2();
     return genG1();
   }
+
+  /* =================================================================
+     학습 설정 — 연산·난이도 직접 설정 문제 생성 (순수 계산)
+     op   : add | sub | mul | div | mix2(덧셈+뺄셈) | mix4(사칙연산)
+     level: 1(쉬움) | 2(보통) | 3(도전)
+     - 뺄셈은 a >= b (음수 없음)
+     - 나눗셈은 나머지 0 (n = 나누는 수 × 몫)
+     - 보기 4개는 중복 없이 정답과 가까운 값
+     ================================================================= */
+  const ST_OPS = ['add','sub','mul','div','mix2','mix4'];
+  const ST_OP_INFO = {
+    add:{name:'덧셈',    sign:'+'},
+    sub:{name:'뺄셈',    sign:'−'},
+    mul:{name:'곱셈',    sign:'×'},
+    div:{name:'나눗셈',  sign:'÷'},
+    mix2:{name:'덧셈+뺄셈', sign:'+ −'},
+    mix4:{name:'사칙연산',  sign:'+ − × ÷'}
+  };
+  const ST_LEVELS = [
+    {v:1, name:'1단계', tag:'쉬움', icon:'🌱', desc:'한 자릿수 덧·뺄셈 · 쉬운 2~5단 곱셈·나눗셈'},
+    {v:2, name:'2단계', tag:'보통', icon:'🌿', desc:'두 자릿수 ± · 2~9단 구구단·나눗셈'},
+    {v:3, name:'3단계', tag:'도전', icon:'⚡', desc:'받아올림/내림 두~세 자릿수 · 두 자리×한 자리 · 두 자리÷한 자리'}
+  ];
+  const PLACE_KO = ['일의 자리','십의 자리','백의 자리','천의 자리'];
+
+  /* 보기 범위: 정답 주변에서 자연스럽게 */
+  function stOpt(ans, lo){
+    const m = Math.max(6, Math.round(Math.abs(ans) * 0.25));
+    return {min: Math.max(lo == null ? 1 : lo, ans - m), max: ans + m};
+  }
+
+  /* 덧셈 힌트: 자리별 세로셈 (0~3자리 모두 같은 규칙으로 만든다) */
+  function stAddHint(a, b){
+    const os = placeAdd(a, b);
+    const carried = os.places.some(function(p){ return p.cout; });
+    const steps = os.places.map(function(pl){
+      let txt = pl.x + ' + ' + pl.y + (pl.cin ? ' + ' + pl.cin : '') + ' = ' + pl.sum;
+      if(pl.cout) txt += ' → ' + numJosa(pl.digit,'을','를') + ' 쓰고 1을 ' + josa(PLACE_KO[Math.min(pl.i+1,3)],'으로','로') + ' 올려요.';
+      return {label: PLACE_KO[Math.min(pl.i,3)], text: txt};
+    });
+    steps.push({label:'답', text:a + ' + ' + b + ' = ' + (a+b)});
+    return stepsHint(steps, carried
+      ? '받아올림이 있어요. 일의 자리부터 차례로 더해요.'
+      : '일의 자리부터 자리별로 차례로 더해요.', colAdd(a,b));
+  }
+  /* 뺄셈 힌트: 자리별 받아내림 */
+  function stSubHint(a, b){
+    const da = String(a).split('').reverse().map(Number);
+    const db = String(b).split('').reverse().map(Number);
+    const n = Math.max(da.length, db.length);
+    const steps = [];
+    let borrow = 0, anyBorrow = false;
+    for(let i=0;i<n;i++){
+      const top0 = (da[i] || 0) - borrow;
+      const y = db[i] || 0;
+      const need = top0 < y;
+      const top = top0 + (need ? 10 : 0);
+      const res = top - y;
+      let txt;
+      if(need){
+        anyBorrow = true;
+        txt = top0 + '에서 ' + numJosa(y,'을','를') + ' 뺄 수 없어요. ' + PLACE_KO[Math.min(i+1,3)] +
+              '에서 10을 빌려 와서 ' + top + ' - ' + y + ' = ' + res;
+      } else {
+        txt = top0 + ' - ' + y + ' = ' + res;
+      }
+      steps.push({label: PLACE_KO[Math.min(i,3)], text: txt});
+      borrow = need ? 1 : 0;
+    }
+    steps.push({label:'확인', text:(a-b) + ' + ' + b + ' = ' + a + ' 이니까 답은 ' + numJosa(a-b,'이에요','예요') + '.'});
+    return stepsHint(steps, anyBorrow
+      ? '받아내림이 있어요. 위의 수가 작으면 윗자리에서 10을 빌려 와요.'
+      : '일의 자리부터 차례로 빼요.', colSub(a,b));
+  }
+  /* 곱셈 힌트: 한 자리×한 자리는 반복 덧셈, 두 자리×한 자리는 자리 나누기 */
+  function stMulHint(a, b){
+    const ans = a*b;
+    if(a <= 9 && b <= 9){
+      const terms = [];
+      for(let i=0;i<b;i++) terms.push(a);
+      return stepsHint([
+        {label:'뜻', text:a + ' × ' + numJosa(b,'은','는') + ' ' + a + '를 ' + b + '번 더한 거예요.'},
+        {label:'더하기', text:terms.join(' + ') + ' = ' + ans},
+        {label:'답', text:a + ' × ' + b + ' = ' + ans}
+      ], '구구단을 외우면 더 빨리 풀 수 있어요.');
+    }
+    const t = Math.floor(a/10)*10, o = a%10;
+    return stepsHint([
+      {label:'나누기', text:numJosa(a,'을','를') + ' ' + t + '과 ' + o + '로 나눠요.'},
+      {label:'십의 자리', text:t + ' × ' + b + ' = ' + (t*b)},
+      {label:'일의 자리', text:o + ' × ' + b + ' = ' + (o*b)},
+      {label:'더하기', text:(t*b) + ' + ' + (o*b) + ' = ' + ans}
+    ], '십의 자리와 일의 자리를 따로 곱한 뒤 더해요.');
+  }
+  /* 나눗셈 힌트: 구구단 거꾸로 / 두 자리 몫은 십의 자리부터 */
+  function stDivHint(d, q){
+    const n = d*q;
+    if(q <= 9){
+      return stepsHint([
+        {label:'구구단에서', text:d + ' × ' + q + ' = ' + n},
+        {label:'그래서', text:n + ' ÷ ' + d + ' = ' + q}
+      ], '곱셈 구구를 거꾸로 생각하면 나눗셈이 돼요.');
+    }
+    const t = Math.floor(q/10)*10, r = q%10;
+    return stepsHint([
+      {label:'몫의 십의 자리', text:d + ' × ' + t + ' = ' + (d*t)},
+      {label:'남은 수', text:n + ' - ' + (d*t) + ' = ' + (d*r)},
+      {label:'몫의 일의 자리', text:d + ' × ' + r + ' = ' + (d*r) + ' 이니까 몫은 ' + t + ' + ' + r + ' = ' + q + '예요.'},
+      {label:'확인', text:d + ' × ' + q + ' = ' + n}
+    ], '두 자리 수 나눗셈은 몫의 십의 자리부터 차례로 찾아요.');
+  }
+
+  function stAddP(a, b, kind, level){
+    const ans = a+b;
+    return prob({grade:0, kind, ansNum:ans, choiceOpt:stOpt(ans, 2),
+      text:a + ' + ' + b + ' = ?',
+      hint: stAddHint(a,b),
+      data:{a,b,op:'+',ans,level}});
+  }
+  function stSubP(a, b, kind, level){
+    const ans = a-b;
+    return prob({grade:0, kind, ansNum:ans, choiceOpt:stOpt(ans, 0),
+      text:a + ' - ' + b + ' = ?',
+      hint: stSubHint(a,b),
+      data:{a,b,op:'-',ans,level}});
+  }
+  function stMulP(a, b, kind, level){
+    const ans = a*b;
+    return prob({grade:0, kind, ansNum:ans, choiceOpt:stOpt(ans, 2),
+      text:a + ' × ' + b + ' = ?',
+      hint: stMulHint(a,b),
+      data:{a,b,op:'×',ans,level}});
+  }
+  function stDivP(d, q, kind, level){
+    const n = d*q;
+    return prob({grade:0, kind, ansNum:q, choiceOpt:stOpt(q, 1),
+      text:n + ' ÷ ' + d + ' = ?',
+      hint: stDivHint(d,q),
+      data:{d,q,n,op:'÷',ans:q,level}});
+  }
+
+  function stAdd(level){
+    if(level === 1){
+      const a = R(1,8), b = R(1, 9-a), ans = a+b;
+      const items = its(a,0).concat(its(b,1));
+      return prob({grade:0, kind:'st_add_1', ansNum:ans, choiceOpt:stOpt(ans, 1),
+        text:a + ' + ' + b + ' = ?',
+        hint: appleHint(items, '빨간 사과 ' + a + '개와 파란 사과 ' + b + '개를 모두 세어 보세요.'),
+        data:{a,b,op:'+',ans,level:1}});
+    }
+    if(level === 2){
+      for(let i=0;i<200;i++){
+        const tA = R(2,8), tB = R(1, 9-tA);
+        const oA = R(1,8), oB = R(1, 9-oA);
+        const a = tA*10+oA, b = tB*10+oB;
+        if(a+b > 99) continue;
+        return stAddP(a, b, 'st_add_2', 2);
+      }
+      return stAddP(42, 35, 'st_add_2', 2);
+    }
+    for(let i=0;i<400;i++){
+      const three = Math.random() < 0.5;
+      const a = three ? R(115, 860) : R(15, 79);
+      const hi = three ? 999 : 99;
+      const b = R(12, hi - a);
+      if(b < 12 || a+b > hi) continue;
+      if((a%10) + (b%10) < 10) continue;   /* 받아올림이 있어야 3단계 */
+      return stAddP(a, b, 'st_add_3', 3);
+    }
+    return stAddP(47, 38, 'st_add_3', 3);
+  }
+  function stSub(level){
+    if(level === 1){
+      const a = R(2,10), b = R(1, a-1), ans = a-b;
+      const items = its(a,0);
+      for(let i=items.length-b;i<items.length;i++) items[i].m = 'crossed';
+      return prob({grade:0, kind:'st_sub_1', ansNum:ans, choiceOpt:stOpt(ans, 0),
+        text:a + ' - ' + b + ' = ?',
+        hint: appleHint(items, a + '개 중에서 ' + b + '개에 X표 했어요. 남은 사과를 세어 보세요.'),
+        data:{a,b,op:'-',ans,level:1}});
+    }
+    if(level === 2){
+      for(let i=0;i<300;i++){
+        const tA = R(3,9), tB = R(1, tA-1);
+        const oA = R(2,9), oB = R(1, oA);        /* 일의 자리 받아내림 없음 */
+        const a = tA*10+oA, b = tB*10+oB;
+        if(a - b < 10) continue;
+        return stSubP(a, b, 'st_sub_2', 2);
+      }
+      return stSubP(58, 23, 'st_sub_2', 2);
+    }
+    for(let i=0;i<400;i++){
+      const three = Math.random() < 0.5;
+      let a, b;
+      if(three){ a = R(230, 940); b = R(112, a-101); }
+      else { a = R(31, 99); b = R(12, a-11); }
+      if(b < 12 || a - b < 10) continue;
+      const bor1 = (a%10) < (b%10);
+      const tTop = (Math.floor(a/10)%10) - (bor1 ? 1 : 0);
+      const bor2 = tTop < (Math.floor(b/10)%10);
+      if(!bor1 && !bor2) continue;               /* 받아내림이 있어야 3단계 */
+      if((Math.floor(a/100) - (bor2?1:0) - Math.floor(b/100)) < 0) continue;
+      return stSubP(a, b, 'st_sub_3', 3);
+    }
+    return stSubP(523, 268, 'st_sub_3', 3);
+  }
+  function stMul(level){
+    if(level === 1){
+      const a = R(2,5), b = R(2,9);
+      return stMulP(a, b, 'st_mul_1', 1);
+    }
+    if(level === 2){
+      const a = R(2,9), b = R(2,9);
+      return stMulP(a, b, 'st_mul_2', 2);
+    }
+    let a = R(12,49);
+    if(a % 10 === 0) a += 1;
+    const b = R(2,9);
+    return stMulP(a, b, 'st_mul_3', 3);
+  }
+  function stDiv(level){
+    if(level === 1){
+      const d = R(2,5), q = R(2,9);
+      return stDivP(d, q, 'st_div_1', 1);
+    }
+    if(level === 2){
+      const d = R(2,9), q = R(2,9);
+      return stDivP(d, q, 'st_div_2', 2);
+    }
+    for(let i=0;i<200;i++){
+      const d = R(2,8);
+      const q = R(11, Math.floor(99/d));
+      if(q % 10 === 0) continue;                 /* 몫이 10의 배수면 힌트가 어색해진다 */
+      return stDivP(d, q, 'st_div_3', 3);
+    }
+    return stDivP(7, 12, 'st_div_3', 3);
+  }
+  function stMixed(level, kinds){
+    const k = kinds[R(0, kinds.length-1)];
+    if(k === 'add') return stAdd(level);
+    if(k === 'sub') return stSub(level);
+    if(k === 'mul') return stMul(level);
+    return stDiv(level);
+  }
+  function studyProblem(op, level){
+    const lv = (Number(level) === 2 || Number(level) === 3) ? Number(level) : 1;
+    const o = ST_OPS.indexOf(op) >= 0 ? op : 'mix4';
+    if(o === 'add') return stAdd(lv);
+    if(o === 'sub') return stSub(lv);
+    if(o === 'mul') return stMul(lv);
+    if(o === 'div') return stDiv(lv);
+    if(o === 'mix2') return stMixed(lv, ['add','sub']);
+    return stMixed(lv, ['add','sub','mul','div']);
+  }
   /* =================================================================
      PROBLEM-ENGINE-END
      ================================================================= */
@@ -1647,6 +2094,10 @@
     theme:'fish',
     caught:{}, caughtMon:{}, solved:0, correct:0,
     best:{ free:{1:0,2:0,3:0,4:0}, timed:{1:0,2:0,3:0,4:0} },
+    /* 학습 설정: mode=grade(학년 과정) / custom(연산·난이도 직접 설정) */
+    study:{ mode:'grade', op:'add', level:1 },
+    /* 직접 설정의 최고 점수 (학년 과정 최고 점수와 따로 모은다) */
+    bestCustom:{ free:0, timed:0 },
     /* 상점: 쓸 수 있는 포인트 지갑 / 보유 아이템 / 장착 아이템 */
     coins:0,
     owned:{ boat:['wood'], rod:['bamboo'], outfit:['fisher'] },
@@ -1671,6 +2122,18 @@
       save.best = {
         free: Object.assign({1:0,2:0,3:0,4:0}, (o.best && o.best.free) || {}),
         timed: Object.assign({1:0,2:0,3:0,4:0}, (o.best && o.best.timed) || {})
+      };
+      /* 학습 설정 (없거나 깨졌으면 학년 과정 1단계로) */
+      const st = (o.study && typeof o.study === 'object') ? o.study : {};
+      save.study = {
+        mode: st.mode === 'custom' ? 'custom' : 'grade',
+        op: ST_OPS.indexOf(st.op) >= 0 ? st.op : 'add',
+        level: (Number(st.level) === 2 || Number(st.level) === 3) ? Number(st.level) : 1
+      };
+      const bc = (o.bestCustom && typeof o.bestCustom === 'object') ? o.bestCustom : {};
+      save.bestCustom = {
+        free: Math.max(0, Math.floor(Number(bc.free) || 0)),
+        timed: Math.max(0, Math.floor(Number(bc.timed) || 0))
       };
       /* 지갑 · 보유 · 장착 (없거나 깨졌으면 기본값으로 되돌린다) */
       save.coins = Math.max(0, Math.floor(Number(o.coins) || 0));
@@ -4267,6 +4730,8 @@
     catchT: 0, catchFrom: null,
     particles: [], floats: [], t: 0,
     dexOpen: false, shopOpen: false, paused: false, frozen: false,
+    /* 학습 설정 모달 / 이번 판의 최고점수 기록 칸(설정 바꿈과 무관하게 시작 시점 기준) */
+    studyOpen: false, recMode:'grade', recGrade:1,
     /* 보스 */
     boss: null, bossFight: false, bossHp: 0, bossMaxHp: 3,
     fishCaught: 0, bossCaught: 0, bossSpawns: 0
@@ -4408,8 +4873,7 @@
     G.streak = Math.max(1, G.streak);
     const book = dexBook();
     book[sp.id] = (Number(book[sp.id])||0) + 1;   /* 테마별 도감(물고기/포켓몬)에 따로 기록 */
-    const bestKey = save.best[G.mode];
-    if(G.score > (bestKey[G.grade]||0)) bestKey[G.grade] = G.score;
+    if(G.score > roundBest()) roundBestSet(G.score);
     if(G.mode === 'timed') G.timeLeft = clamp(G.timeLeft + 5, 0, 60);
     persist();
     updateHUD(true);
@@ -4491,7 +4955,14 @@
   /* ---------------------------------------------------------------
      HUD / 화면
   ----------------------------------------------------------------*/
-  const hudCache = {score:-1, caught:-1, streak:-1, sec:-1, mode:'', grade:-1, coins:-1};
+  const hudCache = {score:-1, caught:-1, streak:-1, sec:-1, mode:'', grade:-1, coins:-1, study:''};
+  /* 플레이 중 상단 배지: 지금 적용 중인 학습 설정을 그대로 보여 준다 */
+  function studyPill(){
+    const md = G.mode === 'timed' ? '60초 도전' : th().free;
+    return (save.study.mode === 'custom')
+      ? studyShort()
+      : GRADE_INFO[G.grade].name + ' · ' + md;
+  }
   /* 보유 포인트를 HUD · 시작 화면 · 상점 세 곳에 같이 맞춘다 */
   function syncCoins(force){
     if(!force && hudCache.coins === save.coins) return;
@@ -4536,9 +5007,9 @@
     } else {
       wrap.classList.add('hidden');
     }
-    if(force || hudCache.mode !== G.mode || hudCache.grade !== G.grade){
-      $('modePillText').textContent = GRADE_INFO[G.grade].name + ' · ' + (G.mode==='timed'?'60초 도전':th().free);
-      hudCache.mode = G.mode; hudCache.grade = G.grade;
+    if(force || hudCache.mode !== G.mode || hudCache.grade !== G.grade || hudCache.study !== studyPill()){
+      $('modePillText').textContent = studyPill();
+      hudCache.mode = G.mode; hudCache.grade = G.grade; hudCache.study = studyPill();
     }
   }
   function setMuteUI(){
@@ -4575,11 +5046,13 @@
     document.querySelectorAll('#modeList .opt').forEach(b=>{
       b.classList.toggle('on', b.dataset.mode === save.mode);
     });
-    $('gradeDesc').textContent = GRADE_INFO[save.grade].desc;
-    const best = save.best[save.mode][save.grade] || 0;
-    const gname = GRADE_INFO[save.grade].name;
+    const custom = save.study.mode === 'custom';
+    $('gradeDesc').textContent = custom ? studyLevelInfo(save.study.level).desc : GRADE_INFO[save.grade].desc;
+    const best = bestGet(save.mode, save.study.mode, save.grade);
+    const gname = custom ? studyShort() : GRADE_INFO[save.grade].name;
     const md = save.mode==='timed' ? '60초 도전' : th().free;
     $('bestLine').textContent = `${gname} · ${md} 최고 점수 ${best}점`;
+    refreshStudyUI();
     const T = th();
     $('bossNote').innerHTML = T.unit + (save.mode === 'timed'
       ? ' <b>4마리</b>마다 <b>' + josa(T.dexBoss,'이','가') + '</b> 나타나요!'
@@ -4587,6 +5060,99 @@
     G.grade = save.grade; G.mode = save.mode;
     applyTheme();
     syncCoins(true);
+  }
+
+  /* ---------------------------------------------------------------
+     학습 설정 — 학년 과정 ⇄ 연산·난이도 직접 설정
+     · 최고 점수는 학년 과정(save.best) / 직접 설정(save.bestCustom)을 따로 기록
+     · 설정을 바꾸면 바로 다음 문제부터 적용되고 localStorage 에 저장
+  ----------------------------------------------------------------*/
+  function bestGet(mode, recMode, recGrade){
+    if(recMode === 'custom') return Math.max(0, Number(save.bestCustom[mode]) || 0);
+    return Number(save.best[mode][recGrade]) || 0;
+  }
+  function bestSet(mode, recMode, recGrade, v){
+    if(recMode === 'custom'){ save.bestCustom[mode] = v; return; }
+    save.best[mode][recGrade] = v;
+  }
+  function roundBest(){ return bestGet(G.mode, G.recMode || save.study.mode, G.recGrade || G.grade); }
+  function roundBestSet(v){ bestSet(G.mode, G.recMode || save.study.mode, G.recGrade || G.grade, v); }
+  function studyOpInfo(op){ return ST_OP_INFO[op] || ST_OP_INFO.mix4; }
+  function studyLevelInfo(lv){
+    const i = clamp((Number(lv) || 1) - 1, 0, ST_LEVELS.length - 1);
+    return ST_LEVELS[i];
+  }
+  /* 예: 덧셈+뺄셈 · 1단계 쉬움 */
+  function studyShort(){
+    const o = studyOpInfo(save.study.op), l = studyLevelInfo(save.study.level);
+    return o.name + ' · ' + l.name + ' ' + l.tag;
+  }
+  function studyTitle(){
+    return (save.study.mode === 'custom' ? '🎯 ' : '📚 ') + studyLabelNow();
+  }
+  /* 예: 1학년 과정 · 덧셈+뺄셈 · 1단계 쉬움 */
+  function studyLabelNow(){
+    return save.study.mode === 'custom'
+      ? studyShort()
+      : GRADE_INFO[save.grade].name + ' 과정';
+  }
+  function refreshStudyUI(){
+    const custom = save.study.mode === 'custom';
+    const b = $('studySummary'); if(b) b.textContent = studyTitle();
+    const ic = $('studyRowIcon'); if(ic) ic.textContent = custom ? '🎯' : '📚';
+    const gblock = $('gradeBlock'); if(gblock) gblock.classList.toggle('hidden', custom);
+    Array.prototype.forEach.call(document.querySelectorAll('#wayList .st-way'), function(x){
+      x.classList.toggle('on', x.dataset.way === save.study.mode);
+    });
+    const cb = $('calcBlock'); if(cb) cb.classList.toggle('hidden', !custom);
+    const lb = $('levelBlock'); if(lb) lb.classList.toggle('hidden', !custom);
+    const mixing = save.study.op === 'mix2' || save.study.op === 'mix4';
+    Array.prototype.forEach.call(document.querySelectorAll('#opList .st-op'), function(x){
+      const on = mixing ? (x.dataset.op === 'mix') : (x.dataset.op === save.study.op);
+      x.classList.toggle('on', on);
+    });
+    const ms = $('mixSub'); if(ms) ms.classList.toggle('hidden', !(custom && mixing));
+    Array.prototype.forEach.call(document.querySelectorAll('#mixSub button[data-mix]'), function(x){
+      x.classList.toggle('on', x.dataset.mix === save.study.op);
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('#levelList .st-lv'), function(x){
+      x.classList.toggle('on', Number(x.dataset.level) === save.study.level);
+    });
+    const pv = $('studyPreview');
+    if(pv) pv.innerHTML = '지금 설정: <b>' + (custom ? studyShort() : GRADE_INFO[save.grade].name + ' 과정') + '</b>';
+  }
+  function openStudy(){
+    /* 문제를 푸는 중(퀴즈·잡아 올리기)에는 열지 않는다 */
+    if(G.state === 'quiz' || G.state === 'catching') return;
+    if(G.state !== 'title' && G.state !== 'playing' && G.state !== 'casting' && G.state !== 'result') return;
+    refreshStudyUI();
+    const body = $('studyBody'); if(body) body.scrollTop = 0;
+    $('studyWrap').classList.remove('hidden');
+    G.studyOpen = true;
+    sfx.tap();
+  }
+  function closeStudy(){
+    $('studyWrap').classList.add('hidden');
+    G.studyOpen = false;
+    if(G.state === 'result') $('resultWrap').classList.remove('hidden');
+  }
+  function setStudy(mode, op, level){
+    let changed = false;
+    if(mode && mode !== save.study.mode && (mode === 'grade' || mode === 'custom')){
+      save.study.mode = mode; changed = true;
+    }
+    if(op && op !== save.study.op && ST_OPS.indexOf(op) >= 0){ save.study.op = op; changed = true; }
+    if(level){
+      const lv = Number(level);
+      const v = (lv === 2 || lv === 3) ? lv : 1;
+      if(v !== save.study.level){ save.study.level = v; changed = true; }
+    }
+    if(!changed) return false;
+    persist();
+    refreshStart();
+    updateHUD(true);
+    sfx.tap();
+    return true;
   }
   function showStart(){
     G.state = 'title';
@@ -4606,16 +5172,26 @@
     refreshStart();
   }
   function hideAllModals(){
-    ['quizWrap','dexWrap','resultWrap','shopWrap'].forEach(id=>$(id).classList.add('hidden'));
+    ['quizWrap','dexWrap','resultWrap','shopWrap','studyWrap'].forEach(id=>$(id).classList.add('hidden'));
     G.dexOpen = false;
     G.shopOpen = false;
+    G.studyOpen = false;
+  }
+
+  /* 지금 학습 설정으로 문제를 만든다 (학년 과정 / 연산·난이도 직접 설정) */
+  function makeProblem(){
+    return (save.study && save.study.mode === 'custom')
+      ? studyProblem(save.study.op, save.study.level)
+      : makeProblemFor(G.grade);
   }
 
   function startGame(){
     audioCtx(); sfx.start();
     G.state = 'playing';
     G.score = 0; G.caughtCount = 0; G.streak = 0;
-    G.startBest = save.best[G.mode][G.grade] || 0;
+    /* 이번 판의 최고점수 기록 칸은 시작할 때의 학습 설정 기준 */
+    G.recMode = save.study.mode; G.recGrade = save.grade;
+    G.startBest = roundBest();
     G.timeLeft = 60; G.elapsed = 0;
     G.fish = []; G.hooked = null; G.bob = null; G.quiz = null; G.wrong = 0; G.hintOpen = false;
     G.particles = []; G.floats = [];
@@ -4634,7 +5210,7 @@
     hideAllModals();
     updateHUD(true);
     syncTopOffset();
-    toast(null, null, `${GRADE_INFO[G.grade].name} · ${G.mode==='timed'?'60초 도전':th().free} 시작!`);
+    toast(null, null, studyPill() + ' 시작!');
   }
 
   /* ---------------------------------------------------------------
@@ -4680,7 +5256,7 @@
   }
 
   function openQuiz(fish, isBoss, quiet){
-    const prob = makeProblemFor(G.grade);
+    const prob = makeProblem();
     G.quiz = prob;
     G.state = 'quiz';
     G.wrong = 0;
@@ -4885,8 +5461,7 @@
     G.caughtCount++;
     const book = dexBook();
     book[sp.id] = (Number(book[sp.id])||0) + 1;   /* 테마별 도감(물고기/포켓몬)에 따로 기록 */
-    const bestKey = save.best[G.mode];
-    if(G.score > (bestKey[G.grade]||0)){ bestKey[G.grade] = G.score; }
+    if(G.score > roundBest()) roundBestSet(G.score);
     persist();
     updateHUD();
     toast(sp, pts, `${josa(sp.name,'을','를')} 잡았어요!` + (comboBonus?` (연속 ${G.streak})`:''));
@@ -5172,9 +5747,9 @@
   ----------------------------------------------------------------*/
   function endGame(reason){
     if(G.state==='result') return;
-    const prevBest = (G.startBest != null ? G.startBest : (save.best[G.mode][G.grade] || 0));
+    const prevBest = (G.startBest != null ? G.startBest : roundBest());
     const isNew = G.score > prevBest;
-    if(isNew){ save.best[G.mode][G.grade] = G.score; persist(); }
+    if(isNew){ roundBestSet(G.score); persist(); }
     G.state = 'result';
     G.quiz = null; G.hooked = null; G.bob = null; G.bossFight = false;
     $('quizWrap').classList.add('hidden');
@@ -5182,11 +5757,12 @@
     const qt = $('quizCard').querySelector('.quiz-top');
     if(qt) qt.classList.remove('hidden');
     $('resultTitle').textContent = reason==='time' ? '시간이 다 됐어요!' : th().finishTitle;
-    $('resultSub').textContent = `${GRADE_INFO[G.grade].name} · ${G.mode==='timed'?'60초 도전':th().free}`;
+    $('resultSub').textContent = (save.study.mode === 'custom' ? studyShort() : GRADE_INFO[G.grade].name)
+      + ' · ' + (G.mode==='timed'?'60초 도전':th().free);
     $('resultCaughtLbl').textContent = '잡은 ' + th().unit;
     $('resultScore').textContent = G.score;
     $('resultCaught').textContent = G.caughtCount;
-    $('resultBest').textContent = save.best[G.mode][G.grade] || 0;
+    $('resultBest').textContent = roundBest();
     $('newRecord').classList.toggle('hidden', !isNew || G.score===0);
     $('resultWrap').classList.remove('hidden');
     sfx.win();
@@ -6246,7 +6822,7 @@
     G.t += dt;
     const t = G.t;
 
-    const modalPause = G.dexOpen || G.shopOpen || G.state==='result' || G.state==='title';
+    const modalPause = G.dexOpen || G.shopOpen || G.studyOpen || G.state==='result' || G.state==='title';
 
     if(!modalPause){
       G.fish.forEach(f=>{
@@ -6392,6 +6968,38 @@
   $('resultHomeBtn').addEventListener('click', showStart);
   $('shopBtn').addEventListener('click', function(){ openShop(); });
   $('shopBtnStart').addEventListener('click', function(){ openShop(); });
+  /* 학습 설정 (시작 화면 요약 줄 · 게임 상단 ⚙️ 버튼 · 모달) */
+  $('studyRow').addEventListener('click', function(){ openStudy(); });
+  $('studyBtn').addEventListener('click', function(){ openStudy(); });
+  $('studyClose').addEventListener('click', closeStudy);
+  $('studyDone').addEventListener('click', closeStudy);
+  $('studyWrap').addEventListener('click', function(ev){ if(ev.target === $('studyWrap')) closeStudy(); });
+  $('wayList').addEventListener('click', function(ev){
+    const b = ev.target.closest('.st-way');
+    if(!b) return;
+    setStudy(b.dataset.way);
+  });
+  $('opList').addEventListener('click', function(ev){
+    const b = ev.target.closest('.st-op');
+    if(!b) return;
+    if(b.dataset.op === 'mix'){
+      /* 섞어서는 지난번에 고른 섞기 방식을 그대로 (처음이면 사칙연산) */
+      const cur = save.study.op;
+      setStudy('custom', (cur === 'mix2' || cur === 'mix4') ? cur : 'mix4');
+    } else {
+      setStudy('custom', b.dataset.op);
+    }
+  });
+  $('mixSub').addEventListener('click', function(ev){
+    const b = ev.target.closest('button[data-mix]');
+    if(!b) return;
+    setStudy('custom', b.dataset.mix);
+  });
+  $('levelList').addEventListener('click', function(ev){
+    const b = ev.target.closest('.st-lv');
+    if(!b) return;
+    setStudy('custom', null, b.dataset.level);
+  });
   $('shopClose').addEventListener('click', closeShop);
   $('shopWrap').addEventListener('click', function(ev){ if(ev.target === $('shopWrap')) closeShop(); });
   $('shopTabs').addEventListener('click', function(ev){
@@ -6412,7 +7020,8 @@
   document.addEventListener('dblclick', (e)=>e.preventDefault(), {passive:false});
   window.addEventListener('keydown', (ev)=>{
     if(ev.key==='Escape'){
-      if(G.shopOpen) closeShop();
+      if(G.studyOpen) closeStudy();
+      else if(G.shopOpen) closeShop();
       else if(G.dexOpen) closeDex();
       else if(G.state==='quiz') quitQuiz();
     }
@@ -6549,6 +7158,26 @@
     screen: ()=> ({W:W, H:H, waterY:waterY, scale:SCALE}),
     selectGrade: (g)=>{ save.grade=Number(g); persist(); refreshStart(); },
     selectMode: (m)=>{ save.mode=m; persist(); refreshStart(); },
+    /* 학습 설정 (테스트/확인용) */
+    study: ()=> Object.assign({}, save.study),
+    studyLabel: ()=> studyLabelNow(),
+    studyShort: ()=> studyShort(),
+    selectStudy: (mode, op, level)=>{ setStudy(mode, op, level); return Object.assign({}, save.study); },
+    genStudy: (op, level, n)=>{
+      const out = [];
+      const c = Math.max(1, Math.floor(Number(n) || 1));
+      for(let i=0;i<c;i++) out.push(studyProblem(op, level));
+      return out;
+    },
+    studyProblem: (op, level)=> studyProblem(op, level),
+    studyLevels: ()=> ST_LEVELS.map(l=>({v:l.v, name:l.name, tag:l.tag, desc:l.desc})),
+    studyOps: ()=> ST_OPS.map(o=>({id:o, name:studyOpInfo(o).name})),
+    studyOpen: ()=> !$('studyWrap').classList.contains('hidden'),
+    openStudy: ()=>{ openStudy(); return !$('studyWrap').classList.contains('hidden'); },
+    closeStudy: ()=>{ closeStudy(); return $('studyWrap').classList.contains('hidden'); },
+    bestCustom: ()=> Object.assign({}, save.bestCustom),
+    bestNow: ()=> roundBest(),
+    timeLeft: ()=> G.timeLeft,
     chooseCorrect: ()=>{
       if(!G.quiz) return false;
       const b = Array.prototype.slice.call(document.querySelectorAll('.choice')).filter(x=>x.dataset.val === String(G.quiz.answer))[0];
