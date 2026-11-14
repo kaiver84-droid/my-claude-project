@@ -134,7 +134,25 @@
     padding:calc(14px + env(safe-area-inset-top)) 14px calc(14px + env(safe-area-inset-bottom));
     overflow:hidden;
   }
-  .start-top{display:flex;justify-content:flex-end;gap:6px;}
+  .start-top{display:flex;justify-content:flex-end;gap:6px;align-items:center;}
+  /* ---------- 테마 선택 (물고기 / 포켓몬) ---------- */
+  .theme-toggle{
+    margin-right:auto;display:flex;gap:3px;padding:3px;border-radius:14px;
+    background:rgba(255,255,255,.78);border:2px solid rgba(255,255,255,.95);
+    box-shadow:0 3px 10px rgba(6,50,74,.2);
+  }
+  .theme-toggle button{
+    display:flex;align-items:center;justify-content:center;gap:4px;border:none;border-radius:11px;
+    min-height:31px;padding:4px 9px;background:none;font-family:inherit;font-size:12px;font-weight:900;
+    color:#3f6b82;cursor:pointer;line-height:1;white-space:nowrap;
+  }
+  .theme-toggle button .ic{font-size:14px;line-height:1;}
+  .theme-toggle button.on{
+    background:linear-gradient(#ffd85a,#f0a800);color:#4a2c00;
+    box-shadow:0 2px 0 #b88000;
+  }
+  .theme-toggle button.on .ic{filter:drop-shadow(0 1px 0 rgba(255,255,255,.6));}
+  .theme-toggle button:active{transform:scale(.97);}
   .title-wrap{text-align:center;margin:4px 0 auto 0;pointer-events:none;}
   .title-wrap h1{
     display:inline-block;margin:0;padding:3px 20px 7px;
@@ -317,7 +335,8 @@
   }
 
   /* ---------- dex ---------- */
-  .dex-head{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+  .card.dex-card{overflow:hidden;}
+  .dex-head{display:flex;align-items:center;justify-content:space-between;gap:8px;flex:0 0 auto;}
   .dex-head h2{margin:0;font-size:20px;font-weight:900;letter-spacing:-.02em;}
   .close-btn{
     width:40px;height:40px;border-radius:12px;border:2px solid #e0eef6;background:#fff;
@@ -325,12 +344,40 @@
   }
   .close-btn svg{width:20px;height:20px;}
   .dex-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
+  /* 수집 현황 바 + 필터 탭 (성도지방 100종 도감) */
+  .dex-progress{display:flex;align-items:center;gap:8px;margin-top:2px;}
+  .dex-progress .bar{
+    flex:1 1 auto;height:11px;border-radius:99px;background:#e8f1f7;overflow:hidden;
+    box-shadow:inset 0 1px 3px rgba(6,50,74,.14);
+  }
+  .dex-progress .bar i{
+    display:block;height:100%;width:0%;border-radius:99px;
+    background:linear-gradient(90deg,#7fd6a0,#2fb457,#ffcf3f);
+    transition:width .25s ease;
+  }
+  .dex-progress span{flex:0 0 auto;font-size:12px;font-weight:900;color:#2f8fd6;letter-spacing:-.01em;}
+  .dex-filter{display:flex;gap:6px;}
+  .dex-filter button{
+    flex:1 1 0;height:32px;border-radius:11px;border:2px solid #d7ecf6;background:#fff;
+    font-family:inherit;font-size:12.5px;font-weight:900;color:#3f6b82;cursor:pointer;
+  }
+  .dex-filter button.on{background:#eaf6ff;border-color:#7fc4ec;color:#1f6d94;}
+  .dex-filter button:active{transform:scale(.98);}
   .stat{
     background:#fff;border:2px solid #eaf5fa;border-radius:13px;padding:7px 6px;text-align:center;
   }
   .stat small{display:block;font-size:10.5px;font-weight:800;color:#7b93a3;}
   .stat b{display:block;font-size:16px;font-weight:900;color:var(--ink);margin-top:1px;}
+  .dex-scroll{
+    flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;
+    display:flex;flex-direction:column;gap:9px;padding:1px 2px 2px 1px;
+  }
   .dex-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;}
+  .dex-grid.many{grid-template-columns:repeat(4,1fr);gap:6px;}
+  .dex-grid.many .dex-item{padding:4px 2px;}
+  .dex-grid.many .dex-item canvas{width:66px;height:40px;}
+  .dex-grid.many .dex-item .nm{font-size:10px;}
+  .dex-grid.many .dex-item .ct{font-size:9.5px;}
   .dex-item{
     background:#fff;border:2px solid #eaf5fa;border-radius:14px;padding:6px 4px 7px;
     display:flex;flex-direction:column;align-items:center;gap:2px;
@@ -550,6 +597,9 @@
     .coin-pill b{font-size:13px;}
   }
   @media (max-width:380px){
+    .theme-toggle{padding:2px;gap:2px;}
+    .theme-toggle button{min-height:28px;padding:3px 6px;font-size:11px;}
+    .theme-toggle button .ic{font-size:12.5px;}
     .chip{padding:4px 6px;}
     .chip .lbl{font-size:9.5px;}
     .chip b{font-size:14px;}
@@ -629,6 +679,11 @@
     .shop-msg{min-height:30px;font-size:11.5px;padding:5px 8px;}
     .start-links .ghost-btn{height:38px;font-size:13px;}
   }
+  @media (max-height:560px){
+    .theme-toggle{padding:2px;}
+    .theme-toggle button{padding:3px 6px;font-size:11px;}
+    .theme-toggle button .ic{font-size:12px;}
+  }
   @media (min-width:820px){
     .chip{font-size:14px;padding:6px 12px;}
     .chip b{font-size:19px;}
@@ -648,7 +703,7 @@
   <div id="hud" class="hud hidden">
     <div class="hud-left">
       <div class="chip"><span class="lbl">점수</span><b id="scoreVal">0</b></div>
-      <div class="chip"><span class="lbl">잡은 물고기</span><b id="caughtVal">0</b></div>
+      <div class="chip"><span class="lbl" id="caughtLbl">잡은 물고기</span><b id="caughtVal">0</b></div>
       <div class="chip combo hidden" id="comboChip"><span class="lbl">연속</span><b id="comboVal">2</b></div>
     </div>
     <div class="hud-right">
@@ -684,16 +739,26 @@
   <!-- bottom -->
   <div id="bottomBar" class="bottom hidden">
     <button class="cast-btn" id="castBtn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#4a2c00" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <svg class="cast-ico-fish" viewBox="0 0 24 24" fill="none" stroke="#4a2c00" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M2.5 21 17 3.5"/><path d="M17 3.5v9.2a3.1 3.1 0 0 1-6.2 0"/>
         <circle cx="8.6" cy="14.6" r="1.5" fill="#4a2c00" stroke="none"/>
       </svg>
-      <span>낚싯대 던지기</span>
+      <svg class="cast-ico-mon" viewBox="0 0 24 24" style="display:none">
+        <circle cx="12" cy="12" r="9.2" fill="#fff" stroke="#4a2c00" stroke-width="2.1"/>
+        <path d="M3.2 12h17.6" stroke="#4a2c00" stroke-width="2.3"/>
+        <circle cx="12" cy="12" r="3.1" fill="#fff" stroke="#4a2c00" stroke-width="2.1"/>
+      </svg>
+      <span id="castLabel">낚싯대 던지기</span>
     </button>
     <button class="dex-btn" id="dexBtn" aria-label="내 어망 도감">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+      <svg class="dex-ico-fish" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
         <path d="M3.5 12c2.6-3.6 6-5.4 9.3-5.4 2.8 0 5 1.6 6 3.9-1 2.3-3.3 3.9-6 3.9-3.4 0-6.7-1.8-9.3-5.4z"/>
         <path d="M3.5 12 1.5 8.6V15z"/><circle cx="15.2" cy="10.6" r="1" fill="currentColor" stroke="none"/>
+      </svg>
+      <svg class="dex-ico-mon" viewBox="0 0 24 24" style="display:none">
+        <circle cx="12" cy="12" r="8.6" fill="none" stroke="currentColor" stroke-width="2.1"/>
+        <path d="M3.6 12h16.8" stroke="currentColor" stroke-width="2.1"/>
+        <circle cx="12" cy="12" r="2.9" fill="none" stroke="currentColor" stroke-width="2.1"/>
       </svg>
       <span>도감</span>
     </button>
@@ -702,6 +767,10 @@
   <!-- start screen -->
   <div id="startScreen" class="screen">
     <div class="start-top">
+      <div class="theme-toggle" id="themeToggle" role="group" aria-label="테마 선택">
+        <button type="button" data-theme="fish" aria-pressed="true"><span class="ic">🐟</span><span class="lb">물고기</span></button>
+        <button type="button" data-theme="pokemon" aria-pressed="false"><span class="ic">⚡</span><span class="lb">포켓몬</span></button>
+      </div>
       <div class="coin-pill big" id="startCoinPill" title="내 포인트"><span>내 포인트</span><b id="startCoins">0</b><i>P</i></div>
       <button class="icon-btn" id="muteBtnStart" aria-label="소리 끄기" title="소리">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -712,7 +781,7 @@
     </div>
     <div class="title-wrap">
       <h1>숫자 낚시</h1>
-      <p>문제를 풀어 물고기를 잡아 보세요!</p>
+      <p id="startSub">문제를 풀어 물고기를 잡아 보세요!</p>
     </div>
     <div class="start-card">
       <div class="seg-title">학년</div>
@@ -741,7 +810,7 @@
           <span class="num">
             <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>
           </span>
-          <span class="txt"><b>자유 낚시</b><small>시간 제한 없이 천천히</small></span>
+          <span class="txt"><b id="freeModeLabel">자유 낚시</b><small>시간 제한 없이 천천히</small></span>
         </button>
         <button class="opt" data-mode="timed">
           <span class="num">
@@ -756,7 +825,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
           <path d="M8 5.5l11 6.5-11 6.5z" fill="#fff" stroke="none"/>
         </svg>
-        낚시 시작
+        <span id="startBtnLabel">낚시 시작</span>
       </button>
       <div class="start-links">
         <button class="ghost-btn" id="dexBtnStart">내 어망 도감</button>
@@ -805,24 +874,35 @@
 
   <!-- dex -->
   <div id="dexWrap" class="modal hidden">
-    <div class="card">
+    <div class="card dex-card">
       <div class="dex-head">
-        <h2>내 어망 도감</h2>
+        <h2 id="dexTitle">내 어망 도감</h2>
         <button class="close-btn" id="dexClose" aria-label="닫기">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
         </button>
       </div>
       <div class="dex-stats">
-        <div class="stat"><small>잡은 물고기</small><b id="dexTotal">0</b></div>
+        <div class="stat"><small id="dexTotalLbl">잡은 물고기</small><b id="dexTotal">0</b></div>
         <div class="stat"><small>모은 종류</small><b id="dexKinds">0/12</b></div>
         <div class="stat"><small>푼 문제</small><b id="dexSolved">0</b></div>
       </div>
-      <div class="dex-grid" id="dexGrid"></div>
-      <div class="dex-sec" id="dexBossSec">
-        <span class="line"></span><b>전설의 보스</b><span class="line"></span>
+      <div class="dex-progress" id="dexProgressWrap">
+        <div class="bar"><i id="dexProgressFill"></i></div>
+        <span id="dexProgressText">0 / 12</span>
       </div>
-      <div class="dex-grid boss" id="dexBossGrid"></div>
-      <div class="dex-legend" id="dexLegend">낚시를 하면 저절로 모여요. 희귀한 물고기일수록 점수가 커요!</div>
+      <div class="dex-filter hidden" id="dexFilter">
+        <button type="button" data-f="all" class="on">전체</button>
+        <button type="button" data-f="got">잡은 것만</button>
+        <button type="button" data-f="boss">전설 보스</button>
+      </div>
+      <div class="dex-scroll" id="dexScroll">
+        <div class="dex-grid" id="dexGrid"></div>
+        <div class="dex-sec" id="dexBossSec">
+          <span class="line"></span><b id="dexBossLbl">전설의 보스</b><span class="line"></span>
+        </div>
+        <div class="dex-grid boss" id="dexBossGrid"></div>
+        <div class="dex-legend" id="dexLegend">낚시를 하면 저절로 모여요. 희귀한 물고기일수록 점수가 커요!</div>
+      </div>
     </div>
   </div>
 
@@ -854,7 +934,7 @@
       <div class="big-score"><span id="resultScore">0</span><small>점</small></div>
       <div id="newRecord" class="new-record hidden">새 최고 기록!</div>
       <div class="result-rows">
-        <span>잡은 물고기 <b id="resultCaught">0</b>마리</span>
+        <span><span id="resultCaughtLbl">잡은 물고기</span> <b id="resultCaught">0</b>마리</span>
         <span>최고 <b id="resultBest">0</b>점</span>
       </div>
       <div class="result-btns">
@@ -1550,7 +1630,9 @@
   const SAVE_KEY = 'mathFishingSave_v1';
   const defaultSave = () => ({
     grade:1, mode:'free', mute:false,
-    caught:{}, solved:0, correct:0,
+    /* 테마: fish(물고기 낚시) / pokemon(포켓몬 모험) — 도감은 테마별로 따로 모은다 */
+    theme:'fish',
+    caught:{}, caughtMon:{}, solved:0, correct:0,
     best:{ free:{1:0,2:0,3:0,4:0}, timed:{1:0,2:0,3:0,4:0} },
     /* 상점: 쓸 수 있는 포인트 지갑 / 보유 아이템 / 장착 아이템 */
     coins:0,
@@ -1569,6 +1651,8 @@
       save.mode = o.mode === 'timed' ? 'timed' : 'free';
       save.mute = !!o.mute;
       save.caught = (o.caught && typeof o.caught === 'object') ? o.caught : {};
+      save.caughtMon = (o.caughtMon && typeof o.caughtMon === 'object') ? o.caughtMon : {};
+      save.theme = o.theme === 'pokemon' ? 'pokemon' : 'fish';
       save.solved = Number(o.solved) || 0;
       save.correct = Number(o.correct) || 0;
       save.best = {
@@ -1897,11 +1981,18 @@
     {id:'golden',  name:'황금잉어', pts:150, w:3,  len:62, color:'#ffd24a', accent:'#f0a800', speed:[16,26], rare:true},
     {id:'chest',   name:'보물상자', pts:200, w:2,  len:52, color:'#a9743c', accent:'#ffd24a', speed:[10,16], rare:true}
   ];
+  function speciesWeight(sp){
+    /* 포켓몬: 등급 기본 무게 × (아직 못 만난 종이면 2.4배) → 도감 100종 수집 재미 */
+    if(sp.kind !== 'mon') return sp.w;
+    const base = sp.tier === 'super' ? 3 : sp.tier === 'rare' ? 10 : 30;
+    return dexCount(sp.id) > 0 ? base : base * 2.4;
+  }
   function pickSpecies(){
-    let total = 0; SPECIES.forEach(s=>{ total += s.w; });
+    const list = th().species;
+    let total = 0; list.forEach(s=>{ total += speciesWeight(s); });
     let r = Math.random()*total;
-    for(let i=0;i<SPECIES.length;i++){ r -= SPECIES[i].w; if(r<=0) return SPECIES[i]; }
-    return SPECIES[0];
+    for(let i=0;i<list.length;i++){ r -= speciesWeight(list[i]); if(r<=0) return list[i]; }
+    return list[0];
   }
 
   /* ---- 전설의 보스 3종 (일반 물고기 풀에는 섞이지 않는다) ---- */
@@ -1914,6 +2005,1276 @@
      speed:[10,15], boss:true, tag:'바다의 왕', aura:[255,205,96]}
   ];
   BOSSES.forEach(b=>{ b.hp = 3; });
+
+  /* ---------------------------------------------------------------
+     테마 — 물고기 낚시 ⇄ 포켓몬 모험
+     포인트(coins)·상점(배·낚싯대·꾸미기)은 함께 쓰고,
+     도감(caught)은 테마마다 따로 모은다.
+  ----------------------------------------------------------------*/
+    /* ---------------------------------------------------------------
+       성도지방 도감 100종 (No.152 치코리타 ~ No.251 세레비)
+       이름·번호는 PokeAPI 도감(한국어) 기준, bst = 종족값 합(강할수록 점수↑)
+       t = 속성(폴백 그림 색·장식 결정)
+    ----------------------------------------------------------------*/
+    const JOHTO = [
+      {dex:152, name:'치코리타', t:['grass'], bst:318, en:'chikorita'},
+      {dex:153, name:'베이리프', t:['grass'], bst:405, en:'bayleef'},
+      {dex:154, name:'메가니움', t:['grass'], bst:525, en:'meganium'},
+      {dex:155, name:'브케인', t:['fire'], bst:309, en:'cyndaquil'},
+      {dex:156, name:'마그케인', t:['fire'], bst:405, en:'quilava'},
+      {dex:157, name:'블레이범', t:['fire'], bst:534, en:'typhlosion'},
+      {dex:158, name:'리아코', t:['water'], bst:314, en:'totodile'},
+      {dex:159, name:'엘리게이', t:['water'], bst:405, en:'croconaw'},
+      {dex:160, name:'장크로다일', t:['water'], bst:530, en:'feraligatr'},
+      {dex:161, name:'꼬리선', t:['normal'], bst:215, en:'sentret'},
+      {dex:162, name:'다꼬리', t:['normal'], bst:415, en:'furret'},
+      {dex:163, name:'부우부', t:['normal','flying'], bst:262, en:'hoothoot'},
+      {dex:164, name:'야부엉', t:['normal','flying'], bst:452, en:'noctowl'},
+      {dex:165, name:'레디바', t:['bug','flying'], bst:265, en:'ledyba'},
+      {dex:166, name:'레디안', t:['bug','flying'], bst:390, en:'ledian'},
+      {dex:167, name:'페이검', t:['bug','poison'], bst:250, en:'spinarak'},
+      {dex:168, name:'아리아도스', t:['bug','poison'], bst:400, en:'ariados'},
+      {dex:169, name:'크로뱃', t:['poison','flying'], bst:535, en:'crobat'},
+      {dex:170, name:'초라기', t:['water','electric'], bst:330, en:'chinchou'},
+      {dex:171, name:'랜턴', t:['water','electric'], bst:460, en:'lanturn'},
+      {dex:172, name:'피츄', t:['electric'], bst:205, en:'pichu'},
+      {dex:173, name:'삐', t:['fairy'], bst:218, en:'cleffa'},
+      {dex:174, name:'푸푸린', t:['normal','fairy'], bst:210, en:'igglybuff'},
+      {dex:175, name:'토게피', t:['fairy'], bst:245, en:'togepi'},
+      {dex:176, name:'토게틱', t:['fairy','flying'], bst:405, en:'togetic'},
+      {dex:177, name:'네이티', t:['psychic','flying'], bst:320, en:'natu'},
+      {dex:178, name:'네이티오', t:['psychic','flying'], bst:470, en:'xatu'},
+      {dex:179, name:'메리프', t:['electric'], bst:280, en:'mareep'},
+      {dex:180, name:'보송송', t:['electric'], bst:365, en:'flaaffy'},
+      {dex:181, name:'전룡', t:['electric'], bst:510, en:'ampharos'},
+      {dex:182, name:'아르코', t:['grass'], bst:490, en:'bellossom'},
+      {dex:183, name:'마릴', t:['water','fairy'], bst:250, en:'marill'},
+      {dex:184, name:'마릴리', t:['water','fairy'], bst:420, en:'azumarill'},
+      {dex:185, name:'꼬지모', t:['rock'], bst:410, en:'sudowoodo'},
+      {dex:186, name:'왕구리', t:['water'], bst:500, en:'politoed'},
+      {dex:187, name:'통통코', t:['grass','flying'], bst:250, en:'hoppip'},
+      {dex:188, name:'두코', t:['grass','flying'], bst:340, en:'skiploom'},
+      {dex:189, name:'솜솜코', t:['grass','flying'], bst:460, en:'jumpluff'},
+      {dex:190, name:'에이팜', t:['normal'], bst:360, en:'aipom'},
+      {dex:191, name:'해너츠', t:['grass'], bst:180, en:'sunkern'},
+      {dex:192, name:'해루미', t:['grass'], bst:425, en:'sunflora'},
+      {dex:193, name:'왕자리', t:['bug','flying'], bst:390, en:'yanma'},
+      {dex:194, name:'우파', t:['water','ground'], bst:210, en:'wooper'},
+      {dex:195, name:'누오', t:['water','ground'], bst:430, en:'quagsire'},
+      {dex:196, name:'에브이', t:['psychic'], bst:525, en:'espeon'},
+      {dex:197, name:'블래키', t:['dark'], bst:525, en:'umbreon'},
+      {dex:198, name:'니로우', t:['dark','flying'], bst:405, en:'murkrow'},
+      {dex:199, name:'야도킹', t:['water','psychic'], bst:490, en:'slowking'},
+      {dex:200, name:'무우마', t:['ghost'], bst:435, en:'misdreavus'},
+      {dex:201, name:'안농', t:['psychic'], bst:336, en:'unown'},
+      {dex:202, name:'마자용', t:['psychic'], bst:405, en:'wobbuffet'},
+      {dex:203, name:'키링키', t:['normal','psychic'], bst:455, en:'girafarig'},
+      {dex:204, name:'피콘', t:['bug'], bst:290, en:'pineco'},
+      {dex:205, name:'쏘콘', t:['bug','steel'], bst:465, en:'forretress'},
+      {dex:206, name:'노고치', t:['normal'], bst:415, en:'dunsparce'},
+      {dex:207, name:'글라이거', t:['ground','flying'], bst:430, en:'gligar'},
+      {dex:208, name:'강철톤', t:['steel','ground'], bst:510, en:'steelix'},
+      {dex:209, name:'블루', t:['fairy'], bst:300, en:'snubbull'},
+      {dex:210, name:'그랑블루', t:['fairy'], bst:450, en:'granbull'},
+      {dex:211, name:'침바루', t:['water','poison'], bst:440, en:'qwilfish'},
+      {dex:212, name:'핫삼', t:['bug','steel'], bst:500, en:'scizor'},
+      {dex:213, name:'단단지', t:['bug','rock'], bst:505, en:'shuckle'},
+      {dex:214, name:'헤라크로스', t:['bug','fighting'], bst:500, en:'heracross'},
+      {dex:215, name:'포푸니', t:['dark','ice'], bst:430, en:'sneasel'},
+      {dex:216, name:'깜지곰', t:['normal'], bst:330, en:'teddiursa'},
+      {dex:217, name:'링곰', t:['normal'], bst:500, en:'ursaring'},
+      {dex:218, name:'마그마그', t:['fire'], bst:250, en:'slugma'},
+      {dex:219, name:'마그카르고', t:['fire','rock'], bst:430, en:'magcargo'},
+      {dex:220, name:'꾸꾸리', t:['ice','ground'], bst:250, en:'swinub'},
+      {dex:221, name:'메꾸리', t:['ice','ground'], bst:450, en:'piloswine'},
+      {dex:222, name:'코산호', t:['water','rock'], bst:410, en:'corsola'},
+      {dex:223, name:'총어', t:['water'], bst:300, en:'remoraid'},
+      {dex:224, name:'대포무노', t:['water'], bst:480, en:'octillery'},
+      {dex:225, name:'딜리버드', t:['ice','flying'], bst:330, en:'delibird'},
+      {dex:226, name:'만타인', t:['water','flying'], bst:485, en:'mantine'},
+      {dex:227, name:'무장조', t:['steel','flying'], bst:465, en:'skarmory'},
+      {dex:228, name:'델빌', t:['dark','fire'], bst:330, en:'houndour'},
+      {dex:229, name:'헬가', t:['dark','fire'], bst:500, en:'houndoom'},
+      {dex:230, name:'킹드라', t:['water','dragon'], bst:540, en:'kingdra'},
+      {dex:231, name:'코코리', t:['ground'], bst:330, en:'phanpy'},
+      {dex:232, name:'코리갑', t:['ground'], bst:500, en:'donphan'},
+      {dex:233, name:'폴리곤2', t:['normal'], bst:515, en:'porygon2'},
+      {dex:234, name:'노라키', t:['normal'], bst:465, en:'stantler'},
+      {dex:235, name:'루브도', t:['normal'], bst:250, en:'smeargle'},
+      {dex:236, name:'배루키', t:['fighting'], bst:210, en:'tyrogue'},
+      {dex:237, name:'카포에라', t:['fighting'], bst:455, en:'hitmontop'},
+      {dex:238, name:'뽀뽀라', t:['ice','psychic'], bst:305, en:'smoochum'},
+      {dex:239, name:'에레키드', t:['electric'], bst:360, en:'elekid'},
+      {dex:240, name:'마그비', t:['fire'], bst:365, en:'magby'},
+      {dex:241, name:'밀탱크', t:['normal'], bst:490, en:'miltank'},
+      {dex:242, name:'해피너스', t:['normal'], bst:540, en:'blissey'},
+      {dex:243, name:'라이코', t:['electric'], bst:580, en:'raikou'},
+      {dex:244, name:'앤테이', t:['fire'], bst:580, en:'entei'},
+      {dex:245, name:'스이쿤', t:['water'], bst:580, en:'suicune'},
+      {dex:246, name:'애버라스', t:['rock','ground'], bst:300, en:'larvitar'},
+      {dex:247, name:'데기라스', t:['rock','ground'], bst:410, en:'pupitar'},
+      {dex:248, name:'마기라스', t:['rock','dark'], bst:600, en:'tyranitar'},
+      {dex:249, name:'루기아', t:['psychic','flying'], bst:680, en:'lugia'},
+      {dex:250, name:'칠색조', t:['fire','flying'], bst:680, en:'ho-oh'},
+      {dex:251, name:'세레비', t:['psychic','grass'], bst:600, en:'celebi'}
+    ];
+    /* 전설·환상 포켓몬 6종 — 일반 풀에는 섞이지 않고 보스로만 나온다 */
+    const BOSS_DEX = [
+      {dex:243, name:'라이코', t:['electric'], bst:580, en:'raikou', pts:500,  tag:'천둥의 전설', aura:[255,225,120]},
+      {dex:244, name:'앤테이', t:['fire'],     bst:580, en:'entei',   pts:550,  tag:'화산의 전설', aura:[255,168,96]},
+      {dex:245, name:'스이쿤', t:['water'],    bst:580, en:'suicune', pts:600,  tag:'오로라 전설', aura:[150,225,255]},
+      {dex:249, name:'루기아', t:['psychic','flying'], bst:680, en:'lugia', pts:750, tag:'바다의 수호신', aura:[170,205,255]},
+      {dex:250, name:'칠색조', t:['fire','flying'],    bst:680, en:'ho-oh', pts:900, tag:'무지개 전설', aura:[255,190,120]},
+      {dex:251, name:'세레비', t:['psychic','grass'],  bst:600, en:'celebi', pts:1000, tag:'시간의 환상', aura:[170,255,190]}
+    ];
+
+    const MON_TYPES = {
+      normal:  {c:'#d6cfbb', d:'#a49b82', ko:'노말'},
+      fire:    {c:'#ff9f5a', d:'#e0672a', ko:'불꽃'},
+      water:   {c:'#82b6f2', d:'#4a7fd0', ko:'물'},
+      grass:   {c:'#a3dc74', d:'#5f9e3a', ko:'풀'},
+      electric:{c:'#ffe377', d:'#dda800', ko:'전기'},
+      ice:     {c:'#b0eaf4', d:'#5fb6c8', ko:'얼음'},
+      fighting:{c:'#e88d6c', d:'#b04a30', ko:'격투'},
+      poison:  {c:'#c894e6', d:'#8a4ab0', ko:'독'},
+      ground:  {c:'#e8d09a', d:'#b0904a', ko:'땅'},
+      flying:  {c:'#cbbdf4', d:'#8f7ad8', ko:'비행'},
+      psychic: {c:'#f9a6ba', d:'#d05a7a', ko:'에스퍼'},
+      bug:     {c:'#c6dd58', d:'#8a9e20', ko:'벌레'},
+      rock:    {c:'#cfb884', d:'#98804a', ko:'바위'},
+      ghost:   {c:'#ab97d1', d:'#6a5690', ko:'고스트'},
+      dragon:  {c:'#a294ec', d:'#5f4fc0', ko:'드래곤'},
+      dark:    {c:'#97867b', d:'#5a4a42', ko:'악'},
+      steel:   {c:'#cad3de', d:'#8a95a6', ko:'강철'},
+      fairy:   {c:'#f9bfd9', d:'#d67aa2', ko:'페어리'}
+    };
+    function monPoints(bst){ return bst <= 230 ? 10 : bst <= 300 ? 20 : bst <= 360 ? 30 : bst <= 410 ? 40 : bst <= 450 ? 55 : bst <= 490 ? 70 : bst <= 520 ? 90 : bst <= 545 ? 110 : bst <= 600 ? 150 : 180; }
+    function monTier(bst){ return bst >= 500 ? 'super' : bst >= 400 ? 'rare' : 'common'; }
+    function monLen(bst){ return bst <= 280 ? 54 : bst <= 380 ? 61 : bst <= 480 ? 70 : bst <= 545 ? 78 : 88; }
+    function monSpeed(bst){ const v = 20 + Math.round((600 - bst) / 26); return [v, v + 12]; }
+
+    const POKE_SPECIES = JOHTO.filter(function(r){ return !BOSS_DEX.some(function(b){ return b.dex === r.dex; }); })
+      .map(function(r){
+        const T = MON_TYPES[r.t[0]] || MON_TYPES.normal;
+        return {
+          id:'p' + r.dex, dex:r.dex, name:r.name, t:r.t, types:r.t, bst:r.bst, en:r.en,
+          pts:monPoints(r.bst), tier:monTier(r.bst), len:monLen(r.bst),
+          w: monTier(r.bst) === 'super' ? 3 : monTier(r.bst) === 'rare' ? 10 : 30,
+          color:T.c, accent:T.d, speed:monSpeed(r.bst), kind:'mon',
+          rare: monTier(r.bst) === 'super'
+        };
+      });
+    const POKE_BOSSES = BOSS_DEX.map(function(b){
+      return {
+        id:'p' + b.dex, dex:b.dex, name:b.name, t:b.t, types:b.t, bst:b.bst, en:b.en,
+        pts:b.pts, tier:'legend', len:200 + Math.round((b.pts - 500) / 12),
+        w:0, color:(MON_TYPES[b.t[0]] || MON_TYPES.normal).c,
+        accent:(MON_TYPES[b.t[0]] || MON_TYPES.normal).d,
+        speed:[9,14], boss:true, tag:b.tag, aura:b.aura, kind:'mon', hp:3
+      };
+    });
+    const MON_ALL = POKE_SPECIES.concat(POKE_BOSSES).sort(function(a,b){ return a.dex - b.dex; });
+
+    /* ---------------------------------------------------------------
+       PokeAPI 스프라이트 (온라인) — 없으면 아래 Canvas 폴백 그림
+       오프라인·차단·로딩 중에도 깨진 이미지가 보이지 않는다.
+    ----------------------------------------------------------------*/
+    const SPRITE_BASE = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/';
+    const SPRITES = {};
+    function spriteUrl(sp, big){
+      return SPRITE_BASE + (big ? 'other/official-artwork/' : '') + sp.dex + '.png';
+    }
+    function spriteState(url){
+      let s = SPRITES[url];
+      if(s) return s;
+      s = SPRITES[url] = {img:null, ok:false, err:false, cbs:[]};
+      try{
+        const im = new Image();
+        im.crossOrigin = 'anonymous';
+        im.onload = function(){
+          if(!im.naturalWidth){ s.err = true; s.cbs.length = 0; return; }
+          s.ok = true;
+          const f = s.cbs.splice(0);
+          f.forEach(function(cb){ try{ cb(); }catch(e){} });
+        };
+        im.onerror = function(){ s.err = true; s.cbs.length = 0; };
+        im.src = url;
+        s.img = im;
+      }catch(e){ s.err = true; }
+      return s;
+    }
+    function spriteThen(sp, big, cb){
+      const s = spriteState(spriteUrl(sp, big));
+      if(s.ok) cb();
+      else if(!s.err) s.cbs.push(cb);
+    }
+    /* 준비된 스프라이트를 (x,y) 중심 size 정사각형에 그린다. 없으면 false */
+    function drawMonSprite(c, sp, x, y, size, big){
+      const s = spriteState(spriteUrl(sp, big));
+      if(!s.ok) return false;
+      const img = s.img;
+      const w = size, h = size * (img.naturalHeight / (img.naturalWidth || 1));
+      c.drawImage(img, x - w/2, y - h/2, w, h);
+      return true;
+    }
+
+    /* ---------------------------------------------------------------
+       속성별 Canvas 폴백 그림
+       (PokeAPI 스프라이트가 아직/영영 안 올 때 보여 주는 그림.
+        같은 속성이라도 도감 번호에 따라 몸 형태가 조금씩 달라진다)
+    ----------------------------------------------------------------*/
+    function monFallbackBody(c, sp){
+      const v = sp.dex % 4;
+      c.beginPath();
+      if(v === 1){                                  /* 길쭉 */
+        c.ellipse(0,1,9.6,13,0,0,Math.PI*2);
+      } else if(v === 2){                           /* 넓적 */
+        c.ellipse(0,2,14,9.4,0,0,Math.PI*2);
+      } else if(v === 3){                           /* 달걀 */
+        c.moveTo(-9.6,3);
+        c.bezierCurveTo(-10.6,10,-5,13.6,0,13.6);
+        c.bezierCurveTo(5.6,13.6,10.6,9.4,10.2,1.6);
+        c.bezierCurveTo(9.8,-6,7,-11.4,1,-11.4);
+        c.bezierCurveTo(-5.4,-11.4,-9,-4,-9.6,3);
+        c.closePath();
+      } else {                                      /* 동글 */
+        c.arc(0,1,12,0,Math.PI*2);
+      }
+    }
+    function typeTail(c, sp, T, wag){
+      const t1 = sp.t[0], t2 = sp.t[1] || null;
+      if(t1 === 'fire'){
+        c.fillStyle = 'rgba(255,150,60,.95)';
+        c.beginPath(); c.moveTo(-8,4);
+        c.quadraticCurveTo(-16,6+wag*2,-15,-1+wag*2);
+        c.quadraticCurveTo(-12,3,-8,1); c.closePath(); c.fill();
+        c.fillStyle = 'rgba(255,225,120,.95)';
+        c.beginPath(); c.moveTo(-9,3);
+        c.quadraticCurveTo(-13.6,3.6+wag,-13,-0.6+wag);
+        c.quadraticCurveTo(-11,2,-9,1); c.closePath(); c.fill();
+      } else if(t1 === 'water'){
+        c.fillStyle = 'rgba(120,190,240,.9)';
+        c.beginPath(); c.moveTo(-9,2); c.quadraticCurveTo(-17,-4+wag*2,-20,2+wag*2);
+        c.quadraticCurveTo(-17,7+wag*2,-9,6); c.closePath(); c.fill();
+      } else if(t1 === 'grass'){
+        c.strokeStyle = T.d; c.lineWidth = 1.6;
+        c.beginPath(); c.moveTo(1,-11); c.quadraticCurveTo(0,-14,-1,-15.6); c.stroke();
+        c.fillStyle = T.d;
+        c.save(); c.translate(-3,-18.4); c.rotate(-0.5);
+        c.beginPath(); c.ellipse(0,0,5.6,3.0,0,0,Math.PI*2); c.fill(); c.restore();
+      } else if(t1 === 'electric'){
+        c.strokeStyle = T.d; c.lineWidth = 2.4;
+        c.beginPath(); c.moveTo(-8,3); c.lineTo(-13,1); c.lineTo(-10.4,-1);
+        c.lineTo(-15,-3.4); c.lineTo(-12,-4.6); c.lineTo(-15.6,-8); c.stroke();
+      } else if(t1 === 'ice'){
+        c.fillStyle = 'rgba(200,244,255,.95)';
+        [-7,-2.4,2.4].forEach(function(x,i){
+          c.beginPath(); c.moveTo(x,-9.4); c.lineTo(x+1.6,-15.4-i*1.2); c.lineTo(x+3.4,-9.4); c.closePath(); c.fill();
+        });
+      } else if(t1 === 'fighting'){
+        c.fillStyle = T.d;
+        c.beginPath(); c.ellipse(9.4,3.4,3.6,3.0,0.4,0,Math.PI*2); c.fill();
+        c.beginPath(); c.ellipse(-9.4,4.4,3.2,2.6,-0.4,0,Math.PI*2); c.fill();
+      } else if(t1 === 'poison'){
+        c.fillStyle = 'rgba(200,140,230,.55)';
+        [[-11,-4,2.6],[8,-6,2.0],[-7,8,1.8],[10,6,1.5]].forEach(function(p){
+          c.beginPath(); c.arc(p[0],p[1],p[2],0,Math.PI*2); c.fill();
+        });
+      } else if(t1 === 'ground'){
+        c.fillStyle = T.d;
+        c.beginPath(); c.moveTo(-9,-6);
+        c.quadraticCurveTo(-3,-12,3,-7.4); c.quadraticCurveTo(-2,-4.4,-9,-6); c.closePath(); c.fill();
+      } else if(t1 === 'flying'){
+        c.fillStyle = 'rgba(255,255,255,.8)';
+        c.beginPath(); c.moveTo(-4,-5); c.quadraticCurveTo(-12,-13,-17,-11);
+        c.quadraticCurveTo(-11,-6,-5,-3); c.closePath(); c.fill();
+        c.beginPath(); c.moveTo(-4,6); c.quadraticCurveTo(-12,13,-16,11.6);
+        c.quadraticCurveTo(-10,7,-4,4); c.closePath(); c.fill();
+        c.strokeStyle = T.d; c.lineWidth = 0.7; c.stroke();
+      } else if(t1 === 'psychic'){
+        c.save(); c.shadowColor = T.c; c.shadowBlur = 6;
+        c.fillStyle = '#fff6ff';
+        c.beginPath(); c.moveTo(1,-14); c.lineTo(3.6,-11.4); c.lineTo(1,-8.8); c.lineTo(-1.6,-11.4); c.closePath(); c.fill();
+        c.restore();
+      } else if(t1 === 'bug'){
+        c.strokeStyle = T.d; c.lineWidth = 1.2;
+        c.beginPath(); c.moveTo(-2,-10); c.quadraticCurveTo(-5,-16,-8,-15); c.stroke();
+        c.beginPath(); c.moveTo(2,-10); c.quadraticCurveTo(5,-16,8,-15); c.stroke();
+        c.fillStyle = T.d;
+        c.beginPath(); c.arc(-8.4,-15,1.3,0,Math.PI*2); c.fill();
+        c.beginPath(); c.arc(8.4,-15,1.3,0,Math.PI*2); c.fill();
+      } else if(t1 === 'rock'){
+        c.fillStyle = T.d;
+        [[-9,6,3.2],[8,7,2.6],[2,-11,2.4]].forEach(function(p){
+          c.beginPath(); c.arc(p[0],p[1],p[2],0,Math.PI*2); c.fill();
+        });
+      } else if(t1 === 'ghost'){
+        c.fillStyle = 'rgba(160,150,200,.45)';
+        c.beginPath(); c.moveTo(-8,6);
+        c.quadraticCurveTo(-16,10+wag*2,-13,15+wag*2);
+        c.quadraticCurveTo(-9,12,-6,10); c.closePath(); c.fill();
+        c.beginPath(); c.moveTo(6,7);
+        c.quadraticCurveTo(14,11+wag*2,11,15.4+wag*2);
+        c.quadraticCurveTo(8,12,4,10.4); c.closePath(); c.fill();
+      } else if(t1 === 'dragon'){
+        c.fillStyle = T.d;
+        c.beginPath(); c.moveTo(-6,-9); c.lineTo(-9,-16); c.lineTo(-2.4,-10.4); c.closePath(); c.fill();
+        c.beginPath(); c.moveTo(3,-10); c.lineTo(3.4,-17); c.lineTo(7,-10); c.closePath(); c.fill();
+      } else if(t1 === 'dark'){
+        c.fillStyle = T.d;
+        c.beginPath(); c.moveTo(-8,-8); c.lineTo(-13,-15); c.lineTo(-4,-10.6); c.closePath(); c.fill();
+        c.beginPath(); c.moveTo(5,-9.4); c.lineTo(10,-15.4); c.lineTo(9.6,-8); c.closePath(); c.fill();
+      } else if(t1 === 'steel'){
+        c.fillStyle = 'rgba(230,238,248,.95)';
+        c.beginPath(); c.ellipse(0,0,10.4,10.8,0,0,Math.PI*2); c.fill();
+        c.strokeStyle = T.d; c.lineWidth = 0.8; c.stroke();
+        c.fillStyle = T.d;
+        [[-7,-6],[7,-6],[-7,6],[7,6]].forEach(function(p){
+          c.beginPath(); c.arc(p[0],p[1],0.9,0,Math.PI*2); c.fill();
+        });
+      } else if(t1 === 'fairy'){
+        c.fillStyle = 'rgba(255,255,255,.85)';
+        c.beginPath(); c.moveTo(-5,-5); c.quadraticCurveTo(-14,-12,-16,-8);
+        c.quadraticCurveTo(-10,-5,-5,-2); c.closePath(); c.fill();
+        c.beginPath(); c.moveTo(-5,4); c.quadraticCurveTo(-13,10,-14,7);
+        c.quadraticCurveTo(-9,4,-5,2); c.closePath(); c.fill();
+      } else {
+        /* 노말: 동그란 귀 */
+        c.fillStyle = T.d;
+        c.beginPath(); c.ellipse(-6,-9.6,3.2,4.6,-0.4,0,Math.PI*2); c.fill();
+        c.beginPath(); c.ellipse(5,-9.6,3.2,4.6,0.4,0,Math.PI*2); c.fill();
+      }
+      if(t2 && (t1 === 'normal' || t1 === 'water' || t1 === 'fire')){
+        /* 두 번째 속성은 배 색으로 살짝 */
+        c.fillStyle = (MON_TYPES[t2] || T).c;
+        c.globalAlpha = 0.55;
+        c.beginPath(); c.ellipse(0,7,7,3.4,0,0,Math.PI*2); c.fill();
+        c.globalAlpha = 1;
+      }
+    }
+    /* 머리 장식·무늬 (도감 번호로 종마다 조금씩 다르게) */
+    function typeHead(c, sp, T, wag){
+      const v = sp.dex % 5, w = sp.dex % 3;
+      c.fillStyle = T.d;
+      if(v === 1){                                   /* 뿔 */
+        c.beginPath(); c.moveTo(-3,-10.4); c.lineTo(-4.6,-15.6); c.lineTo(-0.6,-11.4); c.closePath(); c.fill();
+      } else if(v === 2){                            /* 둥근 귀 2개 */
+        c.beginPath(); c.ellipse(-6,-9.8,2.8,3.6,-0.35,0,Math.PI*2); c.fill();
+        c.beginPath(); c.ellipse(6,-9.8,2.8,3.6,0.35,0,Math.PI*2); c.fill();
+      } else if(v === 3){                            /* 더듬이 술 */
+        c.strokeStyle = T.d; c.lineWidth = 1.3;
+        c.beginPath(); c.moveTo(-2,-10.6); c.quadraticCurveTo(-4,-14.6+wag*0.5,-1,-15.6); c.stroke();
+        c.beginPath(); c.moveTo(2,-10.6); c.quadraticCurveTo(4.4,-14.6-wag*0.5,1.4,-15.8); c.stroke();
+        c.fillStyle = T.d;
+        c.beginPath(); c.arc(-1,-15.8,1.2,0,Math.PI*2); c.fill();
+        c.beginPath(); c.arc(1.4,-16,1.2,0,Math.PI*2); c.fill();
+      } else if(v === 4){                            /* 지느러미 볏 */
+        c.beginPath(); c.moveTo(-5,-9.6); c.quadraticCurveTo(0,-15.4,5,-9.6);
+        c.quadraticCurveTo(0,-7.6,-5,-9.6); c.closePath(); c.fill();
+      }
+      if(w === 1){                                   /* 배 점무늬 */
+        c.fillStyle = 'rgba(255,255,255,.75)';
+        c.beginPath(); c.arc(-4,8.4,1.4,0,Math.PI*2); c.fill();
+        c.beginPath(); c.arc(2.4,9.2,1.1,0,Math.PI*2); c.fill();
+      } else if(w === 2){                            /* 등 줄무늬 */
+        c.strokeStyle = 'rgba(255,255,255,.5)'; c.lineWidth = 1.2;
+        c.beginPath(); c.moveTo(-8,2); c.quadraticCurveTo(0,-1,8,2); c.stroke();
+      }
+    }
+    /* 포켓몬 한 마리 (폴백) — 44단위 좌표계 */
+    function drawMonFallback(c, sp, phase){
+      const T = MON_TYPES[sp.t[0]] || MON_TYPES.normal;
+      const wag = Math.sin(phase);
+      c.lineJoin = 'round';
+      c.lineCap = 'round';
+      typeTail(c, sp, T, wag);
+      /* 몸통 */
+      const g = c.createLinearGradient(0,-13,0,14);
+      g.addColorStop(0, T.c);
+      g.addColorStop(1, T.d);
+      c.fillStyle = g;
+      monFallbackBody(c, sp);
+      c.fill();
+      c.strokeStyle = T.d;
+      c.lineWidth = 0.9;
+      c.stroke();
+      /* 배 */
+      c.fillStyle = 'rgba(255,255,255,.62)';
+      c.beginPath(); c.ellipse(0,7,6.4,3.6,0,0,Math.PI*2); c.fill();
+      /* 얼굴 */
+      monEye(c, -4.2, -1.8, 2.5, 2.9, '#25313f');
+      monEye(c, 4.2, -1.8, 2.5, 2.9, '#25313f');
+      c.strokeStyle = 'rgba(40,60,80,.75)';
+      c.lineWidth = 1.1;
+      c.beginPath(); c.moveTo(-1.6,3.2); c.quadraticCurveTo(0,4.9,1.6,3.2); c.stroke();
+      monBlush(c, -7.6, 1.4, 1.9, 1.2, .3);
+      monBlush(c, 7.6, 1.4, 1.9, 1.2, .3);
+      typeHead(c, sp, T, wag);
+    }
+
+    /* 손으로 그린 종 (나머지는 속성별 폴백으로 그린다) */
+    const HAND_ART = {183:1, 194:1, 158:1, 152:1, 172:1, 195:1, 230:1, 226:1, 243:1, 244:1, 251:1, 245:1, 249:1, 250:1};
+
+    /* 포켓몬 한 마리 그리기 (손그림 → 없으면 속성 폴백) */
+  /* =====================================================================
+     손으로 그린 포켓몬 그림 (Canvas 벡터 패스·그라디언트)
+     일반 물고기와 같은 44단위 좌표계에서 그린다. (head = +x 방향)
+     여기 없는 종은 속성별 폴백 그림(drawMonFallback)으로 그린다.
+     ===================================================================== */
+  function monEll(c,x,y,rx,ry,rot){ c.beginPath(); c.ellipse(x,y,rx,ry,rot||0,0,Math.PI*2); }
+  /* 귀여운 눈: 흰자 + 눈동자 + 반짝임 */
+  function monEye(c,x,y,rx,ry,pupil,glint){
+    c.fillStyle = '#ffffff';
+    monEll(c,x,y,rx,ry); c.fill();
+    c.fillStyle = pupil || '#1e2430';
+    monEll(c, x + rx*0.12, y + ry*0.08, rx*0.56, ry*0.64); c.fill();
+    c.fillStyle = 'rgba(255,255,255,.95)';
+    c.beginPath(); c.arc(x - rx*0.24, y - ry*0.30, Math.max(0.34, (glint||1)*rx*0.24), 0, Math.PI*2); c.fill();
+  }
+  function monBlush(c,x,y,rx,ry,a){
+    c.fillStyle = 'rgba(255,150,175,' + (a||0.42) + ')';
+    monEll(c,x,y,rx,ry,0); c.fill();
+  }
+
+  /* 포켓몬 한 마리 그리기 (drawFish 안에서 호출) */
+  function drawMonBody(c, sp, phase){
+    if(!HAND_ART[sp.dex]){ drawMonFallback(c, sp, phase); return; }
+    const wag = Math.sin(phase);
+    const wag2 = Math.sin(phase - 0.9);
+    c.lineJoin = 'round';
+    c.lineCap = 'round';
+
+    if(sp.dex === 183){
+      /* 꼬리 + 끝 동그라미 */
+      c.strokeStyle = '#2f7bb5'; c.lineWidth = 1.7;
+      c.beginPath(); c.moveTo(-10,3); c.quadraticCurveTo(-18,5+wag*1.6,-21,1+wag*2.2); c.stroke();
+      c.fillStyle = '#3d8fc9'; c.beginPath(); c.arc(-23,-0.5+wag*2.2,3.2,0,Math.PI*2); c.fill();
+      c.fillStyle = 'rgba(255,255,255,.6)'; c.beginPath(); c.arc(-23.9,-1.7+wag*2.2,1.2,0,Math.PI*2); c.fill();
+      /* 귀 2개 */
+      c.save(); c.translate(-3,-11); c.rotate(-0.42);
+      c.fillStyle = '#3f93d0'; monEll(c,0,0,4.4,6.2); c.fill();
+      c.fillStyle = '#dff2ff'; monEll(c,0,0.8,2.4,4); c.fill();
+      c.restore();
+      c.save(); c.translate(4.4,-12); c.rotate(0.18);
+      c.fillStyle = '#4aa2e2'; monEll(c,0,0,4.6,6.4); c.fill();
+      c.fillStyle = '#eaf7ff'; monEll(c,0,0.8,2.6,4.2); c.fill();
+      c.restore();
+      /* 팔 */
+      c.fillStyle = '#3f93d0';
+      monEll(c,-10.4,4.4,3.2,2.4,-0.35); c.fill();
+      monEll(c,10.4,4.4,3.2,2.4,0.35); c.fill();
+      /* 몸통 */
+      const g = c.createLinearGradient(0,-13,0,14);
+      g.addColorStop(0,'#d3f1ff'); g.addColorStop(.45,'#5fb2e6'); g.addColorStop(1,'#2f7fbf');
+      c.fillStyle = g; c.beginPath(); c.arc(0,1,12.6,0,Math.PI*2); c.fill();
+      c.strokeStyle = '#2a6ca6'; c.lineWidth = 0.9; c.stroke();
+      /* 배 */
+      c.fillStyle = '#fffdf4'; monEll(c,0,6.4,8.6,6.2); c.fill();
+      /* 얼굴 */
+      monEye(c,-4.2,-1.4,2.5,2.9,'#25313f');
+      monEye(c,4.2,-1.4,2.5,2.9,'#25313f');
+      c.strokeStyle = '#2a6ca6'; c.lineWidth = 1.1;
+      c.beginPath(); c.moveTo(-1.6,3.2); c.quadraticCurveTo(0,4.9,1.6,3.2); c.stroke();
+      monBlush(c,-8.2,1.8,2,1.3,.35);
+      monBlush(c,8.2,1.8,2,1.3,.35);
+
+    } else if(sp.dex === 194){
+      /* 꼬리 지느러미 */
+      c.fillStyle = '#8fd0e6';
+      c.beginPath(); c.moveTo(-10,4); c.quadraticCurveTo(-18,2+wag*1.5,-17,7+wag*1.5);
+      c.quadraticCurveTo(-13,8.4,-9,6.6); c.closePath(); c.fill();
+      c.strokeStyle = '#5aa9c9'; c.lineWidth = 0.7; c.stroke();
+      /* 아가미 (보라 깃) */
+      c.strokeStyle = '#a97bd8'; c.lineWidth = 2.1;
+      [[-6.6,-6],[-7.6,-9.4],[-5.4,-12.2]].forEach(function(p,i){
+        c.beginPath(); c.moveTo(p[0],p[1]);
+        c.quadraticCurveTo(p[0]-4.4,p[1]-2.2+wag*0.5,p[0]-7,p[1]-1); c.stroke();
+      });
+      [[6.4,-6.4],[7.6,-9.6],[5.6,-12.4]].forEach(function(p,i){
+        c.beginPath(); c.moveTo(p[0],p[1]);
+        c.quadraticCurveTo(p[0]+4.4,p[1]-2.2+wag*0.5,p[0]+7,p[1]-1); c.stroke();
+      });
+      /* 몸통 (둥근 한 덩어리) */
+      const g = c.createLinearGradient(0,-12,0,15);
+      g.addColorStop(0,'#c8eefb'); g.addColorStop(.55,'#7fc7e0'); g.addColorStop(1,'#4a9fc4');
+      c.fillStyle = g;
+      c.beginPath();
+      c.moveTo(-11.5,1);
+      c.bezierCurveTo(-12.6,9.4,-7,14.6,1,14.6);
+      c.bezierCurveTo(9.6,14.6,13.6,9,13.6,2);
+      c.bezierCurveTo(13.6,-4.6,10,-11.6,2.5,-11.6);
+      c.bezierCurveTo(-5,-11.6,-11,-6,-11.5,1);
+      c.closePath(); c.fill();
+      c.strokeStyle = '#4a9fc4'; c.lineWidth = 0.85; c.stroke();
+      /* 배 */
+      c.fillStyle = '#e9f8ff'; monEll(c,1,9,7.4,3.6); c.fill();
+      /* 눈 (동그란 검은 눈) */
+      c.fillStyle = '#1d2a36';
+      c.beginPath(); c.arc(-1.4,-3.4,1.75,0,Math.PI*2); c.fill();
+      c.beginPath(); c.arc(7,-3.4,1.75,0,Math.PI*2); c.fill();
+      c.fillStyle = '#ffffff';
+      c.beginPath(); c.arc(-2,-4.1,0.62,0,Math.PI*2); c.fill();
+      c.beginPath(); c.arc(6.4,-4.1,0.62,0,Math.PI*2); c.fill();
+      /* 웃는 입 */
+      c.strokeStyle = '#3f7f9c'; c.lineWidth = 1.15;
+      c.beginPath(); c.moveTo(-4,1.4); c.quadraticCurveTo(1.6,6,7.4,1.6); c.stroke();
+
+    } else if(sp.dex === 158){
+      /* 꼬리 */
+      c.fillStyle = '#3f8fd0';
+      c.beginPath(); c.moveTo(-12,3); c.quadraticCurveTo(-20,1+wag*2,-24,-4+wag*2.5);
+      c.quadraticCurveTo(-19,-1,-12,-1); c.closePath(); c.fill();
+      c.strokeStyle = '#2a6ca6'; c.lineWidth = 0.7; c.stroke();
+      /* 등 가시 (빨강) */
+      c.fillStyle = '#e2474a';
+      [[-11,-4],[-6,-6.4],[-1,-7.4]].forEach(function(p,i){
+        c.beginPath(); c.moveTo(p[0]-2.6,p[1]+1.5); c.lineTo(p[0],p[1]-3.4-i*0.5);
+        c.lineTo(p[0]+2.6,p[1]+1.5); c.closePath(); c.fill();
+      });
+      /* 몸통 */
+      const g = c.createLinearGradient(0,-10,0,11);
+      g.addColorStop(0,'#9ae0f8'); g.addColorStop(.5,'#4a9ada'); g.addColorStop(1,'#2f74b4');
+      c.fillStyle = g;
+      c.beginPath(); c.ellipse(0,0,15,8.6,0,0,Math.PI*2); c.fill();
+      c.strokeStyle = '#2a6ca6'; c.lineWidth = 0.85; c.stroke();
+      /* 배 */
+      c.fillStyle = '#ffefc4'; monEll(c,0,4.6,10.6,3.9); c.fill();
+      /* 다리 */
+      c.fillStyle = '#3f8fd0';
+      monEll(c,-7.4,8.4,3.6,2.6,-0.1); c.fill();
+      monEll(c,3.4,8.6,3.6,2.6,0.1); c.fill();
+      c.strokeStyle = '#2a6ca6'; c.lineWidth = 0.7;
+      monEll(c,-7.4,8.4,3.6,2.6,-0.1); c.stroke();
+      monEll(c,3.4,8.6,3.6,2.6,0.1); c.stroke();
+      c.fillStyle = '#ffefc4';
+      monEll(c,-7.4,10.2,2.2,0.8); c.fill();
+      monEll(c,3.4,10.4,2.2,0.8); c.fill();
+      /* 팔 */
+      c.fillStyle = '#4a9ada'; monEll(c,7.2,6.2,3.4,2.2,0.35); c.fill();
+      /* 머리 */
+      const hg = c.createLinearGradient(6,-11,15,6);
+      hg.addColorStop(0,'#aeeafc'); hg.addColorStop(1,'#3f8fd0');
+      c.fillStyle = hg; c.beginPath(); c.ellipse(11,-2.5,8.4,7,0,0,Math.PI*2); c.fill();
+      c.strokeStyle = '#2a6ca6'; c.lineWidth = 0.85; c.stroke();
+      /* 주둥이 (위턱) */
+      c.fillStyle = '#5cb0e8';
+      c.beginPath(); c.moveTo(15,-6.6); c.quadraticCurveTo(24,-4.8,23.6,-1.2);
+      c.quadraticCurveTo(20,-0.6,15,-1.2); c.closePath(); c.fill();
+      c.strokeStyle = '#2a6ca6'; c.lineWidth = 0.7; c.stroke();
+      /* 아래턱 + 이빨 */
+      c.fillStyle = '#fff6dc';
+      c.beginPath(); c.moveTo(15,0.4); c.lineTo(23.4,-0.4);
+      c.quadraticCurveTo(22.6,3.4,19,3.6); c.quadraticCurveTo(16,3.2,15,0.4); c.closePath(); c.fill();
+      c.strokeStyle = '#c98a3a'; c.lineWidth = 0.6; c.stroke();
+      c.fillStyle = '#fffdf2';
+      for(let i=0;i<3;i++){
+        const x = 16.8 + i*2.3;
+        c.beginPath(); c.moveTo(x,0.1); c.lineTo(x+0.9,1.9); c.lineTo(x+1.9,0.1); c.closePath(); c.fill();
+      }
+      /* 눈 */
+      monEye(c,9.6,-5.6,2.9,3.3,'#1c2630');
+      c.strokeStyle = '#1f6fa8'; c.lineWidth = 1.2;
+      c.beginPath(); c.moveTo(6.4,-9.4); c.quadraticCurveTo(9.8,-10.8,12.8,-8.8); c.stroke();
+      /* 콧구멍 */
+      c.fillStyle = '#2a6ca6'; c.beginPath(); c.arc(21.6,-3.4,0.52,0,Math.PI*2); c.fill();
+
+    } else if(sp.dex === 152){
+      /* 잎 */
+      c.strokeStyle = '#4e9a3c'; c.lineWidth = 1.8;
+      c.beginPath(); c.moveTo(1,-12); c.quadraticCurveTo(0,-15,-1.4,-16.6); c.stroke();
+      c.save(); c.translate(-3.4,-19.2); c.rotate(-0.5);
+      c.fillStyle = '#6fbf4a'; monEll(c,0,0,6.2,3.4); c.fill();
+      c.strokeStyle = '#3f7f2c'; c.lineWidth = 0.7; c.stroke();
+      c.strokeStyle = '#a8dd7c'; c.lineWidth = 0.9;
+      c.beginPath(); c.moveTo(-5.4,0.2); c.quadraticCurveTo(0,-0.7,5.6,0.1); c.stroke();
+      c.restore();
+      /* 다리 */
+      c.fillStyle = '#8fc94e';
+      monEll(c,-5,12.6,3.4,2.6); c.fill();
+      monEll(c,5,12.6,3.4,2.6); c.fill();
+      c.fillStyle = '#fffdf4';
+      monEll(c,-5,14.4,1.1,0.7); c.fill(); monEll(c,5,14.4,1.1,0.7); c.fill();
+      /* 몸통 (둥근 배) */
+      const g = c.createLinearGradient(0,-14,0,14);
+      g.addColorStop(0,'#eafab8'); g.addColorStop(.6,'#b4dd66'); g.addColorStop(1,'#86c144');
+      c.fillStyle = g;
+      c.beginPath(); c.moveTo(-10.5,2);
+      c.bezierCurveTo(-11.6,10,-6,13.4,0,13.4);
+      c.bezierCurveTo(6.6,13.4,11.6,10,11.2,1.6);
+      c.bezierCurveTo(10.6,-6,8,-12,2,-12);
+      c.bezierCurveTo(-5,-12,-9.8,-5,-10.5,2);
+      c.closePath(); c.fill();
+      c.strokeStyle = '#6fae3c'; c.lineWidth = 0.9; c.stroke();
+      /* 목의 새싹 */
+      c.fillStyle = '#8ed35c';
+      [[-6.6,3.8],[0,5],[6.6,3.8]].forEach(function(p){
+        c.beginPath(); c.arc(p[0],p[1],1.7,0,Math.PI*2); c.fill();
+      });
+      c.strokeStyle = '#5c9a30'; c.lineWidth = 0.6;
+      [[-6.6,3.8],[0,5],[6.6,3.8]].forEach(function(p){
+        c.beginPath(); c.arc(p[0],p[1],1.7,0,Math.PI*2); c.stroke();
+      });
+      /* 얼굴 */
+      monEye(c,-2.6,-5,2.8,3.4,'#7a3a2a');
+      monEye(c,7.4,-5,2.8,3.4,'#7a3a2a');
+      c.strokeStyle = '#5c8f2f'; c.lineWidth = 1;
+      c.beginPath(); c.moveTo(1.4,-0.6); c.quadraticCurveTo(3.4,1.3,5.4,-0.4); c.stroke();
+      monBlush(c,-6.6,-0.4,2.4,1.5,.32);
+
+    } else if(sp.dex === 172){
+      /* 번개 꼬리 (지그재그) */
+      c.strokeStyle = '#3a3a46'; c.lineWidth = 2.7; c.lineJoin = 'round'; c.lineCap = 'round';
+      c.beginPath();
+      c.moveTo(-6.6,3.8);
+      c.lineTo(-10.8,4.6);
+      c.lineTo(-8.4,0.4);
+      c.lineTo(-12.8,1.0);
+      c.lineTo(-10.2,-3.4);
+      c.lineTo(-14.4,-2.6);
+      c.lineTo(-11.4,-7.4);
+      c.stroke();
+      c.strokeStyle = 'rgba(255,255,255,.35)'; c.lineWidth = 0.9;
+      c.beginPath();
+      c.moveTo(-7.4,3.4); c.lineTo(-10.4,4); c.lineTo(-8.2,0.2); c.lineTo(-12,0.6);
+      c.lineTo(-9.6,-3.6); c.lineTo(-13.2,-3); c.stroke();
+      /* 귀 (뒤) */
+      c.save(); c.translate(-3.4,-9.6); c.rotate(-0.5);
+      c.fillStyle = '#ffe066'; monEll(c,0,0,4,8); c.fill();
+      c.strokeStyle = '#d9a800'; c.lineWidth = 0.8; c.stroke();
+      c.fillStyle = '#3a3a46'; monEll(c,0,-5.6,3.4,2.6); c.fill();
+      c.restore();
+      /* 귀 (앞) */
+      c.save(); c.translate(5.2,-10); c.rotate(0.22);
+      c.fillStyle = '#ffe877'; monEll(c,0,0,4.2,8.2); c.fill();
+      c.strokeStyle = '#d9a800'; c.lineWidth = 0.8; c.stroke();
+      c.fillStyle = '#3a3a46'; monEll(c,0,-5.8,3.6,2.7); c.fill();
+      c.restore();
+      /* 몸통 */
+      const g = c.createLinearGradient(0,-6,0,13);
+      g.addColorStop(0,'#fff3a8'); g.addColorStop(.6,'#ffdf5c'); g.addColorStop(1,'#f2bf1e');
+      c.fillStyle = g; monEll(c,0,4,8.6,7.6); c.fill();
+      c.strokeStyle = '#d9a800'; c.lineWidth = 0.85; c.stroke();
+      /* 머리 */
+      c.fillStyle = g; c.beginPath(); c.arc(2,-3,9.2,0,Math.PI*2); c.fill(); c.stroke();
+      /* 볼 */
+      monBlush(c,-4.6,0.4,2.8,2.3,.75);
+      monBlush(c,7.8,0.4,2.8,2.3,.75);
+      /* 눈 */
+      monEye(c,-2,-4.2,2.5,2.9,'#2a2a34');
+      monEye(c,5.6,-4.2,2.5,2.9,'#2a2a34');
+      /* 코·입 */
+      c.fillStyle = '#8a6a00'; c.beginPath(); c.arc(1.8,-1.4,0.55,0,Math.PI*2); c.fill();
+      c.strokeStyle = '#8a6a00'; c.lineWidth = 0.9;
+      c.beginPath(); c.moveTo(0.4,0.9); c.quadraticCurveTo(1.8,2.3,3.2,0.9); c.stroke();
+      /* 발 */
+      c.fillStyle = '#f2bf1e';
+      monEll(c,-2.6,11,3,2.2); c.fill();
+      monEll(c,3.4,11,3,2.2); c.fill();
+
+    } else if(sp.dex === 195){
+      /* 꼬리 */
+      c.fillStyle = '#6f97b8';
+      c.beginPath(); c.moveTo(-10,1); c.quadraticCurveTo(-19,-2,-24,3+wag*1.6);
+      c.quadraticCurveTo(-19,9,-10,7); c.closePath(); c.fill();
+      c.strokeStyle = '#4f7a9e'; c.lineWidth = 0.8; c.stroke();
+      /* 등지느러미 */
+      c.fillStyle = '#8f7cff';
+      c.beginPath(); c.moveTo(-8.6,-6.6);
+      c.quadraticCurveTo(-4.4,-13,1.6,-9.6);
+      c.quadraticCurveTo(5.6,-12,9,-6.2);
+      c.quadraticCurveTo(0,-3.6,-8.6,-6.6);
+      c.closePath(); c.fill();
+      c.strokeStyle = '#6a56d0'; c.lineWidth = 0.7; c.stroke();
+      /* 몸통 */
+      const g = c.createLinearGradient(0,-11,0,14);
+      g.addColorStop(0,'#dbecf9'); g.addColorStop(.5,'#93b8d6'); g.addColorStop(1,'#6389ab');
+      c.fillStyle = g; c.beginPath(); c.ellipse(0,3,15,11,0,0,Math.PI*2); c.fill();
+      c.strokeStyle = '#4f7a9e'; c.lineWidth = 0.9; c.stroke();
+      /* 배 */
+      c.fillStyle = '#e6f1fa'; monEll(c,0,8,10,4.2); c.fill();
+      /* 팔 */
+      c.fillStyle = '#7fa8c9';
+      monEll(c,11,6,3.2,2.4,0.3); c.fill();
+      monEll(c,-11,6.4,3,2.2,-0.3); c.fill();
+      /* 눈 (작은 점) */
+      c.fillStyle = '#1e2a36';
+      c.beginPath(); c.arc(-2,-3.6,1.7,0,Math.PI*2); c.fill();
+      c.beginPath(); c.arc(7,-3.6,1.7,0,Math.PI*2); c.fill();
+      c.fillStyle = '#ffffff';
+      c.beginPath(); c.arc(-2.6,-4.2,0.6,0,Math.PI*2); c.fill();
+      c.beginPath(); c.arc(6.4,-4.2,0.6,0,Math.PI*2); c.fill();
+      /* 입 */
+      c.strokeStyle = '#3f637f'; c.lineWidth = 1.15;
+      c.beginPath(); c.moveTo(-5,2); c.quadraticCurveTo(1.5,6.2,8,2); c.stroke();
+
+    } else if(sp.dex === 230){
+      /* 꼬리 말림 */
+      c.strokeStyle = '#2f66b0'; c.lineWidth = 4.6;
+      c.beginPath(); c.moveTo(-11,11);
+      c.bezierCurveTo(-19,13,-23,5,-16,3.6);
+      c.bezierCurveTo(-12,2.8,-11.6,7.4,-15.6,7.4);
+      c.stroke();
+      /* 등지느러미 (날개) */
+      c.fillStyle = 'rgba(155,227,255,.92)';
+      c.beginPath(); c.moveTo(-1.6,-2);
+      c.quadraticCurveTo(-10,-12,-12.6,-4.2);
+      c.quadraticCurveTo(-8,0.6,-1.6,-2); c.closePath(); c.fill();
+      c.strokeStyle = '#5aa9d8'; c.lineWidth = 0.7; c.stroke();
+      c.strokeStyle = 'rgba(90,169,216,.7)'; c.lineWidth = 0.6;
+      for(let i=0;i<3;i++){
+        c.beginPath(); c.moveTo(-3.4,-2.4+i*0.5); c.lineTo(-10.4,-6.6+i*1.5); c.stroke();
+      }
+      /* 몸통 (S자) */
+      const bg = c.createLinearGradient(-12,-6,10,12);
+      bg.addColorStop(0,'#9fe4ff'); bg.addColorStop(.5,'#3f8fd8'); bg.addColorStop(1,'#2a5f9e');
+      c.strokeStyle = bg; c.lineWidth = 9.4;
+      c.beginPath(); c.moveTo(-11,10); c.bezierCurveTo(-4,9.4,-1,4.2,0.6,-1.8); c.stroke();
+      c.strokeStyle = 'rgba(220,246,255,.55)'; c.lineWidth = 2.4;
+      c.beginPath(); c.moveTo(-10,7.4); c.bezierCurveTo(-4.6,7,-2.2,3,0,-1.8); c.stroke();
+      /* 가슴지느러미 */
+      c.fillStyle = 'rgba(155,227,255,.88)';
+      c.beginPath(); c.moveTo(-1,4); c.quadraticCurveTo(-7.4,10.4,-2.4,10.6);
+      c.quadraticCurveTo(1.2,8,0.2,4.6); c.closePath(); c.fill();
+      /* 머리 */
+      const hg = c.createLinearGradient(0,-14,10,4);
+      hg.addColorStop(0,'#c9edff'); hg.addColorStop(1,'#3f8fd8');
+      c.fillStyle = hg; c.beginPath(); c.ellipse(5,-5.4,8.6,6.4,0,0,Math.PI*2); c.fill();
+      c.strokeStyle = '#2a6ca6'; c.lineWidth = 0.85; c.stroke();
+      /* 관 모양 주둥이 */
+      c.fillStyle = '#5cb0e8';
+      c.beginPath(); c.moveTo(10,-8.4); c.quadraticCurveTo(19.6,-7.6,20.6,-4.8);
+      c.quadraticCurveTo(20.6,-2.2,10,-2.4); c.closePath(); c.fill();
+      c.strokeStyle = '#2a6ca6'; c.lineWidth = 0.7; c.stroke();
+      c.fillStyle = 'rgba(255,250,226,.85)';
+      c.beginPath(); c.moveTo(13,-4.6); c.quadraticCurveTo(18,-3.6,20.2,-4.2);
+      c.quadraticCurveTo(18,-2.7,13,-2.8); c.closePath(); c.fill();
+      /* 머리 볏 */
+      c.fillStyle = '#9be3ff';
+      c.beginPath(); c.moveTo(2.6,-11); c.quadraticCurveTo(0.2,-18,6.4,-13.4);
+      c.quadraticCurveTo(6.4,-10,2.6,-11); c.closePath(); c.fill();
+      c.beginPath(); c.moveTo(7.6,-11.6); c.quadraticCurveTo(7.2,-17.4,11.8,-13.2);
+      c.quadraticCurveTo(10.6,-10.4,7.6,-11.6); c.closePath(); c.fill();
+      c.strokeStyle = '#5aa9d8'; c.lineWidth = 0.6; c.stroke();
+      /* 눈 */
+      monEye(c,7,-6.6,2.4,2.7,'#1c2b3a');
+      c.strokeStyle = '#1f6fa8'; c.lineWidth = 1.1;
+      c.beginPath(); c.moveTo(4.4,-9.8); c.lineTo(9,-9.3); c.stroke();
+      /* 비늘 */
+      c.strokeStyle = 'rgba(220,246,255,.5)'; c.lineWidth = 0.55;
+      for(let i=0;i<3;i++){
+        c.beginPath(); c.arc(-6.6+i*0.7,6.6-i*2.6,1.8,Math.PI*0.15,Math.PI*0.85); c.stroke();
+      }
+
+    } else if(sp.dex === 226){
+      /* 꼬리 */
+      c.strokeStyle = '#3f5c9e'; c.lineWidth = 2;
+      c.beginPath(); c.moveTo(-12,0); c.quadraticCurveTo(-20,1+wag*2,-26,3.4+wag*2.4); c.stroke();
+      /* 날개 (위·아래 한 덩어리) */
+      const wg = c.createLinearGradient(0,-18,0,18);
+      wg.addColorStop(0,'#a7c6f0'); wg.addColorStop(.42,'#4f74b8'); wg.addColorStop(1,'#cfe6ff');
+      c.fillStyle = wg;
+      c.beginPath();
+      c.moveTo(14,-1);
+      c.quadraticCurveTo(4,-12,-6,-15);
+      c.quadraticCurveTo(-16,-17.4,-22,-13);
+      c.quadraticCurveTo(-13.6,-7,-11,-1);
+      c.quadraticCurveTo(-13.6,0.4,-11,1.6);
+      c.quadraticCurveTo(-13.6,7,-22,13);
+      c.quadraticCurveTo(-16,17.4,-6,15);
+      c.quadraticCurveTo(4,12,14,1);
+      c.closePath(); c.fill();
+      c.strokeStyle = '#3a5a96'; c.lineWidth = 0.9; c.stroke();
+      /* 날개 결 */
+      c.strokeStyle = 'rgba(255,255,255,.45)'; c.lineWidth = 0.7;
+      for(let i=0;i<3;i++){
+        c.beginPath(); c.moveTo(9,-2-i*1.5); c.quadraticCurveTo(-4,-6-i*3.2,-15.6,-10.6+i*0.6); c.stroke();
+        c.beginPath(); c.moveTo(9,2+i*1.5); c.quadraticCurveTo(-4,6+i*3.2,-15.6,10.6-i*0.6); c.stroke();
+      }
+      /* 몸통 */
+      const bg = c.createLinearGradient(0,-8,0,8);
+      bg.addColorStop(0,'#3f5c9e'); bg.addColorStop(1,'#7fa2d8');
+      c.fillStyle = bg; c.beginPath(); c.ellipse(2,0,12,6,0,0,Math.PI*2); c.fill();
+      c.strokeStyle = '#2f4a86'; c.lineWidth = 0.7; c.stroke();
+      /* 배 */
+      c.fillStyle = '#eef7ff'; monEll(c,2,2.6,8.6,2.8); c.fill();
+      /* 더듬이 */
+      c.strokeStyle = '#3f5c9e'; c.lineWidth = 2;
+      c.beginPath(); c.moveTo(11.4,-3); c.quadraticCurveTo(16.6,-7.2,18.6,-4.4); c.stroke();
+      c.beginPath(); c.moveTo(11.4,3); c.quadraticCurveTo(16.6,7.2,18.6,4.4); c.stroke();
+      /* 눈 */
+      c.fillStyle = '#101a2c';
+      c.beginPath(); c.arc(9.6,-1.4,1.5,0,Math.PI*2); c.fill();
+      c.beginPath(); c.arc(9.6,2.4,1.5,0,Math.PI*2); c.fill();
+      c.fillStyle = '#ffffff';
+      c.beginPath(); c.arc(9.1,-1.9,0.55,0,Math.PI*2); c.fill();
+      c.beginPath(); c.arc(9.1,1.9,0.55,0,Math.PI*2); c.fill();
+      /* 등 반점 */
+      c.fillStyle = 'rgba(255,255,255,.8)';
+      [[-4,-6.4,1.1],[-9,-8.4,0.9],[-2,6.4,1.0],[-8,8.4,0.8]].forEach(function(p){
+        c.beginPath(); c.arc(p[0],p[1],p[2],0,Math.PI*2); c.fill();
+      });
+
+    } else if(sp.dex === 243){
+      /* 라이코 — 노란 번개 호랑이 */
+      /* 꼬리 (번개 끝) */
+      c.strokeStyle = '#e0a800'; c.lineWidth = 2.2;
+      c.beginPath(); c.moveTo(-14,2); c.quadraticCurveTo(-22,4+wag*2,-25,-2+wag*2); c.stroke();
+      c.fillStyle = '#7a5ad0';
+      c.beginPath(); c.moveTo(-25,-2+wag*2); c.lineTo(-30,-8+wag*2); c.lineTo(-28,-0.6+wag*2);
+      c.lineTo(-32,-2+wag*2); c.closePath(); c.fill();
+      /* 다리 */
+      c.strokeStyle = '#f2c40a'; c.lineWidth = 2.8;
+      [[-10,4],[-5.6,5],[5.4,5],[10,4]].forEach(function(p,i){
+        c.beginPath(); c.moveTo(p[0],p[1]); c.lineTo(p[0]+(i<2?-1:1)*0.8,13.4); c.stroke();
+      });
+      c.fillStyle = '#7a5ad0';
+      [-10.9,-4.8,6.2,10.8].forEach(function(x){ c.beginPath(); c.ellipse(x,13.8,1.8,1.2,0,0,Math.PI*2); c.fill(); });
+      /* 몸통 */
+      const g = c.createLinearGradient(0,-10,0,12);
+      g.addColorStop(0,'#fff6c0'); g.addColorStop(.5,'#ffdf4a'); g.addColorStop(1,'#e8b400');
+      c.fillStyle = g; c.beginPath(); c.ellipse(-1,1,17,7.4,0,0,Math.PI*2); c.fill();
+      c.strokeStyle = '#c99a00'; c.lineWidth = 0.9; c.stroke();
+      /* 검은 줄무늬 */
+      c.strokeStyle = 'rgba(60,44,20,.75)'; c.lineWidth = 1.5;
+      [[-9,-4],[-4,-6],[1,-6.4]].forEach(function(p){
+        c.beginPath(); c.moveTo(p[0],p[1]); c.lineTo(p[0]+1.6,p[1]+5.4); c.stroke();
+      });
+      /* 등 갈기 (보라) */
+      const mg = c.createLinearGradient(-6,-18,6,-6);
+      mg.addColorStop(0,'#c9a6ff'); mg.addColorStop(.6,'#8a5ad8'); mg.addColorStop(1,'#5a2f9e');
+      c.fillStyle = mg;
+      c.beginPath(); c.moveTo(9,-8);
+      c.bezierCurveTo(4,-15,-3,-17.4,-8,-16+wag*0.6);
+      c.bezierCurveTo(-12,-14.6,-12.6,-10,-8.6,-8);
+      c.bezierCurveTo(-4,-6,-1,-8.4,2.4,-6.6);
+      c.bezierCurveTo(5.4,-5.2,7.6,-6,9,-8);
+      c.closePath(); c.fill();
+      c.strokeStyle = '#4a2480'; c.lineWidth = 0.7; c.stroke();
+      /* 목 + 머리 */
+      c.strokeStyle = '#ffdf4a'; c.lineWidth = 6;
+      c.beginPath(); c.moveTo(8.2,-2.4); c.lineTo(11.4,-6.4); c.stroke();
+      const hg = c.createLinearGradient(8,-14,18,-2);
+      hg.addColorStop(0,'#fff9d4'); hg.addColorStop(1,'#f2c40a');
+      c.fillStyle = hg; c.beginPath(); c.ellipse(13.6,-7.4,7,5.8,0,0,Math.PI*2); c.fill();
+      c.strokeStyle = '#c99a00'; c.lineWidth = 0.85; c.stroke();
+      /* 이마 보랏빛 판 */
+      c.fillStyle = 'rgba(138,90,216,.85)';
+      c.beginPath(); c.moveTo(9,-10.4); c.lineTo(12.4,-13.4); c.lineTo(15.6,-10); c.lineTo(12.2,-7.6); c.closePath(); c.fill();
+      /* 주둥이 + 송곳니 */
+      c.fillStyle = '#fff6dc';
+      c.beginPath(); c.moveTo(16.6,-8.6); c.quadraticCurveTo(21.6,-7.4,20.6,-4.4);
+      c.quadraticCurveTo(18,-3.4,16,-4.8); c.closePath(); c.fill();
+      c.fillStyle = '#fffdf2';
+      c.beginPath(); c.moveTo(17.4,-4.6); c.lineTo(18.4,-1.2); c.lineTo(19.4,-4.6); c.closePath(); c.fill();
+      /* 뿔 귀 */
+      c.fillStyle = '#f2c40a';
+      c.beginPath(); c.moveTo(9.4,-12.6); c.lineTo(7,-17.6); c.lineTo(12.4,-13.8); c.closePath(); c.fill();
+      /* 눈 */
+      monEye(c,14.6,-8.6,2.2,2.4,'#c0303c');
+      /* 번개 수염 */
+      c.strokeStyle = '#7a5ad0'; c.lineWidth = 1.2;
+      c.beginPath(); c.moveTo(19.6,-6.6); c.lineTo(24.4,-8.6); c.lineTo(21.4,-6.2); c.stroke();
+
+    } else if(sp.dex === 244){
+      /* 앤테이 — 불꽃 갈기 사자 */
+      c.strokeStyle = '#b06a30'; c.lineWidth = 2.4;
+      c.beginPath(); c.moveTo(-13,3); c.quadraticCurveTo(-22,2+wag*2,-26,7+wag*2.4); c.stroke();
+      c.fillStyle = 'rgba(150,150,160,.85)';
+      c.beginPath(); c.arc(-26.6,8+wag*2.4,3.4,0,Math.PI*2); c.fill();
+      /* 다리 */
+      c.strokeStyle = '#c98a4a'; c.lineWidth = 3;
+      [[-10,4],[-5.4,5.4],[5.4,5.4],[10,4]].forEach(function(p,i){
+        c.beginPath(); c.moveTo(p[0],p[1]); c.lineTo(p[0]+(i<2?-1:1)*0.9,13.6); c.stroke();
+      });
+      /* 연기 갈기 (회색 구름) */
+      const sg = c.createLinearGradient(-10,-20,8,-4);
+      sg.addColorStop(0,'#f2f2f6'); sg.addColorStop(.55,'#c9c9d4'); sg.addColorStop(1,'#9a9aa8');
+      c.fillStyle = sg;
+      [[-4,-14,6.2],[1.6,-16.4,5.4],[-9,-10.6,5.2],[6,-11.4,4.6],[-6,-5.6,4.6]].forEach(function(p){
+        c.beginPath(); c.arc(p[0],p[1],p[2],0,Math.PI*2); c.fill();
+      });
+      /* 몸통 */
+      const g = c.createLinearGradient(0,-9,0,12);
+      g.addColorStop(0,'#e8b06a'); g.addColorStop(.55,'#c1783a'); g.addColorStop(1,'#93542a');
+      c.fillStyle = g; c.beginPath(); c.ellipse(-1,1.4,16.6,7.6,0,0,Math.PI*2); c.fill();
+      c.strokeStyle = '#7d4520'; c.lineWidth = 0.9; c.stroke();
+      /* 목 + 머리 */
+      c.strokeStyle = '#c98a4a'; c.lineWidth = 6;
+      c.beginPath(); c.moveTo(8.6,-2.6); c.lineTo(12,-6.6); c.stroke();
+      const hg = c.createLinearGradient(9,-15,20,-2);
+      hg.addColorStop(0,'#f2c48a'); hg.addColorStop(1,'#b5682e');
+      c.fillStyle = hg; c.beginPath(); c.ellipse(14.6,-7.6,7,5.8,0,0,Math.PI*2); c.fill();
+      c.strokeStyle = '#7d4520'; c.lineWidth = 0.85; c.stroke();
+      /* 이마 황금 판 (왕관) */
+      c.fillStyle = '#ffd24a';
+      c.beginPath(); c.moveTo(10.2,-11); c.lineTo(12.4,-15.4); c.lineTo(14.4,-11.8);
+      c.lineTo(16.6,-15); c.lineTo(18,-10.4); c.closePath(); c.fill();
+      c.strokeStyle = '#c99a00'; c.lineWidth = 0.7; c.stroke();
+      /* 주둥이 */
+      c.fillStyle = '#f2d2a8';
+      c.beginPath(); c.moveTo(18,-8.4); c.quadraticCurveTo(23,-7,22,-4.2);
+      c.quadraticCurveTo(19.4,-3.4,17.4,-4.6); c.closePath(); c.fill();
+      /* 눈 */
+      monEye(c,15.4,-8.8,2.2,2.4,'#b3201c');
+      /* 콧김 */
+      c.strokeStyle = 'rgba(120,120,130,.6)'; c.lineWidth = 1.4;
+      c.beginPath(); c.moveTo(21.6,-6.4); c.quadraticCurveTo(25,-8.8+wag*0.6,22.6,-10.6); c.stroke();
+
+    } else if(sp.dex === 251){
+      /* 세레비 — 숲의 요정 */
+      /* 날개 4장 (뒤) */
+      c.fillStyle = 'rgba(226,255,236,.85)';
+      [[-3,-10,10,-2],[2,-11,9,-4]].forEach(function(w,i){
+        c.save(); c.translate(w[0],w[1]); c.rotate(-0.7+i*0.5);
+        c.beginPath(); c.ellipse(-w[2]*0.6,0,w[2]*0.6,2.6,0,0,Math.PI*2); c.fill();
+        c.restore();
+      });
+      c.beginPath();
+      c.save(); c.translate(-2,8); c.rotate(0.5);
+      c.beginPath(); c.ellipse(-5,0,6.4,2.4,0,0,Math.PI*2); c.fill();
+      c.restore();
+      c.strokeStyle = 'rgba(150,220,180,.6)'; c.lineWidth = 0.6;
+      /* 몸통 */
+      const g = c.createLinearGradient(0,-8,0,10);
+      g.addColorStop(0,'#f2fff2'); g.addColorStop(.55,'#bfe8b0'); g.addColorStop(1,'#8ac47a');
+      c.fillStyle = g; c.beginPath(); c.ellipse(0,4,8.2,7.4,0,0,Math.PI*2); c.fill();
+      c.strokeStyle = '#6fa860'; c.lineWidth = 0.85; c.stroke();
+      /* 머리 (동글동글) */
+      const hg = c.createLinearGradient(0,-14,6,0);
+      hg.addColorStop(0,'#f6fff0'); hg.addColorStop(1,'#a8dc9a');
+      c.fillStyle = hg; c.beginPath(); c.arc(2.4,-3.6,8.6,0,Math.PI*2); c.fill();
+      c.strokeStyle = '#6fa860'; c.lineWidth = 0.85; c.stroke();
+      /* 더듬이 */
+      c.strokeStyle = '#7ab86a'; c.lineWidth = 1.3;
+      c.beginPath(); c.moveTo(1,-11.4); c.quadraticCurveTo(-1,-16.4,2.4,-17.4); c.stroke();
+      c.fillStyle = '#bfe8b0';
+      c.beginPath(); c.arc(2.6,-17.6,1.6,0,Math.PI*2); c.fill();
+      c.beginPath(); c.moveTo(6.4,-11); c.quadraticCurveTo(8.6,-15,11.6,-14); c.stroke();
+      c.beginPath(); c.arc(11.8,-14,1.5,0,Math.PI*2); c.fill();
+      /* 눈 (파랑) */
+      monEye(c,-0.6,-4.4,2.5,2.8,'#2f8fd6');
+      monEye(c,6.6,-4.4,2.5,2.8,'#2f8fd6');
+      /* 입 */
+      c.strokeStyle = '#4f8f4a'; c.lineWidth = 0.95;
+      c.beginPath(); c.moveTo(1.6,-0.6); c.quadraticCurveTo(3.2,0.8,4.8,-0.6); c.stroke();
+      /* 발 */
+      c.fillStyle = '#a8dc9a';
+      c.beginPath(); c.ellipse(-2.6,10.6,2.6,1.9,0,0,Math.PI*2); c.fill();
+      c.beginPath(); c.ellipse(3,10.6,2.6,1.9,0,0,Math.PI*2); c.fill();
+
+    } else if(sp.dex === 245){
+      /* 흐르는 리본 (뒤) */
+      c.strokeStyle = 'rgba(200,240,255,.85)'; c.lineWidth = 3.2;
+      c.beginPath(); c.moveTo(-13,1); c.bezierCurveTo(-21,-2+wag*2,-25,4+wag*3,-30,2+wag*4); c.stroke();
+      c.strokeStyle = 'rgba(255,255,255,.72)'; c.lineWidth = 2;
+      c.beginPath(); c.moveTo(-13,4); c.bezierCurveTo(-20,8+wag*2,-25,6+wag*2,-29,10+wag*3); c.stroke();
+      /* 다리 */
+      c.strokeStyle = '#3fa8cf'; c.lineWidth = 2.8;
+      [[-10,4],[-5.4,5.4],[5.4,5.4],[10,4]].forEach(function(p,i){
+        c.beginPath(); c.moveTo(p[0],p[1]); c.lineTo(p[0]+(i<2?-1:1)*0.9,13.6); c.stroke();
+      });
+      c.fillStyle = '#2f8fb8';
+      [-10.9,-4.5,6.3,10.9].forEach(function(x){
+        c.beginPath(); c.ellipse(x,14,1.8,1.2,0,0,Math.PI*2); c.fill();
+      });
+      /* 몸통 */
+      const g = c.createLinearGradient(0,-10,0,13);
+      g.addColorStop(0,'#eafaff'); g.addColorStop(.45,'#63c4e4'); g.addColorStop(1,'#2f8fb8');
+      c.fillStyle = g; c.beginPath(); c.ellipse(-1,1,18,7.6,0,0,Math.PI*2); c.fill();
+      c.strokeStyle = '#227e9e'; c.lineWidth = 0.9; c.stroke();
+      /* 갈기 (보라 — 흘러내리는 물결) */
+      const mg = c.createLinearGradient(-8,-20,8,-4);
+      mg.addColorStop(0,'#ecd8ff'); mg.addColorStop(.6,'#a469e0'); mg.addColorStop(1,'#6b3fb0');
+      c.fillStyle = mg;
+      c.beginPath();
+      c.moveTo(11,-9.6);
+      c.bezierCurveTo(6,-15.4,0.4,-17.6,-4.6,-16.8+wag*0.7);
+      c.bezierCurveTo(-9.4,-16.2+wag,-13,-13.4,-14.2,-9.6+wag*1.2);
+      c.bezierCurveTo(-11.2,-10.6,-9.2,-9,-7.6,-6.8);
+      c.bezierCurveTo(-5.2,-9.2,-2.4,-7.6,0.4,-6);
+      c.bezierCurveTo(4.2,-4.2,8.4,-5.6,11,-9.6);
+      c.closePath(); c.fill();
+      c.strokeStyle = '#5a2f9e'; c.lineWidth = 0.7; c.stroke();
+      c.strokeStyle = 'rgba(255,255,255,.42)'; c.lineWidth = 0.8;
+      for(let i=0;i<3;i++){
+        c.beginPath(); c.moveTo(7.4,-10.4-i*0.5); c.quadraticCurveTo(-1,-15.6-i*1,-8.4,-14.6-i*0.7); c.stroke();
+      }
+      /* 목 + 머리 */
+      c.strokeStyle = '#63c4e4'; c.lineWidth = 6.4;
+      c.beginPath(); c.moveTo(8.4,-2); c.lineTo(12,-7); c.stroke();
+      const hg = c.createLinearGradient(9,-16,19,0);
+      hg.addColorStop(0,'#e2f9ff'); hg.addColorStop(1,'#3fa8cf');
+      c.fillStyle = hg; c.beginPath(); c.ellipse(13.6,-8.4,7.4,6.2,0,0,Math.PI*2); c.fill();
+      c.strokeStyle = '#227e9e'; c.lineWidth = 0.85; c.stroke();
+      /* 주둥이 */
+      c.fillStyle = '#f0fcff';
+      c.beginPath(); c.moveTo(16.6,-9.8); c.quadraticCurveTo(22.4,-8.8,21.8,-5.4);
+      c.quadraticCurveTo(18.6,-4.2,16,-5.8); c.closePath(); c.fill();
+      c.strokeStyle = '#cfe9f2'; c.lineWidth = 0.6; c.stroke();
+      /* 귀 */
+      c.fillStyle = '#4fb8dc';
+      c.beginPath(); c.moveTo(9,-12.2); c.lineTo(6.2,-17.8); c.lineTo(11.8,-13.2); c.closePath(); c.fill();
+      c.beginPath(); c.moveTo(13.6,-13); c.lineTo(13.4,-18.6); c.lineTo(17,-12.8); c.closePath(); c.fill();
+      /* 이마 수정 */
+      c.save(); c.shadowColor = '#9ff0ff'; c.shadowBlur = 8;
+      c.fillStyle = '#d8fbff';
+      c.beginPath(); c.moveTo(11.6,-15.4); c.lineTo(14.4,-13); c.lineTo(11.6,-10.4); c.lineTo(9,-13); c.closePath(); c.fill();
+      c.restore();
+      c.strokeStyle = '#7fd8f0'; c.lineWidth = 0.6; c.stroke();
+      /* 눈 */
+      monEye(c,15.6,-9,2.3,2.6,'#c0303c');
+
+    } else if(sp.dex === 249){
+      /* 꼬리 */
+      c.strokeStyle = '#c9dcef'; c.lineWidth = 3.4;
+      c.beginPath(); c.moveTo(-12,3); c.quadraticCurveTo(-21,6+wag*2,-27,10+wag*2.6); c.stroke();
+      c.fillStyle = '#dbe9f5';
+      c.beginPath(); c.moveTo(-25.4,9); c.lineTo(-30.6,6.4); c.lineTo(-27.4,11.8); c.closePath(); c.fill();
+      /* 큰 날개 2장 (넓은 물갈퀴) */
+      const wg = c.createLinearGradient(4,-20,-14,18);
+      wg.addColorStop(0,'#ffffff'); wg.addColorStop(.5,'#e4eefb'); wg.addColorStop(1,'#a3bcd9');
+      c.fillStyle = wg;
+      /* 위 날개 */
+      c.save(); c.translate(-5,-9.6); c.rotate(-0.62);
+      monEll(c,0,0,13.4,5.6); c.fill();
+      c.strokeStyle = '#8fa8c4'; c.lineWidth = 0.8; c.stroke();
+      c.strokeStyle = 'rgba(126,152,182,.5)'; c.lineWidth = 0.7;
+      [-4.4,0,4.4].forEach(function(dy){
+        c.beginPath(); c.moveTo(-12,dy*0.15); c.quadraticCurveTo(0,dy,12,dy*0.55); c.stroke();
+      });
+      c.restore();
+      /* 아래 날개 */
+      c.save(); c.translate(-5,10); c.rotate(0.56);
+      monEll(c,0,0,12.4,4.8); c.fill();
+      c.strokeStyle = '#8fa8c4'; c.lineWidth = 0.8; c.stroke();
+      c.strokeStyle = 'rgba(126,152,182,.5)'; c.lineWidth = 0.7;
+      [-3.6,0,3.6].forEach(function(dy){
+        c.beginPath(); c.moveTo(-11,dy*0.15); c.quadraticCurveTo(0,dy,11,dy*0.55); c.stroke();
+      });
+      c.restore();
+      /* 몸통 */
+      const g = c.createLinearGradient(0,-10,0,14);
+      g.addColorStop(0,'#ffffff'); g.addColorStop(.55,'#eaf3fc'); g.addColorStop(1,'#adc6de');
+      c.fillStyle = g; c.beginPath(); c.ellipse(-1,2,16,8.6,0,0,Math.PI*2); c.fill();
+      c.strokeStyle = '#8fa8c4'; c.lineWidth = 0.9; c.stroke();
+      /* 파란 등 줄 */
+      c.strokeStyle = 'rgba(110,150,205,.55)'; c.lineWidth = 1.8;
+      c.beginPath(); c.moveTo(-11,-3.4); c.quadraticCurveTo(-2,-7.2,8,-4.4); c.stroke();
+      /* 배 판 */
+      c.fillStyle = '#a8cbe8';
+      [[-7,5.4],[-1.4,7],[4.4,6]].forEach(function(p,i){
+        c.beginPath(); c.ellipse(p[0],p[1],4.6-i*0.5,1.5,0,0,Math.PI*2); c.fill();
+      });
+      /* 긴 목 + 머리 */
+      c.strokeStyle = '#f7fbff'; c.lineWidth = 7;
+      c.beginPath(); c.moveTo(8,-2.6); c.quadraticCurveTo(12,-8,14.6,-11.4); c.stroke();
+      c.fillStyle = '#fbfdff';
+      c.beginPath(); c.ellipse(18.6,-13,7.2,5,-0.2,0,Math.PI*2); c.fill();
+      c.strokeStyle = '#8fa8c4'; c.lineWidth = 0.8; c.stroke();
+      /* 긴 부리 */
+      c.fillStyle = '#e8f1fc';
+      c.beginPath(); c.moveTo(23.2,-15); c.quadraticCurveTo(28.4,-13.8,23.4,-10.4); c.closePath(); c.fill();
+      c.strokeStyle = '#8fa8c4'; c.lineWidth = 0.7; c.stroke();
+      c.fillStyle = '#7fa8d8';
+      c.beginPath(); c.moveTo(26,-14.2); c.quadraticCurveTo(28.4,-13.6,26.4,-12.2); c.closePath(); c.fill();
+      /* 머리 뒤 돌기 */
+      c.fillStyle = '#c6d8ea';
+      c.beginPath(); c.moveTo(13.8,-16.2); c.lineTo(9.6,-20.8); c.lineTo(15.6,-18); c.closePath(); c.fill();
+      c.beginPath(); c.moveTo(17.4,-17.2); c.lineTo(15.4,-21.8); c.lineTo(20,-18.2); c.closePath(); c.fill();
+      /* 파란 눈 둘레 */
+      c.fillStyle = 'rgba(74,127,208,.55)';
+      c.beginPath(); c.ellipse(20,-14,3.4,1.9,-0.2,0,Math.PI*2); c.fill();
+      monEye(c,20.2,-13.8,1.9,2.1,'#123a6b');
+      /* 발 */
+      c.fillStyle = '#d3e3f2';
+      c.beginPath(); c.ellipse(2,10.6,3,1.8,0,0,Math.PI*2); c.fill();
+      c.beginPath(); c.ellipse(-6,10.2,2.6,1.6,0,0,Math.PI*2); c.fill();
+
+    } else if(sp.dex === 250){
+      /* 무지개 꼬리 깃 */
+      const tailColors = ['#ff5a3c','#ffa53c','#ffe04a','#6ee08a','#5cb6f5'];
+      tailColors.forEach(function(col,i){
+        c.strokeStyle = col; c.lineWidth = 2.8;
+        c.beginPath(); c.moveTo(-8,2+i*0.5);
+        c.quadraticCurveTo(-17,4+i*2.2+wag*2,-24.4,8+i*2.6+wag*3);
+        c.stroke();
+      });
+      /* 큰 날개 2장 (무지개 깃) */
+      const wg = c.createLinearGradient(6,-6,-19,-2);
+      wg.addColorStop(0,'#ff8a4c'); wg.addColorStop(.28,'#ffd24a');
+      wg.addColorStop(.6,'#6ee08a'); wg.addColorStop(1,'#6cb8f0');
+      c.fillStyle = wg;
+      /* 위 날개 */
+      c.save(); c.translate(-4.4,-9.4); c.rotate(-0.6);
+      monEll(c,0,0,13,5.4); c.fill();
+      c.strokeStyle = 'rgba(255,255,255,.7)'; c.lineWidth = 0.8; c.stroke();
+      c.strokeStyle = 'rgba(255,255,255,.42)'; c.lineWidth = 0.8;
+      [-4,0,4].forEach(function(dy){
+        c.beginPath(); c.moveTo(-11.6,dy*0.15); c.quadraticCurveTo(0,dy,11.4,dy*0.55); c.stroke();
+      });
+      c.restore();
+      /* 아래 날개 */
+      c.save(); c.translate(-4.4,10.4); c.rotate(0.52);
+      monEll(c,0,0,12,4.8); c.fill();
+      c.strokeStyle = 'rgba(255,255,255,.7)'; c.lineWidth = 0.8; c.stroke();
+      c.strokeStyle = 'rgba(255,255,255,.42)'; c.lineWidth = 0.8;
+      [-3.4,0,3.4].forEach(function(dy){
+        c.beginPath(); c.moveTo(-10.6,dy*0.15); c.quadraticCurveTo(0,dy,10.4,dy*0.55); c.stroke();
+      });
+      c.restore();
+      /* 몸통 */
+      const g = c.createRadialGradient(1,-2,2,0,0,16);
+      g.addColorStop(0,'#ffcf6a'); g.addColorStop(.55,'#f2552f'); g.addColorStop(1,'#b32a1c');
+      c.fillStyle = g; c.beginPath(); c.ellipse(-1,2,12.4,8.8,0,0,Math.PI*2); c.fill();
+      c.strokeStyle = '#9a2418'; c.lineWidth = 0.9; c.stroke();
+      /* 금빛 배 */
+      c.fillStyle = '#ffe6a0'; monEll(c,-1,5.4,7.6,3.4); c.fill();
+      /* 목 + 머리 */
+      c.strokeStyle = '#ffb43c'; c.lineWidth = 5.8;
+      c.beginPath(); c.moveTo(6.2,-2.2); c.lineTo(9,-8); c.stroke();
+      const hg = c.createLinearGradient(6,-18,17,-2);
+      hg.addColorStop(0,'#fff6c8'); hg.addColorStop(1,'#ffab24');
+      c.fillStyle = hg; c.beginPath(); c.ellipse(11.6,-9.8,7.4,6.2,0,0,Math.PI*2); c.fill();
+      c.strokeStyle = '#c9800a'; c.lineWidth = 0.8; c.stroke();
+      /* 부리 */
+      c.fillStyle = '#ffb02e';
+      c.beginPath(); c.moveTo(17.4,-10.6); c.lineTo(23.6,-8.2); c.lineTo(17.2,-6.2); c.closePath(); c.fill();
+      c.strokeStyle = '#c9800a'; c.lineWidth = 0.7; c.stroke();
+      /* 볏 깃 3장 */
+      const crest = ['#ff5a3c','#ffd24a','#6ee08a'];
+      crest.forEach(function(col,i){
+        c.strokeStyle = col; c.lineWidth = 2;
+        c.beginPath(); c.moveTo(8.4+i*1.6,-14.6);
+        c.quadraticCurveTo(6+i*2.6,-21.4-i*0.4,10.6+i*2.6,-20-i*0.3);
+        c.stroke();
+      });
+      /* 눈 */
+      monEye(c,13.4,-10,2.2,2.4,'#b3201c');
+      /* 반짝임 */
+      c.globalAlpha = 0.9;
+      star4(c,-2,-16,2.6,'#fff6c4');
+      star4(c,5.6,-18,1.9,'#ffffff');
+      c.globalAlpha = 1;
+
+    } else {
+      /* 손그림이 없는 종: 속성별 폴백 그림 */
+      drawMonFallback(c, sp, phase);
+    }
+  }
+
+  const THEMES = {
+    fish: {
+      key:'fish', label:'물고기', icon:'🐟',
+      species:SPECIES, bosses:BOSSES, caughtKey:'caught',
+      sub:'문제를 풀어 물고기를 잡아 보세요!',
+      startBtn:'낚시 시작',
+      unit:'물고기',
+      free:'자유 낚시',
+      cast:'낚싯대 던지기',
+      castBoss:'보스에게 던지기',
+      dexTitle:'내 어망 도감',
+      dexBoss:'전설의 보스',
+      bossTag:'전설의 보스',
+      bossNotify:'보스 출현!',
+      bite:(n)=> josa(n,'이','가') + ' 입질했어요!',
+      biteSub:'문제를 풀면 물고기를 잡을 수 있어요',
+      quitQuiz:'그만 풀기 (물고기 놓아주기)',
+      quitBoss:'그만 풀기 (보스 놓아주기)',
+      wrong:'앗, 물고기가 힘을 내고 있어요!',
+      correct:'정답이에요! 물고기를 끌어 올려요!',
+      bossWrong:(n)=> '앗, ' + josa(n,'이','가') + ' 버텨요!',
+      finishTitle:'낚시를 마쳤어요!',
+      flee:'다시 깊은 곳으로 숨어 버렸어요',
+      release:'놓아주었어요',
+      shopMsg:'물고기를 잡으면 포인트가 쌓여요. 모은 포인트로 배·낚싯대·꾸미기를 바꿔 보세요!',
+      legend:'낚시를 하면 저절로 모여요. 희귀한 물고기일수록 점수가 커요!',
+      legendAll:'모든 물고기를 다 모았어요! 정말 대단해요!',
+      legendBoss:'전설의 보스를 모두 잡았어요! 낚시의 왕이에요!',
+      legendHint:'낚시를 하면 저절로 모여요. 물고기 5마리마다 전설의 보스가 나타나요!'
+    },
+    pokemon: {
+      key:'pokemon', label:'포켓몬', icon:'⚡',
+      species:POKE_SPECIES, bosses:POKE_BOSSES, caughtKey:'caughtMon',
+      sub:'문제를 풀어 포켓몬을 잡아 보세요!',
+      startBtn:'모험 시작',
+      unit:'포켓몬',
+      free:'자유 모험',
+      cast:'몬스터볼 던지기',
+      castBoss:'보스에게 몬스터볼',
+      dexTitle:'내 포켓몬 도감',
+      dexBoss:'전설의 포켓몬',
+      bossTag:'전설의 포켓몬',
+      bossNotify:'전설의 포켓몬 출현!',
+      bite:(n)=> josa(n,'이','가') + ' 나타났어요!',
+      biteSub:'문제를 풀면 몬스터볼로 잡을 수 있어요',
+      quitQuiz:'그만 풀기 (포켓몬 놓아주기)',
+      quitBoss:'그만 풀기 (전설의 포켓몬 놓아주기)',
+      wrong:'앗, 포켓몬이 도망가려 해요!',
+      correct:'정답이에요! 몬스터볼을 던져요!',
+      bossWrong:(n)=> '앗, ' + josa(n,'이','가') + ' 버텨요!',
+      finishTitle:'모험을 마쳤어요!',
+      flee:'도망갔어요',
+      release:'놓아주었어요',
+      shopMsg:'포켓몬을 잡으면 포인트가 쌓여요. 모은 포인트로 배·낚싯대·꾸미기를 바꿔 보세요!',
+      legend:'모험을 하면 저절로 모여요. 성도지방 100종을 모두 모아 보세요!',
+      legendAll:'성도지방 100종을 모두 모았어요! 정말 대단해요!',
+      legendBoss:'전설의 포켓몬을 모두 만났어요! 포켓몬 마스터예요!',
+      legendHint:'모험을 하면 저절로 모여요. 아직 못 만난 포켓몬이 더 자주 나타나요!'
+    }
+  };
+  function th(){ return THEMES[save.theme === 'pokemon' ? 'pokemon' : 'fish']; }
+  /* 지금 테마의 도감 저장소 (물고기·포켓몬 각각 따로) */
+  function dexBook(){ return save.theme === 'pokemon' ? save.caughtMon : save.caught; }
+  function dexCount(id){ return Number(dexBook()[id]) || 0; }
+  /* 테마에 맞는 화면 글자·아이콘을 한 번에 맞춘다 */
+  function applyTheme(){
+    const T = th();
+    const setTxt = function(id, v){ const el = $(id); if(el) el.textContent = v; };
+    setTxt('startSub', T.sub);
+    setTxt('freeModeLabel', T.free);
+    setTxt('startBtnLabel', T.startBtn);
+    setTxt('caughtLbl', '잡은 ' + T.unit);
+    setTxt('dexTotalLbl', '잡은 ' + T.unit);
+    setTxt('dexTitle', T.dexTitle);
+    setTxt('dexBossLbl', T.dexBoss);
+    setTxt('dexBtnStart', T.dexTitle);
+    setTxt('resultCaughtLbl', '잡은 ' + T.unit);
+    setTxt('resultDexBtn', T.dexTitle + ' 보기');
+    setTxt('quizSaySub', T.biteSub);
+    setTxt('quitQuiz', T.quitQuiz);
+    setTxt('bossTag', T.bossTag);
+    const dexBtn = $('dexBtn');
+    if(dexBtn) dexBtn.setAttribute('aria-label', T.dexTitle);
+    const icoFish = document.querySelector('#castBtn .cast-ico-fish');
+    const icoMon = document.querySelector('#castBtn .cast-ico-mon');
+    if(icoFish) icoFish.style.display = T.key === 'pokemon' ? 'none' : '';
+    if(icoMon) icoMon.style.display = T.key === 'pokemon' ? '' : 'none';
+    const dfish = document.querySelector('#dexBtn .dex-ico-fish');
+    const dmon = document.querySelector('#dexBtn .dex-ico-mon');
+    if(dfish) dfish.style.display = T.key === 'pokemon' ? 'none' : '';
+    if(dmon) dmon.style.display = T.key === 'pokemon' ? '' : 'none';
+    Array.prototype.forEach.call(document.querySelectorAll('#themeToggle button'), function(b){
+      const on = b.dataset.theme === T.key;
+      b.classList.toggle('on', on);
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    syncCastLabel();
+  }
+  /* 테마 바꾸기: 화면 글자·수영 중인 종·도감을 모두 새 테마로 */
+  function setTheme(key){
+    const next = key === 'pokemon' ? 'pokemon' : 'fish';
+    if(save.theme === next){ applyTheme(); refreshStart(); return; }
+    save.theme = next;
+    persist();
+    applyTheme();
+    /* 제목 화면에 헤엄치는 종도 새 테마로 바꾼다 */
+    G.fish = [];
+    G.boss = null;
+    G.bossFight = false;
+    ensureFish();
+    if(G.dexOpen) buildDex();
+    refreshStart();
+  }
   const ALL_SPECIES = SPECIES.concat(BOSSES);
 
   function ell(c,x,y,rx,ry){ c.beginPath(); c.ellipse(x,y,rx,ry,0,0,Math.PI*2); }
@@ -2123,6 +3484,16 @@
     const wag = Math.sin(phase);
     const wag2 = Math.sin(phase-0.9);
     c.lineJoin = 'round';
+
+    if(sp.kind === 'mon'){
+      /* 포켓몬: PokeAPI 스프라이트가 오면 그 그림, 아니면 Canvas 그림 */
+      const box = sp.boss ? 46 : 48;
+      /* 무대에서는 큰 공식 아트워크, 도감 칸에서는 작은 스프라이트 */
+      if(!drawMonSprite(c, sp, sp.boss ? 0 : 1, sp.boss ? 0 : -1, box, true)) drawMonBody(c, sp, phase);
+      c.restore();
+      if(alpha!=null) c.globalAlpha = 1;
+      return;
+    }
 
     if(sp.id==='minnow'){
       c.fillStyle = sp.accent;
@@ -2373,12 +3744,12 @@
      전설의 보스 (출현 · 보스전 · 포획)
   ----------------------------------------------------------------*/
   function bossCandidates(){
-    const un = BOSSES.filter(b=> (Number(save.caught[b.id])||0) === 0);
-    return un.length ? un : BOSSES;
+    const un = th().bosses.filter(b=> dexCount(b.id) === 0);
+    return un.length ? un : th().bosses;
   }
   function syncCastLabel(){
-    const s = $('castBtn').querySelector('span');
-    if(s) s.textContent = G.boss ? '보스에게 던지기' : '낚싯대 던지기';
+    const s = $('castLabel') || $('castBtn').querySelector('span');
+    if(s) s.textContent = G.boss ? th().castBoss : th().cast;
   }
   function showBossBanner(title, sub, win){
     const b = $('bossBanner');
@@ -2413,7 +3784,7 @@
       phase: Math.random()*6.28,
       amp: 4*SCALE, rise: 0, wig: 0
     };
-    showBossBanner('보스 출현!', G.mode === 'timed'
+    showBossBanner(th().bossNotify, G.mode === 'timed'
       ? sp.name + ' · 문제 1개면 포획!'
       : sp.name + ' · 3문제 연속!');
     flashBoss();
@@ -2476,7 +3847,8 @@
     G.caughtCount++;
     G.bossCaught++;
     G.streak = Math.max(1, G.streak);
-    save.caught[sp.id] = (Number(save.caught[sp.id])||0) + 1;
+    const book = dexBook();
+    book[sp.id] = (Number(book[sp.id])||0) + 1;   /* 테마별 도감(물고기/포켓몬)에 따로 기록 */
     const bestKey = save.best[G.mode];
     if(G.score > (bestKey[G.grade]||0)) bestKey[G.grade] = G.score;
     if(G.mode === 'timed') G.timeLeft = clamp(G.timeLeft + 5, 0, 60);
@@ -2534,8 +3906,8 @@
     ctx.restore();
   }
   function drawBossTag(sp, x, y, size, t){
-    const txt = '전설의 보스';
-    const ly = y - size*0.54 - 15*SCALE;
+    const txt = th().bossTag;
+    const ly = y - size*(sp.kind === 'mon' ? 0.60 : 0.54) - 15*SCALE;
     const fs = Math.round(12*SCALE);
     ctx.save();
     ctx.font = '900 ' + fs + 'px system-ui, -apple-system, "Apple SD Gothic Neo", sans-serif';
@@ -2606,7 +3978,7 @@
       wrap.classList.add('hidden');
     }
     if(force || hudCache.mode !== G.mode || hudCache.grade !== G.grade){
-      $('modePillText').textContent = GRADE_INFO[G.grade].name + ' · ' + (G.mode==='timed'?'60초 도전':'자유 낚시');
+      $('modePillText').textContent = GRADE_INFO[G.grade].name + ' · ' + (G.mode==='timed'?'60초 도전':th().free);
       hudCache.mode = G.mode; hudCache.grade = G.grade;
     }
   }
@@ -2647,12 +4019,14 @@
     $('gradeDesc').textContent = GRADE_INFO[save.grade].desc;
     const best = save.best[save.mode][save.grade] || 0;
     const gname = GRADE_INFO[save.grade].name;
-    const md = save.mode==='timed'?'60초 도전':'자유 낚시';
+    const md = save.mode==='timed' ? '60초 도전' : th().free;
     $('bestLine').textContent = `${gname} · ${md} 최고 점수 ${best}점`;
-    $('bossNote').innerHTML = save.mode === 'timed'
-      ? '물고기 <b>4마리</b>마다 <b>전설의 보스</b>가 나타나요!'
-      : '물고기 <b>5마리</b>마다 <b>전설의 보스</b>가 나타나요!';
+    const T = th();
+    $('bossNote').innerHTML = T.unit + (save.mode === 'timed'
+      ? ' <b>4마리</b>마다 <b>' + josa(T.dexBoss,'이','가') + '</b> 나타나요!'
+      : ' <b>5마리</b>마다 <b>' + josa(T.dexBoss,'이','가') + '</b> 나타나요!');
     G.grade = save.grade; G.mode = save.mode;
+    applyTheme();
     syncCoins(true);
   }
   function showStart(){
@@ -2701,7 +4075,7 @@
     hideAllModals();
     updateHUD(true);
     syncTopOffset();
-    toast(null, null, `${GRADE_INFO[G.grade].name} · ${G.mode==='timed'?'60초 도전':'자유 낚시'} 시작!`);
+    toast(null, null, `${GRADE_INFO[G.grade].name} · ${G.mode==='timed'?'60초 도전':th().free} 시작!`);
   }
 
   /* ---------------------------------------------------------------
@@ -2765,7 +4139,7 @@
       const bs = 84 / Math.max(40, fish.sp.len);
       drawFish(bcv, fish.sp, 72, 50, fish.sp.len*bs, 1.5, 1);
       $('bossName').textContent = fish.sp.name;
-      $('bossTag').textContent = fish.sp.tag || '전설의 보스';
+    $('bossTag').textContent = fish.sp.tag || th().bossTag;
       updateBossHpUI();
     }
 
@@ -2790,12 +4164,12 @@
 
     $('quizSay').textContent = isBoss
       ? `${fish.sp.name}와의 승부!`
-      : `${josa(fish.sp.name,'이','가')} 입질했어요!`;
+      : th().bite(fish.sp.name);
     $('quizSaySub').textContent = isBoss
       ? (prob.blank ? '빈칸에 들어갈 수를 고르세요' : '맞히면 줄을 당길 수 있어요')
-      : (prob.blank ? '빈칸에 들어갈 수를 골라 보세요' : '답을 고르면 물고기를 잡을 수 있어요');
+      : (prob.blank ? '빈칸에 들어갈 수를 골라 보세요' : th().biteSub);
     $('hintBtnLabel').textContent = prob.hint.type === 'apples' ? '그림으로 세어보기' : '풀이 힌트';
-    $('quitQuiz').textContent = isBoss ? '그만 풀기 (보스 놓아주기)' : '그만 풀기 (물고기 놓아주기)';
+    $('quitQuiz').textContent = isBoss ? th().quitBoss : th().quitQuiz;
 
     const ch = $('choices');
     ch.innerHTML = '';
@@ -2892,7 +4266,7 @@
       btn.classList.add('right');
       document.querySelectorAll('.choice').forEach(b=>b.disabled = true);
       $('feedback').className = 'feedback ok';
-      $('feedback').textContent = '정답이에요! 물고기를 끌어 올려요!';
+      $('feedback').textContent = th().correct;
       save.solved++; save.correct++; persist();
       G.streak++;
       sfx.right();
@@ -2909,11 +4283,11 @@
       const bn = (G.bossFight && G.boss) ? G.boss.sp.name : '';
       $('feedback').textContent = G.bossFight
         ? (G.wrong >= 2
-            ? `앗, ${josa(bn,'이','가')} 버텨요! ${hintWord}를 보며 다시 풀어 볼까요?`
-            : `앗, ${josa(bn,'이','가')} 버텨요! 다시 한 번 풀어 볼까요?`)
+            ? `${th().bossWrong(bn)} ${hintWord}를 보며 다시 풀어 볼까요?`
+            : `${th().bossWrong(bn)} 다시 한 번 풀어 볼까요?`)
         : (G.wrong >= 2
-            ? `앗, 물고기가 힘을 내고 있어요! ${hintWord}를 보며 다시 풀어 볼까요?`
-            : '앗, 물고기가 힘을 내고 있어요! 다시 한 번 풀어 볼까요?');
+            ? `${th().wrong} ${hintWord}를 보며 다시 풀어 볼까요?`
+            : `${th().wrong} 다시 한 번 풀어 볼까요?`);
       const card = $('quizCard');
       card.classList.remove('shake');
       void card.offsetWidth;
@@ -2950,7 +4324,8 @@
     G.score += pts;
     save.coins += pts;              /* 잡은 점수가 바로 쓸 수 있는 포인트로 쌓인다 */
     G.caughtCount++;
-    save.caught[sp.id] = (Number(save.caught[sp.id])||0) + 1;
+    const book = dexBook();
+    book[sp.id] = (Number(book[sp.id])||0) + 1;   /* 테마별 도감(물고기/포켓몬)에 따로 기록 */
     const bestKey = save.best[G.mode];
     if(G.score > (bestKey[G.grade]||0)){ bestKey[G.grade] = G.score; }
     persist();
@@ -2988,9 +4363,9 @@
     G.state = 'playing';
     toast(null, null, fish
       ? (wasBoss
-          ? `${josa(fish.sp.name,'이','가')} 다시 깊은 곳으로 숨어 버렸어요`
-          : `${josa(fish.sp.name,'을','를')} 놓아주었어요`)
-      : '다음 물고기를 기다려요');
+          ? `${josa(fish.sp.name,'이','가')} ${th().flee}`
+          : `${josa(fish.sp.name,'을','를')} ${th().release}`)
+      : '다음 ' + th().unit + '를 기다려요');
   }
 
   function splash(x,y){
@@ -3025,41 +4400,90 @@
     if(G.state === 'result') $('resultWrap').classList.remove('hidden');
   }
   function dexItem(sp, isBoss){
-    const c = Number(save.caught[sp.id])||0;
+    const c = dexCount(sp.id);
+    const owned = c > 0;
     const box = document.createElement('div');
-    box.className = 'dex-item' + (isBoss?' boss':'') + (c>0?'':' locked');
+    box.className = 'dex-item' + (isBoss?' boss':'') + (owned?'':' locked');
+    if(sp.dex) box.dataset.dex = sp.dex;
     const cvs = document.createElement('canvas');
     cvs.width = 144; cvs.height = 88;
     const cc = cvs.getContext('2d');
-    const target = isBoss ? 118 : 76;
-    const s = target / Math.max(isBoss?40:30, sp.len);
-    drawFish(cc, sp, 72, isBoss?46:44, sp.len*s, 1.1, 1);
+    /* 그림: 포켓몬은 PokeAPI 스프라이트(작은 것) → 없으면 Canvas 그림 */
+    const paint = function(){
+      cc.setTransform(1,0,0,1,0,0);
+      cc.clearRect(0,0,cvs.width,cvs.height);
+      if(sp.kind === 'mon'){
+        const target = isBoss ? 86 : 84;
+        if(!drawMonSprite(cc, sp, 72, 45, target, false)){
+          const u = target / 56;
+          cc.save(); cc.translate(72,46); cc.scale(u,u); drawMonBody(cc, sp, 1.1); cc.restore();
+        }
+      } else {
+        const target = isBoss ? 118 : 76;
+        const s2 = target / Math.max(isBoss?40:30, sp.len);
+        drawFish(cc, sp, 72, isBoss?46:44, sp.len*s2, 1.1, 1);
+      }
+    };
+    paint();
+    if(sp.kind === 'mon') spriteThen(sp, false, paint);
     const nm = document.createElement('div'); nm.className='nm';
-    nm.textContent = c>0 ? sp.name : '???';
+    nm.textContent = (sp.dex ? '#' + sp.dex + ' ' : '') + (owned ? sp.name : '???');
     const ct = document.createElement('div'); ct.className='ct';
-    ct.textContent = c>0 ? `${c}마리 · ${sp.pts}점` : '아직 못 만났어요';
+    ct.textContent = owned ? `${c}마리 · ${sp.pts}점` : '아직 못 만났어요';
     box.appendChild(cvs); box.appendChild(nm); box.appendChild(ct);
     return box;
   }
+  let dexFilter = 'all';        /* all | got | boss */
   function buildDex(){
+    const T = th();
+    const all = T.species.concat(T.bosses);
     let total = 0, kinds = 0;
-    ALL_SPECIES.forEach(s=>{ const c = Number(save.caught[s.id])||0; total += c; if(c>0) kinds++; });
+    all.forEach(s=>{ const c = dexCount(s.id); total += c; if(c>0) kinds++; });
+    const allKinds = all.length;
+    $('dexTitle').textContent = T.dexTitle;
+    $('dexTotalLbl').textContent = '잡은 ' + T.unit;
+    $('dexBossLbl').textContent = T.dexBoss;
     $('dexTotal').textContent = total;
-    $('dexKinds').textContent = kinds+'/'+ALL_SPECIES.length;
+    $('dexKinds').textContent = kinds+'/'+allKinds;
     $('dexSolved').textContent = save.solved;
+    /* 수집 현황 (0 / 100) */
+    $('dexProgressText').textContent = kinds + ' / ' + allKinds;
+    $('dexProgressFill').style.width = (allKinds ? kinds/allKinds*100 : 0).toFixed(1) + '%';
+    /* 필터 탭은 종류가 많은 포켓몬 도감에서만 */
+    const hasFilter = allKinds > 20;
+    $('dexFilter').classList.toggle('hidden', !hasFilter);
+    if(!hasFilter) dexFilter = 'all';
+    Array.prototype.forEach.call(document.querySelectorAll('#dexFilter button'), function(b){
+      b.classList.toggle('on', b.dataset.f === dexFilter);
+    });
     const grid = $('dexGrid');
-    grid.innerHTML = '';
-    SPECIES.forEach(sp=>{ grid.appendChild(dexItem(sp, false)); });
     const bgrid = $('dexBossGrid');
+    grid.classList.toggle('many', allKinds > 20);
+    bgrid.classList.toggle('many', T.bosses.length > 4);
+    grid.innerHTML = '';
     bgrid.innerHTML = '';
-    BOSSES.forEach(sp=>{ bgrid.appendChild(dexItem(sp, true)); });
-    const bossKinds = BOSSES.filter(b=> (Number(save.caught[b.id])||0) > 0).length;
-    $('dexBossSec').classList.toggle('done', bossKinds === BOSSES.length);
-    $('dexLegend').textContent = kinds === ALL_SPECIES.length
-      ? '모든 물고기를 다 모았어요! 정말 대단해요!'
-      : (bossKinds === BOSSES.length
-          ? '전설의 보스를 모두 잡았어요! 낚시의 왕이에요!'
-          : '낚시를 하면 저절로 모여요. 물고기 5마리마다 전설의 보스가 나타나요!');
+    const bossKinds = T.bosses.filter(b=> dexCount(b.id) > 0).length;
+    $('dexBossSec').classList.toggle('done', bossKinds === T.bosses.length);
+    if(dexFilter === 'boss'){
+      grid.classList.add('hidden');
+      $('dexBossSec').classList.remove('hidden');
+      bgrid.classList.remove('hidden');
+      T.bosses.forEach(sp=>{ bgrid.appendChild(dexItem(sp, true)); });
+    } else if(dexFilter === 'got'){
+      grid.classList.remove('hidden');
+      $('dexBossSec').classList.add('hidden');
+      const got = all.filter(s=> dexCount(s.id) > 0);
+      got.forEach(sp=>{ grid.appendChild(dexItem(sp, !!sp.boss)); });
+    } else {
+      grid.classList.remove('hidden');
+      $('dexBossSec').classList.remove('hidden');
+      bgrid.classList.remove('hidden');
+      T.species.forEach(sp=>{ grid.appendChild(dexItem(sp, false)); });
+      T.bosses.forEach(sp=>{ bgrid.appendChild(dexItem(sp, true)); });
+    }
+    $('dexLegend').textContent = kinds === allKinds
+      ? T.legendAll
+      : (bossKinds === T.bosses.length ? T.legendBoss : T.legendHint);
   }
 
   /* ---------------------------------------------------------------
@@ -3079,7 +4503,7 @@
     buildShop();
     $('shopWrap').classList.remove('hidden');
     G.shopOpen = true;
-    shopMessage('물고기를 잡으면 포인트가 쌓여요. 모은 포인트로 배·낚싯대·꾸미기를 바꿔 보세요!', '');
+    shopMessage(th().shopMsg, '');
   }
   function closeShop(){
     $('shopWrap').classList.add('hidden');
@@ -3157,7 +4581,7 @@
       const need = it.price - save.coins;
       sfx.poor();
       if(row){ row.classList.remove('shake'); void row.offsetWidth; row.classList.add('shake'); }
-      shopMessage(fmtP(need) + 'P가 부족해요. 물고기를 잡아 포인트를 ' + fmtP(need) + 'P 더 모아 보세요!', 'warn');
+      shopMessage(fmtP(need) + 'P가 부족해요. ' + th().unit + '를 잡아 포인트를 ' + fmtP(need) + 'P 더 모아 보세요!', 'warn');
       return;
     }
     save.coins -= it.price;
@@ -3183,8 +4607,9 @@
     $('bossBar').classList.add('hidden');
     const qt = $('quizCard').querySelector('.quiz-top');
     if(qt) qt.classList.remove('hidden');
-    $('resultTitle').textContent = reason==='time' ? '시간이 다 됐어요!' : '낚시를 마쳤어요!';
-    $('resultSub').textContent = `${GRADE_INFO[G.grade].name} · ${G.mode==='timed'?'60초 도전':'자유 낚시'}`;
+    $('resultTitle').textContent = reason==='time' ? '시간이 다 됐어요!' : th().finishTitle;
+    $('resultSub').textContent = `${GRADE_INFO[G.grade].name} · ${G.mode==='timed'?'60초 도전':th().free}`;
+    $('resultCaughtLbl').textContent = '잡은 ' + th().unit;
     $('resultScore').textContent = G.score;
     $('resultCaught').textContent = G.caughtCount;
     $('resultBest').textContent = save.best[G.mode][G.grade] || 0;
@@ -3914,6 +5339,18 @@
     const b = ev.target.closest('.opt'); if(!b) return;
     save.grade = Number(b.dataset.grade); persist(); refreshStart(); sfx.tap();
   });
+  $('themeToggle').addEventListener('click', (ev)=>{
+    const b = ev.target.closest('button[data-theme]'); if(!b) return;
+    if(b.dataset.theme === save.theme) return;
+    sfx.tap();
+    setTheme(b.dataset.theme);
+  });
+  $('dexFilter').addEventListener('click', (ev)=>{
+    const b = ev.target.closest('button[data-f]'); if(!b) return;
+    dexFilter = b.dataset.f;
+    sfx.tap();
+    buildDex();
+  });
   $('modeList').addEventListener('click', (ev)=>{
     const b = ev.target.closest('.opt'); if(!b) return;
     save.mode = b.dataset.mode; persist(); refreshStart(); sfx.tap();
@@ -3949,7 +5386,7 @@
     shopTab = b.dataset.tab;
     sfx.tap();
     buildShop();
-    shopMessage('물고기를 잡으면 포인트가 쌓여요. 모은 포인트로 배·낚싯대·꾸미기를 바꿔 보세요!', '');
+    shopMessage(th().shopMsg, '');
   });
   ['muteBtn','muteBtnStart'].forEach(id=>{
     $(id).addEventListener('click', ()=>{
@@ -3974,6 +5411,7 @@
   loadSave();
   G.grade = save.grade; G.mode = save.mode;
   setMuteUI();
+  applyTheme();
   refreshStart();
   syncCastLabel();
   resize();
@@ -4000,9 +5438,26 @@
     fishCount: ()=> G.fish.length,
     hintType: ()=> G.quiz ? G.quiz.hint.type : null,
     save: ()=> JSON.parse(JSON.stringify(save)),
+    /* 테마 (테스트/확인용) */
+    theme: ()=> save.theme,
+    selectTheme: (t)=>{ setTheme(t); return save.theme; },
+    themeSpecies: ()=> th().species.map(s=>({id:s.id, name:s.name, pts:s.pts})),
+    themeBosses: ()=> th().bosses.map(s=>({id:s.id, name:s.name, pts:s.pts, tag:s.tag})),
+    dexCount: (id)=> dexCount(id),
+    johto: ()=> MON_ALL.map(function(s){
+      return { dex:s.dex, name:s.name, types:s.types, bst:s.bst, pts:s.pts, tier:s.tier, boss:!!s.boss };
+    }),
+    dexFilter: ()=> dexFilter,
+    setDexFilter: (f)=>{ dexFilter = f; if(G.dexOpen) buildDex(); return dexFilter; },
+    spriteStats: ()=>{
+      const k = Object.keys(SPRITES);
+      return { total:k.length, ok:k.filter(function(u){ return SPRITES[u].ok; }).length,
+               err:k.filter(function(u){ return SPRITES[u].err; }).length };
+    },
+    dexBook: ()=> JSON.parse(JSON.stringify(dexBook())),
     cast: ()=> castButton(),
     boss: ()=> G.boss ? {
-      id:G.boss.sp.id, name:G.boss.sp.name, pts:G.boss.sp.pts,
+      id:G.boss.sp.id, dex:G.boss.sp.dex, name:G.boss.sp.name, pts:G.boss.sp.pts,
       x:G.boss.x, y:G.boss.y, size:G.boss.size, rise:G.boss.rise,
       hp: G.bossFight ? G.bossHp : null,
       maxHp: G.bossFight ? G.bossMaxHp : null,
