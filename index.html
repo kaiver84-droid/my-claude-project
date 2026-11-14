@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#bfe9ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<title>숫자 낚시 - 초1 수학 낚시 게임</title>
+<title>숫자 낚시 - 초등 1~4학년 수학 낚시 게임</title>
 <style>
   :root{
     --ink:#0b3d5c;
@@ -154,36 +154,42 @@
     background:#fffdf4;
     border:3px solid #fff;border-radius:26px;
     padding:14px;box-shadow:0 14px 34px rgba(6,50,74,.3);
-    max-height:calc(100% - 84px);overflow-y:auto;-webkit-overflow-scrolling:touch;
+    max-height:calc(100% - 78px);overflow-y:auto;-webkit-overflow-scrolling:touch;
   }
   .seg-title{
     font-size:12px;font-weight:900;color:var(--ink-soft);letter-spacing:.02em;
     margin:2px 0 7px 3px;display:flex;align-items:center;gap:6px;
   }
   .seg-title::before{content:"";width:5px;height:12px;border-radius:3px;background:var(--sun-dark);}
-  .level-list,.mode-list{display:flex;flex-direction:column;gap:7px;margin-bottom:12px;}
+  .level-list,.mode-list{display:flex;flex-direction:column;gap:6px;margin-bottom:10px;}
+  .grade-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:6px;}
   .opt{
-    display:flex;align-items:center;gap:10px;text-align:left;
-    min-height:52px;padding:8px 12px;border-radius:16px;
+    display:flex;align-items:center;gap:9px;text-align:left;
+    min-height:50px;padding:7px 11px;border-radius:16px;
     background:#f2f9fd;border:2.5px solid #d7ecf6;
     font-family:inherit;color:var(--ink);cursor:pointer;width:100%;
   }
   .opt .num{
-    flex:0 0 auto;width:30px;height:30px;border-radius:10px;background:#d9eef9;
+    flex:0 0 auto;width:29px;height:29px;border-radius:10px;background:#d9eef9;
     display:flex;align-items:center;justify-content:center;font-weight:900;font-size:15px;color:#2f7ea6;
   }
-  .opt .txt{display:flex;flex-direction:column;gap:1px;min-width:0;}
-  .opt .txt b{font-size:16px;font-weight:900;letter-spacing:-.01em;}
-  .opt .txt small{font-size:11.5px;font-weight:700;color:var(--ink-soft);line-height:1.25;}
+  .opt .num svg{display:block;}
+  .opt .txt{display:flex;flex-direction:column;gap:0;min-width:0;}
+  .opt .txt b{font-size:16px;font-weight:900;letter-spacing:-.01em;line-height:1.15;}
+  .opt .txt small{font-size:11px;font-weight:700;color:var(--ink-soft);line-height:1.2;}
   .opt.on{background:#fff7dc;border-color:var(--sun);box-shadow:0 0 0 2px rgba(255,207,63,.35) inset;}
   .opt.on .num{background:var(--sun);color:#5a3a00;}
   .opt:active{transform:scale(.99);}
+  .grade-desc{
+    font-size:11px;font-weight:700;color:#6b8fa3;line-height:1.35;
+    margin:0 2px 10px;text-align:center;min-height:30px;
+  }
   .best-line{
     font-size:12.5px;font-weight:800;color:#6d7f1f;background:#f4f9df;
-    border-radius:10px;padding:7px 10px;margin:0 0 10px;text-align:center;
+    border-radius:10px;padding:6px 9px;margin:0 0 9px;text-align:center;line-height:1.3;
   }
   .big-btn{
-    width:100%;height:62px;border:none;border-radius:20px;
+    width:100%;height:60px;border:none;border-radius:20px;
     background:linear-gradient(#5ed08b,#2fb457);color:#fff;
     font-family:inherit;font-size:21px;font-weight:900;letter-spacing:-.01em;
     box-shadow:0 5px 0 #1d8340,0 12px 24px rgba(6,50,74,.25);cursor:pointer;
@@ -231,7 +237,7 @@
   .quiz-top .say span{display:block;font-size:12px;font-weight:700;color:#7b93a3;margin-top:1px;}
   .qbox{
     background:#fff;border:2.5px solid #e6f2f8;border-radius:18px;
-    padding:12px 8px;text-align:center;
+    padding:11px 8px;text-align:center;
   }
   .question{
     font-size:clamp(26px,8.6vw,40px);font-weight:900;letter-spacing:.01em;
@@ -255,7 +261,7 @@
   .choice.right{background:#e4f9ea;border-color:var(--good);color:#1b7a3c;box-shadow:0 3px 0 #a8e3bb;}
   .choice.wrong{background:#fdeceb;border-color:var(--bad);color:#c2453d;opacity:.75;box-shadow:0 3px 0 #f6c9c6;}
   .hint-btn{
-    width:100%;min-height:48px;border-radius:14px;border:2.5px solid #ffd97a;
+    width:100%;min-height:46px;border-radius:14px;border:2.5px solid #ffd97a;
     background:#fff8e2;color:#a86a00;font-family:inherit;font-size:14.5px;font-weight:900;
     display:flex;align-items:center;justify-content:center;gap:7px;cursor:pointer;
   }
@@ -267,8 +273,10 @@
   .hint-grid{
     display:grid;grid-template-columns:repeat(5,30px);gap:7px;justify-content:center;
   }
+  .hint-grid.ten{grid-template-columns:repeat(10,24px);gap:4px;}
   .hint-ico{width:30px;height:30px;position:relative;display:block;}
   .hint-ico svg{width:30px;height:30px;display:block;}
+  .hint-grid.ten .hint-ico,.hint-grid.ten .hint-ico svg{width:24px;height:24px;}
   .hint-ico.crossed{opacity:.38;}
   .hint-ico.crossed .x{position:absolute;inset:0;}
   .hint-ico.known::after{
@@ -277,6 +285,27 @@
   }
   .hint-note{
     margin:9px 2px 0;font-size:12.5px;font-weight:800;color:#7a6a3a;text-align:center;line-height:1.45;
+  }
+  /* 세로셈 / 단계별 풀이 */
+  .colcalc{border-collapse:collapse;margin:4px auto 0;font-variant-numeric:tabular-nums;}
+  .colcalc td{
+    text-align:center;font-size:21px;font-weight:900;line-height:1.16;
+    padding:0 1.5px;color:var(--ink);min-width:0.66em;letter-spacing:-.01em;
+  }
+  .colcalc td.sign{color:#2f8fd6;font-size:19px;padding-right:7px;padding-left:2px;}
+  .colcalc tr.carry td{font-size:11.5px;line-height:1.05;color:#c2453d;height:14px;}
+  .colcalc tr.ans td{border-top:2.5px solid #7b93a3;padding-top:4px;color:#1f6d94;}
+  .hint-steps{margin:8px 2px 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px;}
+  .hint-steps li{display:flex;gap:7px;align-items:flex-start;}
+  .hint-steps .n{
+    flex:0 0 auto;width:19px;height:19px;border-radius:50%;background:#ffe6a8;color:#8a5a00;
+    font-size:11.5px;font-weight:900;display:flex;align-items:center;justify-content:center;margin-top:1px;
+  }
+  .hint-steps .st{font-size:13px;font-weight:800;color:#45606f;line-height:1.45;letter-spacing:-.01em;}
+  .hint-steps .st .eq{color:#1f6d94;font-weight:900;}
+  .hint-steps .lab{
+    display:inline-block;font-size:10.5px;font-weight:900;color:#a86a00;background:#fff3d1;
+    border-radius:6px;padding:1px 5px;margin-right:5px;vertical-align:1px;
   }
   .feedback{
     min-height:20px;text-align:center;font-size:13.5px;font-weight:900;color:#c2453d;line-height:1.4;
@@ -354,25 +383,32 @@
     .title-wrap p{display:none;}
     .title-wrap{margin:2px 0 auto 0;}
     .start-card{padding:10px;border-radius:22px;}
-    .opt{min-height:46px;padding:6px 10px;}
+    .opt{min-height:44px;padding:5px 9px;}
     .opt .txt b{font-size:15px;}
-    .opt .txt small{font-size:10.5px;}
-    .level-list{gap:6px;margin-bottom:8px;}
+    .opt .txt small{font-size:10px;}
+    .opt .num{width:26px;height:26px;border-radius:9px;font-size:13.5px;}
+    .level-list,.mode-list{gap:5px;margin-bottom:8px;}
+    .grade-grid{gap:5px;margin-bottom:5px;}
     .seg-title{margin-bottom:5px;}
+    .grade-desc{min-height:26px;font-size:10.5px;margin-bottom:8px;}
     .big-btn{height:54px;font-size:19px;}
     .ghost-btn{height:42px;margin-top:6px;font-size:14px;}
     .best-line{padding:5px 8px;margin-bottom:7px;font-size:11.5px;}
     .cast-btn{height:58px;font-size:19px;}
     .dex-btn{height:58px;}
-    .card{padding:10px;gap:8px;}
+    .card{padding:11px;gap:8px;}
     .question{font-size:clamp(24px,7.8vw,34px);}
     .choice{min-height:54px;font-size:clamp(20px,6.6vw,26px);}
-    .hint-btn{min-height:44px;font-size:13.5px;}
+    .hint-btn{min-height:42px;font-size:13.5px;}
     .badge{width:64px;height:44px;}
     .badge canvas{width:64px;height:44px;}
     .hint-grid{grid-template-columns:repeat(5,26px);gap:5px;}
     .hint-ico,.hint-ico svg{width:26px;height:26px;}
+    .hint-grid.ten{grid-template-columns:repeat(10,21px);gap:3px;}
+    .hint-grid.ten .hint-ico,.hint-grid.ten .hint-ico svg{width:21px;height:21px;}
     .hint-note{font-size:11.5px;margin-top:7px;}
+    .hint-steps .st{font-size:12px;}
+    .colcalc td{font-size:18px;}
   }
   @media (max-height:560px){
     .title-wrap{display:block;margin:0 0 4px 0;}
@@ -380,7 +416,7 @@
     .title-wrap p{display:none;}
     .start-card{padding:9px;max-height:calc(100% - 2px);margin-top:2px;}
     .level-list,.mode-list{flex-direction:row;gap:6px;margin-bottom:6px;}
-    .opt{flex:1 1 0;min-height:46px;padding:4px 7px;gap:6px;}
+    .opt{flex:1 1 0;min-height:42px;padding:4px 7px;gap:6px;}
     .opt .num{width:22px;height:22px;border-radius:7px;font-size:12px;}
     .opt .txt b{font-size:13px;}
     .opt .txt small{display:none;}
@@ -388,6 +424,7 @@
     .ghost-btn{height:32px;margin-top:4px;font-size:12px;border-radius:11px;}
     .best-line{margin-bottom:4px;padding:2px 8px;font-size:10px;}
     .seg-title{margin-bottom:3px;font-size:10px;}
+    .grade-desc{display:none;}
     .card{max-height:96vh;}
   }
   @media (min-width:820px){
@@ -396,8 +433,6 @@
     .cast-btn{flex:0 1 420px;height:68px;font-size:22px;}
     .dex-btn{width:88px;height:68px;font-size:12px;}
     .icon-btn{width:48px;height:48px;}
-  }
-  @media (min-width:820px){
     .start-card{max-width:470px;}
     .card{max-width:500px;}
   }
@@ -432,7 +467,7 @@
     <div class="bar"><i id="timerFill"></i></div>
     <div class="txt" id="timerText">60초</div>
   </div>
-  <div id="modePill" class="mode-pill hidden"><span id="modePillText">1단계 · 자유 낚시</span></div>
+  <div id="modePill" class="mode-pill hidden"><span id="modePillText">1학년 · 자유 낚시</span></div>
 
   <!-- bottom -->
   <div id="bottomBar" class="bottom hidden">
@@ -467,37 +502,42 @@
       <p>문제를 풀어 물고기를 잡아 보세요!</p>
     </div>
     <div class="start-card">
-      <div class="seg-title">난이도</div>
-      <div class="level-list" id="levelList">
-        <button class="opt" data-level="1">
+      <div class="seg-title">학년</div>
+      <div class="grade-grid" id="gradeList">
+        <button class="opt" data-grade="1">
           <span class="num">1</span>
-          <span class="txt"><b>쉬움</b><small>한 자리 수 · 합이 10까지</small></span>
+          <span class="txt"><b>1학년</b><small>기초 셈</small></span>
         </button>
-        <button class="opt" data-level="2">
+        <button class="opt" data-grade="2">
           <span class="num">2</span>
-          <span class="txt"><b>보통</b><small>받아올림 · 받아내림 · 십몇</small></span>
+          <span class="txt"><b>2학년</b><small>구구단</small></span>
         </button>
-        <button class="opt" data-level="3">
+        <button class="opt" data-grade="3">
           <span class="num">3</span>
-          <span class="txt"><b>도전</b><small>세 수 계산 · 빈칸 채우기</small></span>
+          <span class="txt"><b>3학년</b><small>곱셈·나눗셈</small></span>
+        </button>
+        <button class="opt" data-grade="4">
+          <span class="num">4</span>
+          <span class="txt"><b>4학년</b><small>소수·혼합</small></span>
         </button>
       </div>
+      <div class="grade-desc" id="gradeDesc">한 자리 수 덧셈·뺄셈, 10 만들기, 받아올림·내림</div>
       <div class="seg-title">놀이 모드</div>
-      <div class="level-list" id="modeList">
+      <div class="mode-list" id="modeList">
         <button class="opt" data-mode="free">
           <span class="num">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>
           </span>
           <span class="txt"><b>자유 낚시</b><small>시간 제한 없이 천천히</small></span>
         </button>
         <button class="opt" data-mode="timed">
           <span class="num">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M7 3h10"/><path d="M9 3v3l-3.5 4A6.5 6.5 0 0 0 12 20.5 6.5 6.5 0 0 0 18.5 10L15 6V3"/></svg>
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M7 3h10"/><path d="M9 3v3l-3.5 4A6.5 6.5 0 0 0 12 20.5 6.5 6.5 0 0 0 18.5 10L15 6V3"/></svg>
           </span>
           <span class="txt"><b>60초 도전</b><small>제한 시간 안에 최고 점수</small></span>
         </button>
       </div>
-      <div class="best-line" id="bestLine">최고 점수 0점</div>
+      <div class="best-line" id="bestLine">1학년 · 자유 낚시 최고 점수 0점</div>
       <button class="big-btn" id="startBtn">
         <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
           <path d="M8 5.5l11 6.5-11 6.5z" fill="#fff" stroke="none"/>
@@ -524,10 +564,10 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.5.4.8 1 .8 1.7h5.6c0-.7.3-1.3.8-1.7A6 6 0 0 0 12 3z"/>
         </svg>
-        그림으로 세어보기
+        <span id="hintBtnLabel">그림으로 세어보기</span>
       </button>
       <div class="hint-panel hidden" id="hintPanel">
-        <div class="hint-grid" id="hintGrid"></div>
+        <div id="hintBody"></div>
         <div class="hint-note" id="hintNote"></div>
       </div>
       <div class="feedback" id="feedback"></div>
@@ -558,7 +598,7 @@
   <div id="resultWrap" class="modal hidden">
     <div class="card result-card">
       <h2 id="resultTitle">시간이 다 됐어요!</h2>
-      <p class="sub">오늘도 열심히 문제를 풀었어요</p>
+      <p class="sub" id="resultSub">오늘도 열심히 문제를 풀었어요</p>
       <div class="big-score"><span id="resultScore">0</span><small>점</small></div>
       <div id="newRecord" class="new-record hidden">새 최고 기록!</div>
       <div class="result-rows">
@@ -579,11 +619,16 @@
 <script>
 "use strict";
 /* =====================================================================
-   숫자 낚시 - 초등학교 1학년용 수학 낚시 게임
+   숫자 낚시 - 초등학교 1~4학년 수학 낚시 게임
    단일 파일 / 외부 라이브러리 없음 / Canvas + CSS + Web Audio
    ===================================================================== */
 (function(){
-  const $ = (id) => document.getElementById(id);
+
+  /* =================================================================
+     PROBLEM-ENGINE-START
+     (이 구간은 순수 계산 코드만 담는다 — DOM 접근 없음.
+      단위 감사 스크립트는 이 구간을 그대로 떼어 내 검증한다.)
+     ================================================================= */
   const R = (a,b) => Math.floor(Math.random()*(b-a+1))+a;
   const pick = (a) => a[Math.floor(Math.random()*a.length)];
   const clamp = (v,a,b) => Math.min(b,Math.max(a,v));
@@ -595,15 +640,661 @@
     return (c - 0xAC00) % 28 !== 0;
   }
   function josa(word, withB, withoutB){ return word + (hasBatchim(word) ? withB : withoutB); }
+  /* 숫자는 읽는 소리로 받침을 정한다: 0영·1일·3삼·6육·7칠·8팔·10십 … */
+  const DIGIT_BATCHIM = {0:1,1:1,2:0,3:1,4:0,5:0,6:1,7:1,8:1,9:0};
+  function numJosa(v, withB, withoutB){
+    const s = String(v);
+    const d = '0123456789'.indexOf(s.charAt(s.length-1));
+    if(d < 0) return josa(s, withB, withoutB);
+    return s + (DIGIT_BATCHIM[d] ? withB : withoutB);
+  }
+
+  const BLANK = '<i class="blank">?</i>';
+  /* 소수 첫째 자리: 10분의 1 단위 정수(tenths) -> "1.9" (부동소수점 오차 없음) */
+  function fmt10(t){ return Math.floor(t/10) + '.' + (t%10); }
+  function fmtNum(n){ return String(n); }
+
+  /* ---- 보기(4지선다) 만들기 ---- */
+  const OFF_INT = [1,-1,2,-2,3,-3,5,-5,10,-10,20,-20,100,-100,9,-9,11,-11];
+  const OFF_TEN = [1,-1,2,-2,3,-3,5,-5,10,-10,20,-20,30,-30,40,-40];
+
+  function buildChoiceSet(ans, offs, min, max){
+    const out = [ans];
+    const sh = shuffle(offs.slice());
+    for(let i=0;i<sh.length && out.length<4;i++){
+      const v = ans + sh[i];
+      if(v < min || v > max) continue;
+      if(out.indexOf(v) !== -1) continue;
+      out.push(v);
+    }
+    let guard = 0;
+    const span = Math.max(2, Math.round(Math.abs(ans)*0.25));
+    while(out.length < 4 && guard++ < 400){
+      const v = ans + (Math.random()<0.5 ? -1 : 1) * R(1, span);
+      if(v < min || v > max || out.indexOf(v) !== -1) continue;
+      out.push(v);
+    }
+    let k = 1;
+    while(out.length < 4){ const v = ans + k; if(v >= min && out.indexOf(v) === -1) out.push(v); k++; }
+    return shuffle(out);
+  }
+  /* 정수 보기 4개 (문자열) */
+  function numChoices(ans, opt){
+    opt = opt || {};
+    const min = opt.min != null ? opt.min : 0;
+    const max = opt.max != null ? opt.max : Math.max(ans + 60, ans * 2 + 20);
+    return buildChoiceSet(ans, opt.offs || OFF_INT, min, max).map(fmtNum);
+  }
+  /* 소수 첫째 자리 보기 4개 (10분의 1 정수 -> "1.9") */
+  function decChoices(ansT, opt){
+    opt = opt || {};
+    const min = opt.min != null ? opt.min : 1;
+    const max = opt.max != null ? opt.max : Math.max(ansT + 30, ansT * 2 + 10);
+    return buildChoiceSet(ansT, opt.offs || OFF_TEN, min, max).map(fmt10);
+  }
+
+  /* ---- 힌트 구조 ----
+     apples: {type:'apples', items:[{t:0|1|2, m:'none'|'crossed'|'known'}], note}
+     steps : {type:'steps', col:null|{cols,rows}, steps:[{label,text}], note}
+     세로셈 rows: {cls:'carry'|'ans'|'', sign:'+'|'-'|'', cells:['','4','7']} */
+  function its(n, tone){
+    const a = [];
+    for(let i=0;i<n;i++) a.push({t: tone||0, m:'none'});
+    return a;
+  }
+  function appleHint(items, note){ return {type:'apples', items, note: note || ''}; }
+  function stepsHint(steps, note, col){ return {type:'steps', col: col || null, steps, note: note || ''}; }
+
+  function padDigits(n, w){
+    const s = String(n), out = [];
+    for(let i=0;i<w-s.length;i++) out.push('');
+    for(let i=0;i<s.length;i++) out.push(s[i]);
+    return out;
+  }
+  function colAdd(a,b){
+    const ans = a + b;
+    const w = Math.max(String(a).length, String(b).length, String(ans).length);
+    const carry = new Array(w).fill('');
+    let c = 0;
+    for(let i=w-1;i>=0;i--){
+      const da = Math.floor(a / Math.pow(10, w-1-i)) % 10;
+      const db = Math.floor(b / Math.pow(10, w-1-i)) % 10;
+      const s = da + db + c;
+      c = s >= 10 ? 1 : 0;
+      if(c && i > 0) carry[i-1] = '1';
+    }
+    return {cols:w, rows:[
+      {cls:'carry', sign:'', cells:carry},
+      {cls:'', sign:'+', cells:padDigits(a,w)},
+      {cls:'', sign:'', cells:padDigits(b,w)},
+      {cls:'ans', sign:'', cells:padDigits(ans,w)}
+    ]};
+  }
+  function colSub(a,b){
+    const ans = a - b;
+    const w = Math.max(String(a).length, String(b).length, String(ans).length);
+    return {cols:w, rows:[
+      {cls:'', sign:'-', cells:padDigits(a,w)},
+      {cls:'', sign:'', cells:padDigits(b,w)},
+      {cls:'ans', sign:'', cells:padDigits(ans,w)}
+    ]};
+  }
+  function colDec(ta, tb, op){
+    const sa = fmt10(ta), sb = fmt10(tb), sr = fmt10(op === '+' ? ta+tb : ta-tb);
+    const w = Math.max(sa.length, sb.length, sr.length);
+    const pad = (s)=>{
+      const o = [];
+      for(let i=0;i<w-s.length;i++) o.push('');
+      for(let i=0;i<s.length;i++) o.push(s[i]);
+      return o;
+    };
+    return {cols:w, rows:[
+      {cls:'', sign:op, cells:pad(sa)},
+      {cls:'', sign:'', cells:pad(sb)},
+      {cls:'ans', sign:'', cells:pad(sr)}
+    ]};
+  }
+  /* 세로셈에서 한 자리씩 계산하는 값을 만들어 준다 (텍스트와 검산이 같은 수를 쓴다) */
+  function placeAdd(a, b){
+    const ans = a + b;
+    const da = String(a).split('').reverse().map(Number);
+    const db = String(b).split('').reverse().map(Number);
+    const dr = String(ans).split('').reverse().map(Number);
+    const n = Math.max(da.length, db.length);
+    const out = [];
+    let carry = 0;
+    for(let i=0;i<n;i++){
+      const x = da[i] || 0, y = db[i] || 0;
+      const sum = x + y + carry;
+      out.push({i, x, y, cin: carry, sum, digit: sum % 10, cout: sum >= 10 ? 1 : 0});
+      carry = sum >= 10 ? 1 : 0;
+    }
+    if(carry) out.push({i:n, x:0, y:0, cin:carry, sum:carry, digit:carry, cout:0});
+    return {ans, places: out};
+  }
+
+  /* ---- 문제 객체 ---- */
+  function prob(o){
+    const answer = o.answer != null ? String(o.answer) : String(o.ansNum);
+    let choices = o.choices ? o.choices.slice() : numChoices(o.ansNum, o.choiceOpt);
+    if(choices.indexOf(answer) === -1) choices[0] = answer;
+    return {
+      grade: o.grade,
+      kind: o.kind,
+      text: o.text,
+      prompt: o.prompt || o.text.replace('?', BLANK),
+      answer: answer,
+      choices: choices,
+      blank: !!o.blank,
+      hint: o.hint,
+      data: o.data || {}
+    };
+  }
+
+  /* ================= 초1 ================= */
+  function g1Add(){
+    const a = R(1,9), b = R(1, 10-a), ans = a+b;
+    const items = its(a,0).concat(its(b,1));
+    return prob({grade:1, kind:'g1_add', ansNum:ans, choiceOpt:{min:1,max:18},
+      text:`${a} + ${b} = ?`,
+      hint: appleHint(items, `빨간 사과 ${a}개와 파란 사과 ${b}개를 모두 세어 보세요.`),
+      data:{a,b,op:'+'}});
+  }
+  function g1Sub(){
+    const a = R(3,10), b = R(1, a-1), ans = a-b;
+    const items = its(a,0);
+    for(let i=items.length-b;i<items.length;i++) items[i].m = 'crossed';
+    return prob({grade:1, kind:'g1_sub', ansNum:ans, choiceOpt:{min:1,max:10},
+      text:`${a} - ${b} = ?`,
+      hint: appleHint(items, `${a}개 중에서 ${b}개에 X표 했어요. 남은 사과를 세어 보세요.`),
+      data:{a,b,op:'-'}});
+  }
+  function g1Make10(){
+    const a = R(1,9), ans = 10-a;
+    const items = its(10,0);
+    for(let i=0;i<a;i++){ items[i].m = 'known'; items[i].t = 1; }
+    return prob({grade:1, kind:'g1_make10', ansNum:ans, choiceOpt:{min:1,max:10},
+      text:`${a} + ? = 10`, blank:true,
+      hint: appleHint(items, `모두 10개가 되어야 해요. 파란 사과 ${a}개 말고 남은 사과를 세어 보세요.`),
+      data:{a,b:ans,op:'make10'}});
+  }
+  function g1CarryAdd(){
+    const a = R(2,9), b = R(Math.max(2, 11-a), 9), ans = a+b;
+    const items = its(a,0).concat(its(b,1));
+    return prob({grade:1, kind:'g1_carry_add', ansNum:ans, choiceOpt:{min:11,max:20},
+      text:`${a} + ${b} = ?`,
+      hint: appleHint(items, `10개씩 묶어서 세어 보세요. ${a}개와 ${b}개를 모으면 10개가 넘어요.`),
+      data:{a,b,op:'+'}});
+  }
+  function g1TeenSub(){
+    const a = R(11,18), b = R(2, Math.min(9, a-2)), ans = a-b;
+    const items = its(a,0);
+    for(let i=items.length-b;i<items.length;i++) items[i].m = 'crossed';
+    return prob({grade:1, kind:'g1_teen_sub', ansNum:ans, choiceOpt:{min:1,max:18},
+      text:`${a} - ${b} = ?`,
+      hint: appleHint(items, `${a}개에서 ${b}개를 빼요. 10개 묶음에서 하나를 풀어서 빼 보세요.`),
+      data:{a,b,op:'-'}});
+  }
+  function g1TwoAdd(){
+    const a = 10 + R(1,8), b = R(1, 9-(a-10)), ans = a+b;
+    const items = its(a,0).concat(its(b,1));
+    return prob({grade:1, kind:'g1_two_add', ansNum:ans, choiceOpt:{min:11,max:20},
+      text:`${a} + ${b} = ?`,
+      hint: appleHint(items, `10개 묶음은 그대로 두고, 낱개끼리 모아 세어 보세요.`),
+      data:{a,b,op:'+'}});
+  }
+  function g1TwoSub(){
+    const a = 10 + R(1,9), b = R(1, a-10), ans = a-b;
+    const items = its(a,0);
+    for(let i=items.length-b;i<items.length;i++) items[i].m = 'crossed';
+    return prob({grade:1, kind:'g1_two_sub', ansNum:ans, choiceOpt:{min:1,max:19},
+      text:`${a} - ${b} = ?`,
+      hint: appleHint(items, `10개 묶음은 그대로 두고, 낱개에서 ${b}개를 빼 보세요.`),
+      data:{a,b,op:'-'}});
+  }
+
+  /* ================= 초2 ================= */
+  function g2Add2(){
+    let a=0, b=0;
+    for(let i=0;i<200;i++){
+      a = R(12,79);
+      b = R(13, 96-a);
+      if(b < 13) continue;
+      if((a%10) + (b%10) < 10) continue;
+      break;
+    }
+    const ans = a+b;
+    const oA = a%10, oB = b%10, tA = Math.floor(a/10), tB = Math.floor(b/10);
+    const os = placeAdd(a,b);
+    const ones = os.places[0];
+    const tens = os.places[1];
+    return prob({grade:2, kind:'g2_add2', ansNum:ans, choiceOpt:{min:20,max:99},
+      text:`${a} + ${b} = ?`,
+      hint: stepsHint([
+        {label:'일의 자리', text:`${oA} + ${oB} = ${ones.sum} → ${numJosa(ones.digit,'을','를')} 쓰고 1을 십의 자리로 올려요.`},
+        {label:'십의 자리', text:`${tA} + ${tB} + 1 = ${tens.sum}`},
+        {label:'답', text:`${a} + ${b} = ${ans}`}
+      ], '받아올림이 있어요. 일의 자리부터 차례로 계산해요.', colAdd(a,b)),
+      data:{a,b,op:'+',onesSum:ones.sum,carry:1,onesDigit:ones.digit,tensSum:tens.sum}});
+  }
+  function g2Sub2(){
+    let a=0, b=0;
+    for(let i=0;i<300;i++){
+      a = R(21,99);
+      b = R(11, a-1);
+      if((a%10) >= (b%10)) continue;
+      break;
+    }
+    const ans = a-b;
+    const oA = a%10, oB = b%10, tA = Math.floor(a/10), tB = Math.floor(b/10);
+    const onesRes = oA + 10 - oB;
+    const tensRes = tA - 1 - tB;
+    return prob({grade:2, kind:'g2_sub2', ansNum:ans, choiceOpt:{min:1,max:98},
+      text:`${a} - ${b} = ?`,
+      hint: stepsHint([
+        {label:'일의 자리', text:`${oA}에서 ${numJosa(oB,'을','를')} 뺄 수 없어요. 십의 자리에서 10을 빌려 와서 ${oA+10} - ${oB} = ${onesRes}`},
+        {label:'십의 자리', text:`${tA} - 1 - ${tB} = ${tensRes}`},
+        {label:'답', text:`${ans} + ${b} = ${a} 이니까 답은 ${numJosa(ans,'이에요','예요')}.`}
+      ], '받아내림이 있어요. 십의 자리에서 10을 빌려 와요.', colSub(a,b)),
+      data:{a,b,op:'-',onesBorrow:oA+10,onesRes,tensRes}});
+  }
+  function g2Mul(){
+    const a = R(2,9), b = R(2,9), ans = a*b;
+    const terms = [];
+    for(let i=0;i<b;i++) terms.push(a);
+    return prob({grade:2, kind:'g2_mul', ansNum:ans, choiceOpt:{min:1,max:81},
+      text:`${a} × ${b} = ?`,
+      hint: stepsHint([
+        {label:'뜻', text:`${a} × ${numJosa(b,'은','는')} ${a}를 ${b}번 더한 거예요.`},
+        {label:'더하기', text:`${terms.join(' + ')} = ${ans}`},
+        {label:'답', text:`${a} × ${b} = ${ans}`}
+      ], '구구단을 외우면 더 빨리 풀 수 있어요.'),
+      data:{a,b,op:'×',terms,prod:ans}});
+  }
+  function g2Three(){
+    if(Math.random() < 0.5){
+      const a = R(21,60), b = R(11,30), s = a+b;
+      const c = R(5, s-1), ans = s-c;
+      return prob({grade:2, kind:'g2_three_add_sub', ansNum:ans, choiceOpt:{min:1,max:99},
+        text:`${a} + ${b} - ${c} = ?`,
+        hint: stepsHint([
+          {label:'앞에서부터', text:`${a} + ${b} = ${s}`},
+          {label:'이어서', text:`${s} - ${c} = ${ans}`},
+          {label:'답', text:`${a} + ${b} - ${c} = ${ans}`}
+        ], '세 수는 앞에서부터 차례로 계산해요.'),
+        data:{a,b,c,op:'+-'}});
+    }
+    const a = R(31,80), b = R(11, a-1), s = a-b;
+    const c = R(3, 20), ans = s+c;
+    return prob({grade:2, kind:'g2_three_sub_add', ansNum:ans, choiceOpt:{min:1,max:99},
+      text:`${a} - ${b} + ${c} = ?`,
+      hint: stepsHint([
+        {label:'앞에서부터', text:`${a} - ${b} = ${s}`},
+        {label:'이어서', text:`${s} + ${c} = ${ans}`},
+        {label:'답', text:`${a} - ${b} + ${c} = ${ans}`}
+      ], '세 수는 앞에서부터 차례로 계산해요.'),
+      data:{a,b,c,op:'-+'}});
+  }
+  function g2BlankMul(){
+    const a = R(2,9), b = R(2,9), p = a*b;
+    const left = Math.random() < 0.5;
+    return prob({grade:2, kind:'g2_blank_mul', ansNum:b, choiceOpt:{min:2,max:9},
+      text: left ? `${a} × ? = ${p}` : `? × ${a} = ${p}`, blank:true,
+      hint: stepsHint([
+        {label:'구구단', text:`${a} × ${b} = ${p}`},
+        {label:'빈칸', text:`${a} × ? = ${p} 이니까 빈칸은 ${numJosa(b,'이에요','예요')}.`}
+      ], '곱해서 나온 수를 보고 몇 번 곱했는지 찾아요.'),
+      data:{a,b,prod:p,op:'blank-mul'}});
+  }
+  function g2BlankAdd(){
+    const a = R(11,60), ansV = R(11, Math.min(39, 99-a)), c = a + ansV;
+    const left = Math.random() < 0.5;
+    return prob({grade:2, kind:'g2_blank_add', ansNum:ansV, choiceOpt:{min:5,max:60},
+      text: left ? `${a} + ? = ${c}` : `? + ${a} = ${c}`, blank:true,
+      hint: stepsHint([
+        {label:'생각하기', text:`빈칸은 ${c}에서 ${a}를 뺀 수예요.`},
+        {label:'계산', text:`${c} - ${a} = ${ansV}`}
+      ], '더하기 빈칸은 빼기로 찾을 수 있어요.'),
+      data:{a,b:ansV,sum:c,op:'blank-add'}});
+  }
+
+  /* ================= 초3 ================= */
+  function g3Add3(){
+    let a=0, b=0;
+    for(let i=0;i<300;i++){
+      a = R(105,499);
+      b = R(105, 899-a);
+      if((a%10) + (b%10) < 10) continue;
+      break;
+    }
+    const ans = a+b;
+    const ps = placeAdd(a,b).places;
+    const addLine = (pl)=>{
+      const parts = [pl.x, pl.y];
+      if(pl.cin) parts.push(pl.cin);
+      return `${parts.join(' + ')} = ${pl.sum}`;
+    };
+    const carryLine = (pl, next)=>{
+      return pl.cout ? ` → ${numJosa(pl.digit,'을','를')} 쓰고 1을 ${josa(next,'으로','로')} 올려요.` : '';
+    };
+    const steps = [{label:'일의 자리', text:`${ps[0].x} + ${ps[0].y} = ${ps[0].sum}` + carryLine(ps[0], '십의 자리')}];
+    steps.push({label:'십의 자리', text: addLine(ps[1]) + carryLine(ps[1], '백의 자리')});
+    steps.push({label:'백의 자리', text: addLine(ps[2])});
+    steps.push({label:'답', text:`${a} + ${b} = ${ans}`});
+    return prob({grade:3, kind:'g3_add3', ansNum:ans, choiceOpt:{min:200,max:999},
+      text:`${a} + ${b} = ?`,
+      hint: stepsHint(steps, '일의 자리부터 차례로 더해요.', colAdd(a,b)),
+      data:{a,b,op:'+',onesSum:ps[0].sum,tensSum:ps[1].sum,hundSum:ps[2].sum}});
+  }
+  function g3Sub3(){
+    let a=0, b=0;
+    for(let i=0;i<400;i++){
+      a = R(241, 899);
+      if(a % 100 < 20) continue;
+      b = R(112, a-101);
+      if(b % 100 < 10) continue;
+      if((a%10) >= (b%10) && (Math.floor(a/10)%10) >= (Math.floor(b/10)%10)) continue;
+      break;
+    }
+    const ans = a-b;
+    const oA = a%10, oB = b%10, tA = Math.floor(a/10)%10, tB = Math.floor(b/10)%10;
+    const hA = Math.floor(a/100), hB = Math.floor(b/100);
+    const bor1 = oA < oB ? 1 : 0;
+    const oRes = oA + 10*bor1 - oB;
+    const tTop = tA - bor1;
+    const bor2 = tTop < tB ? 1 : 0;
+    const tRes = tTop + 10*bor2 - tB;
+    const hRes = hA - bor2 - hB;
+    const onesText = bor1
+      ? `${oA}에서 ${numJosa(oB,'을','를')} 뺄 수 없어요. 십의 자리에서 10을 빌려 와서 ${oA+10} - ${oB} = ${oRes}`
+      : `${oA} - ${oB} = ${oRes}`;
+    const tensText = bor2
+      ? `${tTop}에서 ${numJosa(tB,'을','를')} 뺄 수 없어요. 백의 자리에서 10을 빌려 와서 ${tTop+10} - ${tB} = ${tRes}`
+      : `${tTop} - ${tB} = ${tRes}`;
+    const hundText = bor2 ? `${hA} - 1 - ${hB} = ${hRes}` : `${hA} - ${hB} = ${hRes}`;
+    return prob({grade:3, kind:'g3_sub3', ansNum:ans, choiceOpt:{min:101,max:899},
+      text:`${a} - ${b} = ?`,
+      hint: stepsHint([
+        {label:'일의 자리', text: onesText},
+        {label:'십의 자리', text: tensText},
+        {label:'백의 자리', text: hundText},
+        {label:'확인', text:`${ans} + ${b} = ${a} 이니까 답은 ${numJosa(ans,'이에요','예요')}.`}
+      ], '자리마다 빌려 오는 수가 있는지 확인해요.', colSub(a,b)),
+      data:{a,b,op:'-',oA,oB,tA,tB,hA,hB,bor1,bor2,oRes,tRes,hRes}});
+  }
+  function g3Mul2x1(){
+    let a = R(12,49);
+    if(a % 10 === 0) a += 1;
+    const b = R(2,9), ans = a*b;
+    const t = Math.floor(a/10)*10, o = a%10;
+    return prob({grade:3, kind:'g3_mul2x1', ansNum:ans, choiceOpt:{min:20,max:450},
+      text:`${a} × ${b} = ?`,
+      hint: stepsHint([
+        {label:'나누기', text:`${numJosa(a,'을','를')} ${t}과 ${o}로 나눠요.`},
+        {label:'십의 자리', text:`${t} × ${b} = ${t*b}`},
+        {label:'일의 자리', text:`${o} × ${b} = ${o*b}`},
+        {label:'더하기', text:`${t*b} + ${o*b} = ${ans}`}
+      ], '십의 자리와 일의 자리를 따로 곱한 뒤 더해요.'),
+      data:{a,b,op:'×',t,o}});
+  }
+  function g3Div(){
+    const q = R(2,9), d = R(2,9), n = q*d;
+    return prob({grade:3, kind:'g3_div', ansNum:q, choiceOpt:{min:1,max:9},
+      text:`${n} ÷ ${d} = ?`,
+      hint: stepsHint([
+        {label:'구구단에서', text:`${d} × ${q} = ${n}`},
+        {label:'그래서', text:`${n} ÷ ${d} = ${q}`}
+      ], '곱셈 구구를 거꾸로 생각하면 나눗셈이 돼요.'),
+      data:{d,q,n,op:'÷'}});
+  }
+  function g3BlankDiv(){
+    const d = R(2,9), q = R(2,9), ans = d*q;
+    return prob({grade:3, kind:'g3_blank_div', ansNum:ans, choiceOpt:{min:2,max:81},
+      text:`? ÷ ${d} = ${q}`, blank:true,
+      hint: stepsHint([
+        {label:'곱하기로', text:`나누기 ${d}는 곱하기 ${d}의 반대예요. ? 는 ${d} × ${q} 예요.`},
+        {label:'계산', text:`${d} × ${q} = ${ans}`}
+      ], '나눗셈 빈칸은 곱셈으로 찾아요.'),
+      data:{d,q,ans,op:'blank-div'}});
+  }
+  const UNITS = [
+    {from:'m', to:'cm', mul:100},
+    {from:'km', to:'m', mul:1000},
+    {from:'kg', to:'g', mul:1000},
+    {from:'L', to:'mL', mul:1000},
+    {from:'cm', to:'mm', mul:10}
+  ];
+  function g3Unit(){
+    const u = pick(UNITS);
+    const a = R(2,9), ans = a*u.mul;
+    const cands = [a, a*10, a*100, u.mul];
+    const extra = [];
+    cands.forEach(v=>{ if(v>0 && v !== ans && extra.indexOf(v) === -1 && v <= ans*10) extra.push(v); });
+    const chosen = [ans].concat(shuffle(extra).slice(0,3));
+    let k = 1;
+    while(chosen.length < 4){ const v = ans + k*u.mul; if(chosen.indexOf(v) === -1) chosen.push(v); k++; }
+    return prob({grade:3, kind:'g3_unit', answer:ans,
+      choices: shuffle(chosen.slice(0,4)).map(fmtNum),
+      text:`${a} ${u.from} = ? ${u.to}`, blank:true,
+      hint: stepsHint([
+        {label:'약속', text:`1 ${u.from} = ${u.mul} ${u.to}`},
+        {label:'계산', text:`${a} × ${u.mul} = ${ans}`},
+        {label:'답', text:`${a} ${u.from} = ${ans} ${u.to}`}
+      ], `${u.from}를 ${u.to}로 바꾸면 ${u.mul}배가 돼요.`),
+      data:{a,unitFrom:u.from,unitTo:u.to,mul:u.mul,ans,op:'unit'}});
+  }
+
+  /* ================= 초4 ================= */
+  function g4Mul2x2(){
+    let b = R(12,29);
+    if(b % 10 === 0) b += 1;
+    const a = R(12,45), ans = a*b;
+    const t = Math.floor(b/10)*10, o = b%10;
+    return prob({grade:4, kind:'g4_mul2x2', ansNum:ans, choiceOpt:{min:100,max:1600,offs:[1,-1,10,-10,100,-100,20,-20,50,-50,2,-2,5,-5]},
+      text:`${a} × ${b} = ?`,
+      hint: stepsHint([
+        {label:'나누기', text:`${numJosa(b,'을','를')} ${t}과 ${o}로 나눠요.`},
+        {label:'십의 자리', text:`${a} × ${t} = ${a*t}`},
+        {label:'일의 자리', text:`${a} × ${o} = ${a*o}`},
+        {label:'더하기', text:`${a*t} + ${a*o} = ${ans}`}
+      ], '곱하는 수를 십의 자리와 일의 자리로 나눠서 곱해요.'),
+      data:{a,b,op:'×',t,o,part1:a*t,part2:a*o}});
+  }
+  function g4Div(){
+    let d, q, n;
+    if(Math.random() < 0.62){
+      d = R(2,9); q = R(12,49);
+    } else {
+      d = R(11,19); q = R(11,19);
+    }
+    n = d*q;
+    return prob({grade:4, kind:'g4_div', ansNum:q, choiceOpt:{min:2,max:60,offs:[1,-1,2,-2,3,-3,5,-5,10,-10,20,-20]},
+      text:`${n} ÷ ${d} = ?`,
+      hint: stepsHint([
+        {label:'곱하기로', text:`${d} × ? = ${n} 인 수를 찾아요.`},
+        {label:'확인', text:`${d} × ${q} = ${n}`},
+        {label:'답', text:`${n} ÷ ${d} = ${q}`}
+      ], '나눗셈은 곱해서 확인할 수 있어요.'),
+      data:{d,q,n,op:'÷'}});
+  }
+  function g4Mixed(){
+    const kind = R(1,8);
+    if(kind === 1){
+      const a = R(3,40), b = R(2,9), c = R(2,9), p = b*c, ans = a+p;
+      return prob({grade:4, kind:'g4_mixed', ansNum:ans, choiceOpt:{min:3,max:120},
+        text:`${a} + ${b} × ${c} = ?`,
+        hint: stepsHint([
+          {label:'먼저', text:`곱셈을 먼저 계산해요: ${b} × ${c} = ${p}`},
+          {label:'다음', text:`${a} + ${p} = ${ans}`},
+          {label:'답', text:`${a} + ${b} × ${c} = ${ans}`}
+        ], '곱셈과 나눗셈을 덧셈·뺄셈보다 먼저 계산해요.'),
+        data:{a,b,c,op:'+*',prod:p}});
+    }
+    if(kind === 2){
+      const b = R(2,9), c = R(2,9), p = b*c, a = p + R(1,30), ans = a-p;
+      return prob({grade:4, kind:'g4_mixed', ansNum:ans, choiceOpt:{min:1,max:120},
+        text:`${a} - ${b} × ${c} = ?`,
+        hint: stepsHint([
+          {label:'먼저', text:`곱셈을 먼저 계산해요: ${b} × ${c} = ${p}`},
+          {label:'다음', text:`${a} - ${p} = ${ans}`},
+          {label:'답', text:`${a} - ${b} × ${c} = ${ans}`}
+        ], '곱셈과 나눗셈을 덧셈·뺄셈보다 먼저 계산해요.'),
+        data:{a,b,c,op:'-*',prod:p}});
+    }
+    if(kind === 3){
+      const a = R(2,12), b = R(2,9), c = R(2,30), p = a*b, ans = p+c;
+      return prob({grade:4, kind:'g4_mixed', ansNum:ans, choiceOpt:{min:4,max:130},
+        text:`${a} × ${b} + ${c} = ?`,
+        hint: stepsHint([
+          {label:'먼저', text:`곱셈을 먼저 계산해요: ${a} × ${b} = ${p}`},
+          {label:'다음', text:`${p} + ${c} = ${ans}`},
+          {label:'답', text:`${a} × ${b} + ${c} = ${ans}`}
+        ], '곱셈과 나눗셈을 덧셈·뺄셈보다 먼저 계산해요.'),
+        data:{a,b,c,op:'*+',prod:p}});
+    }
+    if(kind === 4){
+      const a = R(2,12), b = R(2,9), p = a*b, c = R(1, p-1), ans = p-c;
+      return prob({grade:4, kind:'g4_mixed', ansNum:ans, choiceOpt:{min:1,max:120},
+        text:`${a} × ${b} - ${c} = ?`,
+        hint: stepsHint([
+          {label:'먼저', text:`곱셈을 먼저 계산해요: ${a} × ${b} = ${p}`},
+          {label:'다음', text:`${p} - ${c} = ${ans}`},
+          {label:'답', text:`${a} × ${b} - ${c} = ${ans}`}
+        ], '곱셈과 나눗셈을 덧셈·뺄셈보다 먼저 계산해요.'),
+        data:{a,b,c,op:'*-',prod:p}});
+    }
+    if(kind === 5){
+      const a = R(2,20), b = R(2,20), c = R(2,9), s = a+b, ans = s*c;
+      return prob({grade:4, kind:'g4_mixed', ansNum:ans, choiceOpt:{min:8,max:400},
+        text:`(${a} + ${b}) × ${c} = ?`,
+        hint: stepsHint([
+          {label:'괄호 먼저', text:`괄호 안을 먼저 계산해요: ${a} + ${b} = ${s}`},
+          {label:'다음', text:`${s} × ${c} = ${ans}`},
+          {label:'답', text:`(${a} + ${b}) × ${c} = ${ans}`}
+        ], '괄호가 있으면 괄호 안을 가장 먼저 계산해요.'),
+        data:{a,b,c,op:'(+)',inner:s}});
+    }
+    if(kind === 6){
+      const b = R(2,15), a = b + R(2,25), c = R(2,9), s = a-b, ans = s*c;
+      return prob({grade:4, kind:'g4_mixed', ansNum:ans, choiceOpt:{min:4,max:300},
+        text:`(${a} - ${b}) × ${c} = ?`,
+        hint: stepsHint([
+          {label:'괄호 먼저', text:`괄호 안을 먼저 계산해요: ${a} - ${b} = ${s}`},
+          {label:'다음', text:`${s} × ${c} = ${ans}`},
+          {label:'답', text:`(${a} - ${b}) × ${c} = ${ans}`}
+        ], '괄호가 있으면 괄호 안을 가장 먼저 계산해요.'),
+        data:{a,b,c,op:'(-)',inner:s}});
+    }
+    if(kind === 7){
+      const b = R(2,9), q = R(2,12), a = b*q, c = R(2,30), ans = q+c;
+      return prob({grade:4, kind:'g4_mixed', ansNum:ans, choiceOpt:{min:3,max:100},
+        text:`${a} ÷ ${b} + ${c} = ?`,
+        hint: stepsHint([
+          {label:'먼저', text:`나눗셈을 먼저 계산해요: ${a} ÷ ${b} = ${q}`},
+          {label:'다음', text:`${q} + ${c} = ${ans}`},
+          {label:'답', text:`${a} ÷ ${b} + ${c} = ${ans}`}
+        ], '곱셈과 나눗셈을 덧셈·뺄셈보다 먼저 계산해요.'),
+        data:{a,b,c,op:'/+',q}});
+    }
+    const c = R(2,9), q = R(2,12), b = c*q, a = R(2,40), ans = a+q;
+    return prob({grade:4, kind:'g4_mixed', ansNum:ans, choiceOpt:{min:3,max:100},
+      text:`${a} + ${b} ÷ ${c} = ?`,
+      hint: stepsHint([
+        {label:'먼저', text:`나눗셈을 먼저 계산해요: ${b} ÷ ${c} = ${q}`},
+        {label:'다음', text:`${a} + ${q} = ${ans}`},
+        {label:'답', text:`${a} + ${b} ÷ ${c} = ${ans}`}
+      ], '곱셈과 나눗셈을 덧셈·뺄셈보다 먼저 계산해요.'),
+      data:{a,b,c,op:'+/',q}});
+  }
+  function g4Decimal(){
+    if(Math.random() < 0.5){
+      const ta = R(10,88), tb = R(10, 199-ta), ansT = ta+tb;
+      return prob({grade:4, kind:'g4_decimal_add', answer: fmt10(ansT),
+        choices: decChoices(ansT),
+        text:`${fmt10(ta)} + ${fmt10(tb)} = ?`,
+        hint: stepsHint([
+          {label:'0.1이 몇 개?', text:`${numJosa(fmt10(ta),'은','는')} 0.1이 ${ta}개, ${numJosa(fmt10(tb),'은','는')} 0.1이 ${tb}개예요.`},
+          {label:'개수끼리', text:`${ta} + ${tb} = ${ansT}`},
+          {label:'소수로', text:`0.1이 ${ansT}개는 ${fmt10(ansT)}예요.`}
+        ], '소수점을 맞춰서 계산해요.', colDec(ta,tb,'+')),
+        data:{ta,tb,op:'+',ansT}});
+    }
+    const ta = R(20,99), tb = R(10, ta-1), ansT = ta-tb;
+    return prob({grade:4, kind:'g4_decimal_sub', answer: fmt10(ansT),
+      choices: decChoices(ansT),
+      text:`${fmt10(ta)} - ${fmt10(tb)} = ?`,
+      hint: stepsHint([
+        {label:'0.1이 몇 개?', text:`${numJosa(fmt10(ta),'은','는')} 0.1이 ${ta}개, ${numJosa(fmt10(tb),'은','는')} 0.1이 ${tb}개예요.`},
+        {label:'개수끼리', text:`${ta} - ${tb} = ${ansT}`},
+        {label:'소수로', text:`0.1이 ${ansT}개는 ${fmt10(ansT)}예요.`}
+      ], '소수점을 맞춰서 계산해요.', colDec(ta,tb,'-')),
+      data:{ta,tb,op:'-',ansT}});
+  }
+
+  /* ================= 학년별 출제 ================= */
+  const GRADE_INFO = {
+    1:{name:'1학년', tag:'기초 셈', desc:'한 자리 수 덧셈·뺄셈, 10 만들기, 받아올림·받아내림, 두 자리 ± 한 자리'},
+    2:{name:'2학년', tag:'구구단', desc:'받아올림·내림이 있는 두 자리 덧셈·뺄셈, 구구단, 세 수 계산, 빈칸 채우기'},
+    3:{name:'3학년', tag:'곱셈·나눗셈', desc:'세 자리 수 덧셈·뺄셈, (두 자리)×(한 자리), 나눗셈, 단위 바꾸기'},
+    4:{name:'4학년', tag:'소수·혼합', desc:'(두 자리)×(두 자리), 나눗셈, 사칙 혼합계산, 소수 첫째 자리 덧셈·뺄셈'}
+  };
+
+  function genG1(){
+    const r = Math.random();
+    if(r < 0.20) return g1Add();
+    if(r < 0.38) return g1Sub();
+    if(r < 0.52) return g1Make10();
+    if(r < 0.68) return g1CarryAdd();
+    if(r < 0.82) return g1TeenSub();
+    if(r < 0.91) return g1TwoAdd();
+    return g1TwoSub();
+  }
+  function genG2(){
+    const r = Math.random();
+    if(r < 0.26) return g2Add2();
+    if(r < 0.50) return g2Sub2();
+    if(r < 0.70) return g2Mul();
+    if(r < 0.84) return g2Three();
+    if(r < 0.93) return g2BlankMul();
+    return g2BlankAdd();
+  }
+  function genG3(){
+    const r = Math.random();
+    if(r < 0.24) return g3Add3();
+    if(r < 0.48) return g3Sub3();
+    if(r < 0.70) return g3Mul2x1();
+    if(r < 0.84) return g3Div();
+    if(r < 0.93) return g3BlankDiv();
+    return g3Unit();
+  }
+  function genG4(){
+    const r = Math.random();
+    if(r < 0.26) return g4Mul2x2();
+    if(r < 0.48) return g4Div();
+    if(r < 0.78) return g4Mixed();
+    return g4Decimal();
+  }
+  function makeProblemFor(grade){
+    const g = Number(grade);
+    if(g === 4) return genG4();
+    if(g === 3) return genG3();
+    if(g === 2) return genG2();
+    return genG1();
+  }
+  /* =================================================================
+     PROBLEM-ENGINE-END
+     ================================================================= */
+
+  const $ = (id) => document.getElementById(id);
 
   /* ---------------------------------------------------------------
      저장 (localStorage, 실패해도 게임은 계속)
   ----------------------------------------------------------------*/
   const SAVE_KEY = 'mathFishingSave_v1';
   const defaultSave = () => ({
-    level:1, mode:'free', mute:false,
+    grade:1, mode:'free', mute:false,
     caught:{}, solved:0, correct:0,
-    best:{ free:{1:0,2:0,3:0}, timed:{1:0,2:0,3:0} }
+    best:{ free:{1:0,2:0,3:0,4:0}, timed:{1:0,2:0,3:0,4:0} }
   });
   let save = defaultSave();
   function loadSave(){
@@ -611,16 +1302,17 @@
       const raw = localStorage.getItem(SAVE_KEY);
       if(!raw) return;
       const o = JSON.parse(raw);
-      if(!o || typeof o!=='object') return;
-      save.level = (o.level===2||o.level===3)?o.level:1;
-      save.mode = o.mode==='timed'?'timed':'free';
+      if(!o || typeof o !== 'object') return;
+      const g = Number(o.grade);
+      save.grade = (g===1||g===2||g===3||g===4) ? g : 1;
+      save.mode = o.mode === 'timed' ? 'timed' : 'free';
       save.mute = !!o.mute;
-      save.caught = (o.caught && typeof o.caught==='object')?o.caught:{};
-      save.solved = Number(o.solved)||0;
-      save.correct = Number(o.correct)||0;
+      save.caught = (o.caught && typeof o.caught === 'object') ? o.caught : {};
+      save.solved = Number(o.solved) || 0;
+      save.correct = Number(o.correct) || 0;
       save.best = {
-        free: Object.assign({1:0,2:0,3:0}, (o.best&&o.best.free)||{}),
-        timed: Object.assign({1:0,2:0,3:0}, (o.best&&o.best.timed)||{})
+        free: Object.assign({1:0,2:0,3:0,4:0}, (o.best && o.best.free) || {}),
+        timed: Object.assign({1:0,2:0,3:0,4:0}, (o.best && o.best.timed) || {})
       };
     }catch(e){ /* 저장소를 쓸 수 없어도 플레이는 가능 */ }
   }
@@ -688,172 +1380,6 @@
   };
 
   /* ---------------------------------------------------------------
-     문제 엔진 (1학년 범위)
-  ----------------------------------------------------------------*/
-  const OP = { '+':'+', '-':'-' };
-
-  function buildChoices(answer){
-    const out = [answer];
-    const offs = shuffle([1,-1,2,-2,3,-3,4,-4,10,-10,5,-5]);
-    for(let i=0;i<offs.length && out.length<4;i++){
-      const v = answer + offs[i];
-      if(v < 0 || v > 30) continue;
-      if(out.indexOf(v) !== -1) continue;
-      out.push(v);
-    }
-    let guard = 0;
-    while(out.length < 4 && guard < 80){
-      guard++;
-      const v = answer + R(1,9) + guard;
-      if(v >= 0 && v <= 40 && out.indexOf(v) === -1) out.push(v);
-    }
-    return shuffle(out);
-  }
-  function items(count, tone, mark){
-    const arr = [];
-    for(let i=0;i<count;i++) arr.push({t: tone||0, m: mark||'none'});
-    return arr;
-  }
-  function makeProblem(kind, prompt, answer, hintItems, note, expr){
-    return {
-      kind, prompt, answer,
-      choices: buildChoices(answer),
-      hint: { items: hintItems, note: note },
-      expr: expr || null
-    };
-  }
-
-  /* 1단계: 한 자리 수 */
-  function genL1(){
-    const r = Math.random();
-    if(r < 0.38){                                    // 합이 10 이하 덧셈
-      const a = R(1,9), b = R(1,10-a), ans = a+b;
-      const its = items(a,0).concat(items(b,1));
-      return makeProblem('add1', `${a} + ${b} = <i class="blank">?</i>`, ans, its,
-        `빨간 것 ${a}개와 파란 것 ${b}개를 모두 세어 보세요.`, {k:'add',a,b});
-    }
-    if(r < 0.70){                                    // 한 자리 뺄셈
-      const a = R(2,10), b = R(1,a-1), ans = a-b;
-      const its = items(a,0);
-      for(let i=its.length-b;i<its.length;i++) its[i].m = 'crossed';
-      return makeProblem('sub1', `${a} - ${b} = <i class="blank">?</i>`, ans, its,
-        `${a}개 중에서 ${b}개에 X표 했어요. 남은 것을 세어 보세요.`, {k:'sub',a,b});
-    }
-    {                                                // 10 만들기 짝꿍수
-      const a = R(1,9), ans = 10-a;
-      const its = items(10,0);
-      for(let i=0;i<a;i++){ its[i].m = 'known'; }
-      for(let i=a;i<10;i++){ its[i].t = 1; }
-      return makeProblem('make10', `${a} + <i class="blank">?</i> = 10`, ans, its,
-        `모두 10개가 되어야 해요. 파란 칸 ${10-a}개를 채우면 됩니다.`, {k:'make10',a,b:ans});
-    }
-  }
-
-  /* 2단계: 받아올림/내림, 십몇 */
-  function genL2(){
-    const r = Math.random();
-    if(r < 0.30){                                    // 받아올림 덧셈 (합 11~18)
-      const a = R(2,9);
-      const b = R(Math.max(2,11-a), 9);
-      const ans = a+b;
-      const its = items(a,0).concat(items(b,1));
-      return makeProblem('addCarry', `${a} + ${b} = <i class="blank">?</i>`, ans, its,
-        `빨간 것 ${a}개에 파란 것 ${b}개를 더해 모두 세어 보세요.`, {k:'add',a,b});
-    }
-    if(r < 0.58){                                    // 십몇 빼기 몇 (받아내림)
-      const a = R(11,18);
-      const b = R(Math.max(2,a-9), Math.min(9,a-1));
-      const ans = a-b;
-      const its = items(a,0);
-      for(let i=its.length-b;i<its.length;i++) its[i].m = 'crossed';
-      return makeProblem('subTeen', `${a} - ${b} = <i class="blank">?</i>`, ans, its,
-        `${a}개 중 ${b}개에 X표! 10개씩 묶어 보고 남은 것을 세어 보세요.`, {k:'sub',a,b});
-    }
-    if(r < 0.80){                                    // 두 자리 + 한 자리 (받아올림 없음)
-      const a = 10 + R(1,7);
-      const b = R(1, 9-(a-10));
-      const ans = a+b;
-      const its = items(a,0).concat(items(b,1));
-      return makeProblem('twoPlus', `${a} + ${b} = <i class="blank">?</i>`, ans, its,
-        `${a}개에서 ${b}개를 더 보태어 세어 보세요.`, {k:'add',a,b});
-    }
-    {                                                // 두 자리 - 한 자리 (받아내림 없음)
-      const a = 10 + R(1,9);
-      const b = R(1, a-10);
-      const ans = a-b;
-      const its = items(a,0);
-      for(let i=its.length-b;i<its.length;i++) its[i].m = 'crossed';
-      return makeProblem('twoMinus', `${a} - ${b} = <i class="blank">?</i>`, ans, its,
-        `${a}개 중 ${b}개에 X표. 남은 것을 세어 보세요.`, {k:'sub',a,b});
-    }
-  }
-
-  /* 3단계: 세 수 계산, 빈칸 채우기 */
-  function genL3(){
-    const r = Math.random();
-    if(r < 0.20){                                    // 세 수 더하기
-      const a = R(1,7), b = R(1,7);
-      const c = R(1, Math.max(1, 20-a-b));
-      const ans = a+b+c;
-      const its = items(a,0).concat(items(b,1)).concat(items(c,2));
-      return makeProblem('threeAdd', `${a} + ${b} + ${c} = <i class="blank">?</i>`, ans, its,
-        `빨강 ${a}개, 파랑 ${b}개, 초록 ${c}개를 모두 세어 보세요.`, {k:'a+b+c',a,b,c});
-    }
-    if(r < 0.38){                                    // 더하기 빼기 섞인 세 수
-      const a = R(3,9), b = R(2,9);
-      const s = a+b;
-      const c = R(1, s-1);
-      const ans = s-c;
-      const its = items(a,0).concat(items(b,1));
-      for(let i=its.length-c;i<its.length;i++) its[i].m = 'crossed';
-      return makeProblem('threeMix1', `${a} + ${b} - ${c} = <i class="blank">?</i>`, ans, its,
-        `${a}개와 ${b}개를 합친 뒤 ${c}개에 X표 했어요. 남은 것을 세어 보세요.`, {k:'a+b-c',a,b,c});
-    }
-    if(r < 0.54){                                    // 빼기 더하기 섞인 세 수
-      const a = R(6,15), b = R(1,a-1);
-      const rest = a-b;
-      const c = R(1, Math.max(1, 20-rest));
-      const ans = rest+c;
-      const its = items(a,0);
-      for(let i=its.length-b;i<its.length;i++) its[i].m = 'crossed';
-      for(let i=0;i<c;i++) its.push({t:2,m:'none'});
-      return makeProblem('threeMix2', `${a} - ${b} + ${c} = <i class="blank">?</i>`, ans, its,
-        `${a}개 중 ${b}개에 X표 하고, 초록 ${c}개를 더했어요. 모두 세어 보세요.`, {k:'a-b+c',a,b,c});
-    }
-    if(r < 0.72){                                    // □ + 5 = 12
-      const c = R(10,18), a = R(2, c-2);
-      const ans = c-a;
-      const its = items(c,0);
-      for(let i=0;i<a;i++){ its[i].m='known'; its[i].t=1; }
-      return makeProblem('blankAdd', `<i class="blank">?</i> + ${a} = ${c}`, ans, its,
-        `모두 ${c}개가 되어야 해요. 파란 ${a}개 말고 남은 칸을 세어 보세요.`, {k:'blank+a=c',a,b:c});
-    }
-    if(r < 0.90){                                    // 14 - □ = 6
-      const a = R(10,18), c = R(2,9);
-      const ans = a-c;
-      const its = items(a,0);
-      for(let i=its.length-c;i<its.length;i++){ its[i].m='known'; its[i].t=1; }
-      for(let i=0;i<ans;i++){ its[i].m='crossed'; }
-      return makeProblem('blankSub', `${a} - <i class="blank">?</i> = ${c}`, ans, its,
-        `${c}개가 남았어요. X표 한 개수를 세어 보세요.`, {k:'a-blank=c',a,b:c});
-    }
-    {                                                // □ + b = 10 근처 (작은 수)
-      const c = R(5,10), b = R(1,c-1);
-      const ans = c-b;
-      const its = items(c,0);
-      for(let i=0;i<b;i++){ its[i].m='known'; its[i].t=1; }
-      return makeProblem('blankAddLow', `<i class="blank">?</i> + ${b} = ${c}`, ans, its,
-        `모두 ${c}개가 되어야 해요. 파란 ${b}개 말고 남은 칸을 세어 보세요.`, {k:'blank+b=c',a:b,b:c});
-    }
-  }
-
-  function makeProblemFor(level){
-    if(level===3) return genL3();
-    if(level===2) return genL2();
-    return genL1();
-  }
-
-  /* ---------------------------------------------------------------
      물고기 종류 & 그림
   ----------------------------------------------------------------*/
   const SPECIES = [
@@ -867,8 +1393,6 @@
     {id:'golden',  name:'황금잉어', pts:150, w:3,  len:62, color:'#ffd24a', accent:'#f0a800', speed:[16,26], rare:true},
     {id:'chest',   name:'보물상자', pts:200, w:2,  len:52, color:'#a9743c', accent:'#ffd24a', speed:[10,16], rare:true}
   ];
-  const SP_BY_ID = {};
-  SPECIES.forEach(s=>{ SP_BY_ID[s.id]=s; });
   function pickSpecies(){
     let total = 0; SPECIES.forEach(s=>{ total += s.w; });
     let r = Math.random()*total;
@@ -1025,7 +1549,6 @@
       c.fillStyle='#fff'; ell(c,13,-3,3,3); c.fill();
       c.fillStyle='#7a4b00'; ell(c,13.8,-3,1.4,1.4); c.fill();
       c.fillStyle='rgba(255,255,255,.6)'; ell(c,-5,-6,4,2.4); c.fill();
-      // 반짝임
       const tw = 0.5+0.5*Math.sin(phase*2);
       c.globalAlpha = 0.5*tw;
       c.fillStyle='#fff';
@@ -1092,7 +1615,7 @@
   ----------------------------------------------------------------*/
   const G = {
     state: 'title',        // title | playing | casting | quiz | catching | result
-    level: 1, mode: 'free',
+    grade: 1, mode: 'free',
     score: 0, caughtCount: 0, streak: 0,
     timeLeft: 60, elapsed: 0,
     fish: [], hooked: null, castT: 0, castDelay: 0, bob: null,
@@ -1131,7 +1654,7 @@
   /* ---------------------------------------------------------------
      HUD / 화면
   ----------------------------------------------------------------*/
-  const hudCache = {score:-1, caught:-1, streak:-1, sec:-1, mode:'', level:-1};
+  const hudCache = {score:-1, caught:-1, streak:-1, sec:-1, mode:'', grade:-1};
   function updateHUD(force){
     if(force || hudCache.score !== G.score){ $('scoreVal').textContent = G.score; hudCache.score = G.score; }
     if(force || hudCache.caught !== G.caughtCount){ $('caughtVal').textContent = G.caughtCount; hudCache.caught = G.caughtCount; }
@@ -1155,9 +1678,9 @@
     } else {
       wrap.classList.add('hidden');
     }
-    if(force || hudCache.mode !== G.mode || hudCache.level !== G.level){
-      $('modePillText').textContent = G.level+'단계 · '+(G.mode==='timed'?'60초 도전':'자유 낚시');
-      hudCache.mode = G.mode; hudCache.level = G.level;
+    if(force || hudCache.mode !== G.mode || hudCache.grade !== G.grade){
+      $('modePillText').textContent = GRADE_INFO[G.grade].name + ' · ' + (G.mode==='timed'?'60초 도전':'자유 낚시');
+      hudCache.mode = G.mode; hudCache.grade = G.grade;
     }
   }
   function setMuteUI(){
@@ -1188,17 +1711,18 @@
      시작 화면
   ----------------------------------------------------------------*/
   function refreshStart(){
-    document.querySelectorAll('#levelList .opt').forEach(b=>{
-      b.classList.toggle('on', Number(b.dataset.level) === save.level);
+    document.querySelectorAll('#gradeList .opt').forEach(b=>{
+      b.classList.toggle('on', Number(b.dataset.grade) === save.grade);
     });
     document.querySelectorAll('#modeList .opt').forEach(b=>{
       b.classList.toggle('on', b.dataset.mode === save.mode);
     });
-    const best = save.best[save.mode][save.level] || 0;
-    const lv = save.level===1?'1단계':save.level===2?'2단계':'3단계';
+    $('gradeDesc').textContent = GRADE_INFO[save.grade].desc;
+    const best = save.best[save.mode][save.grade] || 0;
+    const gname = GRADE_INFO[save.grade].name;
     const md = save.mode==='timed'?'60초 도전':'자유 낚시';
-    $('bestLine').textContent = `${lv} · ${md} 최고 점수 ${best}점`;
-    G.level = save.level; G.mode = save.mode;
+    $('bestLine').textContent = `${gname} · ${md} 최고 점수 ${best}점`;
+    G.grade = save.grade; G.mode = save.mode;
   }
   function showStart(){
     G.state = 'title';
@@ -1209,7 +1733,6 @@
     $('timerWrap').classList.add('hidden');
     $('modePill').classList.add('hidden');
     hideAllModals();
-    $('dexBtnStart').classList.remove('hidden');
     refreshStart();
   }
   function hideAllModals(){
@@ -1221,7 +1744,7 @@
     audioCtx(); sfx.start();
     G.state = 'playing';
     G.score = 0; G.caughtCount = 0; G.streak = 0;
-    G.startBest = save.best[G.mode][G.level] || 0;
+    G.startBest = save.best[G.mode][G.grade] || 0;
     G.timeLeft = 60; G.elapsed = 0;
     G.fish = []; G.hooked = null; G.bob = null; G.quiz = null; G.wrong = 0; G.hintOpen = false;
     G.particles = []; G.floats = [];
@@ -1232,7 +1755,7 @@
     $('modePill').classList.remove('hidden');
     hideAllModals();
     updateHUD(true);
-    toast(null, null, G.level===1?'1단계 · 한 자리 수 문제예요':G.level===2?'2단계 · 받아올림 문제예요':'3단계 · 도전 문제예요');
+    toast(null, null, `${GRADE_INFO[G.grade].name} · ${G.mode==='timed'?'60초 도전':'자유 낚시'} 시작!`);
   }
 
   /* ---------------------------------------------------------------
@@ -1253,7 +1776,6 @@
   }
   function castButton(){
     if(G.state !== 'playing') return;
-    // 화면 가운데 아래쪽에서 가장 가까운 물고기
     if(!G.fish.length){ ensureFish(); }
     const target = { x: W*0.5, y: waterY + (H-waterY)*0.45 };
     let best = null, bd = 1e9;
@@ -1264,8 +1786,20 @@
     castTo(best);
   }
 
+  /* 문제 글자가 상자보다 길면 글자를 줄여 한 줄에 담는다 */
+  function fitQuestion(){
+    const q = $('question');
+    q.style.fontSize = '';
+    let fs = parseFloat(getComputedStyle(q).fontSize) || 30;
+    let guard = 0;
+    while(q.scrollWidth > q.clientWidth + 1 && fs > 15 && guard++ < 24){
+      fs -= 1.5;
+      q.style.fontSize = fs + 'px';
+    }
+  }
+
   function openQuiz(fish){
-    const prob = makeProblemFor(G.level);
+    const prob = makeProblemFor(G.grade);
     G.quiz = prob;
     G.state = 'quiz';
     G.wrong = 0;
@@ -1273,12 +1807,15 @@
     G.bob.biting = false;
 
     $('question').innerHTML = prob.prompt;
+    fitQuestion();
     $('feedback').textContent = '';
     $('feedback').className = 'feedback';
     $('hintPanel').classList.add('hidden');
+    $('hintBody').innerHTML = '';
+    $('hintNote').textContent = '';
     $('quizCard').classList.remove('shake');
 
-    // 물고기 배지
+    /* 물고기 배지 */
     const bc = $('badgeCv').getContext('2d');
     bc.setTransform(1,0,0,1,0,0);
     bc.clearRect(0,0,152,104);
@@ -1287,9 +1824,10 @@
     drawFish(bc, fish.sp, 76, 52, fish.sp.len*s, 1.4, 1);
 
     $('quizSay').textContent = `${josa(fish.sp.name,'이','가')} 입질했어요!`;
-    $('quizSaySub').textContent = prob.kind.indexOf('blank')===0
+    $('quizSaySub').textContent = prob.blank
       ? '빈칸에 들어갈 수를 골라 보세요'
       : '답을 고르면 물고기를 잡을 수 있어요';
+    $('hintBtnLabel').textContent = prob.hint.type === 'apples' ? '그림으로 세어보기' : '풀이 힌트';
 
     const ch = $('choices');
     ch.innerHTML = '';
@@ -1307,36 +1845,89 @@
     $('hintBtn').focus({preventScroll:true});
   }
 
-  function renderHint(prob){
-    const grid = $('hintGrid');
-    grid.innerHTML = '';
-    const tones = ['#ff6b6b','#4aa8ff','#5ec86a'];
-    prob.hint.items.forEach(it=>{
-      const d = document.createElement('span');
-      d.className = 'hint-ico' + (it.m==='crossed'?' crossed':'') + (it.m==='known'?' known':'');
-      const col = tones[it.t||0];
-      const dark = it.t===1?'#1c6fb8':it.t===2?'#2f8b3c':'#c8403a';
-      d.innerHTML = `<svg viewBox="0 0 24 24">
+  function appleSvg(col, dark, crossed){
+    const x = crossed ? `<svg class="x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="#5b3a3a" stroke-width="2.6" stroke-linecap="round"/></svg>` : '';
+    return `<svg viewBox="0 0 24 24">
         <circle cx="12" cy="14" r="8" fill="${col}" stroke="${dark}" stroke-width="1.6"/>
         <path d="M12 6.5c0-2 1-3.2 3-3.4" fill="none" stroke="#4e9a4e" stroke-width="2" stroke-linecap="round"/>
         <path d="M12.4 6.6c1.6-2 4-2.2 4.8-1.2-1.1 1.7-3.1 2.2-4.8 1.2z" fill="#6fc46f"/>
         <ellipse cx="8.6" cy="11.4" rx="2" ry="1.4" fill="rgba(255,255,255,.5)" transform="rotate(-25 8.6 11.4)"/>
-      </svg>` + (it.m==='crossed' ? `<svg class="x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="#5b3a3a" stroke-width="2.6" stroke-linecap="round"/></svg>` : '');
-      grid.appendChild(d);
+      </svg>` + x;
+  }
+
+  function buildColumn(col){
+    const tb = document.createElement('table');
+    tb.className = 'colcalc';
+    col.rows.forEach(r=>{
+      const tr = document.createElement('tr');
+      if(r.cls) tr.className = r.cls;
+      const sc = document.createElement('td');
+      sc.className = 'sign';
+      sc.textContent = r.sign || '';
+      tr.appendChild(sc);
+      r.cells.forEach(ch=>{
+        const td = document.createElement('td');
+        td.textContent = ch;
+        tr.appendChild(td);
+      });
+      tb.appendChild(tr);
     });
-    $('hintNote').textContent = prob.hint.note;
+    return tb;
+  }
+
+  function renderHint(prob){
+    const body = $('hintBody');
+    body.innerHTML = '';
+    if(prob.hint.type === 'apples'){
+      const n = prob.hint.items.length;
+      const grid = document.createElement('div');
+      grid.className = 'hint-grid' + (n > 10 ? ' ten' : '');
+      const tones = ['#ff6b6b','#4aa8ff','#5ec86a'];
+      prob.hint.items.forEach(it=>{
+        const d = document.createElement('span');
+        d.className = 'hint-ico' + (it.m==='crossed'?' crossed':'') + (it.m==='known'?' known':'');
+        const col = tones[it.t||0];
+        const dark = it.t===1?'#1c6fb8':it.t===2?'#2f8b3c':'#c8403a';
+        d.innerHTML = appleSvg(col, dark, it.m==='crossed');
+        grid.appendChild(d);
+      });
+      body.appendChild(grid);
+    } else {
+      if(prob.hint.col) body.appendChild(buildColumn(prob.hint.col));
+      const ol = document.createElement('ol');
+      ol.className = 'hint-steps';
+      prob.hint.steps.forEach((s, i)=>{
+        const li = document.createElement('li');
+        const num = document.createElement('span');
+        num.className = 'n'; num.textContent = String(i+1);
+        const st = document.createElement('span');
+        st.className = 'st';
+        if(s.label){
+          const lab = document.createElement('span');
+          lab.className = 'lab'; lab.textContent = s.label;
+          st.appendChild(lab);
+        }
+        st.appendChild(document.createTextNode(s.text));
+        li.appendChild(num); li.appendChild(st);
+        ol.appendChild(li);
+      });
+      body.appendChild(ol);
+    }
+    $('hintNote').textContent = prob.hint.note || '';
+    $('hintPanel').classList.remove('hidden');
   }
 
   function answer(val, btn){
     if(G.state !== 'quiz' || !G.quiz) return;
     const prob = G.quiz;
-    if(val === prob.answer){
+    if(String(val) === String(prob.answer)){
       btn.classList.add('right');
       document.querySelectorAll('.choice').forEach(b=>b.disabled = true);
       $('feedback').className = 'feedback ok';
       $('feedback').textContent = '정답이에요! 물고기를 끌어 올려요!';
       save.solved++; save.correct++; persist();
       G.streak++;
+      sfx.right();
       setTimeout(()=>catchStart(), 420);
     } else {
       G.wrong++;
@@ -1345,17 +1936,19 @@
       btn.classList.add('wrong');
       btn.disabled = true;
       $('feedback').className = 'feedback';
+      const hintWord = prob.hint.type === 'apples' ? '그림 힌트' : '풀이 힌트';
       $('feedback').textContent = G.wrong >= 2
-        ? '앗, 물고기가 힘을 내고 있어요! 그림 힌트를 보며 다시 풀어 볼까요?'
+        ? `앗, 물고기가 힘을 내고 있어요! ${hintWord}를 보며 다시 풀어 볼까요?`
         : '앗, 물고기가 힘을 내고 있어요! 다시 한 번 풀어 볼까요?';
       const card = $('quizCard');
       card.classList.remove('shake');
       void card.offsetWidth;
       card.classList.add('shake');
       sfx.wrong();
-      if(G.wrong >= 2){
-        // 두 번 틀리면 힌트를 저절로 펼쳐 준다
-        if(!G.hintOpen){ G.hintOpen = true; renderHint(prob); $('hintPanel').classList.remove('hidden'); }
+      if(G.wrong >= 2 && !G.hintOpen){
+        G.hintOpen = true;
+        renderHint(prob);
+        setTimeout(()=>{ try{ $('hintPanel').scrollIntoView({block:'nearest', behavior:'smooth'}); }catch(e){} }, 60);
       }
     }
   }
@@ -1382,7 +1975,7 @@
     G.caughtCount++;
     save.caught[sp.id] = (Number(save.caught[sp.id])||0) + 1;
     const bestKey = save.best[G.mode];
-    if(G.score > (bestKey[G.level]||0)){ bestKey[G.level] = G.score; }
+    if(G.score > (bestKey[G.grade]||0)){ bestKey[G.grade] = G.score; }
     persist();
     updateHUD();
     toast(sp, pts, `${josa(sp.name,'을','를')} 잡았어요!` + (comboBonus?` (연속 ${G.streak})`:''));
@@ -1456,7 +2049,7 @@
       cvs.width = 144; cvs.height = 88;
       const cc = cvs.getContext('2d');
       const s = 76 / Math.max(30, sp.len);
-      drawFish(cc, sp, 72, 44, sp.len*s, 1.1, 1, c>0?1:1);
+      drawFish(cc, sp, 72, 44, sp.len*s, 1.1, 1);
       const nm = document.createElement('div'); nm.className='nm'; nm.textContent = c>0?sp.name:'???';
       const ct = document.createElement('div'); ct.className='ct';
       ct.textContent = c>0 ? `${c}마리 · ${sp.pts}점` : `아직 못 만났어요`;
@@ -1473,16 +2066,17 @@
   ----------------------------------------------------------------*/
   function endGame(reason){
     if(G.state==='result') return;
-    const prevBest = (G.startBest != null ? G.startBest : (save.best[G.mode][G.level] || 0));
+    const prevBest = (G.startBest != null ? G.startBest : (save.best[G.mode][G.grade] || 0));
     const isNew = G.score > prevBest;
-    if(isNew){ save.best[G.mode][G.level] = G.score; persist(); }
+    if(isNew){ save.best[G.mode][G.grade] = G.score; persist(); }
     G.state = 'result';
     G.quiz = null; G.hooked = null; G.bob = null;
     $('quizWrap').classList.add('hidden');
     $('resultTitle').textContent = reason==='time' ? '시간이 다 됐어요!' : '낚시를 마쳤어요!';
+    $('resultSub').textContent = `${GRADE_INFO[G.grade].name} · ${G.mode==='timed'?'60초 도전':'자유 낚시'}`;
     $('resultScore').textContent = G.score;
     $('resultCaught').textContent = G.caughtCount;
-    $('resultBest').textContent = save.best[G.mode][G.level] || 0;
+    $('resultBest').textContent = save.best[G.mode][G.grade] || 0;
     $('newRecord').classList.toggle('hidden', !isNew || G.score===0);
     $('resultWrap').classList.remove('hidden');
     sfx.win();
@@ -1492,7 +2086,6 @@
      장면 그리기
   ----------------------------------------------------------------*/
   function drawScene(t, dt){
-    // 하늘
     const sky = ctx.createLinearGradient(0,0,0,skyH+20);
     sky.addColorStop(0,'#9fdcf7');
     sky.addColorStop(0.55,'#c9ecfb');
@@ -1500,7 +2093,6 @@
     ctx.fillStyle = sky;
     ctx.fillRect(0,0,W,skyH+20);
 
-    // 해
     const sunX = W*0.82, sunY = skyH*0.30, sunR = 26*SCALE;
     const glow = ctx.createRadialGradient(sunX,sunY,sunR*0.4,sunX,sunY,sunR*3.4);
     glow.addColorStop(0,'rgba(255,236,150,.55)');
@@ -1510,14 +2102,12 @@
     ctx.fillStyle = '#ffe98a';
     ctx.beginPath(); ctx.arc(sunX,sunY,sunR,0,Math.PI*2); ctx.fill();
 
-    // 구름
     clouds.forEach(cl=>{
       cl.x += cl.v*dt;
       if(cl.x > W+90) cl.x = -90;
       drawCloud(cl.x, cl.y, cl.s, cl.o);
     });
 
-    // 먼 섬
     ctx.fillStyle = 'rgba(126,196,168,.75)';
     ctx.beginPath();
     ctx.moveTo(W*0.02, waterY);
@@ -1529,7 +2119,6 @@
     ctx.quadraticCurveTo(W*0.74, waterY-30*SCALE, W*0.92, waterY);
     ctx.closePath(); ctx.fill();
 
-    // 물
     const sea = ctx.createLinearGradient(0,waterY,0,H);
     sea.addColorStop(0,'#63cfe4');
     sea.addColorStop(0.35,'#2f9dc4');
@@ -1537,7 +2126,6 @@
     ctx.fillStyle = sea;
     ctx.fillRect(0,waterY,W,H-waterY);
 
-    // 수면 물결
     ctx.save();
     ctx.globalAlpha = 0.5;
     ctx.strokeStyle = 'rgba(255,255,255,.85)';
@@ -1552,7 +2140,6 @@
     }
     ctx.restore();
 
-    // 빛줄기
     rays.forEach((r,i)=>{
       const g = ctx.createLinearGradient(0,waterY,0,H*0.85);
       g.addColorStop(0,`rgba(255,255,255,${r.a})`);
@@ -1567,7 +2154,6 @@
       ctx.closePath(); ctx.fill();
     });
 
-    // 물고기
     G.fish.forEach(f=>{
       if(f === G.hooked && (G.state==='casting'||G.state==='quiz'||G.state==='catching')) return;
       drawFish(ctx, f.sp, f.x, f.y, f.size, f.phase, f.dir);
@@ -1584,7 +2170,6 @@
       }
     });
 
-    // 기포
     ctx.save();
     bubbles.forEach(b=>{
       b.y -= b.v*dt;
@@ -1595,13 +2180,9 @@
     });
     ctx.restore();
 
-    // 낚싯배와 꼬마 낚시꾼 (시작 화면에서는 메뉴를 가리지 않게 그리지 않음)
     if(G.state !== 'title') drawBoat(t);
-
-    // 낚싯줄 & 찌
     drawLineAndBobber(t);
 
-    // 잡아 올리는 중인 물고기
     if(G.state==='catching' && G.hooked){
       const tip = rodTip();
       const p = clamp(G.catchT/0.85, 0, 1);
@@ -1615,7 +2196,6 @@
       ctx.restore();
     }
 
-    // 파티클
     G.particles = G.particles.filter(pa=>pa.life < pa.max);
     G.particles.forEach(pa=>{
       pa.life += dt;
@@ -1626,7 +2206,6 @@
       ctx.beginPath(); ctx.arc(pa.x, pa.y, pa.r*a+0.6, 0, Math.PI*2); ctx.fill();
     });
 
-    // 떠오르는 점수
     G.floats = G.floats.filter(fl=>fl.life < fl.max);
     G.floats.forEach(fl=>{
       fl.life += dt;
@@ -1664,11 +2243,9 @@
     ctx.translate(boat.x, bobY);
     ctx.scale(s,s);
 
-    // 물결 그림자
     ctx.fillStyle = 'rgba(3,45,68,.20)';
     ell(ctx, 0, 12, 48, 9); ctx.fill();
 
-    // 배
     ctx.fillStyle = '#c85c37';
     ctx.beginPath();
     ctx.moveTo(-44,-2);
@@ -1685,7 +2262,6 @@
     ctx.fillStyle = '#c85c37';
     ctx.beginPath(); ctx.moveTo(-38,-8); ctx.lineTo(38,-8); ctx.lineTo(36,-4); ctx.lineTo(-36,-4); ctx.closePath(); ctx.fill();
 
-    // 꼬마 낚시꾼
     const armWag = Math.sin(t*1.6)*1.4;
     ctx.fillStyle = '#3a6ea5';
     ctx.beginPath(); ctx.roundRect ? ctx.roundRect(-13,-30,26,22,8) : ctx.rect(-13,-30,26,22); ctx.fill();
@@ -1693,22 +2269,18 @@
     ell(ctx,0,-38,12,12); ctx.fill();
     ctx.fillStyle = '#4a3122';
     ctx.beginPath(); ctx.arc(0,-40,12,Math.PI*1.05,Math.PI*1.95); ctx.fill();
-    // 밀짚모자
     ctx.fillStyle = '#f0c86a';
     ctx.beginPath(); ctx.ellipse(0,-47,19,5.5,0,0,Math.PI*2); ctx.fill();
     ctx.beginPath(); ctx.ellipse(0,-52,10,8,0,Math.PI,Math.PI*2); ctx.fill();
     ctx.strokeStyle = '#d9a83f'; ctx.lineWidth = 1.6;
     ctx.beginPath(); ctx.ellipse(0,-47,19,5.5,0,0,Math.PI*2); ctx.stroke();
-    // 얼굴
     ctx.fillStyle = '#2b1c12';
     ctx.beginPath(); ctx.arc(-4,-38,1.5,0,Math.PI*2); ctx.fill();
     ctx.beginPath(); ctx.arc(4,-38,1.5,0,Math.PI*2); ctx.fill();
     ctx.strokeStyle = '#e08a6a'; ctx.lineWidth = 1.5;
     ctx.beginPath(); ctx.arc(0,-34.5,3,0.2*Math.PI,0.8*Math.PI); ctx.stroke();
-    // 팔
     ctx.strokeStyle = '#ffd9b8'; ctx.lineWidth = 5; ctx.lineCap = 'round';
     ctx.beginPath(); ctx.moveTo(9,-27); ctx.lineTo(20+armWag,-33); ctx.stroke();
-    // 낚싯대
     ctx.strokeStyle = '#8a5a2b'; ctx.lineWidth = 3.2; ctx.lineCap='round';
     ctx.beginPath(); ctx.moveTo(16,-31); ctx.quadraticCurveTo(30,-48,40,-66); ctx.stroke();
     ctx.restore();
@@ -1737,7 +2309,6 @@
       ctx.beginPath(); ctx.moveTo(tip.x, tip.y); ctx.lineTo(tip.x+3, tip.y+14); ctx.stroke();
       ctx.restore();
     }
-    // 찌
     if(G.bob && (G.state==='casting'||G.state==='quiz'||G.state==='catching')){
       const wob = G.bob.biting ? Math.sin(t*24)*3 : Math.sin(t*3)*1.2;
       ctx.save();
@@ -1778,7 +2349,6 @@
 
     const modalPause = G.dexOpen || G.state==='result' || G.state==='title';
 
-    // 물고기 헤엄
     if(!modalPause){
       G.fish.forEach(f=>{
         if(f === G.hooked && (G.state==='casting'||G.state==='quiz'||G.state==='catching')){
@@ -1792,7 +2362,6 @@
         f.phase += dt*(3.2 + f.speed*0.04);
       });
 
-      // 낚시 단계 진행
       if(G.state === 'casting' && G.hooked){
         G.castT += dt*2.4;
         const tip = rodTip();
@@ -1810,12 +2379,10 @@
       }
       if(G.state === 'catching'){
         G.catchT += dt;
-        // 잡아 올릴 때 물고기가 따라 올라옴
         if(G.catchT > 0.85){ finishCatch(); }
       }
       if(G.state === 'quiz' && G.bob){ G.bob.biting = true; }
 
-      // 시간 제한
       if(G.mode === 'timed' && (G.state==='playing' || G.state==='casting' || G.state==='quiz')){
         G.timeLeft -= dt;
         if(G.timeLeft <= 0){
@@ -1862,9 +2429,9 @@
   /* ---------------------------------------------------------------
      UI 바인딩
   ----------------------------------------------------------------*/
-  $('levelList').addEventListener('click', (ev)=>{
+  $('gradeList').addEventListener('click', (ev)=>{
     const b = ev.target.closest('.opt'); if(!b) return;
-    save.level = Number(b.dataset.level); persist(); refreshStart(); sfx.tap();
+    save.grade = Number(b.dataset.grade); persist(); refreshStart(); sfx.tap();
   });
   $('modeList').addEventListener('click', (ev)=>{
     const b = ev.target.closest('.opt'); if(!b) return;
@@ -1879,7 +2446,7 @@
   $('hintBtn').addEventListener('click', ()=>{
     if(G.state !== 'quiz' || !G.quiz) return;
     G.hintOpen = !G.hintOpen;
-    if(G.hintOpen){ renderHint(G.quiz); $('hintPanel').classList.remove('hidden'); }
+    if(G.hintOpen){ renderHint(G.quiz); try{ $('hintPanel').scrollIntoView({block:'nearest'}); }catch(e){} }
     else $('hintPanel').classList.add('hidden');
     sfx.tap();
   });
@@ -1911,7 +2478,7 @@
      시작
   ----------------------------------------------------------------*/
   loadSave();
-  G.level = save.level; G.mode = save.mode;
+  G.grade = save.grade; G.mode = save.mode;
   setMuteUI();
   refreshStart();
   resize();
@@ -1919,23 +2486,33 @@
   updateHUD();
   requestAnimationFrame(frame);
 
-  // 테스트/디버그용 읽기 전용 훅
+  /* 테스트/디버그용 읽기 전용 훅 */
   window.__mf = {
-    makeProblem: (lv)=> makeProblemFor(lv||1),
+    grades: ()=> [1,2,3,4],
+    gen: (grade, n)=>{
+      const out = [];
+      const cnt = n||1;
+      for(let i=0;i<cnt;i++) out.push(makeProblemFor(grade));
+      return out;
+    },
+    problem: (grade)=> makeProblemFor(grade),
     state: ()=> G.state,
     quiz: ()=> G.quiz,
-    level: ()=> G.level,
+    grade: ()=> G.grade,
     mode: ()=> G.mode,
     score: ()=> G.score,
     caught: ()=> G.caughtCount,
     fishCount: ()=> G.fish.length,
-    fishes: ()=> G.fish.map(f=>({x:Math.round(f.x), y:Math.round(f.y), size:Math.round(f.size), name:f.sp.name})),
+    hintType: ()=> G.quiz ? G.quiz.hint.type : null,
     save: ()=> JSON.parse(JSON.stringify(save)),
     cast: ()=> castButton(),
-    answer: (v)=>{
-      const b = document.querySelector('.choice[data-val="'+v+'"]');
-      if(b) b.click();
-      return !!b;
+    selectGrade: (g)=>{ save.grade=Number(g); persist(); refreshStart(); },
+    selectMode: (m)=>{ save.mode=m; persist(); refreshStart(); },
+    chooseCorrect: ()=>{
+      if(!G.quiz) return false;
+      const b = Array.prototype.slice.call(document.querySelectorAll('.choice')).filter(x=>x.dataset.val === String(G.quiz.answer))[0];
+      if(b){ b.click(); return true; }
+      return false;
     }
   };
 })();
