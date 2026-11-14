@@ -707,6 +707,82 @@
     .card{max-width:500px;}
   }
 
+  /* ---------- 오답 노트 (📝) ---------- */
+  .icon-btn.wn-btn{position:relative;font-size:20px;line-height:1;font-weight:900;color:#7a4a00;
+    background:linear-gradient(#fff6d8,#ffe9a8);border-color:#fff;letter-spacing:-.02em;}
+  .icon-btn.wn-btn.flash{animation:wnpop .5s;}
+  @keyframes wnpop{0%{transform:scale(1)}35%{transform:scale(1.16)}100%{transform:scale(1)}}
+  .wn-count{
+    position:absolute;top:-6px;right:-6px;min-width:20px;height:20px;padding:0 5px;
+    border-radius:99px;background:linear-gradient(#ff9075,#e8512f);color:#fff;
+    font-size:11px;font-weight:900;line-height:16px;text-align:center;
+    border:2px solid #fff;box-shadow:0 2px 5px rgba(6,50,74,.28);letter-spacing:0;
+    font-variant-numeric:tabular-nums;
+  }
+  .wn-count.hidden{display:none !important;}
+  .start-links .ghost-btn.wn{position:relative;}
+
+  .card.wn-card{max-width:470px;}
+  .wn-head{display:flex;align-items:center;justify-content:space-between;gap:8px;flex:0 0 auto;}
+  .wn-head h2{margin:0;font-size:20px;font-weight:900;letter-spacing:-.02em;}
+  .wn-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;flex:0 0 auto;}
+  .wn-summary{
+    flex:0 0 auto;font-size:12px;font-weight:800;color:#2f6a86;background:#f1f9ff;
+    border:2px solid #dceffb;border-radius:12px;padding:6px 9px;line-height:1.35;text-align:center;
+  }
+  .wn-status{font-size:11.5px;font-weight:800;color:#7b93a3;text-align:center;min-height:15px;flex:0 0 auto;}
+  .wn-status:empty{min-height:0;display:none;}
+  .wn-status.off{color:#b8452f;}
+  .wn-status.ok{color:#1b7a3c;}
+  .wn-scroll{
+    flex:1 1 auto;min-height:110px;overflow-y:auto;-webkit-overflow-scrolling:touch;
+    display:flex;flex-direction:column;gap:8px;padding:1px 2px 2px 1px;
+  }
+  .wn-item{background:#fff;border:2.5px solid #dceffb;border-radius:16px;padding:9px 10px;
+    display:flex;flex-direction:column;gap:6px;}
+  .wn-item .top{display:flex;align-items:center;gap:5px;flex-wrap:wrap;}
+  .wn-tag{font-size:10.5px;font-weight:900;color:#2f7ea6;background:#eaf6ff;border-radius:8px;padding:3px 7px;white-space:nowrap;}
+  .wn-tag.pending{color:#8a5a00;background:#fff6dc;}
+  .wn-when{margin-left:auto;font-size:10.5px;font-weight:800;color:#9db2bf;white-space:nowrap;}
+  .wn-q{font-size:21px;font-weight:900;color:var(--ink);letter-spacing:-.01em;text-align:center;padding:1px 0;line-height:1.25;}
+  .wn-ans{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;}
+  .wn-pill{font-size:12.5px;font-weight:900;border-radius:9px;padding:3px 9px;}
+  .wn-pill.mine{color:#c2453d;background:#fdeceb;border:1.5px solid #f6c9c6;}
+  .wn-pill.ok{color:#1b7a3c;background:#e9f9ef;border:1.5px solid #a8e3bb;}
+  .wn-sp{font-size:11px;font-weight:800;color:#8aa6b5;text-align:center;}
+  .wn-acts{display:flex;gap:6px;}
+  .wn-retry-btn{flex:1 1 auto;height:38px;border-radius:12px;border:2.5px solid #bfe4f7;background:#f4fbff;
+    color:#1f6d94;font-family:inherit;font-size:13.5px;font-weight:900;cursor:pointer;}
+  .wn-retry-btn:active{transform:scale(.99);}
+  .wn-del{flex:0 0 auto;width:42px;height:38px;border-radius:12px;border:2px solid #f3dcd8;background:#fff;
+    color:#b8452f;font-size:15px;font-weight:900;cursor:pointer;line-height:1;}
+  .wn-retry{display:flex;flex-direction:column;gap:7px;border-top:2px dashed #dceffb;padding-top:7px;}
+  .wn-retry-hint{font-size:12px;font-weight:900;color:#2f7ea6;text-align:center;}
+  .wn-choices{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+  .wn-choices button{
+    min-height:46px;border-radius:12px;border:2.5px solid #bfe4f7;background:#fff;
+    font-family:inherit;font-size:20px;font-weight:900;color:#12506f;cursor:pointer;
+  }
+  .wn-choices button.right{background:#e4f9ea;border-color:var(--good);color:#1b7a3c;}
+  .wn-choices button.wrong{background:#fdeceb;border-color:var(--bad);color:#c2453d;opacity:.8;}
+  .wn-fb{font-size:12.5px;font-weight:900;text-align:center;min-height:16px;color:#1b7a3c;line-height:1.3;}
+  .wn-cancel{align-self:center;background:none;border:none;color:#9db2bf;font-family:inherit;
+    font-size:11.5px;font-weight:800;text-decoration:underline;cursor:pointer;padding:2px 6px;}
+  .wn-empty{text-align:center;font-size:13px;font-weight:800;color:#7b93a3;padding:22px 8px;line-height:1.55;}
+  .wn-empty .ic{display:block;font-size:30px;margin-bottom:6px;}
+  .wn-foot{flex:0 0 auto;}
+  .wn-foot .ghost-btn{margin-top:0;height:42px;font-size:14px;color:#b8452f;border-color:#f3dcd8;background:#fff8f6;}
+  .wn-foot .ghost-btn:disabled{opacity:.45;}
+  @media (max-width:380px){
+    .wn-q{font-size:19px;}
+    .wn-choices button{font-size:18px;min-height:42px;}
+  }
+  @media (max-height:640px){
+    .wn-stats .stat{padding:5px 4px;}
+    .wn-q{font-size:19px;}
+    .wn-item{padding:7px 8px;}
+  }
+
   /* ---------- 학습 설정 (시작 화면 요약 + ⚙️ 모달) ---------- */
   .study-row{
     display:flex;align-items:center;gap:8px;width:100%;text-align:left;
@@ -838,6 +914,7 @@
       <div class="chip combo hidden" id="comboChip"><span class="lbl">연속</span><b id="comboVal">2</b></div>
     </div>
     <div class="hud-right">
+      <button class="icon-btn wn-btn" id="wnBtn" aria-label="오답 노트 열기" title="오답 노트"><span aria-hidden="true">📝</span><span class="wn-count hidden" id="wnHudCount">0</span></button>
       <button class="icon-btn" id="studyBtn" aria-label="학습 난이도 설정" title="학습 설정">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
@@ -976,6 +1053,7 @@
       <div class="start-links">
         <button class="ghost-btn" id="dexBtnStart">내 어망 도감</button>
         <button class="ghost-btn shop" id="shopBtnStart">상점 · 꾸미기</button>
+        <button class="ghost-btn wn" id="wnBtnStart" aria-label="오답 노트 열기">📝 오답 노트<span class="wn-count hidden" id="wnStartCount">0</span></button>
       </div>
     </div>
   </div>
@@ -1128,6 +1206,29 @@
       </div>
       <div class="study-foot">
         <button class="big-btn" id="studyDone"><span>확인</span></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 오답 노트 (실시간 서버 저장 + 다시 풀기) -->
+  <div id="wnWrap" class="modal hidden">
+    <div class="card wn-card">
+      <div class="wn-head">
+        <h2><span aria-hidden="true">📝</span> 오답 노트</h2>
+        <button class="close-btn" id="wnClose" aria-label="닫기">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <div class="wn-stats">
+        <div class="stat"><small>틀린 문제</small><b id="wnTotal">0</b></div>
+        <div class="stat"><small>연산</small><b id="wnOps">-</b></div>
+        <div class="stat"><small>단계</small><b id="wnLv">-</b></div>
+      </div>
+      <div class="wn-summary" id="wnSummary">아직 틀린 문제가 없어요!</div>
+      <div class="wn-status" id="wnStatus"></div>
+      <div class="wn-scroll" id="wnList"></div>
+      <div class="wn-foot">
+        <button class="ghost-btn" id="wnClearAll" type="button">오답 노트 전체 비우기</button>
       </div>
     </div>
   </div>
@@ -5172,7 +5273,7 @@
     refreshStart();
   }
   function hideAllModals(){
-    ['quizWrap','dexWrap','resultWrap','shopWrap','studyWrap'].forEach(id=>$(id).classList.add('hidden'));
+    ['quizWrap','dexWrap','resultWrap','shopWrap','studyWrap','wnWrap'].forEach(id=>$(id).classList.add('hidden'));
     G.dexOpen = false;
     G.shopOpen = false;
     G.studyOpen = false;
@@ -5423,6 +5524,25 @@
         : (G.wrong >= 2
             ? `${th().wrong} ${hintWord}를 보며 다시 풀어 볼까요?`
             : `${th().wrong} 다시 한 번 풀어 볼까요?`);
+      /* 틀린 문제를 실시간 서버에 기록 (게임은 멈추지 않음) */
+      try{
+        WN.record({
+          id: 'wa' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+          question: prob.text,
+          chosen: String(val),
+          answer: String(prob.answer),
+          modeLabel: studyPill(),
+          opName: (save.study.mode === 'custom')
+            ? studyOpInfo(save.study.op).name
+            : (GRADE_INFO[G.grade].name + ' 과정'),
+          stepLabel: (save.study.mode === 'custom')
+            ? (studyLevelInfo(save.study.level).name + ' ' + studyLevelInfo(save.study.level).tag)
+            : (G.mode === 'timed' ? '60초 도전' : th().free),
+          theme: save.theme === 'pokemon' ? 'pokemon' : 'fish',
+          speciesName: (G.hooked && G.hooked.sp) ? G.hooked.sp.name : '',
+          createdAt: new Date().toISOString()
+        });
+      }catch(e){}
       const card = $('quizCard');
       card.classList.remove('shake');
       void card.offsetWidth;
@@ -7042,6 +7162,476 @@
   updateHUD();
   requestAnimationFrame(frame);
 
+  /* =================================================================
+     오답 노트 — 실시간 서버 저장 + 다시 풀기
+     · 문제를 틀리면 게임을 멈추지 않고 백그라운드로 서버(/api/wrong-answers)에 저장
+     · 서버가 없거나(정적 호스팅) 끊겨도 기기에 보관했다가 연결되면 다시 올린다
+     ================================================================= */
+  const WN = (function(){
+    const K_PRO = 'mfWnProfile_v1';     /* 이 기기의 프로필 id */
+    const K_CACHE = 'mfWnCache_v1';     /* 서버에서 받은 마지막 목록 */
+    const K_QUEUE = 'mfWnQueue_v1';     /* 아직 못 올린 오답 */
+    const K_DEL = 'mfWnDel_v1';         /* 아직 못 지운 오답 id */
+    /* GitHub Pages 처럼 /api 가 없는 곳에서 쓸 서버 주소 (비어 있으면 같은 주소만 사용) */
+    const FALLBACK_HOST = 'math-fishing-game-omega.vercel.app';
+
+    let profile = '';
+    let serverItems = [];
+    let queue = [];
+    let delQueue = [];
+    let online = null;        /* null 확인 전 · true 연결됨 · false 연결 안 됨 */
+    let isOpen = false;
+    let flushing = false;
+    let retryId = null;
+    let lastErr = '';
+
+    function lsGet(k, d){
+      try{ const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); }catch(e){ return d; }
+    }
+    function lsSet(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+    function pad2(n){ return (n < 10 ? '0' : '') + n; }
+    function wnEl(tag, cls, text){
+      const e = document.createElement(tag);
+      if(cls) e.className = cls;
+      if(text != null) e.textContent = text;
+      return e;
+    }
+
+    function initProfile(){
+      let p = '';
+      try{ p = localStorage.getItem(K_PRO) || ''; }catch(e){}
+      if(!/^[A-Za-z0-9_-]{6,40}$/.test(p)){
+        p = 'p' + Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+        try{ localStorage.setItem(K_PRO, p); }catch(e){}
+      }
+      profile = p;
+    }
+
+    function apiBase(){
+      /* 파일로 직접 열었으면 서버를 부르지 않고 기기에만 쌓는다 */
+      if(location.protocol === 'file:') return '';
+      const h = location.hostname || '';
+      const external = /(^|\.)github\.io$/.test(h) || /(^|\.)github\.dev$/.test(h);
+      const hasFallback = !!FALLBACK_HOST && FALLBACK_HOST.indexOf('__WN_') !== 0;
+      if(external) return hasFallback ? ('https://' + FALLBACK_HOST) : '';
+      return '';
+    }
+    function apiUrl(qs){
+      return apiBase() + '/api/wrong-answers' + (qs ? ('?' + qs) : '');
+    }
+    /* 서버를 부를 수 있는 환경인가 (파일로 열었거나 /api 가 없으면 부르지 않는다) */
+    function canCall(){
+      if(location.protocol === 'file:') return false;
+      return true;
+    }
+
+    async function req(method, url, body){
+      if(typeof fetch !== 'function') throw new Error('no-fetch');
+      if(!canCall()) throw new Error('offline-static');
+      const opt = { method: method, cache: 'no-store', headers: {} };
+      if(body != null){
+        opt.headers['Content-Type'] = 'application/json';
+        opt.body = JSON.stringify(body);
+      }
+      const r = await fetch(url, opt);
+      const txt = await r.text();
+      let data = null;
+      try{ data = txt ? JSON.parse(txt) : null; }catch(e){ data = null; }
+      if(!r.ok || !data || data.ok !== true){
+        throw new Error((data && data.error) || ('HTTP ' + r.status));
+      }
+      return data;
+    }
+
+    /* 서버 목록 + 아직 못 올린 오답을 한 줄로 (최신 순) */
+    function merged(){
+      const seen = {}, out = [];
+      serverItems.forEach(function(it){
+        if(it && it.id && !seen[it.id]){ seen[it.id] = 1; out.push(it); }
+      });
+      queue.forEach(function(it){
+        if(it && it.id && !seen[it.id]){ seen[it.id] = 1; out.push(Object.assign({}, it, { _pending: true })); }
+      });
+      out.sort(function(a, b){ return String(b.createdAt || '').localeCompare(String(a.createdAt || '')); });
+      return out;
+    }
+
+    function paintCount(){
+      const n = merged().length;
+      ['wnHudCount', 'wnStartCount'].forEach(function(id){
+        const el = $(id);
+        if(!el) return;
+        el.textContent = n > 99 ? '99+' : String(n);
+        el.classList.toggle('hidden', n <= 0);
+      });
+    }
+
+    function setStatus(text, kind){
+      const el = $('wnStatus');
+      if(!el) return;
+      el.textContent = text || '';
+      el.className = 'wn-status' + (kind ? (' ' + kind) : '');
+    }
+
+    function whenText(iso){
+      const d = new Date(iso);
+      if(!d || isNaN(d.getTime())) return '';
+      const now = new Date();
+      const hm = pad2(d.getHours()) + ':' + pad2(d.getMinutes());
+      if(d.toDateString() === now.toDateString()) return '오늘 ' + hm;
+      const y = new Date(now.getTime() - 86400000);
+      if(d.toDateString() === y.toDateString()) return '어제 ' + hm;
+      return (d.getMonth() + 1) + '/' + d.getDate() + ' ' + hm;
+    }
+
+    async function load(){
+      try{
+        const data = await req('GET', apiUrl('profile=' + encodeURIComponent(profile)));
+        online = true; lastErr = '';
+        serverItems = Array.isArray(data.items) ? data.items : [];
+        lsSet(K_CACHE, serverItems);
+      }catch(e){
+        online = false; lastErr = String((e && e.message) || e);
+        const cached = lsGet(K_CACHE, []);
+        serverItems = Array.isArray(cached) ? cached : [];
+      }
+      paintCount();
+      return serverItems;
+    }
+
+    async function flush(){
+      if(flushing) return;
+      flushing = true;
+      try{
+        /* 지우기 요청부터 (서버에 남은 것 정리) */
+        while(delQueue.length){
+          const id = delQueue[0];
+          try{
+            const data = await req('DELETE', apiUrl('profile=' + encodeURIComponent(profile) + '&id=' + encodeURIComponent(id)));
+            online = true; lastErr = '';
+            if(Array.isArray(data.items)){ serverItems = data.items; lsSet(K_CACHE, serverItems); }
+            delQueue.shift(); lsSet(K_DEL, delQueue);
+          }catch(e){ online = false; lastErr = String((e && e.message) || e); break; }
+        }
+        /* 아직 못 올린 오답 */
+        while(queue.length){
+          const it = queue[0];
+          try{
+            const data = await req('POST', apiUrl(), Object.assign({ profile: profile }, it));
+            online = true; lastErr = '';
+            if(Array.isArray(data.items)){ serverItems = data.items; lsSet(K_CACHE, serverItems); }
+            queue.shift(); lsSet(K_QUEUE, queue);
+          }catch(e){ online = false; lastErr = String((e && e.message) || e); break; }
+        }
+      } finally {
+        flushing = false;
+        paintCount();
+      }
+      if(isOpen && !retryId) render(true);
+    }
+
+    /* 문제를 틀렸을 때 — 화면을 막지 않는다 */
+    function record(item){
+      if(!item || !item.id) return;
+      queue.push(item);
+      lsSet(K_QUEUE, queue);
+      paintCount();
+      const b = $('wnBtn');
+      if(b){ b.classList.remove('flash'); void b.offsetWidth; b.classList.add('flash'); }
+      flush();
+    }
+
+    async function remove(id){
+      queue = queue.filter(function(it){ return it.id !== id; });
+      lsSet(K_QUEUE, queue);
+      const had = serverItems.some(function(it){ return it.id === id; });
+      serverItems = serverItems.filter(function(it){ return it.id !== id; });
+      lsSet(K_CACHE, serverItems);
+      paintCount();
+      if(!had) return 'local';
+      try{
+        const data = await req('DELETE', apiUrl('profile=' + encodeURIComponent(profile) + '&id=' + encodeURIComponent(id)));
+        online = true; lastErr = '';
+        if(Array.isArray(data.items)){ serverItems = data.items; lsSet(K_CACHE, serverItems); }
+        paintCount();
+        return 'server';
+      }catch(e){
+        online = false; lastErr = String((e && e.message) || e);
+        if(delQueue.indexOf(id) < 0){ delQueue.push(id); lsSet(K_DEL, delQueue); }
+        paintCount();
+        return 'local';
+      }
+    }
+
+    async function clearAll(){
+      queue = []; lsSet(K_QUEUE, queue);
+      delQueue = []; lsSet(K_DEL, delQueue);
+      serverItems = []; lsSet(K_CACHE, serverItems);
+      paintCount();
+      try{
+        const data = await req('DELETE', apiUrl('profile=' + encodeURIComponent(profile) + '&all=1'));
+        online = true; lastErr = '';
+        if(Array.isArray(data.items)){ serverItems = data.items; lsSet(K_CACHE, serverItems); }
+        return true;
+      }catch(e){
+        online = false; lastErr = String((e && e.message) || e);
+        return false;
+      }
+    }
+
+    /* 보기 4개: 정답 + 가까운 수 3개 (문제 id로 항상 같은 순서) */
+    function choicesFor(item){
+      const raw = String(item.answer == null ? '' : item.answer).trim();
+      const num = Number(raw.replace(/[^0-9.\-]/g, ''));
+      if(!isFinite(num) || raw === '') return [raw || '?'];
+      const dec = raw.indexOf('.') >= 0;
+      const fmt = function(v){
+        const r = Math.round(v * 10) / 10;
+        return dec ? r.toFixed(1) : String(Math.round(r));
+      };
+      const out = [fmt(num)];
+      const cands = dec ? [0.1, -0.1, 0.2, -0.2, 0.5, -0.5, 1, -1, 0.3, -0.3]
+                        : [1, -1, 2, -2, 3, -3, 10, -10, 5, -5, 20, -20];
+      for(let i = 0; i < cands.length && out.length < 4; i++){
+        const v = num + cands[i];
+        if(v < 0) continue;
+        const s = fmt(v);
+        if(out.indexOf(s) < 0) out.push(s);
+      }
+      let h = 7;
+      const seed = String(item.id || '');
+      for(let i = 0; i < seed.length; i++) h = (h * 31 + seed.charCodeAt(i)) % 100003;
+      for(let i = out.length - 1; i > 0; i--){
+        h = (h * 1103515245 + 12345) % 2147483648;
+        const j = h % (i + 1);
+        const t = out[i]; out[i] = out[j]; out[j] = t;
+      }
+      return out;
+    }
+
+    function buildItem(item){
+      const card = wnEl('div', 'wn-item');
+      card.dataset.id = item.id;
+
+      const top = wnEl('div', 'top');
+      top.appendChild(wnEl('span', 'wn-tag', item.modeLabel || '연습'));
+      if(item._pending) top.appendChild(wnEl('span', 'wn-tag pending', '기기에 보관'));
+      top.appendChild(wnEl('span', 'wn-when', whenText(item.createdAt)));
+      card.appendChild(top);
+
+      card.appendChild(wnEl('div', 'wn-q', item.question || ''));
+
+      const ans = wnEl('div', 'wn-ans');
+      const chosen = (item.chosen == null || item.chosen === '') ? '—' : String(item.chosen);
+      ans.appendChild(wnEl('span', 'wn-pill mine', '내 답 ' + chosen));
+      ans.appendChild(wnEl('span', 'wn-pill ok', '정답 ' + String(item.answer == null ? '' : item.answer)));
+      card.appendChild(ans);
+
+      if(item.speciesName){
+        card.appendChild(wnEl('div', 'wn-sp', (item.theme === 'pokemon' ? '⚡ ' : '🐟 ') + item.speciesName));
+      }
+
+      const acts = wnEl('div', 'wn-acts');
+      const rb = wnEl('button', 'wn-retry-btn', '✏️ 다시 풀기');
+      rb.type = 'button';
+      rb.addEventListener('click', function(){ startRetry(card, item); });
+      const del = wnEl('button', 'wn-del', '🗑');
+      del.type = 'button';
+      del.title = '이 문제 지우기';
+      del.setAttribute('aria-label', '이 문제 지우기');
+      del.addEventListener('click', async function(){
+        del.disabled = true;
+        const where = await remove(item.id);
+        retryId = null;
+        render(true);
+        setStatus(where === 'server' ? '문제를 지웠어요' : '이 기기에서 지웠어요 · 연결되면 서버에도 반영해요',
+          where === 'server' ? 'ok' : 'off');
+      });
+      acts.appendChild(rb);
+      acts.appendChild(del);
+      card.appendChild(acts);
+      return card;
+    }
+
+    function startRetry(card, item){
+      if(card.querySelector('.wn-retry')) return;
+      retryId = item.id;
+      const acts = card.querySelector('.wn-acts');
+      if(acts) acts.classList.add('hidden');
+
+      const box = wnEl('div', 'wn-retry');
+      box.appendChild(wnEl('div', 'wn-retry-hint', '다시 풀어 보세요!'));
+      const ch = wnEl('div', 'wn-choices');
+      const fb = wnEl('div', 'wn-fb', '');
+      const vals = choicesFor(item);
+      let done = false;
+      vals.forEach(function(v){
+        const b = wnEl('button', null, String(v));
+        b.type = 'button';
+        b.addEventListener('click', async function(){
+          if(done) return;
+          if(String(v) === String(item.answer)){
+            done = true;
+            b.classList.add('right');
+            Array.prototype.forEach.call(ch.querySelectorAll('button'), function(x){ x.disabled = true; });
+            fb.style.color = '#1b7a3c';
+            fb.textContent = '정답이에요! 🎉 오답 노트에서 지웠어요';
+            try{ sfx.right(); }catch(e){}
+            const where = await remove(item.id);
+            setTimeout(function(){
+              retryId = null;
+              render(true);
+              setStatus(where === 'server' ? '정답! 오답 노트에서 지웠어요' : '정답! 이 기기에서 지웠어요',
+                where === 'server' ? 'ok' : '');
+            }, 900);
+          } else {
+            b.classList.add('wrong');
+            b.disabled = true;
+            fb.style.color = '#c2453d';
+            fb.textContent = '아쉬워요, 한 번 더 생각해 볼까요?';
+            try{ sfx.wrong(); }catch(e){}
+          }
+        });
+        ch.appendChild(b);
+      });
+      box.appendChild(ch);
+      box.appendChild(fb);
+      const cancel = wnEl('button', 'wn-cancel', '그만 풀기');
+      cancel.type = 'button';
+      cancel.addEventListener('click', function(){
+        retryId = null;
+        box.remove();
+        if(acts) acts.classList.remove('hidden');
+      });
+      box.appendChild(cancel);
+      card.appendChild(box);
+    }
+
+    function counts(items, key){
+      const map = {};
+      items.forEach(function(it){
+        const k = String(it[key] || '').trim();
+        if(k) map[k] = (map[k] || 0) + 1;
+      });
+      return Object.keys(map).map(function(k){ return { k: k, n: map[k] }; })
+        .sort(function(a, b){ return b.n - a.n; });
+    }
+
+    function paintStats(items){
+      const total = $('wnTotal'), ops = $('wnOps'), lv = $('wnLv'), sum = $('wnSummary');
+      if(total) total.textContent = String(items.length);
+      const opList = counts(items, 'opName');
+      const stepList = counts(items, 'stepLabel');
+      if(ops) ops.textContent = opList.length ? (opList.length === 1 ? opList[0].k : opList.length + '가지') : '-';
+      if(lv){
+        const top = stepList[0];
+        lv.textContent = top ? top.k.replace(/\s.*/, '') : '-';
+      }
+      if(sum){
+        if(!opList.length){
+          sum.textContent = '아직 틀린 문제가 없어요!';
+        } else {
+          const a = opList.slice(0, 3).map(function(x){ return x.k + ' ' + x.n; }).join(' · ');
+          const b = stepList.slice(0, 2).map(function(x){ return x.k + ' ' + x.n; }).join(' · ');
+          sum.textContent = a + (b ? (' · ' + b) : '');
+        }
+      }
+    }
+
+    function render(keepScroll){
+      const list = $('wnList');
+      if(!list) return;
+      const st = list.scrollTop;
+      const items = merged();
+      list.innerHTML = '';
+      if(!items.length){
+        const e = wnEl('div', 'wn-empty');
+        e.innerHTML = '<span class="ic">🎣</span>아직 틀린 문제가 없어요!<br>문제를 틀리면 여기에 저절로 모여요.';
+        list.appendChild(e);
+      } else {
+        items.forEach(function(it){ list.appendChild(buildItem(it)); });
+      }
+      paintStats(items);
+      if(keepScroll) list.scrollTop = st;
+    }
+
+    async function open(){
+      const w = $('wnWrap');
+      if(!w) return;
+      isOpen = true;
+      retryId = null;
+      w.classList.remove('hidden');
+      render(false);
+      setStatus('서버에서 불러오는 중…');
+      await flush();
+      await load();
+      if(!isOpen) return;
+      render(true);
+      if(online) setStatus('');
+      else setStatus(canCall()
+        ? '서버에 연결하지 못했어요 · 기기에 저장된 기록을 보여요'
+        : '이 기기에 저장된 기록이에요 · 서버에 연결되면 자동으로 올라가요', 'off');
+      paintCount();
+    }
+
+    function close(){
+      const w = $('wnWrap');
+      if(w) w.classList.add('hidden');
+      isOpen = false;
+      retryId = null;
+    }
+
+    function init(){
+      initProfile();
+      const c = lsGet(K_CACHE, []);
+      const q = lsGet(K_QUEUE, []);
+      const d = lsGet(K_DEL, []);
+      serverItems = Array.isArray(c) ? c : [];
+      queue = Array.isArray(q) ? q : [];
+      delQueue = Array.isArray(d) ? d : [];
+      paintCount();
+
+      const hudBtn = $('wnBtn'), startBtn = $('wnBtnStart');
+      [hudBtn, startBtn].forEach(function(b){
+        if(!b) return;
+        b.addEventListener('click', function(){
+          try{ sfx.tap(); }catch(e){}
+          open();
+        });
+      });
+      const closeBtn = $('wnClose');
+      if(closeBtn) closeBtn.addEventListener('click', close);
+      const wrap = $('wnWrap');
+      if(wrap) wrap.addEventListener('click', function(ev){ if(ev.target === wrap) close(); });
+      const clearBtn = $('wnClearAll');
+      if(clearBtn){
+        clearBtn.addEventListener('click', async function(){
+          clearBtn.disabled = true;
+          const ok = await clearAll();
+          render(false);
+          setStatus(ok ? '오답 노트를 비웠어요' : '기기에서만 비웠어요 · 서버는 연결되면 다시 비워요', ok ? 'ok' : 'off');
+          clearBtn.disabled = false;
+        });
+      }
+
+      /* 켜자마자 조용히 서버와 맞춰 둔다 */
+      (async function(){
+        await flush();
+        await load();
+        if(isOpen && !retryId) render(true);
+      })();
+    }
+
+    return {
+      init: init, open: open, close: close, record: record, render: render,
+      isOpenNow: function(){ return isOpen; },
+      items: function(){ return merged(); },
+      state: function(){ return { profile: profile, online: online, lastErr: lastErr, queue: queue.length, del: delQueue.length }; },
+      profile: function(){ return profile; }
+    };
+  })();
+  WN.init();
+
   /* 테스트/디버그용 읽기 전용 훅 */
   window.__mf = {
     grades: ()=> [1,2,3,4],
@@ -7183,7 +7773,12 @@
       const b = Array.prototype.slice.call(document.querySelectorAll('.choice')).filter(x=>x.dataset.val === String(G.quiz.answer))[0];
       if(b){ b.click(); return true; }
       return false;
-    }
+    },
+    /* 오답 노트 (테스트/확인용) */
+    wn: ()=> ({ items: WN.items(), state: WN.state(), open: WN.isOpenNow(), profile: WN.profile() }),
+    openWrong: ()=>{ WN.open(); return true; },
+    closeWrong: ()=>{ WN.close(); return true; },
+    wnCount: ()=> WN.items().length
   };
 })();
 </script>
