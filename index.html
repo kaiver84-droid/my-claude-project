@@ -5979,7 +5979,7 @@
     const pts = sp.pts;
     G.score += pts;
     save.coins += pts;                 /* 바로 쓸 수 있는 포인트로 쌓인다 */
-    G.caughtCount++;
+    /* 희귀 보물은 '잡은 물고기' 수에는 넣지 않는다 (도감의 '희귀 보물' 칸에 따로 기록) */
     G.gemCaught = (G.gemCaught || 0) + 1;
     const book = dexBook();
     book[sp.id] = (Number(book[sp.id])||0) + 1;   /* 물고기 도감의 '희귀 보물' 칸 */
