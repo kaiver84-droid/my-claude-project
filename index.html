@@ -1171,6 +1171,206 @@
     .study-body{padding:9px 9px 2px;gap:8px;}
     .study-foot .big-btn{height:46px;font-size:16px;}
   }
+
+  /* =================================================================
+     아케이드 UI (참고: 「낚시 스피릿」) — 금속 질감 배지 · 광택 버튼
+     기존 레이아웃 크기는 그대로 두고 질감만 올린다.
+  ================================================================= */
+  .chip{
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.98) 0%, rgba(238,250,255,.98) 46%, rgba(206,235,251,.98) 100%);
+    border-color:#ffffff;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,.95) inset,
+      0 -2px 0 rgba(80,150,190,.35) inset,
+      0 2px 0 rgba(11,61,92,.13),
+      0 6px 14px rgba(6,50,74,.26);
+    text-shadow:0 1px 0 rgba(255,255,255,.9);
+  }
+  .chip .lbl{color:#3f6c85;letter-spacing:.01em;}
+  .chip b{
+    color:#0a3a58;
+    text-shadow:0 1px 0 #fff, 0 0 8px rgba(120,220,255,.5);
+  }
+  .chip.combo{
+    background:linear-gradient(180deg,#fff8d6 0%,#ffe184 48%,#ffc94a 100%);
+    border-color:#fff3c4;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,.95) inset,
+      0 -2px 0 rgba(200,140,0,.45) inset,
+      0 2px 0 rgba(160,105,0,.22),
+      0 6px 16px rgba(150,100,0,.28);
+  }
+  .chip.combo b{color:#7a3f00;text-shadow:0 1px 0 #fff6cf;}
+  .icon-btn{
+    background:
+      linear-gradient(180deg,#ffffff 0%,#eef8ff 45%,#cfe8f8 100%);
+    border-color:#ffffff;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,.95) inset,
+      0 -2px 0 rgba(80,150,190,.35) inset,
+      0 2px 0 rgba(11,61,92,.14),
+      0 6px 14px rgba(6,50,74,.26);
+  }
+  .icon-btn:active{transform:translateY(1px) scale(.96);}
+
+  /* 하단 낚싯대 버튼 — 아케이드 금속 리벳 버튼 */
+  .cast-btn{
+    position:relative;overflow:hidden;
+    background:
+      linear-gradient(180deg,#fff6c8 0%,#ffdf6a 22%,#ffc224 52%,#e89400 78%,#b86e00 100%);
+    box-shadow:
+      0 2px 0 rgba(255,255,255,.85) inset,
+      0 -3px 0 rgba(120,70,0,.45) inset,
+      0 0 0 2px rgba(255,255,255,.55),
+      0 5px 0 #a06400,
+      0 12px 26px rgba(6,50,74,.32),
+      0 0 22px rgba(255,200,60,.35);
+    text-shadow:0 1px 0 rgba(255,255,255,.75);
+  }
+  .cast-btn::after{
+    content:"";position:absolute;left:6px;right:6px;top:5px;height:38%;
+    border-radius:18px 18px 60% 60%;
+    background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,0));
+    pointer-events:none;
+  }
+  .cast-btn:active{box-shadow:0 1px 0 rgba(255,255,255,.8) inset,0 -2px 0 rgba(120,70,0,.45) inset,0 0 0 2px rgba(255,255,255,.5),0 2px 0 #a06400,0 6px 16px rgba(6,50,74,.3);}
+
+  /* 상단 미터 · 포인트 배지 */
+  .coin-pill{
+    background:linear-gradient(180deg,#fffbe6 0%,#ffe486 46%,#f5b800 100%);
+    border-color:#fff1bd;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,.9) inset,
+      0 -2px 0 rgba(170,110,0,.35) inset,
+      0 2px 0 rgba(140,90,0,.22),
+      0 5px 12px rgba(6,50,74,.22);
+  }
+  .coin-pill b{color:#6d3d00;text-shadow:0 1px 0 rgba(255,246,200,.9);}
+  .mode-pill span{
+    background:linear-gradient(180deg,rgba(24,92,130,.86),rgba(8,52,80,.9));
+    border:1px solid rgba(150,235,255,.45);
+    box-shadow:0 1px 0 rgba(255,255,255,.22) inset,0 3px 10px rgba(4,30,50,.4);
+    text-shadow:0 1px 3px rgba(0,20,40,.6);
+    letter-spacing:.01em;
+  }
+  .timer .bar{
+    background:linear-gradient(180deg,rgba(6,45,70,.55),rgba(10,70,100,.35));
+    box-shadow:0 1px 0 rgba(255,255,255,.35) inset, 0 0 0 1.5px rgba(255,255,255,.5), 0 3px 8px rgba(4,30,50,.3);
+  }
+  .timer .bar i{
+    background:linear-gradient(180deg,#a6ff9a 0%,#43d96a 45%,#159b45 100%);
+    box-shadow:0 1px 0 rgba(255,255,255,.6) inset, 0 0 10px rgba(80,255,140,.55);
+  }
+  .timer.low .bar i{background:linear-gradient(180deg,#ffd08a 0%,#ff8a5c 45%,#e0342f 100%);box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 0 12px rgba(255,110,80,.7);}
+  .timer .txt{text-shadow:0 0 8px rgba(0,60,100,.8),0 2px 3px rgba(0,20,40,.8);}
+
+  /* 토스트 — 금색 테두리 + 광택 */
+  .toast{
+    background:linear-gradient(180deg,rgba(255,255,255,.99),rgba(240,250,255,.99));
+    box-shadow:0 0 0 2px rgba(255,255,255,.7) inset,0 12px 28px rgba(6,50,74,.34),0 0 22px rgba(255,205,80,.3);
+  }
+
+  /* 보스 체력 바 — 아케이드 게이지 */
+  .boss-hp i{
+    background:linear-gradient(180deg,#ff9fb4 0%,#ff3d63 45%,#c10028 100%);
+    box-shadow:0 1px 0 rgba(255,255,255,.55) inset,0 0 9px rgba(255,70,110,.85);
+  }
+  .boss-hp i.off{background:linear-gradient(180deg,#264055,#14293a);box-shadow:0 1px 0 rgba(255,255,255,.12) inset;}
+
+  /* 보스 출현 경고 — 화면 테두리 섬광 */
+  #bossFlash{display:none;}
+  /* 아케이드 리본 배너가 떠 있는 동안 게임 자체 배너는 가린다 */
+  .boss-banner.arcade-muted{opacity:0 !important;animation:none !important;}
+
+  /* =================================================================
+     GET! / CONGRATULATIONS! 포획 연출 (리본 배너)
+  ================================================================= */
+  .arcade-get{
+    position:absolute;left:50%;top:44%;z-index:40;
+    transform:translate(-50%,-50%);
+    width:min(92vw,420px);pointer-events:none;
+    display:none;flex-direction:column;align-items:center;gap:0;
+    text-align:center;
+    will-change:transform,opacity;
+  }
+  .arcade-get.show{display:flex;animation:agPop 2.3s cubic-bezier(.2,.9,.25,1) both;}
+  .arcade-get.boss.show{animation-duration:3s;}
+  @keyframes agPop{
+    0%{opacity:0;transform:translate(-50%,-50%) scale(.55) rotate(-6deg);}
+    10%{opacity:1;transform:translate(-50%,-50%) scale(1.12) rotate(1.5deg);}
+    18%{transform:translate(-50%,-50%) scale(1) rotate(0deg);}
+    78%{opacity:1;transform:translate(-50%,-52%) scale(1) rotate(0deg);}
+    92%{opacity:1;transform:translate(-50%,-54%) scale(1.02);}
+    100%{opacity:0;transform:translate(-50%,-62%) scale(.96);}
+  }
+  .arcade-get .ag-top{
+    font-size:clamp(38px,13vw,62px);font-weight:900;line-height:1;letter-spacing:.02em;
+    font-family:system-ui,-apple-system,"Apple SD Gothic Neo",sans-serif;
+    color:#ffe45c;
+    -webkit-text-stroke:6px #7a2a00;
+    paint-order:stroke fill;
+    text-shadow:0 0 18px rgba(255,190,40,.95),0 6px 0 rgba(90,30,0,.55);
+    transform:rotate(-3deg);
+  }
+  .arcade-get.boss .ag-top{
+    font-size:clamp(19px,5.6vw,30px);letter-spacing:.02em;
+    color:#fff6c0;-webkit-text-stroke:5px #8a1400;
+    text-shadow:0 0 22px rgba(255,150,40,.95),0 5px 0 rgba(110,20,0,.6);
+  }
+  .arcade-get .ag-ribbon{
+    margin-top:-4px;position:relative;
+    display:inline-flex;align-items:center;justify-content:center;
+    padding:5px 30px 7px;min-width:0;
+    background:linear-gradient(180deg,#fffdf6 0%,#fff4d8 55%,#ffe3a6 100%);
+    border-top:3px solid #fff;border-bottom:3px solid #e04a2a;
+    box-shadow:0 6px 10px rgba(20,50,70,.35), 0 0 0 2px rgba(230,60,40,.55) inset;
+    clip-path:polygon(0 22%,5% 0,95% 0,100% 22%,100% 78%,95% 100%,5% 100%,0 78%);
+  }
+  .arcade-get .ag-ribbon::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(100deg,rgba(255,255,255,0) 38%,rgba(255,255,255,.85) 50%,rgba(255,255,255,0) 62%);
+    animation:agShine 2.3s ease-in-out .18s 2 both;
+  }
+  @keyframes agShine{0%{transform:translateX(-110%)}60%,100%{transform:translateX(110%)}}
+  .arcade-get .ag-name{
+    font-size:clamp(20px,6vw,29px);font-weight:900;color:#8a1f00;letter-spacing:-.01em;
+    text-shadow:0 1px 0 rgba(255,255,255,.9);
+    position:relative;z-index:1;
+  }
+  .arcade-get.boss .ag-name{color:#a10b2b;font-size:clamp(22px,6.6vw,32px);}
+  .arcade-get .ag-band{
+    margin-top:9px;display:flex;align-items:baseline;gap:3px;
+    padding:5px 20px 6px;
+    background:linear-gradient(180deg,#ff5b6e 0%,#d5122f 55%,#8c0018 100%);
+    border-top:2px solid #ffb3bd;border-bottom:2px solid #5c0010;
+    border-radius:4px;
+    box-shadow:0 5px 12px rgba(80,0,10,.45), 0 0 20px rgba(255,80,60,.35);
+    transform:rotate(-1deg);
+  }
+  .arcade-get .ag-band span{
+    font-size:clamp(15px,4.4vw,20px);font-weight:900;color:#fff;letter-spacing:.06em;
+    text-shadow:0 2px 0 rgba(90,0,10,.65);
+  }
+  .arcade-get .ag-band i{font-style:normal;font-size:12px;font-weight:900;color:#ffd7a0;}
+  .arcade-get.boss .ag-band{
+    background:linear-gradient(180deg,#ffe98f 0%,#ffbe1f 55%,#c47a00 100%);
+    border-top:2px solid #fff6c8;border-bottom:2px solid #8a5200;
+    box-shadow:0 5px 14px rgba(90,50,0,.5),0 0 24px rgba(255,200,60,.6);
+  }
+  .arcade-get.boss .ag-band span{color:#6b2b00;text-shadow:0 1px 0 rgba(255,255,255,.7);font-size:clamp(16px,4.8vw,22px);}
+  .arcade-get.boss .ag-band i{color:#7a4a00;}
+
+  /* 결과 화면 점수도 아케이드 금속 느낌 */
+  .big-score{
+    background:linear-gradient(180deg,#7fe6ff 0%,#1f8fc4 55%,#0b4f77 100%);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+    filter:drop-shadow(0 2px 0 rgba(255,255,255,.7)) drop-shadow(0 4px 8px rgba(6,50,74,.3));
+  }
+  @media (max-width:400px){
+    .arcade-get{width:min(94vw,380px);}
+  }
 </style>
 </head>
 <body>
@@ -5998,6 +6198,7 @@
     showBossBanner(th().bossNotify, G.mode === 'timed'
       ? sp.name + ' · 문제 1개면 포획!'
       : sp.name + ' · 3문제 연속!');
+    if(window.__arcade) window.__arcade.bossWarn();
     flashBoss();
     sfx.bossAppear();
     syncCastLabel();
@@ -6087,6 +6288,7 @@
     splash(fish.x-26, waterY+8);
     splash(fish.x+28, waterY+8);
     showBossBanner(sp.name + ' 포획!', bonus ? '+' + pts + '점 · 남은 시간 +5초' : '+' + pts + '점', true);
+    if(window.__arcade) window.__arcade.celebrate(sp.name, pts, true, false);
     sfx.bossWin();
     ensureFish();
   }
@@ -6765,6 +6967,7 @@
     if(G.score > roundBest()) roundBestSet(G.score);
     persist();
     updateHUD();
+    if(window.__arcade) window.__arcade.celebrate(sp.name, pts, false, false);
     toast(sp, pts, `${josa(sp.name,'을','를')} 잡았어요!` + (comboBonus?` (연속 ${G.streak})`:''));
     floatText(boat.x, boat.y - 78*SCALE, '+'+pts, '#ffe07a');
     sparkle(fish.x, waterY);
@@ -6804,6 +7007,7 @@
     G.state = 'playing';
     toast(sp, pts, josa(sp.name,'을','를') + ' 건졌어요!');
     sparkle(gx, waterY);
+    if(window.__arcade) window.__arcade.celebrate(sp.name, pts, false, true);
     gemBurst(gx, Math.min(gy, waterY + 40));
     showBossBanner(sp.name + ' 획득!', '+' + pts + '점 · 희귀 보물', true);
     sfx.gem();
@@ -6835,6 +7039,7 @@
   }
 
   function splash(x,y){
+    if(window.__arcade) window.__arcade.ring(x, y);
     for(let i=0;i<18;i++){
       const a = -Math.PI*0.15 - Math.random()*Math.PI*0.7;
       const sp = 60+Math.random()*150;
@@ -7210,6 +7415,9 @@
       ctx.closePath(); ctx.fill();
     });
 
+    /* 아케이드 수중 아트 레이어 (산호초 · 커스틱스 · 빛줄기 · 그림자) */
+    if(window.__arcade) window.__arcade.back(ctx, t, dt, G, W, H, waterY, SCALE);
+
     if(!G.hideFish) G.fish.forEach(f=>{
       if(f === G.hooked && (G.state==='casting'||G.state==='quiz'||G.state==='catching')) return;
       drawFish(ctx, f.sp, f.x, f.y, f.size, f.phase, f.dir);
@@ -7303,6 +7511,9 @@
       ctx.fillText(fl.text, fl.x, fl.y - fl.life*40);
       ctx.restore();
     });
+
+    /* 아케이드 앞 레이어 (찌 파문 · 물보라 링 · GET! 축하 연출) */
+    if(window.__arcade) window.__arcade.front(ctx, t, dt, G, W, H, waterY, SCALE);
   }
 
   function drawCloud(x,y,s,o){
@@ -11348,6 +11559,1047 @@
     wnCount: ()=> WN.items().length
   };
 })();
+</script>
+<script>
+/* ===================================================================
+   아케이드 수중 아트 레이어  (참고: 닌텐도 스위치 「낚시 스피릿」)
+   -------------------------------------------------------------------
+   · 바다 그라디언트 / 모래 바닥 / 좌우 산호초 지형 / 커스틱스(수면 빛무늬)
+     / 빛줄기 / 물고기 그림자 / 물보라 링 / GET! 축하 연출을 담당한다.
+   · 산호초·모래·암초는 크기가 바뀔 때 한 번만 오프스크린 캔버스에 그려
+     캐싱하고, 매 프레임은 blit + 커스틱스 2겹 + 광선 + 그림자만 그린다.
+     → 아이폰에서도 60fps 유지.
+   =================================================================== */
+(function () {
+  'use strict';
+
+  var A = {};
+  window.__arcade = A;
+  /* 성능 측정용 스위치 (기본 전부 켜짐) */
+  A.flags = { water: 1, reef: 1, caustics: 1, rays: 1, kelp: 1, shadows: 1, plankton: 1, front: 1 };
+
+  function clampv(v, a, b) { return v < a ? a : (v > b ? b : v); }
+  function mulberry32(a) {
+    return function () {
+      a = a + 0x6D2B79F5 | 0;
+      var t = Math.imul(a ^ a >>> 15, 1 | a);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  var TAU = Math.PI * 2;
+
+  var ST = { W: 0, H: 0, waterY: 0, S: 1, dpr: 1, key: '' };
+
+  var waterGrad = null, deepGlow = null, surfGrad = null, rayGrad = null;
+  var reefCv = null, kelpList = [];
+  var causticCv = null, shadowSpr = null, burstSpr = null, coinSpr = null, glowSpr = null;
+  var plankton = [];
+
+  var cel = null;            /* 축하 연출 상태 */
+  var warn = 0;              /* 보스 등장 경고 잔여 시간 */
+  var rings = [];            /* 물결 파문 */
+  var coins = [];            /* 금화 파티클 */
+  var sparks = [];           /* 별 반짝임 */
+  var getEl = null;
+
+  /* ------------------------------------------------------------------
+     작은 도형 헬퍼
+  ------------------------------------------------------------------ */
+  function domePath(c, x, y, rx, ry) {
+    c.beginPath();
+    c.ellipse(x, y, rx, ry, 0, Math.PI, TAU);
+    c.closePath();
+  }
+
+  function softEllipse(c, x, y, rx, ry, col) {
+    var g = c.createRadialGradient(x, y, rx * 0.1, x, y, rx);
+    g.addColorStop(0, col);
+    g.addColorStop(1, col.replace(/[\d.]+\)$/, '0)'));
+    c.fillStyle = g;
+    c.beginPath(); c.ellipse(x, y, rx, ry, 0, 0, TAU); c.fill();
+  }
+
+  /* ------------------------------------------------------------------
+     커스틱스(수면 빛무늬) 타일 — 한 번만 만든 뒤 늘려서 겹쳐 그린다
+  ------------------------------------------------------------------ */
+  function buildCaustic() {
+    var S = 256;
+    var cv = document.createElement('canvas');
+    cv.width = cv.height = S;
+    var c = cv.getContext('2d');
+    var rnd = mulberry32(9001);
+    c.clearRect(0, 0, S, S);
+    c.globalCompositeOperation = 'lighter';
+    c.lineCap = 'round';
+    /* 잔잔한 물결 그물: 짧고 부드러운 곡선 다발 */
+    for (var i = 0; i < 84; i++) {
+      var x0 = rnd() * S, y0 = rnd() * S;
+      var len = 16 + rnd() * 54, ang = rnd() * TAU;
+      var amp = 3 + rnd() * 9;
+      c.strokeStyle = 'rgba(255,255,255,' + (0.035 + rnd() * 0.075).toFixed(3) + ')';
+      c.lineWidth = 0.9 + rnd() * 2.1;
+      c.beginPath();
+      var steps = 6;
+      for (var k = 0; k <= steps; k++) {
+        var p = k / steps;
+        var px = x0 + Math.cos(ang) * len * p + Math.cos(ang + 1.57) * Math.sin(p * 3.4 + i) * amp;
+        var py = y0 + Math.sin(ang) * len * p + Math.sin(ang + 1.57) * Math.sin(p * 3.4 + i) * amp;
+        if (k === 0) c.moveTo(px, py); else c.lineTo(px, py);
+      }
+      c.stroke();
+    }
+    /* 밝은 마디 */
+    for (var j = 0; j < 90; j++) {
+      var bx = rnd() * S, by = rnd() * S, br = 1.4 + rnd() * 5.2;
+      var bg = c.createRadialGradient(bx, by, 0, bx, by, br);
+      bg.addColorStop(0, 'rgba(255,255,255,' + (0.10 + rnd() * 0.22).toFixed(3) + ')');
+      bg.addColorStop(1, 'rgba(255,255,255,0)');
+      c.fillStyle = bg;
+      c.beginPath(); c.arc(bx, by, br, 0, TAU); c.fill();
+    }
+    return cv;
+  }
+
+  /* ------------------------------------------------------------------
+     그림자 · 금화 · 방사형 광선 · 글로우 스프라이트
+  ------------------------------------------------------------------ */
+  function makeShadow() {
+    var cv = document.createElement('canvas');
+    cv.width = 128; cv.height = 64;
+    var c = cv.getContext('2d');
+    var g = c.createRadialGradient(64, 32, 2, 64, 32, 62);
+    g.addColorStop(0, 'rgba(3,26,44,.5)');
+    g.addColorStop(0.45, 'rgba(4,32,54,.26)');
+    g.addColorStop(1, 'rgba(4,32,54,0)');
+    c.fillStyle = g;
+    c.beginPath(); c.ellipse(64, 32, 62, 30, 0, 0, TAU); c.fill();
+    return cv;
+  }
+
+  function makeGlow() {
+    var cv = document.createElement('canvas');
+    cv.width = cv.height = 128;
+    var c = cv.getContext('2d');
+    var g = c.createRadialGradient(64, 64, 0, 64, 64, 64);
+    g.addColorStop(0, 'rgba(255,246,200,.95)');
+    g.addColorStop(0.35, 'rgba(255,206,90,.55)');
+    g.addColorStop(1, 'rgba(255,170,40,0)');
+    c.fillStyle = g; c.fillRect(0, 0, 128, 128);
+    return cv;
+  }
+
+  function makeCoin() {
+    var cv = document.createElement('canvas');
+    cv.width = cv.height = 40;
+    var c = cv.getContext('2d');
+    var g = c.createLinearGradient(6, 4, 34, 36);
+    g.addColorStop(0, '#fff6c2'); g.addColorStop(0.4, '#ffd94a');
+    g.addColorStop(0.75, '#e8a400'); g.addColorStop(1, '#a86b00');
+    c.fillStyle = g;
+    c.beginPath(); c.arc(20, 20, 17, 0, TAU); c.fill();
+    c.strokeStyle = '#fff3b0'; c.lineWidth = 2.4;
+    c.beginPath(); c.arc(20, 20, 14, 0, TAU); c.stroke();
+    c.fillStyle = 'rgba(255,255,255,.75)';
+    c.beginPath(); c.ellipse(14, 12, 5.5, 3.4, -0.6, 0, TAU); c.fill();
+    c.fillStyle = '#9a5d00';
+    c.font = '900 15px system-ui, sans-serif';
+    c.textAlign = 'center'; c.textBaseline = 'middle';
+    c.fillText('P', 20, 21);
+    return cv;
+  }
+
+  function makeBurst() {
+    var S = 512;
+    var cv = document.createElement('canvas');
+    cv.width = cv.height = S;
+    var c = cv.getContext('2d');
+    var cx = S / 2, cy = S / 2;
+    c.globalCompositeOperation = 'lighter';
+    var n = 22;
+    for (var i = 0; i < n; i++) {
+      var a0 = (i / n) * TAU, a1 = a0 + TAU / n * 0.46;
+      var g = c.createRadialGradient(cx, cy, 6, cx, cy, S * 0.5);
+      g.addColorStop(0, 'rgba(255,246,190,.62)');
+      g.addColorStop(0.45, 'rgba(255,198,70,.30)');
+      g.addColorStop(1, 'rgba(255,170,40,0)');
+      c.fillStyle = g;
+      c.beginPath();
+      c.moveTo(cx, cy);
+      c.arc(cx, cy, S * 0.5, a0, a1);
+      c.closePath(); c.fill();
+    }
+    var rg = c.createRadialGradient(cx, cy, 0, cx, cy, S * 0.3);
+    rg.addColorStop(0, 'rgba(255,250,215,.34)');
+    rg.addColorStop(0.6, 'rgba(255,210,100,.22)');
+    rg.addColorStop(1, 'rgba(255,200,80,0)');
+    c.fillStyle = rg;
+    c.beginPath(); c.arc(cx, cy, S * 0.3, 0, TAU); c.fill();
+    return cv;
+  }
+
+  /* ------------------------------------------------------------------
+     산호초 조각들
+  ------------------------------------------------------------------ */
+  /* 둥글둥글한 바위 덩어리 — 여러 타원을 한 path 로 합쳐 유기적인 실루엣 */
+  function rockBlob(c, x, y, w, h, rnd, tone) {
+    var n = 6 + Math.floor(rnd() * 3);
+    var parts = [];
+    for (var i = 0; i < n; i++) {
+      var t = (i + 0.5) / n;
+      var px = x - w * 0.5 + w * t + (rnd() - 0.5) * w * 0.10;
+      var rr = h * (0.46 + 0.58 * Math.sin(Math.PI * Math.min(1, Math.max(0.02, t)))) * (0.82 + 0.3 * rnd());
+      parts.push({ x: px, y: y - rr * 0.5, rx: rr * (1.15 + rnd() * 0.28), ry: rr });
+    }
+    var g = c.createLinearGradient(x, y - h * 1.15, x, y + h * 0.1);
+    if (tone === 'far') {
+      g.addColorStop(0, '#26768f'); g.addColorStop(0.38, '#165a76');
+      g.addColorStop(0.72, '#0f4462'); g.addColorStop(1, '#0a3049');
+    } else {
+      g.addColorStop(0, '#3b97ad'); g.addColorStop(0.36, '#1f6c86');
+      g.addColorStop(0.7, '#145473'); g.addColorStop(1, '#0a3049');
+    }
+    c.fillStyle = g;
+    c.beginPath();
+    for (var k = 0; k < parts.length; k++) {
+      c.moveTo(parts[k].x + parts[k].rx, parts[k].y);
+      c.ellipse(parts[k].x, parts[k].y, parts[k].rx, parts[k].ry, 0, 0, TAU);
+    }
+    c.fill();
+    /* 윗면 림 라이트 + 아래쪽 그늘 */
+    c.save();
+    c.globalCompositeOperation = 'lighter';
+    c.globalAlpha = 0.22;
+    c.fillStyle = 'rgba(170,240,255,.9)';
+    c.beginPath();
+    for (var k2 = 0; k2 < parts.length; k2++) {
+      var pt = parts[k2];
+      c.moveTo(pt.x + pt.rx * 0.86, pt.y - pt.ry * 0.72);
+      c.ellipse(pt.x, pt.y - pt.ry * 0.72, pt.rx * 0.86, pt.ry * 0.26, 0, 0, TAU);
+    }
+    c.fill();
+    c.restore();
+    /* 점박이 · 틈 */
+    for (var p2 = 0; p2 < 12; p2++) {
+      var sx = x + (rnd() - 0.5) * w * 0.86;
+      var sy = y - rnd() * h * 0.95;
+      c.fillStyle = (p2 % 3 === 0 ? 'rgba(6,40,60,' : 'rgba(180,240,255,')
+        + (0.05 + rnd() * 0.10).toFixed(2) + ')';
+      c.beginPath(); c.arc(sx, sy, h * (0.03 + rnd() * 0.055), 0, TAU); c.fill();
+    }
+  }
+
+  /* 콜리플라워 산호: 작은 혹 다발 */
+  function coralBumps(c, x, y, s, c1, c2, rnd) {
+    var n = 6 + Math.floor(rnd() * 5);
+    var bumps = [];
+    for (var i = 0; i < n; i++) {
+      var t = (i + 0.5) / n;
+      var px = x + (t - 0.5) * s * 1.7 + (rnd() - 0.5) * s * 0.22;
+      var hh = s * (0.42 + 0.72 * Math.sin(Math.PI * t)) * (0.85 + rnd() * 0.4);
+      bumps.push({ x: px, y: y - hh * 0.5, rx: hh * 0.6, ry: hh * 0.62 });
+    }
+    var g = c.createLinearGradient(x, y - s * 1.4, x, y);
+    g.addColorStop(0, c1); g.addColorStop(0.55, c2); g.addColorStop(1, 'rgba(72,6,44,.95)');
+    c.fillStyle = g;
+    c.beginPath();
+    for (var k = 0; k < bumps.length; k++) {
+      var b = bumps[k];
+      c.moveTo(b.x + b.rx, b.y);
+      c.ellipse(b.x, b.y, b.rx, b.ry, 0, 0, TAU);
+    }
+    c.fill();
+    c.save();
+    c.globalCompositeOperation = 'lighter';
+    c.globalAlpha = 0.30;
+    c.fillStyle = 'rgba(255,255,255,.9)';
+    c.beginPath();
+    for (var k2 = 0; k2 < bumps.length; k2++) {
+      var b2 = bumps[k2];
+      c.moveTo(b2.x + b2.rx * 0.55, b2.y - b2.ry * 0.55);
+      c.ellipse(b2.x, b2.y - b2.ry * 0.55, b2.rx * 0.5, b2.ry * 0.3, 0, 0, TAU);
+    }
+    c.fill();
+    c.restore();
+  }
+
+  function tubeSponges(c, x, y, s, rnd, cols) {
+    var n = 3 + Math.floor(rnd() * 3);
+    for (var i = 0; i < n; i++) {
+      var tx = x + (i - (n - 1) / 2) * s * 0.46 + (rnd() - 0.5) * s * 0.2;
+      var th = s * (0.85 + rnd() * 1.0);
+      var tw = s * (0.15 + rnd() * 0.06);
+      var g = c.createLinearGradient(tx - tw, 0, tx + tw, 0);
+      g.addColorStop(0, cols[0]); g.addColorStop(0.35, cols[1]);
+      g.addColorStop(0.72, cols[2]); g.addColorStop(1, cols[3]);
+      c.fillStyle = g;
+      c.beginPath();
+      c.moveTo(tx - tw, y);
+      c.quadraticCurveTo(tx - tw * 1.2, y - th * 0.75, tx - tw * 0.82, y - th);
+      c.quadraticCurveTo(tx, y - th * 1.14, tx + tw * 0.82, y - th);
+      c.quadraticCurveTo(tx + tw * 1.2, y - th * 0.75, tx + tw, y);
+      c.closePath(); c.fill();
+      c.fillStyle = 'rgba(255,255,255,.26)';
+      c.beginPath();
+      c.ellipse(tx - tw * 0.35, y - th * 0.6, tw * 0.2, th * 0.3, 0, 0, TAU); c.fill();
+      c.fillStyle = 'rgba(90,30,0,.55)';
+      c.beginPath(); c.ellipse(tx, y - th * 0.99, tw * 0.78, tw * 0.34, 0, 0, TAU); c.fill();
+    }
+  }
+
+  function seaFan(c, x, y, s, col, rnd) {
+    c.save();
+    c.strokeStyle = col; c.lineCap = 'round';
+    c.globalAlpha = 0.92;
+    function branch(bx, by, ang, len, w, depth) {
+      if (depth <= 0 || len < 3) return;
+      var ex = bx + Math.cos(ang) * len, ey = by + Math.sin(ang) * len;
+      c.lineWidth = w;
+      c.beginPath(); c.moveTo(bx, by); c.lineTo(ex, ey); c.stroke();
+      branch(ex, ey, ang - 0.3 - rnd() * 0.16, len * 0.72, w * 0.7, depth - 1);
+      branch(ex, ey, ang + 0.3 + rnd() * 0.16, len * 0.72, w * 0.7, depth - 1);
+      if (rnd() < 0.55) branch(ex, ey, ang + (rnd() - 0.5) * 0.22, len * 0.68, w * 0.68, depth - 1);
+    }
+    for (var i = 0; i < 3; i++) {
+      branch(x + (i - 1) * s * 0.16, y, -Math.PI / 2 + (i - 1) * 0.42 + (rnd() - 0.5) * 0.2,
+        s * (0.46 + rnd() * 0.3), Math.max(1.4, s * 0.085), 4);
+    }
+    c.restore();
+  }
+
+  /* 잎사귀 산호 (넓적한 물결 잎) */
+  function coralLettuce(c, x, y, s, c1, c2, rnd) {
+    var n = 4 + Math.floor(rnd() * 3);
+    for (var i = 0; i < n; i++) {
+      var a = -Math.PI * 0.5 + (i - (n - 1) / 2) * 0.34 + (rnd() - 0.5) * 0.16;
+      var L = s * (0.9 + rnd() * 0.7);
+      var wd = s * (0.3 + rnd() * 0.22);
+      c.save();
+      c.translate(x, y);
+      c.rotate(a + Math.PI / 2);
+      var g = c.createLinearGradient(0, 0, 0, -L);
+      g.addColorStop(0, c2); g.addColorStop(0.55, c1); g.addColorStop(1, 'rgba(255,255,255,.55)');
+      c.fillStyle = g;
+      c.beginPath();
+      c.moveTo(0, 0);
+      c.quadraticCurveTo(-wd, -L * 0.45, -wd * 0.35, -L);
+      c.quadraticCurveTo(0, -L * 1.1, wd * 0.4, -L);
+      c.quadraticCurveTo(wd, -L * 0.45, 0, 0);
+      c.closePath(); c.fill();
+      c.strokeStyle = 'rgba(255,255,255,.25)';
+      c.lineWidth = Math.max(0.7, s * 0.04);
+      c.beginPath(); c.moveTo(0, 0); c.lineTo(0, -L * 0.92); c.stroke();
+      c.restore();
+    }
+  }
+
+  function anemone(c, x, y, s, c1, c2, rnd) {
+    var g = c.createRadialGradient(x, y - s * 0.5, s * 0.15, x, y, s * 1.2);
+    g.addColorStop(0, c1); g.addColorStop(1, c2);
+    c.fillStyle = g;
+    domePath(c, x, y, s * 0.9, s * 0.66); c.fill();
+    var n = 14;
+    for (var i = 0; i < n; i++) {
+      var a = Math.PI + (i / (n - 1)) * Math.PI;
+      var L = s * (0.6 + rnd() * 0.4);
+      var ex = x + Math.cos(a) * L * 0.55 + (rnd() - 0.5) * s * 0.16;
+      var ey = y - s * 0.34 + Math.sin(a) * L * 0.5 - rnd() * s * 0.2;
+      c.strokeStyle = i % 2 ? 'rgba(255,255,255,.5)' : c1;
+      c.lineWidth = Math.max(1, s * 0.06);
+      c.lineCap = 'round';
+      c.beginPath();
+      c.moveTo(x + Math.cos(a) * s * 0.2, y - s * 0.26);
+      c.quadraticCurveTo((x + ex) / 2 + (rnd() - 0.5) * s * 0.16, (y - s * 0.26 + ey) / 2 - s * 0.16, ex, ey);
+      c.stroke();
+      c.fillStyle = 'rgba(255,255,235,.8)';
+      c.beginPath(); c.arc(ex, ey, Math.max(0.8, s * 0.038), 0, TAU); c.fill();
+    }
+  }
+
+  function starfish(c, x, y, s, rot, col, col2) {
+    c.save();
+    c.translate(x, y); c.rotate(rot);
+    c.beginPath();
+    for (var i = 0; i < 5; i++) {
+      var a = -Math.PI / 2 + i * TAU / 5;
+      var a2 = a + TAU / 10;
+      c.lineTo(Math.cos(a) * s, Math.sin(a) * s * 1.08);
+      c.quadraticCurveTo(Math.cos(a2) * s * 0.42, Math.sin(a2) * s * 0.42,
+        Math.cos(a2 + TAU / 10) * s, Math.sin(a2 + TAU / 10) * s * 1.08);
+    }
+    c.closePath();
+    var g = c.createRadialGradient(0, 0, s * 0.1, 0, 0, s);
+    g.addColorStop(0, col2); g.addColorStop(1, col);
+    c.fillStyle = g; c.fill();
+    c.strokeStyle = 'rgba(255,255,255,.35)'; c.lineWidth = Math.max(0.8, s * 0.06); c.stroke();
+    c.fillStyle = 'rgba(255,255,255,.5)';
+    for (var k = 0; k < 6; k++) {
+      var rr = s * (0.2 + k * 0.11);
+      c.beginPath(); c.arc(Math.cos(k * 2) * rr, Math.sin(k * 2) * rr, Math.max(0.5, s * 0.05), 0, TAU); c.fill();
+    }
+    c.restore();
+  }
+
+  function kelpDef(x, y, h, col, phase, w) {
+    kelpList.push({ x: x, y: y, h: h, col: col, ph: phase, w: w });
+  }
+
+  function drawKelp(c, t) {
+    for (var i = 0; i < kelpList.length; i++) {
+      var k = kelpList[i];
+      var segs = 7;
+      var pts = [];
+      for (var s = 0; s <= segs; s++) {
+        var p = s / segs;
+        pts.push({
+          x: k.x + Math.sin(t * 1.05 + k.ph + p * 2.1) * k.w * 2.4 * p,
+          y: k.y - k.h * p
+        });
+      }
+      /* 잎사귀 모양(밑동은 두껍고 끝은 뾰족) 두 갈래로 채운다 */
+      c.beginPath();
+      c.moveTo(k.x, k.y);
+      for (var a = 1; a <= segs; a++) {
+        var pa = pts[a];
+        var wA = k.w * (1 - a / segs) * 1.35 + 0.5;
+        c.lineTo(pa.x - wA, pa.y);
+      }
+      for (var b = segs; b >= 1; b--) {
+        var pb = pts[b];
+        var wB = k.w * (1 - b / segs) * 1.35 + 0.5;
+        c.lineTo(pb.x + wB, pb.y);
+      }
+      c.closePath();
+      c.fillStyle = k.col;
+      c.fill();
+      /* 잎맥 · 하이라이트 */
+      c.strokeStyle = 'rgba(255,255,255,.30)';
+      c.lineWidth = Math.max(0.7, k.w * 0.42);
+      c.lineCap = 'round';
+      c.beginPath();
+      c.moveTo(pts[0].x, pts[0].y);
+      for (var q = 1; q <= segs; q++) c.lineTo(pts[q].x, pts[q].y);
+      c.stroke();
+    }
+  }
+
+  /* ------------------------------------------------------------------
+     배경: 원경 암초 실루엣 + 모래 바닥
+  ------------------------------------------------------------------ */
+  function buildBackHills(c, W, H, waterY) {
+    var rnd = mulberry32(77);
+    var bands = [
+      { col: 'rgba(34,132,164,.26)', y: 0.84, amp: 30, n: 5 },
+      { col: 'rgba(18,98,130,.30)', y: 0.90, amp: 22, n: 4 }
+    ];
+    for (var b = 0; b < bands.length; b++) {
+      var bd = bands[b];
+      c.fillStyle = bd.col;
+      c.beginPath();
+      c.moveTo(-4, H);
+      c.lineTo(-4, waterY + (H - waterY) * bd.y);
+      for (var i = 0; i <= bd.n; i++) {
+        var x0 = -4 + (W + 8) * (i / bd.n);
+        var x1 = -4 + (W + 8) * ((i + 1) / bd.n);
+        var peak = waterY + (H - waterY) * bd.y - bd.amp * (0.4 + rnd() * 0.9);
+        c.quadraticCurveTo((x0 + x1) / 2, peak, x1, waterY + (H - waterY) * bd.y);
+      }
+      c.lineTo(W + 4, H);
+      c.closePath(); c.fill();
+    }
+  }
+
+  function sandTopY() {
+    var S = ST.S;
+    return ST.H - Math.max(52 * S, Math.min(150 * S, (ST.H - ST.waterY) * 0.20));
+  }
+
+  function buildSand(c, W, H, waterY, front) {
+    var rnd = mulberry32(front ? 61 : 31);
+    var S = ST.S;
+    var top = front ? (H - Math.max(40 * S, Math.min(96 * S, (H - waterY) * 0.135))) : sandTopY();
+    var dune = function (x) {
+      if (front) {
+        return top + Math.sin(x * 0.013 + 0.7) * 7 * S + Math.sin(x * 0.031 + 1.9) * 3.2 * S;
+      }
+      return top + Math.sin(x * 0.011 + 1.3) * 9 * S + Math.sin(x * 0.027 + 0.4) * 4.5 * S
+        + Math.sin(x * 0.006 + 2.2) * 7 * S;
+    };
+    var g = c.createLinearGradient(0, top - 20 * S, 0, H);
+    g.addColorStop(0, front ? '#f7e7bd' : '#fdf3d6');
+    g.addColorStop(0.30, front ? '#eed3a0' : '#f4e2ae');
+    g.addColorStop(0.62, front ? '#dcb87c' : '#e3c184');
+    g.addColorStop(1, front ? '#b8935c' : '#c9a466');
+    c.fillStyle = g;
+    c.beginPath();
+    c.moveTo(-4, H + 2);
+    c.lineTo(-4, dune(-4));
+    for (var x = -4; x <= W + 4; x += 7) c.lineTo(x, dune(x));
+    c.lineTo(W + 4, H + 2);
+    c.closePath(); c.fill();
+
+    /* 앞쪽 모래는 윗변 그늘을 넣어 지형 경계를 살린다 */
+    if (front) {
+      c.strokeStyle = 'rgba(120,86,42,.20)';
+      c.lineWidth = 3;
+      c.beginPath();
+      for (var x2 = -4; x2 <= W + 4; x2 += 7) {
+        var y2 = dune(x2);
+        if (x2 === -4) c.moveTo(x2, y2); else c.lineTo(x2, y2);
+      }
+      c.stroke();
+      c.save();
+      c.globalCompositeOperation = 'lighter';
+      c.globalAlpha = 0.5;
+      c.strokeStyle = 'rgba(255,248,214,.55)';
+      c.lineWidth = 1.6;
+      c.beginPath();
+      for (var x3 = -4; x3 <= W + 4; x3 += 7) {
+        var y3 = dune(x3) + 4;
+        if (x3 === -4) c.moveTo(x3, y3); else c.lineTo(x3, y3);
+      }
+      c.stroke();
+      c.restore();
+    }
+
+    /* 모래 위 빛 얼룩 */
+    for (var i = 0; i < (front ? 8 : 16); i++) {
+      var gx = rnd() * W, gy = top + 10 * S + rnd() * (H - top);
+      softEllipse(c, gx, gy, 26 * S + rnd() * 44 * S, 11 * S + rnd() * 14 * S, 'rgba(255,252,214,.36)');
+    }
+    /* 물결 자국 */
+    for (var k = 0; k < (front ? 16 : 32); k++) {
+      var rx = rnd() * W, ry = top + 10 * S + rnd() * (H - top - 8);
+      var rw = 11 * S + rnd() * 28 * S;
+      c.strokeStyle = 'rgba(158,116,58,' + (0.09 + rnd() * 0.12).toFixed(2) + ')';
+      c.lineWidth = 1.2 + rnd() * 1.1;
+      c.beginPath(); c.moveTo(rx - rw / 2, ry);
+      c.quadraticCurveTo(rx, ry - (3 + rnd() * 4) * S, rx + rw / 2, ry);
+      c.stroke();
+    }
+    /* 조약돌·조개 */
+    for (var p2 = 0; p2 < (front ? 14 : 22); p2++) {
+      var px = rnd() * W, py = top + 6 * S + rnd() * (H - top - 6);
+      var pr = (1.5 + rnd() * 3.6) * S;
+      var cols = ['rgba(255,255,255,.55)', 'rgba(150,196,214,.5)', 'rgba(235,178,140,.55)', 'rgba(120,96,72,.4)'];
+      c.fillStyle = cols[Math.floor(rnd() * cols.length)];
+      c.beginPath(); c.ellipse(px, py, pr, pr * 0.72, rnd() * 3, 0, TAU); c.fill();
+      c.fillStyle = 'rgba(255,255,255,.42)';
+      c.beginPath(); c.ellipse(px - pr * 0.25, py - pr * 0.25, pr * 0.34, pr * 0.2, 0, 0, TAU); c.fill();
+    }
+  }
+
+  /* ------------------------------------------------------------------
+     좌우 산호 지형 — 암초 머리(bommie)를 가장자리에 흩어 놓는다
+  ------------------------------------------------------------------ */
+  function coralGarden(c, x, y, sc, rnd, dir) {
+    var S = ST.S;
+    /* 바위 받침 */
+    rockBlob(c, x, y + 4 * S, 30 * S * sc, 15 * S * sc, rnd, rnd() < 0.5 ? 'far' : 'lit');
+    var items = 2 + Math.floor(rnd() * 3);
+    var palettes = [
+      ['#ffa3cf', '#e8368c'], ['#ffc37a', '#ef6a15'], ['#c9a6ff', '#7a3ce0'],
+      ['#8ff4d8', '#1aa88c'], ['#ffe88a', '#e8ae00'], ['#ff9d86', '#d83a26']
+    ];
+    for (var i = 0; i < items; i++) {
+      var pa = palettes[Math.floor(rnd() * palettes.length)];
+      var ox = x + (rnd() - 0.5) * 26 * S * sc;
+      var oy = y - (2 + rnd() * 5) * S * sc;
+      var sz = (12 + rnd() * 11) * S * sc;
+      var kind = rnd();
+      if (kind < 0.30) coralBumps(c, ox, oy, sz, pa[0], pa[1], rnd);
+      else if (kind < 0.50) tubeSponges(c, ox, oy, sz * 0.85, rnd, [pa[0], pa[0], pa[1], 'rgba(80,16,0,.85)']);
+      else if (kind < 0.68) seaFan(c, ox, oy, sz, pa[0], rnd);
+      else if (kind < 0.82) coralLettuce(c, ox, oy, sz * 0.9, pa[0], pa[1], rnd);
+      else if (kind < 0.92) anemone(c, ox, oy, sz * 0.85, pa[0], pa[1], rnd);
+      else starfish(c, ox, oy - 2 * S, sz * 0.42, rnd() * TAU, pa[1], pa[0]);
+    }
+    if (rnd() < 0.55) {
+      kelpDef(x + dir * (rnd() * 12) * S, y + 3 * S, (40 + rnd() * 40) * S,
+        rnd() < 0.5 ? 'rgba(56,190,126,.88)' : 'rgba(112,206,96,.88)', rnd() * 6, 2.4 * S);
+    }
+  }
+
+  function buildReefSide(c, W, H, waterY, side) {
+    var S = ST.S;
+    var rnd = mulberry32(side < 0 ? 401 : 907);
+    var edge = side < 0 ? 0 : W;
+    var dir = side < 0 ? 1 : -1;               /* 화면 안쪽 방향 */
+    var maxW = Math.min(W * 0.235, 205 * S);
+    var bands = [
+      { d: 0.06, w: 0.36, h: 0.062 },
+      { d: 0.20, w: 0.50, h: 0.080 },
+      { d: 0.35, w: 0.44, h: 0.075 },
+      { d: 0.49, w: 0.62, h: 0.098 },
+      { d: 0.63, w: 0.56, h: 0.092 },
+      { d: 0.77, w: 0.78, h: 0.125 },
+      { d: 0.90, w: 0.66, h: 0.112 }
+    ];
+    for (var i = 0; i < bands.length; i++) {
+      var bd = bands[i];
+      var w = maxW * bd.w * (0.82 + rnd() * 0.4);
+      var h = (H - waterY) * bd.h * (0.85 + rnd() * 0.4);
+      var cy = waterY + (H - waterY) * bd.d + (rnd() - 0.5) * 26 * S;
+      var cx = edge + dir * (w * (0.16 + rnd() * 0.16));
+      rockBlob(c, cx, cy, w, h, rnd, i < 2 ? 'far' : (i < 4 ? 'mid' : 'lit'));
+      var groups = 2 + Math.floor(rnd() * 3);
+      for (var g = 0; g < groups; g++) {
+        var gx = cx + dir * ((rnd() - 0.15) * w * 0.5);
+        var gy = cy - h * (0.5 + rnd() * 0.35);
+        coralGarden(c, gx, gy, (0.9 + rnd() * 0.7) * (0.7 + bd.w * 0.6), rnd, dir);
+      }
+      if (rnd() < 0.45) {
+        kelpDef(cx + dir * w * (0.1 + rnd() * 0.3), cy - h * 0.35,
+          (34 + rnd() * 40) * S, rnd() < 0.5 ? 'rgba(64,196,132,.9)' : 'rgba(44,168,120,.9)',
+          rnd() * 6, 2.6 * S);
+      }
+    }
+    /* 사이사이 작은 산호 다발로 빈틈을 메운다 */
+    for (var k = 0; k < 4; k++) {
+      var ky = waterY + (H - waterY) * (0.12 + rnd() * 0.8);
+      var kx = edge + dir * (maxW * (0.1 + rnd() * 0.35));
+      coralGarden(c, kx, ky, 0.7 + rnd() * 0.5, rnd, dir);
+    }
+  }
+
+  /* 바닥 앞쪽 소품 */
+  function buildFloorProps(c, W, H) {
+    var rnd = mulberry32(1313);
+    var S = ST.S;
+    var top = H - Math.max(40 * S, Math.min(96 * S, (H - ST.waterY) * 0.135)) + 6 * S;
+    starfish(c, W * 0.30, top + (H - top) * 0.5, 13 * S, 0.4, '#e56a2a', '#ffc06a');
+    starfish(c, W * 0.70, top + (H - top) * 0.66, 9.5 * S, -0.9, '#c8471f', '#ffa552');
+    coralBumps(c, W * 0.20, top + (H - top) * 0.6, 13 * S, '#ffb3d8', '#d63a86', rnd);
+    tubeSponges(c, W * 0.82, top + (H - top) * 0.55, 12 * S, rnd, ['#ffe066', '#ffc21f', '#e08a00', 'rgba(90,20,0,.85)']);
+    for (var i = 0; i < 3; i++) {
+      var sx = W * (0.26 + rnd() * 0.48), sy = top + (H - top) * (0.35 + rnd() * 0.45);
+      c.fillStyle = 'rgba(255,240,222,.9)';
+      c.beginPath(); c.arc(sx, sy, 4 * S, Math.PI, TAU); c.closePath(); c.fill();
+      c.strokeStyle = 'rgba(200,140,96,.55)'; c.lineWidth = 0.8;
+      c.beginPath(); c.arc(sx, sy, 4 * S, Math.PI, TAU); c.stroke();
+    }
+  }
+
+  /* ------------------------------------------------------------------
+     크기 / 캐시 갱신
+  ------------------------------------------------------------------ */
+  function sync(W, H, waterY, SCALE) {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2.5);
+    var key = W + 'x' + H + 'x' + Math.round(waterY) + 'x' + dpr;
+    if (ST.key === key) return;
+    ST.W = W; ST.H = H; ST.waterY = waterY; ST.dpr = dpr;
+    ST.S = clampv(Math.min(W, H) / 380, 0.82, 1.55);
+    ST.key = key;
+
+    waterGrad = deepGlow = surfGrad = rayGrad = null;
+
+    if (!causticCv) causticCv = buildCaustic();
+    if (!shadowSpr) shadowSpr = makeShadow();
+    if (!glowSpr) glowSpr = makeGlow();
+    if (!coinSpr) coinSpr = makeCoin();
+    if (!burstSpr) burstSpr = makeBurst();
+
+    kelpList = [];
+    var cv = document.createElement('canvas');
+    var rd = Math.min(dpr, 2);
+    cv.width = Math.round(W * rd);
+    cv.height = Math.round(H * rd);
+    var c = cv.getContext('2d');
+    c.setTransform(rd, 0, 0, rd, 0, 0);
+    /* 바다 그라디언트 + 깊이 광원을 여기에 함께 구워 매 프레임 한 번에 blit */
+    var wg = c.createLinearGradient(0, waterY, 0, H);
+    wg.addColorStop(0, '#9df3e8');
+    wg.addColorStop(0.09, '#5fdfe0');
+    wg.addColorStop(0.26, '#2ab8d3');
+    wg.addColorStop(0.5, '#1697c4');
+    wg.addColorStop(0.72, '#0e77a6');
+    wg.addColorStop(0.9, '#0a5c88');
+    wg.addColorStop(1, '#073f63');
+    c.fillStyle = wg;
+    c.fillRect(0, waterY, W, H - waterY);
+    var dg = c.createRadialGradient(W * 0.5, waterY - 10, 8, W * 0.5, waterY + (H - waterY) * 0.42, Math.max(W, H) * 0.92);
+    dg.addColorStop(0, 'rgba(190,255,255,.22)');
+    dg.addColorStop(0.32, 'rgba(120,230,255,.12)');
+    dg.addColorStop(1, 'rgba(0,40,80,.34)');
+    c.fillStyle = dg;
+    c.fillRect(0, waterY, W, H - waterY);
+    buildBackHills(c, W, H, waterY);
+    buildSand(c, W, H, waterY, false);
+    buildReefSide(c, W, H, waterY, -1);
+    buildReefSide(c, W, H, waterY, 1);
+    buildSand(c, W, H, waterY, true);
+    buildFloorProps(c, W, H);
+    reefCv = cv;
+
+    plankton = [];
+    var rnd = mulberry32(55);
+    var pn = Math.round(W * H / 30000);
+    for (var i = 0; i < pn; i++) {
+      plankton.push({
+        x: rnd() * W, y: waterY + rnd() * (H - waterY),
+        r: 0.8 + rnd() * 1.7, v: 6 + rnd() * 15, ph: rnd() * 6.28
+      });
+    }
+  }
+
+  /* ------------------------------------------------------------------
+     뒤 레이어 (물고기보다 뒤)
+  ------------------------------------------------------------------ */
+  A.back = function (ctx, t, dt, G, W, H, waterY, SCALE) {
+    sync(W, H, waterY, SCALE);
+
+    if (!surfGrad) {
+      surfGrad = ctx.createLinearGradient(0, waterY, 0, waterY + 44);
+      surfGrad.addColorStop(0, 'rgba(255,255,255,.5)');
+      surfGrad.addColorStop(0.45, 'rgba(220,255,250,.16)');
+      surfGrad.addColorStop(1, 'rgba(255,255,255,0)');
+      rayGrad = ctx.createLinearGradient(0, waterY, 0, waterY + (H - waterY) * 0.72);
+      rayGrad.addColorStop(0, 'rgba(255,255,235,.28)');
+      rayGrad.addColorStop(0.4, 'rgba(205,255,245,.10)');
+      rayGrad.addColorStop(1, 'rgba(180,255,240,0)');
+    }
+
+    /* 1) 바다 + 모래 + 산호초 (캐시 blit 한 번) */
+    if (reefCv && (A.flags.water || A.flags.reef)) ctx.drawImage(reefCv, 0, 0, W, H);
+
+    /* 2) 빛줄기 (물고기보다 뒤) */
+    ctx.save();
+    ctx.globalCompositeOperation = 'lighter';
+    if (A.flags.rays) {
+    var rays = [
+      { x: 0.10, w: 0.030, a: 0.20 },
+      { x: 0.30, w: 0.042, a: 0.16 },
+      { x: 0.55, w: 0.028, a: 0.22 },
+      { x: 0.78, w: 0.038, a: 0.15 }
+    ];
+    for (var i = 0; i < rays.length; i++) {
+      var r = rays[i];
+      var bx = W * r.x;
+      var sway = Math.sin(t * 0.42 + i * 1.7) * 22 * ST.S;
+      var wTop = W * r.w;
+      ctx.globalAlpha = r.a * (0.72 + 0.28 * Math.sin(t * 0.65 + i * 1.3));
+      ctx.fillStyle = rayGrad;
+      ctx.beginPath();
+      ctx.moveTo(bx + sway, waterY - 4);
+      ctx.lineTo(bx + wTop + sway, waterY - 4);
+      ctx.lineTo(bx + wTop * 3.2 + sway * 1.8, waterY + (H - waterY) * 0.78);
+      ctx.lineTo(bx + wTop * 0.6 + sway * 1.8, waterY + (H - waterY) * 0.78);
+      ctx.closePath();
+      ctx.fill();
+    }
+    }
+    ctx.restore();
+
+    /* 3) 수면 띠 + 물결 하이라이트 */
+    ctx.fillStyle = surfGrad;
+    ctx.fillRect(0, waterY - 2, W, 48);
+    ctx.save();
+    ctx.globalCompositeOperation = 'lighter';
+    ctx.strokeStyle = 'rgba(255,255,255,.55)';
+    for (var w2 = 0; w2 < 3; w2++) {
+      ctx.lineWidth = 2.4 - w2 * 0.5;
+      ctx.globalAlpha = 0.5 - w2 * 0.13;
+      ctx.beginPath();
+      for (var x = -10; x <= W + 10; x += 10) {
+        var yy = waterY + 4 + w2 * 8 + Math.sin(x * 0.024 + t * (1.5 + w2 * 0.4) + w2) * (3.2 + w2);
+        if (x === -10) ctx.moveTo(x, yy); else ctx.lineTo(x, yy);
+      }
+      ctx.stroke();
+    }
+    /* 반짝이는 물빛 */
+    ctx.globalAlpha = 1;
+    for (var sp = 0; sp < 9; sp++) {
+      var sx = ((sp * 137.5 + t * 26) % (W + 40)) - 20;
+      var sy = waterY + 5 + ((sp * 53) % 24);
+      var tw = 0.35 + 0.65 * Math.abs(Math.sin(t * 2.2 + sp));
+      ctx.fillStyle = 'rgba(255,255,255,' + (0.45 * tw).toFixed(2) + ')';
+      ctx.beginPath(); ctx.arc(sx, sy, 1.5 + tw * 1.6, 0, TAU); ctx.fill();
+    }
+    ctx.restore();
+
+    /* 4) 커스틱스 (수면 빛무늬) — 두 겹만 */
+    var cw = W * 1.18, ch = (H - waterY) * 1.12;
+    if (A.flags.caustics) {
+      ctx.save();
+      ctx.globalCompositeOperation = 'lighter';
+      ctx.globalAlpha = 0.52;
+      ctx.drawImage(causticCv, -((t * 9) % 300) * (W / 300), waterY - 20, cw, ch);
+      ctx.restore();
+    }
+
+    /* 6) 해초 흔들림 */
+    if (A.flags.kelp) drawKelp(ctx, t);
+
+    /* 7) 떠다니는 플랑크톤 */
+    ctx.save();
+    ctx.globalCompositeOperation = 'lighter';
+    if (A.flags.plankton) for (var p = 0; p < plankton.length; p++) {
+      var pl = plankton[p];
+      pl.y -= pl.v * dt;
+      if (pl.y < waterY + 4) { pl.y = H - 6; pl.x = Math.random() * W; }
+      var al = 0.14 + 0.18 * Math.abs(Math.sin(t * 1.6 + pl.ph));
+      ctx.fillStyle = 'rgba(220,255,255,' + al.toFixed(2) + ')';
+      ctx.beginPath();
+      ctx.arc(pl.x + Math.sin(t + pl.ph) * 6, pl.y, pl.r, 0, TAU);
+      ctx.fill();
+    }
+    ctx.restore();
+
+    /* 8) 물고기 · 보스 · 보물 그림자 */
+    var depthA = function (y) {
+      return 0.4 + 0.6 * clampv((y - waterY) / Math.max(1, H - waterY), 0, 1);
+    };
+    if (!G.hideFish && A.flags.shadows) {
+      for (var f = 0; f < G.fish.length; f++) {
+        var fi = G.fish[f];
+        if (fi === G.hooked && (G.state === 'casting' || G.state === 'quiz' || G.state === 'catching')) continue;
+        var sw = fi.size * 1.4, sh = fi.size * 0.46;
+        ctx.globalAlpha = 0.42 * depthA(fi.y);
+        ctx.drawImage(shadowSpr, fi.x + fi.size * 0.16 - sw / 2, fi.y + fi.size * 0.64 - sh / 2, sw, sh);
+      }
+    }
+    if (G.boss) {
+      var b = G.boss;
+      ctx.globalAlpha = 0.5 * depthA(b.y);
+      ctx.drawImage(shadowSpr, b.x - b.size * 0.9, b.y + b.size * 0.6 - b.size * 0.3, b.size * 1.8, b.size * 0.6);
+      ctx.globalAlpha = 1;
+      if (b.rise > 0.05) {
+        ctx.save();
+        ctx.globalCompositeOperation = 'lighter';
+        ctx.globalAlpha = 0.28 * clampv(b.rise, 0, 1);
+        ctx.drawImage(glowSpr, b.x - b.size * 1.5, b.y - b.size * 1.6, b.size * 3, b.size * 3);
+        ctx.restore();
+      }
+    }
+    if (G.gem) {
+      var gm = G.gem;
+      ctx.globalAlpha = 0.34 * depthA(gm.y);
+      ctx.drawImage(shadowSpr, gm.x - gm.size * 0.7, gm.y + gm.size * 0.58, gm.size * 1.4, gm.size * 0.46);
+    }
+    ctx.globalAlpha = 1;
+
+    /* 9) 보스 등장 경고: 화면 테두리 섬광 + 광선 */
+    if (warn > 0) {
+      warn = Math.max(0, warn - dt);
+      drawWarn(ctx, t, W, H, waterY);
+    }
+  };
+
+  function drawWarn(ctx, t, W, H, waterY) {
+    var k = clampv(warn / 1.9, 0, 1);
+    var pulse = (0.55 + 0.45 * Math.sin(t * 16)) * k;
+    ctx.save();
+    ctx.globalCompositeOperation = 'lighter';
+    var edge = ctx.createLinearGradient(0, 0, 0, H);
+    edge.addColorStop(0, 'rgba(255,60,90,' + (0.45 * pulse).toFixed(2) + ')');
+    edge.addColorStop(0.5, 'rgba(255,120,40,' + (0.10 * pulse).toFixed(2) + ')');
+    edge.addColorStop(1, 'rgba(255,60,90,' + (0.45 * pulse).toFixed(2) + ')');
+    ctx.fillStyle = edge;
+    var t1 = 5 + 9 * pulse;
+    ctx.fillRect(0, 0, W, t1);
+    ctx.fillRect(0, H - t1, W, t1);
+    ctx.fillRect(0, 0, t1, H);
+    ctx.fillRect(W - t1, 0, t1, H);
+    ctx.globalAlpha = 0.20 * k;
+    ctx.translate(W / 2, waterY + (H - waterY) * 0.45);
+    ctx.rotate(t * 0.6);
+    ctx.drawImage(burstSpr, -W * 0.85, -W * 0.85, W * 1.7, W * 1.7);
+    ctx.restore();
+    ctx.save();
+    ctx.globalAlpha = 0.16 * k;
+    ctx.fillStyle = 'rgba(255,40,90,.14)';
+    ctx.fillRect(0, 0, W, H);
+    ctx.restore();
+  }
+
+  /* ------------------------------------------------------------------
+     앞 레이어 (물고기 위)
+  ------------------------------------------------------------------ */
+  A.front = function (ctx, t, dt, G, W, H, waterY, SCALE) {
+    /* 1) 낚싯줄 찌 주변 물결 */
+    if (G.bob && (G.state === 'playing' || G.state === 'casting' || G.state === 'quiz')) {
+      var bx = G.bob.x, by = G.bob.y;
+      var pumping = G.bob.biting ? 1 : 0;
+      ctx.save();
+      ctx.globalCompositeOperation = 'lighter';
+      for (var i = 0; i < 3; i++) {
+        var ph = ((t * 0.9 + i * 0.33 + (pumping ? t * 1.7 : 0)) % 1);
+        var rr = (7 + ph * 30) * ST.S;
+        ctx.globalAlpha = (1 - ph) * (pumping ? 0.55 : 0.3);
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 1.8 * (1 - ph * 0.5);
+        ctx.beginPath(); ctx.ellipse(bx, Math.min(by + 6, H - 6), rr, rr * 0.42, 0, 0, TAU); ctx.stroke();
+      }
+      if (pumping) {
+        ctx.globalAlpha = 0.5 + 0.3 * Math.sin(t * 14);
+        ctx.drawImage(glowSpr, bx - 26, by - 26, 52, 52);
+      }
+      ctx.restore();
+    }
+
+    /* 2) 물보라 링 */
+    for (var r = rings.length - 1; r >= 0; r--) {
+      var rg = rings[r];
+      rg.t += dt;
+      var p = rg.t / rg.dur;
+      if (p >= 1) { rings.splice(r, 1); continue; }
+      ctx.save();
+      ctx.globalCompositeOperation = 'lighter';
+      var rr2 = (8 + p * 54) * ST.S;
+      ctx.globalAlpha = (1 - p) * 0.7;
+      ctx.strokeStyle = 'rgba(235,255,255,.95)';
+      ctx.lineWidth = (3.4 - p * 2.4) * ST.S;
+      ctx.beginPath(); ctx.ellipse(rg.x, rg.y, rr2, rr2 * 0.42, 0, 0, TAU); ctx.stroke();
+      ctx.globalAlpha = (1 - p) * 0.45;
+      ctx.strokeStyle = 'rgba(255,255,255,.85)';
+      ctx.lineWidth = 1.6 * ST.S;
+      ctx.beginPath(); ctx.ellipse(rg.x, rg.y, rr2 * 1.45, rr2 * 0.6, 0, 0, TAU); ctx.stroke();
+      ctx.restore();
+    }
+
+    /* 3) 포획 축하 연출 */
+    if (cel) drawCelebration(ctx, t, dt, W, H, waterY);
+  };
+
+  /* ------------------------------------------------------------------
+     GET! / CONGRATULATIONS! 연출
+  ------------------------------------------------------------------ */
+  function ensureBanner() {
+    if (getEl && document.body.contains(getEl)) return getEl;
+    getEl = document.createElement('div');
+    getEl.id = 'arcadeGet';
+    getEl.className = 'arcade-get';
+    getEl.innerHTML = '<div class="ag-top" id="agTop">GET!</div>' +
+      '<div class="ag-ribbon"><span class="ag-name" id="agName"></span></div>' +
+      '<div class="ag-band"><span id="agPts"></span><i>P</i></div>';
+    (document.getElementById('app') || document.body).appendChild(getEl);
+    return getEl;
+  }
+
+  A.celebrate = function (name, pts, boss, gem) {
+    var el = ensureBanner();
+    var top = document.getElementById('agTop');
+    var nm = document.getElementById('agName');
+    var pt = document.getElementById('agPts');
+    if (top) top.textContent = boss ? 'CONGRATULATIONS!' : (gem ? 'TREASURE!' : 'GET!');
+    if (nm) nm.textContent = name || '';
+    if (pt) pt.textContent = pts != null ? '+' + pts : '';
+    el.className = 'arcade-get' + (boss ? ' boss' : '') + (gem ? ' gem' : '');
+    void el.offsetWidth;
+    el.classList.add('show');
+    clearTimeout(A.celebrate._h);
+    A.celebrate._h = setTimeout(function () { if (getEl) getEl.classList.remove('show'); }, boss ? 3050 : 2350);
+
+    /* 게임 자체의 보스 배너와 겹치지 않게 잠깐 가린다 (요소·클래스는 그대로) */
+    var bb = document.getElementById('bossBanner');
+    if (bb) {
+      bb.classList.add('arcade-muted');
+      clearTimeout(A.celebrate._m);
+      A.celebrate._m = setTimeout(function () { bb.classList.remove('arcade-muted'); }, 2750);
+    }
+
+    cel = { t: 0, dur: boss ? 2.9 : 2.2, boss: !!boss, gem: !!gem, name: name, pts: pts };
+    coins = [];
+    sparks = [];
+    var n = boss ? 34 : 22;
+    for (var i = 0; i < n; i++) {
+      var a = -Math.PI * 0.5 + (Math.random() - 0.5) * 3.4;
+      var sp = 190 + Math.random() * 330;
+      coins.push({
+        x: (Math.random() - 0.5) * 40, y: (Math.random() - 0.5) * 30,
+        vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - 40,
+        rot: Math.random() * 6.28, vr: (Math.random() - 0.5) * 9,
+        life: 0, max: 1.4 + Math.random() * 1.0, r: (boss ? 16 : 13) + Math.random() * 8
+      });
+    }
+    for (var k = 0; k < (boss ? 24 : 15); k++) {
+      var aa = Math.random() * TAU, ss = 90 + Math.random() * 340;
+      sparks.push({
+        x: 0, y: 0, vx: Math.cos(aa) * ss, vy: Math.sin(aa) * ss,
+        life: 0, max: 0.6 + Math.random() * 0.6, r: 2 + Math.random() * 3,
+        sp: 12 + Math.random() * 16
+      });
+    }
+  };
+
+  function drawCelebration(ctx, t, dt, W, H, waterY) {
+    cel.t += dt;
+    var p = cel.t / cel.dur;
+    if (p >= 1) { cel = null; coins = []; sparks = []; return; }
+    var fade = p < 0.12 ? p / 0.12 : (p > 0.8 ? Math.max(0, (1 - p) / 0.2) : 1);
+    var cx = W * 0.5, cy = waterY + (H - waterY) * 0.36;
+
+    /* 1) 황금 방사형 광선 + 중심 글로우 (가산 합성) */
+    ctx.save();
+    ctx.globalCompositeOperation = 'lighter';
+    ctx.globalAlpha = 0.5 * fade;
+    var scale = 0.5 + 0.4 * Math.min(1, cel.t * 3.4);
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(cel.t * 0.9);
+    ctx.drawImage(burstSpr, -W * 0.55 * scale, -W * 0.55 * scale, W * 1.1 * scale, W * 1.1 * scale);
+    ctx.restore();
+    ctx.globalAlpha = 0.34 * fade;
+    ctx.drawImage(glowSpr, cx - W * 0.24, cy - W * 0.24, W * 0.48, W * 0.48);
+    ctx.restore();
+
+    /* 2) 금화 · 별 반짝임 (일반 합성 — 금색이 물빛에 씻기지 않게) */
+    ctx.save();
+    for (var i = coins.length - 1; i >= 0; i--) {
+      var co = coins[i];
+      co.life += dt;
+      if (co.life > co.max) { coins.splice(i, 1); continue; }
+      co.vy += 620 * dt;
+      co.x += co.vx * dt; co.y += co.vy * dt;
+      co.rot += co.vr * dt;
+      var lifeP = co.life / co.max;
+      var a = lifeP > 0.78 ? (1 - lifeP) / 0.22 : 1;
+      var spin = Math.abs(Math.cos(co.rot * 1.4));
+      ctx.globalAlpha = a * fade;
+      ctx.drawImage(coinSpr, cx + co.x - co.r, cy + co.y - co.r * 0.5 - co.r,
+        co.r * 2 * (0.24 + 0.76 * spin), co.r * 2);
+    }
+    ctx.globalCompositeOperation = 'lighter';
+    for (var k = sparks.length - 1; k >= 0; k--) {
+      var s2 = sparks[k];
+      s2.life += dt;
+      if (s2.life > s2.max) { sparks.splice(k, 1); continue; }
+      s2.vy += 90 * dt;
+      s2.x += s2.vx * dt; s2.y += s2.vy * dt;
+      var sa = (1 - s2.life / s2.max) * fade;
+      var sx = cx + s2.x, sy = cy + s2.y;
+      ctx.globalAlpha = sa * 0.8;
+      ctx.strokeStyle = 'rgba(255,244,180,.95)';
+      ctx.lineWidth = 1.5;
+      var L = s2.sp * 0.5 * (0.55 + 0.45 * Math.sin(s2.life * 12));
+      ctx.beginPath();
+      ctx.moveTo(sx - L, sy); ctx.lineTo(sx + L, sy);
+      ctx.moveTo(sx, sy - L * 0.62); ctx.lineTo(sx, sy + L * 0.62);
+      ctx.stroke();
+    }
+    ctx.restore();
+    ctx.globalAlpha = 1;
+  }
+
+  /* 물보라 파문 (splash 훅에서 호출) */
+  A.ring = function (x, y) {
+    rings.push({ x: x, y: y, t: 0, dur: 0.85 });
+    if (rings.length > 14) rings.shift();
+  };
+
+  A.bossWarn = function () { warn = 1.9; };
+
+  /* 테스트/확인용 */
+  A.state = function () {
+    return {
+      built: !!reefCv, w: ST.W, h: ST.H, waterY: ST.waterY, scale: ST.S,
+      kelp: kelpList.length,
+      celebrating: !!cel, warn: warn, rings: rings.length, coins: coins.length,
+      banner: !!(getEl && getEl.classList.contains('show'))
+    };
+  };
+})();
+
 </script>
 </body>
 </html>
