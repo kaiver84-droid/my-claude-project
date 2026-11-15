@@ -8437,6 +8437,222 @@
   }
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', dtInit);
   else dtInit();
+  /* =================================================================
+     배경음악(BGM) — Web Audio 순수 합성 (외부 음원 파일 없음)
+     · 8마디(약 19초) 루프: 멜로디(트라이앵글) + 화음 아르페지오(사인) + 가벼운 베이스
+     · 첫 터치·클릭에서 AudioContext 잠금 해제와 함께 자연스럽게 시작
+     · 음소거 · 탭 숨김(visibilitychange) · 보스 출현 · 결과 화면에서 자동으로 멈추거나 줄어든다
+     ================================================================= */
+  const BGM = (function(){
+    const BPM = 100;
+    const BEAT = 60 / BPM;        /* 0.6초 */
+    const BAR = BEAT * 4;         /* 2.4초 */
+    const BARS = 8;               /* 8마디 ≈ 19.2초 루프 */
+    const BASE = 0.7;             /* 전체 볼륨 (효과음·보스 사운드를 덮지 않는 수준) */
+    /* 화음 진행: C - G - Am - F - C - G - F - G */
+    const CH = [
+      { bass:36, notes:[60,64,67] },
+      { bass:43, notes:[59,62,67] },
+      { bass:45, notes:[57,60,64] },
+      { bass:41, notes:[57,60,65] },
+      { bass:36, notes:[60,64,67] },
+      { bass:43, notes:[59,62,67] },
+      { bass:41, notes:[57,60,65] },
+      { bass:43, notes:[59,62,67] }
+    ];
+    /* 멜로디: [박 위치, MIDI 음, 길이(박)] */
+    const MEL = [
+      [[0,76,.5],[.5,79,.5],[1,81,1],[2,79,.5],[2.5,76,.5],[3,72,1]],
+      [[0,74,.5],[.5,76,.5],[1,79,1],[2,76,.5],[2.5,74,.5],[3,71,1]],
+      [[0,72,.5],[.5,76,.5],[1,81,1.5],[2.5,79,.5],[3,76,1]],
+      [[0,77,.5],[.5,76,.5],[1,74,1],[2,72,.5],[2.5,74,.5],[3,76,1]],
+      [[0,76,.5],[.5,79,.5],[1,81,1],[2,83,.5],[2.5,81,.5],[3,79,1]],
+      [[0,79,.5],[.5,81,.5],[1,83,1],[2,81,.5],[2.5,79,.5],[3,76,1]],
+      [[0,77,1],[1,76,.5],[1.5,74,.5],[2,72,1],[3,74,.5],[3.5,76,.5]],
+      [[0,74,1],[1,71,1],[2,72,2]]
+    ];
+    const VOL = { mel:0.055, chord:0.016, bass:0.042 };
+
+    let bus = null, analyser = null;
+    let timer = null, duckTimer = null;
+    let nextT = 0, bar = 0, notes = 0, loops = 0;
+    let running = false, hidden = false, duck = 1;
+    let active = [], lastErr = '';
+    let probe = null;
+
+    function midiF(m){ return 440 * Math.pow(2, (m - 69) / 12); }
+
+    function ensureBus(c){
+      if(bus && bus.context === c) return;
+      bus = c.createGain();
+      bus.gain.value = 0.0001;
+      analyser = c.createAnalyser();
+      analyser.fftSize = 1024;
+      const hp = c.createBiquadFilter();
+      hp.type = 'highpass';
+      hp.frequency.value = 55;          /* 폰 스피커에서 웅웅거리지 않게 아주 낮은 대역만 정리 */
+      bus.connect(analyser);
+      analyser.connect(hp);
+      hp.connect(c.destination);
+    }
+    function applyGain(){
+      if(!bus || !AC){ return false; }
+      try{
+        const v = Math.max(0.0001, BASE * duck);
+        bus.gain.cancelScheduledValues(AC.currentTime);
+        bus.gain.setTargetAtTime(v, AC.currentTime, 0.12);
+        return true;
+      }catch(e){ lastErr = String(e && e.message || e); return false; }
+    }
+    function note(midi, t, dur, vol, type, lowpass){
+      const c = AC; if(!c) return;
+      try{
+        const o = c.createOscillator();
+        const g = c.createGain();
+        o.type = type || 'triangle';
+        o.frequency.setValueAtTime(midiF(midi), Math.max(0.001, t));
+        const d = Math.max(0.08, dur);
+        g.gain.setValueAtTime(0.0001, Math.max(0.001, t));
+        g.gain.exponentialRampToValueAtTime(Math.max(0.0003, vol), Math.max(0.01, t + 0.02));
+        g.gain.exponentialRampToValueAtTime(0.0001, t + d);
+        o.connect(g);
+        if(lowpass){
+          const f = c.createBiquadFilter();
+          f.type = 'lowpass';
+          f.frequency.setValueAtTime(lowpass, Math.max(0.001, t));
+          g.connect(f); f.connect(bus);
+        } else {
+          g.connect(bus);
+        }
+        o.start(Math.max(0.001, t));
+        o.stop(t + d + 0.06);
+        active.push(o);
+        if(active.length > 240) active = active.slice(-140);
+        notes++;
+      }catch(e){ lastErr = String(e && e.message || e); }
+    }
+    function scheduleBar(i, t0){
+      const ch = CH[i % BARS];
+      /* 베이스: 1·3박 루트 + 4박 앞 통과음 */
+      note(ch.bass, t0, BEAT * 0.85, VOL.bass, 'triangle');
+      note(ch.bass, t0 + BEAT * 2, BEAT * 0.85, VOL.bass * 0.9, 'triangle');
+      note(ch.bass + 7, t0 + BEAT * 3.5, BEAT * 0.4, VOL.bass * 0.6, 'triangle');
+      /* 화음 아르페지오 (부드러운 사인 + 로우패스) */
+      const order = [0, 1, 2, 1, 2, 0, 1, 2];
+      for(let k = 0; k < 8; k++){
+        const nn = ch.notes[order[k]] + ((k === 3 || k === 7) ? 12 : 0);
+        note(nn, t0 + BEAT * 0.5 * k, BEAT * 0.42, VOL.chord, 'sine', 2600);
+      }
+      /* 멜로디 */
+      MEL[i % BARS].forEach(function(m){
+        note(m[1], t0 + BEAT * m[0], BEAT * m[2] * 0.9, VOL.mel, 'triangle');
+      });
+    }
+    /* 지금 화면에 맞는 배경음량 (보스·결과 화면에서는 줄인다) */
+    function duckFor(){
+      if(G.state === 'result') return 0.4;
+      if(G.boss) return 0.35;
+      if(G.state === 'quiz') return 0.7;
+      return 1;
+    }
+    function updateDuck(){
+      const d = hidden ? 0 : duckFor();
+      if(Math.abs(d - duck) > 0.001){ duck = d; applyGain(); }
+    }
+    function tick(){
+      timer = null;
+      if(!running) return;
+      const c = AC;
+      if(!c){ running = false; return; }
+      if(c.state !== 'running'){ timer = setTimeout(tick, 300); return; }
+      const now = c.currentTime;
+      if(nextT < now - 0.1 || nextT > now + BAR * 1.6) nextT = now + 0.1;
+      scheduleBar(bar, nextT);
+      nextT += BAR;
+      if(bar === BARS - 1) loops++;
+      bar = (bar + 1) % BARS;
+      updateDuck();
+      timer = setTimeout(tick, Math.max(40, (nextT - c.currentTime - 0.35) * 1000));
+    }
+    function start(){
+      if(running) return true;
+      if(save.mute || hidden) return false;
+      const c = audioCtx();
+      if(!c) return false;
+      if(c.state !== 'running'){ try{ c.resume(); }catch(e){} }
+      if(c.state !== 'running') return false;
+      ensureBus(c);
+      running = true;
+      duck = duckFor();
+      applyGain();
+      nextT = c.currentTime + 0.15;
+      tick();
+      if(!duckTimer) duckTimer = setInterval(updateDuck, 400);
+      return true;
+    }
+    function stop(){
+      if(!running && !timer){ if(bus) applyGain(); return false; }
+      running = false;
+      if(timer){ clearTimeout(timer); timer = null; }
+      if(duckTimer){ clearInterval(duckTimer); duckTimer = null; }
+      duck = 0;
+      if(bus && AC){
+        try{
+          bus.gain.cancelScheduledValues(AC.currentTime);
+          bus.gain.setTargetAtTime(0.0001, AC.currentTime, 0.04);
+        }catch(e){}
+      }
+      active.forEach(function(o){ try{ o.stop(); }catch(e){} });
+      active = [];
+      return true;
+    }
+    function sync(){
+      if(save.mute || hidden) return stop();
+      return start();
+    }
+    /* 지금 실제로 나오는 소리 크기 (RMS, 검증용) */
+    function level(){
+      if(!analyser) return 0;
+      try{
+        const a = new Float32Array(analyser.fftSize);
+        analyser.getFloatTimeDomainData(a);
+        let s = 0;
+        for(let i = 0; i < a.length; i++) s += a[i] * a[i];
+        return Math.sqrt(s / a.length);
+      }catch(e){ return 0; }
+    }
+    function bind(){
+      ['muteBtn', 'muteBtnStart'].forEach(function(id){
+        const b = $(id);
+        if(!b) return;
+        b.addEventListener('click', function(){ setTimeout(sync, 0); });
+      });
+      document.addEventListener('visibilitychange', function(){
+        hidden = (document.visibilityState === 'hidden');
+        if(hidden) stop(); else { if(!save.mute) start(); }
+      });
+      ['pointerdown', 'touchend', 'click', 'keydown'].forEach(function(ev){
+        document.addEventListener(ev, function(){
+          if(!running && !save.mute && !hidden) start();
+        }, {passive:true});
+      });
+      window.addEventListener('pagehide', function(){ stop(); });
+    }
+    bind();
+    return {
+      start: start, stop: stop, sync: sync, level: level,
+      state: function(){
+        return {
+          running: running, muted: !!save.mute, hidden: hidden,
+          duck: Math.round(duck * 1000) / 1000, bar: bar, bars: BARS, loops: loops,
+          notes: notes, ctx: AC ? AC.state : 'none',
+          gain: bus ? Math.round(bus.gain.value * 1000) / 1000 : 0,
+          rms: Math.round(level() * 10000) / 10000,
+          bpm: BPM, error: lastErr
+        };
+      }
+    };
+  })();
   /* ---------------------------------------------------------------
      시작
   ----------------------------------------------------------------*/
@@ -9101,6 +9317,11 @@
       if(b){ b.click(); return true; }
       return false;
     },
+    /* 배경음악 (테스트/확인용) */
+    bgm: ()=> BGM.state(),
+    bgmStart: ()=>{ BGM.start(); return BGM.state(); },
+    bgmStop: ()=>{ BGM.stop(); return BGM.state(); },
+    bgmLevel: ()=> BGM.level(),
     /* 세부 조정 (테스트/확인용) */
     detail: ()=> Object.assign({}, dtCur()),
     setDetail: (key, val)=> { setStudyDetail(key, val); return Object.assign({}, dtCur()); },
