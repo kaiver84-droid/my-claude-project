@@ -1054,6 +1054,192 @@
     .study-preview .pv-ex b{font-size:12.5px;}
   }
 
+  /* ---------- ID · 캐릭터 (프로필) ---------- */
+  /* 시작 화면 부제 줄은 ID 칩이 대신한다 (같은 정보 + 전환 버튼) */
+  .title-wrap #startSub{display:none;}
+  .pf-chip{
+    display:flex;align-items:center;gap:6px;
+    margin:3px auto 0;padding:3px 8px 3px 3px;
+    border:2.5px solid #fff;border-radius:999px;
+    background:linear-gradient(180deg,#ffffff,#e9f6ff);
+    box-shadow:0 4px 12px rgba(6,50,74,.2);
+    font-family:inherit;color:var(--ink);cursor:pointer;
+    max-width:100%;pointer-events:auto;
+  }
+  .pf-chip:active{transform:translateY(1px);}
+  .pf-chip .av{width:26px;height:26px;border-radius:50%;overflow:hidden;flex:0 0 auto;
+    background:#bfe9ff;border:1.5px solid #fff;display:flex;align-items:center;justify-content:center;}
+  .pf-chip .av canvas{width:26px;height:26px;display:block;}
+  .pf-chip .tx{display:flex;flex-direction:column;align-items:flex-start;line-height:1.15;min-width:0;}
+  .pf-chip .tx b{font-size:12.5px;font-weight:900;max-width:96px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .pf-chip .tx small{font-size:9px;font-weight:800;color:#6b889c;max-width:104px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .pf-chip .go{font-size:10px;font-weight:900;color:#fff;background:linear-gradient(#7cc9f6,#2f8fd6);
+    border-radius:999px;padding:3px 7px;box-shadow:0 2px 0 #1c6b9f;white-space:nowrap;}
+
+  /* HUD 안의 ID 칩 (점수 칩과 같은 결) */
+  .pf-hud-btn{
+    display:flex;align-items:center;gap:5px;pointer-events:auto;cursor:pointer;
+    background:linear-gradient(#fff7d6,#ffe08a);border:2px solid #fff;
+    border-radius:14px;padding:5px 9px;box-shadow:0 3px 10px rgba(6,50,74,.18);
+    font-family:inherit;color:#8a5200;font-size:13px;font-weight:900;line-height:1.2;
+    white-space:nowrap;max-width:126px;
+  }
+  .pf-hud-btn i{width:9px;height:9px;border-radius:50%;flex:0 0 auto;box-shadow:0 0 0 1.5px rgba(0,0,0,.12) inset;}
+  .pf-hud-btn b{overflow:hidden;text-overflow:ellipsis;max-width:88px;}
+
+  .pf-card{max-width:500px;gap:8px;}
+  .pf-head{display:flex;align-items:center;gap:9px;}
+  .pf-me{display:flex;align-items:center;gap:8px;flex:1 1 auto;min-width:0;
+    background:#eef9ff;border:2px solid #d6eefb;border-radius:16px;padding:5px 9px 5px 5px;}
+  .pf-me canvas{width:44px;height:44px;border-radius:12px;background:#bfe9ff;flex:0 0 auto;display:block;}
+  .pf-me .tx{display:flex;flex-direction:column;line-height:1.22;min-width:0;}
+  .pf-me .tx b{font-size:14.5px;font-weight:900;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .pf-me .tx small{font-size:10.5px;font-weight:800;color:#5f8299;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .pf-close{flex:0 0 auto;width:34px;height:34px;border-radius:50%;border:none;background:#eaf3f9;
+    color:#54798f;font-size:17px;font-weight:900;cursor:pointer;}
+  .pf-tabs{display:flex;gap:6px;background:#eaf3f9;border-radius:14px;padding:3px;}
+  .pf-tabs button{
+    flex:1 1 0;border:none;background:transparent;border-radius:11px;padding:7px 4px;
+    font-family:inherit;font-size:12.5px;font-weight:900;color:#5b7f95;cursor:pointer;
+  }
+  .pf-tabs button.on{background:#fff;color:var(--ink);box-shadow:0 2px 6px rgba(9,60,90,.12);}
+  .pf-body{display:flex;flex-direction:column;gap:8px;min-height:0;}
+  .pf-sec{background:#f2fbff;border:2px solid #dbeffb;border-radius:16px;padding:9px;}
+  .pf-sec-t{font-size:11.5px;font-weight:900;color:#3f6d87;margin-bottom:6px;display:flex;align-items:center;gap:5px;}
+  .pf-sec-t span{margin-left:auto;font-weight:800;color:#7b93a3;font-size:10.5px;}
+  .pf-new-row{display:flex;gap:6px;}
+  .pf-new-row input{
+    flex:1 1 0;min-width:0;height:40px;border-radius:12px;border:2px solid #cfe8f6;background:#fff;
+    padding:0 10px;font-family:inherit;font-size:13.5px;font-weight:800;color:var(--ink);
+  }
+  .pf-new-row input::placeholder{color:#9db6c6;font-weight:700;}
+  .pf-new-row button{
+    flex:0 0 auto;height:40px;padding:0 12px;border-radius:12px;border:none;
+    background:linear-gradient(#7cc9f6,#2f8fd6);color:#fff;font-family:inherit;
+    font-size:13px;font-weight:900;box-shadow:0 3px 0 #1c6b9f;cursor:pointer;
+  }
+  .pf-new-row button:active{transform:translateY(2px);box-shadow:none;}
+  .pf-msg{font-size:11.5px;font-weight:800;color:#7b93a3;margin-top:6px;min-height:14px;}
+  .pf-msg.ok{color:#1c8f4b;}
+  .pf-msg.warn{color:#d4574c;}
+  .pf-search{
+    width:100%;height:36px;border-radius:12px;border:2px solid #d8ecf8;background:#fff;
+    padding:0 10px;font-family:inherit;font-size:13px;font-weight:800;color:var(--ink);
+  }
+  .pf-list{display:flex;flex-direction:column;gap:6px;max-height:190px;overflow-y:auto;-webkit-overflow-scrolling:touch;
+    padding-right:2px;}
+  .pf-row{
+    display:flex;align-items:center;gap:8px;background:#fff;border:2px solid #e2f1fa;border-radius:14px;padding:6px 8px;
+  }
+  .pf-row.on{border-color:#ffcf3f;background:linear-gradient(#fffbea,#fff5cf);}
+  .pf-row canvas{width:34px;height:34px;border-radius:10px;background:#e8f6fd;flex:0 0 auto;display:block;}
+  .pf-row .tx{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;line-height:1.2;}
+  .pf-row .tx b{font-size:13.5px;font-weight:900;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .pf-row .tx small{font-size:10.5px;font-weight:800;color:#7b93a3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .pf-row .bt{
+    flex:0 0 auto;height:32px;min-width:64px;padding:0 9px;border-radius:10px;border:none;
+    font-family:inherit;font-size:12px;font-weight:900;cursor:pointer;
+    background:#eaf3f9;color:#5b7f95;box-shadow:0 2px 0 #d3e6f1;
+  }
+  .pf-row .bt.go{background:linear-gradient(#7cc9f6,#2f8fd6);color:#fff;box-shadow:0 2px 0 #1c6b9f;}
+  .pf-row .bt.now{background:#eef5f9;color:#7b93a3;box-shadow:none;}
+  .pf-row .bt:active{transform:translateY(1px);}
+  .pf-empty{font-size:12px;font-weight:800;color:#8aa4b4;text-align:center;padding:10px 0;}
+
+  .pf-char{display:flex;gap:9px;align-items:stretch;}
+  .pf-stage{
+    flex:0 0 128px;height:150px;border-radius:18px;overflow:hidden;border:2.5px solid #fff;
+    box-shadow:0 6px 16px rgba(6,50,74,.18);background:#5fc9e8;position:relative;
+  }
+  .pf-stage canvas{width:100%;height:100%;display:block;}
+  .pf-stage .tag{
+    position:absolute;left:6px;bottom:6px;right:6px;text-align:center;
+    background:rgba(255,255,255,.88);border-radius:9px;padding:2px 4px;
+    font-size:10.5px;font-weight:900;color:#1f6d94;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  }
+  .pf-opts{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:5px;}
+  .pf-lbl{font-size:10.5px;font-weight:900;color:#3f6d87;}
+  .pf-nick{
+    width:100%;height:34px;border-radius:11px;border:2px solid #cfe8f6;background:#fff;
+    padding:0 9px;font-family:inherit;font-size:13px;font-weight:900;color:var(--ink);
+  }
+  .pf-swatches{display:flex;flex-wrap:wrap;gap:5px;}
+  .pf-swatches button{
+    width:24px;height:24px;border-radius:50%;border:2.5px solid #fff;cursor:pointer;
+    box-shadow:0 1px 4px rgba(9,60,90,.22);padding:0;
+  }
+  .pf-swatches button.on{box-shadow:0 0 0 2.5px #ffcf3f,0 1px 4px rgba(9,60,90,.22);}
+  .pf-chips{display:flex;flex-wrap:wrap;gap:4px;}
+  .pf-chips button{
+    border:2px solid #d8ecf8;background:#fff;border-radius:9px;padding:3px 7px;
+    font-family:inherit;font-size:11px;font-weight:900;color:#5b7f95;cursor:pointer;
+  }
+  .pf-chips button.on{background:linear-gradient(#fff3c9,#ffdf7a);border-color:#ffcf3f;color:#8a5200;}
+  .pf-gear{display:flex;flex-direction:column;gap:6px;}
+  .pf-gear-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+  .pf-gear-row .k{flex:0 0 42px;font-size:10.5px;font-weight:900;color:#3f6d87;}
+  .pf-gear-row .it{
+    border:2px solid #d8ecf8;background:#fff;border-radius:10px;padding:4px 8px;
+    font-family:inherit;font-size:11px;font-weight:900;color:#5b7f95;cursor:pointer;
+  }
+  .pf-gear-row .it.on{background:linear-gradient(#c9f0ff,#8fd8f6);border-color:#4fb3e0;color:#0d4f74;}
+  .pf-gear-row .it.buy{background:#fff7e6;border-color:#ffd88a;color:#a26900;}
+  .pf-foot{display:flex;gap:6px;align-items:center;}
+  .pf-foot .ok{
+    flex:1 1 auto;height:42px;border-radius:13px;border:none;
+    background:linear-gradient(#8fe0a4,#2fb457);color:#fff;font-family:inherit;
+    font-size:14px;font-weight:900;box-shadow:0 3px 0 #1c8f4b;cursor:pointer;
+  }
+  .pf-foot .ok:active{transform:translateY(2px);box-shadow:none;}
+  .pf-foot .rst{
+    flex:0 0 auto;height:42px;padding:0 11px;border-radius:13px;border:2px solid #e3eef5;
+    background:#fff;color:#6b889c;font-family:inherit;font-size:12px;font-weight:900;cursor:pointer;
+  }
+  .pf-note{font-size:10.5px;font-weight:800;color:#7b93a3;text-align:center;}
+  .pf-note b{color:#1c8f4b;}
+
+  /* 넓은 화면에서는 제목 옆에 나란히 (세로 공간을 쓰지 않는다) */
+  @media (min-width:481px){
+    .title-wrap{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;}
+    .pf-chip{margin:0;}
+  }
+
+  /* 화면이 낮으면(360x640 등) 제목 옆에 작게 띄운다 — 시작 카드가 넘치지 않게 */
+  @media (max-height:700px){
+    .pf-chip{
+      position:absolute;left:8px;top:calc(env(safe-area-inset-top) + 46px);
+      margin:0;max-width:112px;z-index:3;
+    }
+    .pf-chip .go{display:none;}
+    .pf-chip .tx small{display:none;}
+    .pf-chip .tx b{max-width:78px;}
+  }
+
+  /* 낮은 화면: 모달 내용을 촘촘하게 (저장 버튼까지 한눈에) */
+  @media (max-height:700px){
+    .pf-card{gap:6px;padding:11px;}
+    .pf-me canvas{width:38px;height:38px;}
+    .pf-me{padding:4px 8px 4px 4px;}
+    .pf-tabs button{padding:5px 4px;font-size:12px;}
+    .pf-stage{flex:0 0 96px;height:118px;}
+    .pf-swatches button{width:20px;height:20px;gap:4px;}
+    .pf-swatches{gap:4px;}
+    .pf-chips button{padding:2px 6px;font-size:10.5px;}
+    .pf-opts{gap:4px;}
+    .pf-sec{padding:7px;}
+    .pf-nick{height:30px;}
+    .pf-foot .ok,.pf-foot .rst{height:38px;}
+    .pf-list{max-height:148px;}
+  }
+
+  @media (max-width:420px){
+    .pf-chip .tx b,.pf-chip .tx small{max-width:72px;}
+    .pf-stage{flex:0 0 104px;height:130px;}
+    .pf-hud-btn{max-width:108px;padding:4px 7px;font-size:12px;}
+    .pf-hud-btn b{max-width:66px;}
+    .pf-swatches button{width:22px;height:22px;}
+  }
+
   /* ---------- 학습 설정 (시작 화면 요약 + ⚙️ 모달) ---------- */
   .study-row{
     display:flex;align-items:center;gap:8px;width:100%;text-align:left;
@@ -1414,6 +1600,9 @@
   </div>
   <div id="playTop" class="play-top hidden">
     <div id="modePill" class="mode-pill hidden"><span id="modePillText">1학년 · 자유 낚시</span></div>
+    <button class="pf-hud-btn" id="pfBtn" type="button" aria-label="ID · 캐릭터">
+      <i id="pfHudDot"></i><b id="pfHudNick">낚시꾼</b>
+    </button>
     <div id="coinPill" class="coin-pill" title="내 포인트"><span>내 포인트</span><b id="playCoins">0</b><i>P</i></div>
     <div id="timerWrap" class="timer hidden">
       <div class="bar"><i id="timerFill"></i></div>
@@ -1467,6 +1656,11 @@
     <div class="title-wrap">
       <h1>숫자 낚시</h1>
       <p id="startSub">문제를 풀어 물고기를 잡아 보세요!</p>
+      <button class="pf-chip" id="pfChipStart" type="button" aria-label="ID 전환 · 캐릭터 꾸미기">
+        <span class="av"><canvas id="pfChipCv" width="84" height="84"></canvas></span>
+        <span class="tx"><b id="pfChipNick">낚시꾼</b><small id="pfChipId">ID: -</small></span>
+        <span class="go">ID · 캐릭터</span>
+      </button>
     </div>
     <div class="start-card">
       <div class="subj-seg" id="subjSeg" role="group" aria-label="과목 선택">
@@ -1654,6 +1848,78 @@
   </div>
 
   <!-- 학습 난이도·연산 설정 -->
+  <!-- ID · 캐릭터 (프로필) -->
+  <div id="pfWrap" class="modal hidden">
+    <div class="card pf-card">
+      <div class="pf-head">
+        <div class="pf-me">
+          <canvas id="pfMeCv" width="88" height="88"></canvas>
+          <div class="tx">
+            <b id="pfMeNick">낚시꾼</b>
+            <small id="pfMeId">ID: -</small>
+            <small id="pfMeCoins">0P · 도감 0종</small>
+          </div>
+        </div>
+        <button class="pf-close" id="pfClose" aria-label="닫기">✕</button>
+      </div>
+      <div class="pf-tabs" id="pfTabs">
+        <button type="button" data-tab="id" class="on">🪪 ID</button>
+        <button type="button" data-tab="char">🎨 캐릭터</button>
+      </div>
+
+      <div class="pf-body" id="pfBodyId">
+        <div class="pf-sec">
+          <div class="pf-sec-t">새 ID 만들기 <span>비밀번호 없이 바로 시작해요</span></div>
+          <div class="pf-new-row">
+            <input id="pfNewId" type="text" maxlength="12" placeholder="ID (예: 민준)" autocomplete="off" autocapitalize="off" spellcheck="false">
+            <input id="pfNewName" type="text" maxlength="10" placeholder="캐릭터 이름 (선택)" autocomplete="off">
+            <button type="button" id="pfCreate">+ 만들기</button>
+          </div>
+          <div class="pf-msg" id="pfNewMsg"></div>
+        </div>
+        <div class="pf-sec">
+          <div class="pf-sec-t">내 ID 목록 <span id="pfListCount"></span></div>
+          <input id="pfSearch" class="pf-search" type="text" placeholder="🔍 ID · 이름 검색" autocomplete="off">
+          <div class="pf-list" id="pfList" style="margin-top:6px;"></div>
+        </div>
+        <div class="pf-note" id="pfSyncNote">진행사항은 ID 별로 자동 저장돼요</div>
+      </div>
+
+      <div class="pf-body hidden" id="pfBodyChar">
+        <div class="pf-char">
+          <div class="pf-stage">
+            <canvas id="pfStageCv" width="300" height="360"></canvas>
+            <div class="tag" id="pfStageTag">내 캐릭터</div>
+          </div>
+          <div class="pf-opts">
+            <div class="pf-lbl">캐릭터 닉네임</div>
+            <input id="pfNick" class="pf-nick" type="text" maxlength="10" placeholder="예: 불꽃낚시왕" autocomplete="off">
+            <div class="pf-lbl">피부색</div>
+            <div class="pf-swatches" id="pfSkin"></div>
+            <div class="pf-lbl">머리색</div>
+            <div class="pf-swatches" id="pfHairColor"></div>
+            <div class="pf-lbl">머리 모양</div>
+            <div class="pf-chips" id="pfHairStyle"></div>
+            <div class="pf-lbl">옷 색</div>
+            <div class="pf-swatches" id="pfShirt"></div>
+          </div>
+        </div>
+        <div class="pf-sec">
+          <div class="pf-sec-t">장착 장비 <span>상점에서 산 것만 보여요</span></div>
+          <div class="pf-gear">
+            <div class="pf-gear-row"><span class="k">배</span><span id="pfGearBoat" class="pf-chips"></span></div>
+            <div class="pf-gear-row"><span class="k">낚싯대</span><span id="pfGearRod" class="pf-chips"></span></div>
+            <div class="pf-gear-row"><span class="k">꾸미기</span><span id="pfGearOutfit" class="pf-chips"></span></div>
+          </div>
+        </div>
+        <div class="pf-foot">
+          <button type="button" class="ok" id="pfDone">저장하고 이어서 하기</button>
+          <button type="button" class="rst" id="pfCharReset">기본값</button>
+        </div>
+        <div class="pf-note" id="pfCharNote">바꾸면 바로 자동 저장돼요</div>
+      </div>
+    </div>
+  </div>
   <div id="studyWrap" class="modal hidden">
     <div class="card study-card">
       <div class="study-head">
@@ -3008,7 +3274,7 @@
   /* ---------------------------------------------------------------
      저장 (localStorage, 실패해도 게임은 계속)
   ----------------------------------------------------------------*/
-  const SAVE_KEY = 'mathFishingSave_v1';
+  let SAVE_KEY = 'mathFishingSave_v1';   /* ID(프로필) 마다 다른 키로 바뀐다 */
   const defaultSave = () => ({
     grade:1, mode:'free', mute:false,
     /* 테마: fish(물고기 낚시) / pokemon(포켓몬 모험) — 도감은 테마별로 따로 모은다 */
@@ -3032,7 +3298,11 @@
     /* 상점: 쓸 수 있는 포인트 지갑 / 보유 아이템 / 장착 아이템 */
     coins:0,
     owned:{ boat:['wood'], rod:['bamboo'], outfit:['fisher'] },
-    equipped:{ boat:'wood', rod:'bamboo', outfit:'fisher' }
+    equipped:{ boat:'wood', rod:'bamboo', outfit:'fisher' },
+    /* 캐릭터 설정 (ID 마다 따로): 피부·머리색·머리 모양·옷색·닉네임 */
+    char:{ nick:'', skin:'#ffd9b8', hair:'#4a3122', hairStyle:'short', shirt:'' },
+    /* 마지막 저장 시각 (기기·서버 중 최신 판단에 쓴다) */
+    updatedAt:0
   });
   let save = defaultSave();
   function loadSave(){
@@ -3107,6 +3377,18 @@
         free: Math.max(0, Math.floor(Number(bc.free) || 0)),
         timed: Math.max(0, Math.floor(Number(bc.timed) || 0))
       };
+      /* 캐릭터 설정 (ID 마다 따로 저장) */
+      const ch = (o.char && typeof o.char === 'object') ? o.char : {};
+      const hex = function(v, def){ return (typeof v === 'string' && /^#[0-9a-fA-F]{6}$/.test(v)) ? v.toLowerCase() : def; };
+      const hstyle = ['short','spiky','long','pony','bun','bald'].indexOf(ch.hairStyle) >= 0 ? ch.hairStyle : 'short';
+      save.char = {
+        nick: (typeof ch.nick === 'string') ? ch.nick.trim().slice(0,10) : '',
+        skin: hex(ch.skin, '#ffd9b8'),
+        hair: hex(ch.hair, '#4a3122'),
+        hairStyle: hstyle,
+        shirt: hex(ch.shirt, '')
+      };
+      save.updatedAt = Math.max(0, Math.floor(Number(o.updatedAt) || 0));
       /* 지갑 · 보유 · 장착 (없거나 깨졌으면 기본값으로 되돌린다) */
       save.coins = Math.max(0, Math.floor(Number(o.coins) || 0));
       const own = (o.owned && typeof o.owned === 'object') ? o.owned : {};
@@ -3122,7 +3404,9 @@
     }catch(e){ /* 저장소를 쓸 수 없어도 플레이는 가능 */ }
   }
   function persist(){
+    try{ save.updatedAt = Date.now(); }catch(e){}
     try{ localStorage.setItem(SAVE_KEY, JSON.stringify(save)); }catch(e){}
+    try{ if(window.__pfTouch) window.__pfTouch(); }catch(e){}   /* ID 별 자동 서버 저장 (디바운스) */
   }
 
   /* ---------------------------------------------------------------
@@ -6265,6 +6549,7 @@
     if(G.score > roundBest()) roundBestSet(G.score);
     if(G.mode === 'timed') G.timeLeft = clamp(G.timeLeft + 5, 0, 60);
     persist();
+    try{ PF.pushNow(); }catch(e){}
     updateHUD(true);
     G.boss = null;
     G.bossFight = false;
@@ -6623,10 +6908,11 @@
     refreshStart();
   }
   function hideAllModals(){
-    ['quizWrap','dexWrap','resultWrap','shopWrap','studyWrap','wnWrap'].forEach(id=>$(id).classList.add('hidden'));
+    ['quizWrap','dexWrap','resultWrap','shopWrap','studyWrap','wnWrap','pfWrap'].forEach(id=>$(id).classList.add('hidden'));
     G.dexOpen = false;
     G.shopOpen = false;
     G.studyOpen = false;
+    G.pfOpen = false;
   }
 
   /* 지금 학습 설정으로 문제를 만든다 (학년 과정 / 연산·난이도 직접 설정) */
@@ -6966,6 +7252,7 @@
     book[sp.id] = (Number(book[sp.id])||0) + 1;   /* 테마별 도감(물고기/포켓몬)에 따로 기록 */
     if(G.score > roundBest()) roundBestSet(G.score);
     persist();
+    try{ PF.pushNow(); }catch(e){}
     updateHUD();
     if(window.__arcade) window.__arcade.celebrate(sp.name, pts, false, false);
     toast(sp, pts, `${josa(sp.name,'을','를')} 잡았어요!` + (comboBonus?` (연속 ${G.streak})`:''));
@@ -6998,6 +7285,7 @@
     book[sp.id] = (Number(book[sp.id])||0) + 1;   /* 물고기 도감의 '희귀 보물' 칸 */
     if(G.score > roundBest()) roundBestSet(G.score);
     persist();
+    try{ PF.pushNow(); }catch(e){}
     updateHUD(true);
     const gx = gem.x, gy = gem.y;
     removeFish(gem);
@@ -7308,6 +7596,7 @@
     save.owned[cat].push(id);
     save.equipped[cat] = id;            /* 구매하면 바로 장착 */
     persist();
+    try{ PF.pushNow(); }catch(e){}
     sfx.buy();
     buildShop(); updateHUD(true); refreshStart();
     shopMessage(it.name + ' 구매 완료! 포인트 ' + fmtP(it.price) + 'P를 썼어요. 바로 장착했어요!', 'gold');
@@ -8103,6 +8392,9 @@
     else if(id === 'astro') shirt = '#eef4fb';
     else if(id === 'wizard') shirt = '#2b2f7a';
     else if(id === 'emperor') shirt = '#5b2a86';
+    /* 캐릭터 설정에서 고른 옷 색이 있으면 그 색으로 */
+    const pfShirt = charNow().shirt;
+    if(pfShirt) shirt = pfShirt;
     c.fillStyle = shirt;
     c.beginPath();
     if(c.roundRect) c.roundRect(-13,-30,26,22,8); else c.rect(-13,-30,26,22);
@@ -8181,11 +8473,12 @@
       c.beginPath(); c.arc(0,-24,3.0,0,Math.PI*2); c.stroke();
     }
 
-    /* 얼굴 */
-    c.fillStyle = '#ffd9b8';
+    /* 얼굴 (피부색은 캐릭터 설정) */
+    const pfChar = charNow();
+    c.fillStyle = pfChar.skin;
     ell(c, 0, -38, 12, 12); c.fill();
-    c.fillStyle = '#4a3122';
-    c.beginPath(); c.arc(0,-40,12,Math.PI*1.05,Math.PI*1.95); c.fill();
+    /* 머리카락 (색 · 모양) */
+    drawHairShape(c, pfChar.hair, pfChar.hairStyle);
 
     /* 눈 */
     c.fillStyle = '#2b1c12';
@@ -8293,7 +8586,7 @@
     }
 
     /* 팔 */
-    c.strokeStyle = '#ffd9b8'; c.lineWidth = 5;
+    c.strokeStyle = charNow().skin; c.lineWidth = 5;
     c.beginPath(); c.moveTo(9,-27); c.lineTo(20+armWag,-33); c.stroke();
     c.restore();
   }
@@ -8416,7 +8709,7 @@
     G.t += dt;
     const t = G.t;
 
-    const modalPause = G.dexOpen || G.shopOpen || G.studyOpen || G.state==='result' || G.state==='title';
+    const modalPause = G.dexOpen || G.shopOpen || G.studyOpen || G.pfOpen || G.state==='result' || G.state==='title';
 
     if(!modalPause){
       G.fish.forEach(f=>{
@@ -10818,10 +11111,781 @@
       }
     };
   })();
+  /* =================================================================
+     ID(프로필) · 캐릭터 꾸미기 · 진행사항 자동 저장
+     · ID 마다 캐릭터·코인·도감·상점·학습 설정·오답 노트가 따로 저장된다
+     · 기기(localStorage)에 먼저 저장하고 Vercel /api/profile 에도 올린다
+     · 다른 기기에서 같은 ID 로 들어오면 서버에서 받아 그대로 이어서 한다
+     ================================================================= */
+  const PF_CHAR_DEF = { nick:'', skin:'#ffd9b8', hair:'#4a3122', hairStyle:'short', shirt:'' };
+  const PF_SKINS = ['#ffd9b8','#f7c9a3','#e9b184','#d09a6a','#a9744b','#7d5232'];
+  const PF_HAIRS = ['#4a3122','#1b1b22','#8a5a2e','#e0b96a','#c8462a','#8b5ad0','#3aa6c9','#e7e7ef'];
+  const PF_SHIRTS = ['', '#3a6ea5', '#e0483d', '#3fb36a', '#f2c14e', '#8e5bd0', '#ff7bb0', '#2b2f4a'];
+  const PF_HAIR_STYLES = [
+    { id:'short', name:'짧은 머리' },
+    { id:'spiky', name:'뾰족 머리' },
+    { id:'long',  name:'긴 머리' },
+    { id:'pony',  name:'묶은 머리' },
+    { id:'bun',   name:'동그란 머리' },
+    { id:'bald',  name:'민머리' }
+  ];
+  function pfHex(v, def){
+    return (typeof v === 'string' && /^#[0-9a-fA-F]{6}$/.test(v)) ? v.toLowerCase() : def;
+  }
+  /* 지금 ID 의 캐릭터 설정 (없으면 기본값) */
+  function charNow(){
+    const c = (save && save.char && typeof save.char === 'object') ? save.char : {};
+    const st = PF_HAIR_STYLES.filter(function(x){ return x.id === c.hairStyle; })[0];
+    const nick = (typeof c.nick === 'string' && c.nick.trim()) ? c.nick.trim().slice(0,10) : '';
+    return {
+      nick: nick || '낚시꾼',
+      skin: pfHex(c.skin, PF_CHAR_DEF.skin),
+      hair: pfHex(c.hair, PF_CHAR_DEF.hair),
+      hairStyle: st ? st.id : 'short',
+      shirt: pfHex(c.shirt, '')
+    };
+  }
+  /* 머리카락 — 캐릭터 설정의 색·모양을 그대로 그린다 (drawAnglerShape 안에서 부른다) */
+  function drawHairShape(c, color, style){
+    const col = pfHex(color, PF_CHAR_DEF.hair);
+    c.save();
+    c.fillStyle = col;
+    if(style === 'bald'){ c.restore(); return; }
+    /* 앞머리 (이마를 덮는 기본 머리) */
+    c.beginPath(); c.arc(0,-40,12,Math.PI*1.05,Math.PI*1.95); c.fill();
+    if(style === 'spiky'){
+      [[-8.6,-47.2],[-2.6,-50.4],[3.6,-49.6],[9.2,-46.2]].forEach(function(p){
+        c.beginPath();
+        c.moveTo(p[0]-3.2, p[1]+3.4);
+        c.lineTo(p[0], p[1]-5.6);
+        c.lineTo(p[0]+3.2, p[1]+3.4);
+        c.closePath(); c.fill();
+      });
+    } else if(style === 'long'){
+      c.beginPath();
+      c.moveTo(-12.6,-38.4); c.quadraticCurveTo(-15.8,-24, -13.2,-12.6);
+      c.lineTo(-7.2,-13.4); c.quadraticCurveTo(-9.8,-26, -8.6,-38.4); c.closePath(); c.fill();
+      c.beginPath();
+      c.moveTo(12.6,-38.4); c.quadraticCurveTo(15.8,-24, 13.2,-12.6);
+      c.lineTo(7.2,-13.4); c.quadraticCurveTo(9.8,-26, 8.6,-38.4); c.closePath(); c.fill();
+    } else if(style === 'pony'){
+      c.beginPath(); c.ellipse(13.4,-33.6,5.4,4.2,0.6,0,Math.PI*2); c.fill();
+      c.beginPath(); c.moveTo(13.4,-30.6);
+      c.quadraticCurveTo(19.4,-22.4, 15.2,-11.8);
+      c.quadraticCurveTo(12.2,-20.4, 11.6,-30.6); c.closePath(); c.fill();
+    } else if(style === 'bun'){
+      c.beginPath(); c.arc(0,-52.6,6.2,0,Math.PI*2); c.fill();
+      c.strokeStyle = 'rgba(255,255,255,.35)'; c.lineWidth = 1;
+      c.beginPath(); c.arc(0,-52.6,4.2,Math.PI*0.15,Math.PI*1.1); c.stroke();
+    }
+    c.restore();
+  }
+  /* 얼굴만 (ID 목록·칩 미리보기) */
+  function paintFace(cv, ch2){
+    if(!cv) return false;
+    const c = cv.getContext('2d');
+    const w = cv.width, h = cv.height;
+    c.setTransform(1,0,0,1,0,0);
+    c.clearRect(0,0,w,h);
+    const ch = ch2 || charNow();
+    const g = c.createLinearGradient(0,0,0,h);
+    g.addColorStop(0,'#d6f4ff'); g.addColorStop(1,'#7fd4f2');
+    c.fillStyle = g; c.fillRect(0,0,w,h);
+    const s = h / 70;
+    c.save();
+    c.translate(w/2, h*0.48 + 38*s);
+    c.scale(s, s);
+    /* 옷깃 */
+    c.fillStyle = ch.shirt || '#3a6ea5';
+    if(c.roundRect){ c.beginPath(); c.roundRect(-15,-24,30,28,9); c.fill(); } else c.fillRect(-15,-24,30,28);
+    /* 얼굴 */
+    c.fillStyle = ch.skin; ell(c, 0, -38, 12, 12); c.fill();
+    drawHairShape(c, ch.hair, ch.hairStyle);
+    c.fillStyle = '#2b1c12';
+    c.beginPath(); c.arc(-4,-38,1.6,0,Math.PI*2); c.fill();
+    c.beginPath(); c.arc(4,-38,1.6,0,Math.PI*2); c.fill();
+    c.strokeStyle = '#e08a6a'; c.lineWidth = 1.6;
+    c.beginPath(); c.arc(0,-34.5,3,0.2*Math.PI,0.8*Math.PI); c.stroke();
+    c.restore();
+    return true;
+  }
+  /* 캐릭터 + 배 + 낚싯대 (캐릭터 설정 미리보기) */
+  function paintCharScene(cv){
+    if(!cv) return false;
+    const c = cv.getContext('2d');
+    const w = cv.width, h = cv.height;
+    c.setTransform(1,0,0,1,0,0);
+    c.clearRect(0,0,w,h);
+    const g = c.createLinearGradient(0,0,0,h);
+    g.addColorStop(0,'#a8ecff'); g.addColorStop(.42,'#4bc3e8'); g.addColorStop(1,'#0a5f8c');
+    c.fillStyle = g; c.fillRect(0,0,w,h);
+    /* 물결 */
+    c.strokeStyle = 'rgba(255,255,255,.5)'; c.lineWidth = 2;
+    for(let i=0;i<3;i++){
+      c.beginPath();
+      for(let x=0;x<=w;x+=8) c.lineTo(x, h*0.26 + i*13 + Math.sin((x/26)+i)*3);
+      c.stroke();
+    }
+    const s = Math.min(w/155, h/150);
+    c.save();
+    c.translate(w*0.5, h*0.70);
+    c.scale(s*1.05, s*1.05);
+    drawHullShape(c, boatNow(), 0);
+    drawAnglerShape(c, outfitNow(), 0);
+    drawRodShape(c, rodNow(), 0);
+    c.restore();
+    return true;
+  }
+
+  const PF = (function(){
+    const K_REG = 'mfProfiles_v2';
+    const K_PRE = 'mathFishingSave_v2:';
+    const K_LEGACY = 'mathFishingSave_v1';
+    const K_WN = 'mfWnProfile_v1';
+    const FALLBACK_HOST = 'math-fishing-game-omega.vercel.app';
+
+    let reg = { ver:2, current:'', list:[] };
+    let booted = false;
+    let syncDone = false;
+    let syncing = false;
+    let pushing = false;
+    let again = false;
+    let online = null;
+    let lastErr = '';
+    let savedAt = 0;
+    let timer = null;
+    let tab = 'id';
+    let dirty = false;
+
+    function lsGet(k, d){ try{ const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); }catch(e){ return d; } }
+    function lsSet(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); return true; }catch(e){ return false; } }
+    function longAgo(t){
+      const ms = Number(t) || 0;
+      if(!ms) return '새 ID';
+      const d = Date.now() - ms;
+      if(d < 60000) return '방금 전';
+      if(d < 3600000) return Math.floor(d/60000) + '분 전';
+      if(d < 86400000) return Math.floor(d/3600000) + '시간 전';
+      return Math.floor(d/86400000) + '일 전';
+    }
+    function hhmm(t){
+      const d = new Date(Number(t) || Date.now());
+      const p = function(n){ return (n<10?'0':'') + n; };
+      return p(d.getHours()) + ':' + p(d.getMinutes());
+    }
+    function normId(v){
+      return String(v == null ? '' : v).trim().replace(/\s+/g,'')
+        .replace(/[^A-Za-z0-9_\-가-힣]/g,'').slice(0,24);
+    }
+    function validId(s){ return /^[A-Za-z0-9_\-가-힣]{2,24}$/.test(s); }
+    function randId(){ return 'p' + Date.now().toString(36).slice(-5) + Math.random().toString(36).slice(2,5); }
+    function byId(id){
+      const k = String(id == null ? '' : id).toLowerCase();
+      for(let i=0;i<reg.list.length;i++) if(String(reg.list[i].id).toLowerCase() === k) return reg.list[i];
+      return null;
+    }
+    function cur(){ return byId(reg.current) || (reg.list[0] || null); }
+    function rawPersist(){
+      try{ localStorage.setItem(SAVE_KEY, JSON.stringify(save)); }catch(e){}
+    }
+    function charOfEntry(e){
+      if(!e) return Object.assign({}, PF_CHAR_DEF);
+      const st = lsGet(K_PRE + e.id, null);
+      const c = (st && st.char && typeof st.char === 'object') ? st.char : {};
+      const hs = PF_HAIR_STYLES.filter(function(x){ return x.id === c.hairStyle; })[0];
+      return {
+        nick: (typeof c.nick === 'string' && c.nick.trim()) ? c.nick.trim().slice(0,10) : (e.name || '낚시꾼'),
+        skin: pfHex(c.skin, PF_CHAR_DEF.skin),
+        hair: pfHex(c.hair, PF_CHAR_DEF.hair),
+        hairStyle: hs ? hs.id : 'short',
+        shirt: pfHex(c.shirt, '')
+      };
+    }
+    function statOfEntry(e){
+      const st = lsGet(K_PRE + e.id, null);
+      if(!st || typeof st !== 'object') return { coins:0, dex:0, empty:true };
+      let dex = 0;
+      ['caught','caughtMon'].forEach(function(k){
+        const m = st[k] && typeof st[k] === 'object' ? st[k] : {};
+        Object.keys(m).forEach(function(key){ if(Number(m[key]) > 0) dex++; });
+      });
+      return { coins: Math.max(0, Math.floor(Number(st.coins) || 0)), dex: dex, empty:false };
+    }
+    function dexCountNow(){
+      let n = 0;
+      ['caught','caughtMon'].forEach(function(k){
+        const m = save[k] && typeof save[k] === 'object' ? save[k] : {};
+        Object.keys(m).forEach(function(key){ if(Number(m[key]) > 0) n++; });
+      });
+      return n;
+    }
+
+    /* ---------- 기기 저장소 (ID 목록 · 첫 실행 이전) ---------- */
+    function loadReg(){
+      let o = null;
+      try{ o = JSON.parse(localStorage.getItem(K_REG) || 'null'); }catch(e){ o = null; }
+      if(o && typeof o === 'object' && Array.isArray(o.list) && o.list.length){
+        reg = { ver:2, current: String(o.current || ''), list: o.list.filter(function(e){ return e && e.id; }) };
+        if(!cur()) reg.current = reg.list[0].id;
+        return false;
+      }
+      /* 처음 실행: 예전 단일 저장을 첫 ID 로 옮긴다 (오답 노트 프로필은 그대로 이어 쓴다) */
+      let legacyId = '';
+      try{ legacyId = localStorage.getItem(K_WN) || ''; }catch(e){}
+      if(!validId(normId(legacyId))) legacyId = '';
+      const id = legacyId || randId();
+      const e = { id: id, name: '나의 낚시꾼', createdAt: Date.now(), updatedAt: 0, lastSeen: Date.now(), remote:false };
+      reg = { ver:2, current: id, list: [e] };
+      let oldRaw = null;
+      try{ oldRaw = localStorage.getItem(K_LEGACY); }catch(err){}
+      if(oldRaw){
+        try{ localStorage.setItem(K_PRE + id, oldRaw); }catch(err){}
+        try{
+          const o2 = JSON.parse(oldRaw);
+          e.updatedAt = Math.max(0, Math.floor(Number(o2 && o2.updatedAt) || 0));
+          e.pub = !!(Number(o2 && o2.coins) || Number(o2 && o2.solved) ||
+                     (o2 && o2.caught && Object.keys(o2.caught).length) ||
+                     (o2 && o2.caughtMon && Object.keys(o2.caughtMon).length));
+        }catch(err){}
+      }
+      lsSet(K_REG, reg);
+      return true;
+    }
+
+    /* ---------- ID 활성화 (저장 키·캐릭터·오답 프로필을 바꾼다) ---------- */
+    function activate(id, opt){
+      const e = byId(id);
+      if(!e) return false;
+      const keepMute = !!(save && save.mute);
+      reg.current = e.id;
+      e.lastSeen = Date.now();
+      SAVE_KEY = K_PRE + e.id;
+      save = defaultSave();
+      loadSave();
+      save.mute = keepMute;
+      if(!save.char || typeof save.char !== 'object') save.char = Object.assign({}, PF_CHAR_DEF);
+      if(!save.char.nick) save.char.nick = e.name || '낚시꾼';
+      rawPersist();
+      lsSet(K_REG, reg);
+      try{ localStorage.setItem(K_WN, e.id); }catch(err){}
+      if(window.PF_WN && window.PF_WN.setProfile){ try{ window.PF_WN.setProfile(e.id); }catch(err){} }
+      if(!(opt && opt.silent)) paintChips();
+      return true;
+    }
+
+    /* ---------- 서버(Blob) ---------- */
+    function apiBase(){
+      if(location.protocol === 'file:') return '';
+      const h = location.hostname || '';
+      const external = /(^|\.)github\.io$/.test(h) || /(^|\.)github\.dev$/.test(h);
+      const has = !!FALLBACK_HOST && FALLBACK_HOST.indexOf('__PF_') !== 0;
+      if(external) return has ? ('https://' + FALLBACK_HOST) : '';
+      return '';
+    }
+    function canCall(){
+      if(location.protocol === 'file:') return false;
+      if(typeof fetch !== 'function') return false;
+      return true;
+    }
+    function url(qs){ return apiBase() + '/api/profile' + (qs ? ('?' + qs) : ''); }
+    async function req(method, qs, body, keepalive){
+      const opt = { method: method, cache:'no-store', headers:{} };
+      if(body != null){ opt.headers['Content-Type'] = 'application/json'; opt.body = JSON.stringify(body); }
+      if(keepalive) opt.keepalive = true;
+      const r = await fetch(url(qs), opt);
+      const txt = await r.text();
+      let data = null;
+      try{ data = txt ? JSON.parse(txt) : null; }catch(e){ data = null; }
+      if(!r.ok || !data || data.ok !== true) throw new Error((data && data.error) || ('HTTP ' + r.status));
+      return data;
+    }
+    function snapshot(){
+      const s = JSON.parse(JSON.stringify(save));
+      delete s.mute;
+      return s;
+    }
+    function note(){
+      const txt = online === false
+        ? '기기에 저장 중 · 연결되면 서버에 올려요'
+        : (savedAt ? ('☁️ 서버에 저장됨 · ' + hhmm(savedAt)) : '진행사항은 ID 별로 자동 저장돼요');
+      const a = $('pfSyncNote'); if(a) a.textContent = txt;
+      const b = $('pfCharNote'); if(b) b.textContent = online === false ? '기기에 저장 중 · 연결되면 서버에 올려요' : '바꾸면 바로 자동 저장돼요';
+    }
+
+    function mergeRemoteList(list){
+      let changed = false;
+      (list || []).forEach(function(r){
+        if(!r || !r.id) return;
+        const id = normId(r.id);
+        if(!validId(id)) return;
+        const e = byId(id);
+        if(e){
+          if(r.name && r.name !== e.name){ e.name = String(r.name).slice(0,24); changed = true; }
+          if(Number(r.updatedAt) > (Number(e.updatedAt) || 0)){ e.updatedAt = Number(r.updatedAt); changed = true; }
+          e.remote = true;
+        } else {
+          reg.list.push({ id: id, name: String(r.name || id).slice(0,24), createdAt: Number(r.createdAt) || 0,
+                          updatedAt: Number(r.updatedAt) || 0, lastSeen: 0, remote:true });
+          changed = true;
+        }
+      });
+      if(changed) lsSet(K_REG, reg);
+    }
+
+    function applyRemote(remote){
+      if(!remote || !remote.state || typeof remote.state !== 'object') return false;
+      const keepMute = !!save.mute;
+      const e = cur();
+      try{ localStorage.setItem(SAVE_KEY, JSON.stringify(remote.state)); }catch(err){}
+      save = defaultSave();
+      loadSave();
+      save.mute = keepMute;
+      if(!save.char || typeof save.char !== 'object') save.char = Object.assign({}, PF_CHAR_DEF);
+      if(!save.char.nick){
+        save.char.nick = (remote.char && remote.char.nick) || (e && e.name) || '낚시꾼';
+      }
+      if(e){
+        if(remote.name) e.name = String(remote.name).slice(0,24);
+        e.updatedAt = Math.max(Number(e.updatedAt) || 0, Number(remote.updatedAt) || 0);
+        e.remote = true;
+      }
+      rawPersist();
+      lsSet(K_REG, reg);
+      return true;
+    }
+
+    function applyUI(){
+      try{ paintChips(); }catch(e){}
+      try{ refreshStart(); }catch(e){}
+      try{ updateHUD(true); }catch(e){}
+      try{ PROG.paint(); }catch(e){}
+      try{ if(G.dexOpen) buildDex(); }catch(e){}
+      try{ if(!$('shopWrap').classList.contains('hidden')) buildShop(true); }catch(e){}
+    }
+
+    async function sync(){
+      if(!canCall()){ syncDone = true; online = false; note(); return null; }
+      if(syncing) return null;
+      syncing = true;
+      syncDone = false;
+      const id = reg.current;
+      try{
+        const d = await req('GET', 'id=' + encodeURIComponent(id));
+        online = true; lastErr = '';
+        const remote = d && d.profile ? d.profile : null;
+        const localAt = Number(save.updatedAt) || 0;
+        const remoteAt = remote ? (Number(remote.updatedAt) || 0) : 0;
+        if(remote && remoteAt > localAt + 400){
+          applyRemote(remote);
+          savedAt = remoteAt;
+          applyUI();
+        }
+        try{
+          const ld = await req('GET', 'list=1');
+          mergeRemoteList(ld && ld.profiles ? ld.profiles : []);
+        }catch(err){}
+        syncDone = true;
+        if(!remote || localAt > remoteAt + 400 || dirty){
+          await flush({ force:true });
+        } else {
+          savedAt = savedAt || remoteAt;
+        }
+      }catch(e){
+        online = false; lastErr = String((e && e.message) || e);
+        syncDone = true;
+      }finally{
+        syncing = false; syncDone = true;
+        note();
+        if(tab === 'id') buildList();
+      }
+      return null;
+    }
+
+    async function flush(opt){
+      const o = opt || {};
+      if(!booted) return false;
+      if(!canCall()){ online = false; note(); return false; }
+      if(!syncDone && !o.force) return false;      /* 서버에서 먼저 읽기 전에는 덮어쓰지 않는다 */
+      if(pushing){ again = true; return false; }
+      pushing = true;
+      const e = cur();
+      try{
+        if(e && !e.pub && (save.coins > 0 || save.solved > 0 || dexCountNow() > 0)) e.pub = true;
+        const payload = {
+          id: reg.current,
+          name: (e && e.name) || '',
+          char: (save && save.char) || {},
+          state: snapshot(),
+          listed: !!(e && e.pub),
+          updatedAt: Date.now()
+        };
+        const d = await req('POST', '', payload, !!o.keepalive);
+        online = true; lastErr = '';
+        dirty = false;
+        savedAt = Number(d.updatedAt) || Date.now();
+        if(e){ e.updatedAt = savedAt; lsSet(K_REG, reg); }
+        return true;
+      }catch(err){
+        online = false; lastErr = String((err && err.message) || err);
+        return false;
+      }finally{
+        pushing = false;
+        note();
+        if(again){ again = false; clearTimeout(timer); timer = setTimeout(function(){ flush(); }, 800); }
+      }
+    }
+    function touch(){
+      if(!booted) return;
+      dirty = true;
+      clearTimeout(timer);
+      timer = setTimeout(function(){ flush(); }, 1200);
+    }
+    function pushNow(){ clearTimeout(timer); return flush(); }
+
+    /* ---------- 화면 ---------- */
+    function paintChips(){
+      const ch = charNow();
+      const e = cur();
+      const nickTxt = ch.nick || (e && e.name) || '낚시꾼';
+      ['pfHudNick','pfChipNick'].forEach(function(id){ const el = $(id); if(el) el.textContent = nickTxt; });
+      const idTxt = 'ID: ' + ((e && e.id) || '-');
+      const s1 = $('pfChipId'); if(s1) s1.textContent = idTxt;
+      const dot = $('pfHudDot'); if(dot) dot.style.background = ch.shirt || '#3a6ea5';
+      const c1 = $('pfChipCv'); if(c1) paintFace(c1, ch);
+    }
+    function refreshMe(){
+      const e = cur();
+      const ch = charNow();
+      const n = $('pfMeNick'); if(n) n.textContent = ch.nick;
+      const i = $('pfMeId'); if(i) i.textContent = 'ID: ' + ((e && e.id) || '-');
+      const c = $('pfMeCoins'); if(c) c.textContent = fmtP(save.coins) + 'P · 도감 ' + dexCountNow() + '종';
+      const cv = $('pfMeCv'); if(cv) paintFace(cv, ch);
+    }
+    function setTab(t){
+      tab = (t === 'char') ? 'char' : 'id';
+      Array.prototype.forEach.call(document.querySelectorAll('#pfTabs button'), function(b){
+        b.classList.toggle('on', b.dataset.tab === tab);
+      });
+      $('pfBodyId').classList.toggle('hidden', tab !== 'id');
+      $('pfBodyChar').classList.toggle('hidden', tab !== 'char');
+      refreshMe();
+      if(tab === 'char') buildChar(); else buildList();
+    }
+    function msg(text, kind){
+      const el = $('pfNewMsg');
+      if(!el) return;
+      el.textContent = text || '';
+      el.className = 'pf-msg' + (kind ? (' ' + kind) : '');
+    }
+    function buildList(){
+      const box = $('pfList');
+      if(!box) return;
+      const q = String(($('pfSearch') && $('pfSearch').value) || '').trim().toLowerCase();
+      const list = reg.list.slice().sort(function(a,b){
+        const ac = (a.id === reg.current) ? 1 : 0, bc = (b.id === reg.current) ? 1 : 0;
+        if(ac !== bc) return bc - ac;
+        return (Number(b.lastSeen) || Number(b.updatedAt) || 0) - (Number(a.lastSeen) || Number(a.updatedAt) || 0);
+      }).filter(function(e){
+        if(!q) return true;
+        return (String(e.id).toLowerCase().indexOf(q) >= 0) || (String(e.name || '').toLowerCase().indexOf(q) >= 0);
+      });
+      box.innerHTML = '';
+      const cnt = $('pfListCount');
+      if(cnt) cnt.textContent = reg.list.length + '개';
+      if(!list.length){
+        const em = document.createElement('div');
+        em.className = 'pf-empty';
+        em.textContent = q ? '검색 결과가 없어요' : '아직 ID 가 없어요';
+        box.appendChild(em);
+        return;
+      }
+      list.forEach(function(e){
+        const row = document.createElement('div');
+        row.className = 'pf-row' + (e.id === reg.current ? ' on' : '');
+        const cv = document.createElement('canvas');
+        cv.width = 68; cv.height = 68;
+        paintFace(cv, charOfEntry(e));
+        const tx = document.createElement('div');
+        tx.className = 'tx';
+        const b = document.createElement('b');
+        b.textContent = (charOfEntry(e).nick || e.name || e.id);
+        const sm = document.createElement('small');
+        const st = statOfEntry(e);
+        sm.textContent = 'ID ' + e.id + ' · ' + fmtP(st.coins) + 'P · 도감 ' + st.dex + '종 · ' + longAgo(e.lastSeen || e.updatedAt);
+        tx.appendChild(b); tx.appendChild(sm);
+        const bt = document.createElement('button');
+        bt.type = 'button';
+        bt.className = 'bt' + (e.id === reg.current ? ' now' : ' go');
+        bt.textContent = e.id === reg.current ? '지금' : '전환';
+        if(e.id !== reg.current) bt.addEventListener('click', function(){ switchProfile(e.id); });
+        row.appendChild(cv); row.appendChild(tx); row.appendChild(bt);
+        box.appendChild(row);
+      });
+    }
+    function fillSwatches(box, colors, curColor, onPick){
+      if(!box) return;
+      box.innerHTML = '';
+      colors.forEach(function(col){
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.style.background = col || 'linear-gradient(135deg,#fff 45%,#e0483d 46%,#e0483d 55%,#fff 56%)';
+        b.title = col || '옷 원래 색';
+        if((col || '') === (curColor || '')) b.classList.add('on');
+        b.addEventListener('click', function(){ onPick(col); });
+        box.appendChild(b);
+      });
+    }
+    function buildChar(){
+      const ch = charNow();
+      const nk = $('pfNick');
+      if(nk && document.activeElement !== nk) nk.value = ch.nick;
+      fillSwatches($('pfSkin'), PF_SKINS, ch.skin, function(col){ setChar({ skin: col }); });
+      fillSwatches($('pfHairColor'), PF_HAIRS, ch.hair, function(col){ setChar({ hair: col }); });
+      fillSwatches($('pfShirt'), PF_SHIRTS, ch.shirt, function(col){ setChar({ shirt: col }); });
+      const hs = $('pfHairStyle');
+      if(hs){
+        hs.innerHTML = '';
+        PF_HAIR_STYLES.forEach(function(st){
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.className = (st.id === ch.hairStyle ? 'on' : '');
+          b.textContent = st.name;
+          b.addEventListener('click', function(){ setChar({ hairStyle: st.id }); });
+          hs.appendChild(b);
+        });
+      }
+      ['boat','rod','outfit'].forEach(function(cat){
+        const box = $('pfGear' + cat.charAt(0).toUpperCase() + cat.slice(1));
+        if(!box) return;
+        box.innerHTML = '';
+        CAT[cat].items.forEach(function(it){
+          if(!isOwned(cat, it.id)) return;
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'it' + (save.equipped[cat] === it.id ? ' on' : '');
+          b.textContent = it.name;
+          b.addEventListener('click', function(){ equip(cat, it.id); });
+          box.appendChild(b);
+        });
+        const buy = document.createElement('button');
+        buy.type = 'button';
+        buy.className = 'it buy';
+        buy.textContent = '+ 상점';
+        buy.addEventListener('click', function(){ close(); openShop(cat); });
+        box.appendChild(buy);
+      });
+      paintStage();
+      note();
+    }
+    function paintStage(){
+      const cv = $('pfStageCv');
+      if(cv) paintCharScene(cv);
+      const tag = $('pfStageTag');
+      if(tag) tag.textContent = charNow().nick + ' · ' + boatNow().name;
+      refreshMe();
+      paintChips();
+    }
+    function setChar(patch){
+      const next = Object.assign({}, charNow(), patch);
+      save.char = { nick: String(next.nick || '').slice(0,10), skin: next.skin, hair: next.hair,
+                    hairStyle: next.hairStyle, shirt: next.shirt };
+      if(patch && patch.nick != null){
+        save.char.nick = String(patch.nick).slice(0,10) || ((cur() && cur().name) || '낚시꾼');
+        const e = cur();
+        if(e){
+          e.name = save.char.nick;
+          lsSet(K_REG, reg);
+        }
+      }
+      persist();
+      buildChar();
+      if(G.state === 'title') refreshStart();
+    }
+    function equip(cat, id){
+      if(!isOwned(cat, id)) return;
+      save.equipped[cat] = id;
+      persist();
+      buildChar();
+      try{ updateHUD(true); }catch(e){}
+      if(G.state === 'title') refreshStart();
+      try{ sfx.equip(); }catch(e){}
+    }
+
+    async function createProfile(){
+      const idRaw = $('pfNewId') ? $('pfNewId').value : '';
+      const nameRaw = $('pfNewName') ? $('pfNewName').value : '';
+      const id = normId(idRaw);
+      if(!validId(id)) return msg('ID 는 한글·영문·숫자 2~24자로 정해 주세요', 'warn');
+      if(byId(id)) return msg('이미 있는 ID 예요 · 아래 목록에서 골라 주세요', 'warn');
+      const btn = $('pfCreate');
+      if(btn) btn.disabled = true;
+      msg('만드는 중…');
+      /* 다른 기기에서 만든 같은 ID 가 있으면 그것을 불러온다 */
+      if(canCall()){
+        try{
+          const d = await req('GET', 'id=' + encodeURIComponent(id));
+          if(d && d.profile){
+            const e2 = { id: id, name: String(d.profile.name || id).slice(0,24), createdAt: Date.now(),
+                         updatedAt: Number(d.profile.updatedAt) || 0, lastSeen: Date.now(), remote:true };
+            reg.list.push(e2);
+            lsSet(K_REG, reg);
+            if(btn) btn.disabled = false;
+            msg('이미 있던 ID 예요 · 진행사항을 불러왔어요', 'ok');
+            switchProfile(id);
+            return;
+          }
+        }catch(err){}
+      }
+      const name = String(nameRaw || '').trim().slice(0,10) || id;
+      const e = { id: id, name: name, createdAt: Date.now(), updatedAt: 0, lastSeen: Date.now(), remote:false, pub:true };
+      reg.list.push(e);
+      lsSet(K_REG, reg);
+      activate(e.id, { silent:true });
+      save.char.nick = name;
+      rawPersist();
+      if(btn) btn.disabled = false;
+      msg('새 ID 「' + id + '」 를 만들었어요 · 캐릭터를 꾸며 보세요', 'ok');
+      paintChips();
+      setTab('char');
+      syncDone = true;
+      pushNow();
+      try{ showStart(); }catch(err){}
+      if(G.state === 'title') refreshStart();
+      open('char');
+    }
+    function switchProfile(id){
+      const e = byId(id);
+      if(!e) return false;
+      if(e.id === reg.current){ setTab('id'); return true; }
+      clearTimeout(timer);
+      flush();
+      activate(e.id, { silent:true });
+      syncDone = false;
+      try{ showStart(); }catch(err){}
+      applyUI();
+      toast(null, null, 'ID 「' + (e.name || e.id) + '」 로 이어서 해요!');
+      sync();
+      return true;
+    }
+
+    function open(which){
+      const w = $('pfWrap');
+      if(!w) return false;
+      w.classList.remove('hidden');
+      G.pfOpen = true;
+      if($('pfNewId')) $('pfNewId').value = '';
+      if($('pfNewName')) $('pfNewName').value = '';
+      if($('pfSearch')) $('pfSearch').value = '';
+      msg('');
+      setTab(which || 'id');
+      note();
+      sync();
+      return true;
+    }
+    function close(){
+      const w = $('pfWrap');
+      if(w) w.classList.add('hidden');
+      G.pfOpen = false;
+    }
+    function isOpen(){ const w = $('pfWrap'); return !!w && !w.classList.contains('hidden'); }
+
+    function wire(){
+      const openers = ['pfBtn','pfChipStart'];
+      openers.forEach(function(id){
+        const b = $(id);
+        if(b) b.addEventListener('click', function(ev){
+          if(ev) ev.preventDefault();
+          try{ sfx.tap(); }catch(e){}
+          open('id');
+        });
+      });
+      const cl = $('pfClose');
+      if(cl) cl.addEventListener('click', close);
+      const wrap = $('pfWrap');
+      if(wrap) wrap.addEventListener('click', function(ev){ if(ev.target === wrap) close(); });
+      Array.prototype.forEach.call(document.querySelectorAll('#pfTabs button'), function(b){
+        b.addEventListener('click', function(){ try{ sfx.tap(); }catch(e){} setTab(b.dataset.tab); });
+      });
+      const cr = $('pfCreate');
+      if(cr) cr.addEventListener('click', function(){ createProfile(); });
+      const sr = $('pfSearch');
+      if(sr) sr.addEventListener('input', buildList);
+      const nk = $('pfNick');
+      if(nk) nk.addEventListener('change', function(){ setChar({ nick: nk.value }); });
+      const done = $('pfDone');
+      if(done) done.addEventListener('click', function(){
+        flashSaved();
+      });
+      const rst = $('pfCharReset');
+      if(rst) rst.addEventListener('click', function(){
+        const e = cur();
+        save.char = Object.assign({}, PF_CHAR_DEF, { nick: (e && e.name) || '낚시꾼' });
+        persist();
+        buildChar();
+        if(G.state === 'title') refreshStart();
+        msg('캐릭터를 기본 모습으로 되돌렸어요', 'ok');
+      });
+      document.addEventListener('visibilitychange', function(){
+        if(document.visibilityState === 'hidden') flush({ keepalive:true });
+      });
+      window.addEventListener('pagehide', function(){ flush({ keepalive:true }); });
+    }
+    function flashSaved(){
+      const okPush = flush({ force:true });
+      close();
+      try{ toast(null, null, online === false ? '기기에 저장했어요 · 연결되면 서버에도 올려요' : '☁️ 저장 완료 · 다른 기기에서도 이어서 할 수 있어요'); }catch(e){}
+      if(G.state === 'title') refreshStart();
+      return okPush;
+    }
+
+    function boot(){
+      loadReg();
+      activate(reg.current, { silent:true });
+      booted = true;
+      wire();
+      paintChips();
+      /* 게임을 막지 않고 조용히 서버와 맞춘다 */
+      setTimeout(function(){ sync(); }, 400);
+      return reg.current;
+    }
+
+    return {
+      boot: boot, open: open, close: close, isOpen: isOpen,
+      touch: touch, pushNow: pushNow, flush: flush, sync: sync,
+      switchProfile: switchProfile, createProfile: createProfile,
+      setTab: setTab, applyUI: applyUI,
+      state: function(){
+        const e = cur();
+        return {
+          id: e ? e.id : '', name: e ? e.name : '',
+          char: charNow(), coins: save.coins, dex: dexCountNow(),
+          equipped: Object.assign({}, save.equipped),
+          online: online, lastErr: lastErr, savedAt: savedAt,
+          syncDone: syncDone, updatedAt: Number(save.updatedAt) || 0,
+          list: reg.list.map(function(x){
+            return { id: x.id, name: x.name, updatedAt: Number(x.updatedAt)||0,
+                     lastSeen: Number(x.lastSeen)||0, remote: !!x.remote, pub: !!x.pub };
+          })
+        };
+      },
+      setChar: setChar, equip: equip, paintChar: paintCharScene
+    };
+  })();
+  /* persist() 가 부를 자동 저장 훅 (TDZ 없이 안전하게) */
+  window.__pfTouch = function(){ try{ PF.touch(); }catch(e){} };
+
+  /* 테스트에서 ID 를 만들 때 쓰는 도우미 (만들기 버튼과 같은 경로) */
+  async function FP_TEST_CREATE(id, name){
+    const box = $('pfNewId'), nb = $('pfNewName');
+    if(box) box.value = String(id || '');
+    if(nb) nb.value = String(name || '');
+    return await PF.createProfile();
+  }
   /* ---------------------------------------------------------------
      시작
   ----------------------------------------------------------------*/
   loadSave();
+  PF.boot();
   G.grade = save.grade; G.mode = save.mode;
   setMuteUI();
   applyTheme();
@@ -10859,6 +11923,10 @@
       try{ const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); }catch(e){ return d; }
     }
     function lsSet(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+    /* 캐시·대기열도 ID(프로필) 별로 따로 둔다 */
+    function kc(){ return K_CACHE + ':' + profile; }
+    function kq(){ return K_QUEUE + ':' + profile; }
+    function kd(){ return K_DEL + ':' + profile; }
     function pad2(n){ return (n < 10 ? '0' : '') + n; }
     function wnEl(tag, cls, text){
       const e = document.createElement(tag);
@@ -10959,10 +12027,10 @@
         const data = await req('GET', apiUrl('profile=' + encodeURIComponent(profile)));
         online = true; lastErr = '';
         serverItems = Array.isArray(data.items) ? data.items : [];
-        lsSet(K_CACHE, serverItems);
+        lsSet(kc(), serverItems);
       }catch(e){
         online = false; lastErr = String((e && e.message) || e);
-        const cached = lsGet(K_CACHE, []);
+        const cached = lsGet(kc(), []);
         serverItems = Array.isArray(cached) ? cached : [];
       }
       paintCount();
@@ -10979,8 +12047,8 @@
           try{
             const data = await req('DELETE', apiUrl('profile=' + encodeURIComponent(profile) + '&id=' + encodeURIComponent(id)));
             online = true; lastErr = '';
-            if(Array.isArray(data.items)){ serverItems = data.items; lsSet(K_CACHE, serverItems); }
-            delQueue.shift(); lsSet(K_DEL, delQueue);
+            if(Array.isArray(data.items)){ serverItems = data.items; lsSet(kc(), serverItems); }
+            delQueue.shift(); lsSet(kd(), delQueue);
           }catch(e){ online = false; lastErr = String((e && e.message) || e); break; }
         }
         /* 아직 못 올린 오답 */
@@ -10989,8 +12057,8 @@
           try{
             const data = await req('POST', apiUrl(), Object.assign({ profile: profile }, it));
             online = true; lastErr = '';
-            if(Array.isArray(data.items)){ serverItems = data.items; lsSet(K_CACHE, serverItems); }
-            queue.shift(); lsSet(K_QUEUE, queue);
+            if(Array.isArray(data.items)){ serverItems = data.items; lsSet(kc(), serverItems); }
+            queue.shift(); lsSet(kq(), queue);
           }catch(e){ online = false; lastErr = String((e && e.message) || e); break; }
         }
       } finally {
@@ -11004,7 +12072,7 @@
     function record(item){
       if(!item || !item.id) return;
       queue.push(item);
-      lsSet(K_QUEUE, queue);
+      lsSet(kq(), queue);
       paintCount();
       const b = $('wnBtn');
       if(b){ b.classList.remove('flash'); void b.offsetWidth; b.classList.add('flash'); }
@@ -11013,35 +12081,35 @@
 
     async function remove(id){
       queue = queue.filter(function(it){ return it.id !== id; });
-      lsSet(K_QUEUE, queue);
+      lsSet(kq(), queue);
       const had = serverItems.some(function(it){ return it.id === id; });
       serverItems = serverItems.filter(function(it){ return it.id !== id; });
-      lsSet(K_CACHE, serverItems);
+      lsSet(kc(), serverItems);
       paintCount();
       if(!had) return 'local';
       try{
         const data = await req('DELETE', apiUrl('profile=' + encodeURIComponent(profile) + '&id=' + encodeURIComponent(id)));
         online = true; lastErr = '';
-        if(Array.isArray(data.items)){ serverItems = data.items; lsSet(K_CACHE, serverItems); }
+        if(Array.isArray(data.items)){ serverItems = data.items; lsSet(kc(), serverItems); }
         paintCount();
         return 'server';
       }catch(e){
         online = false; lastErr = String((e && e.message) || e);
-        if(delQueue.indexOf(id) < 0){ delQueue.push(id); lsSet(K_DEL, delQueue); }
+        if(delQueue.indexOf(id) < 0){ delQueue.push(id); lsSet(kd(), delQueue); }
         paintCount();
         return 'local';
       }
     }
 
     async function clearAll(){
-      queue = []; lsSet(K_QUEUE, queue);
-      delQueue = []; lsSet(K_DEL, delQueue);
-      serverItems = []; lsSet(K_CACHE, serverItems);
+      queue = []; lsSet(kq(), queue);
+      delQueue = []; lsSet(kd(), delQueue);
+      serverItems = []; lsSet(kc(), serverItems);
       paintCount();
       try{
         const data = await req('DELETE', apiUrl('profile=' + encodeURIComponent(profile) + '&all=1'));
         online = true; lastErr = '';
-        if(Array.isArray(data.items)){ serverItems = data.items; lsSet(K_CACHE, serverItems); }
+        if(Array.isArray(data.items)){ serverItems = data.items; lsSet(kc(), serverItems); }
         return true;
       }catch(e){
         online = false; lastErr = String((e && e.message) || e);
@@ -11270,9 +12338,9 @@
 
     function init(){
       initProfile();
-      const c = lsGet(K_CACHE, []);
-      const q = lsGet(K_QUEUE, []);
-      const d = lsGet(K_DEL, []);
+      const c = lsGet(kc(), []);
+      const q = lsGet(kq(), []);
+      const d = lsGet(kd(), []);
       serverItems = Array.isArray(c) ? c : [];
       queue = Array.isArray(q) ? q : [];
       delQueue = Array.isArray(d) ? d : [];
@@ -11309,8 +12377,28 @@
       })();
     }
 
+    /* ID(프로필) 전환 — 대기열은 올리고, 그 ID 의 목록으로 갈아탄다 */
+    async function setProfile(p){
+      const next = String(p == null ? '' : p).trim();
+      if(!next || next === profile) return profile;
+      try{ await flush(); }catch(e){}
+      try{ localStorage.setItem(K_PRO, next); }catch(e){}
+      profile = next;
+      const c = lsGet(kc(), []);
+      const q = lsGet(kq(), []);
+      const d = lsGet(kd(), []);
+      serverItems = Array.isArray(c) ? c : [];
+      queue = Array.isArray(q) ? q : [];
+      delQueue = Array.isArray(d) ? d : [];
+      retryId = null;
+      paintCount();
+      try{ await flush(); await load(); }catch(e){}
+      if(isOpen) render(true);
+      return profile;
+    }
+
     return {
-      init: init, open: open, close: close, record: record, render: render,
+      init: init, open: open, close: close, record: record, render: render, setProfile: setProfile,
       isOpenNow: function(){ return isOpen; },
       items: function(){ return merged(); },
       state: function(){ return { profile: profile, online: online, lastErr: lastErr, queue: queue.length, del: delQueue.length }; },
@@ -11318,6 +12406,8 @@
     };
   })();
   WN.init();
+  /* ID(프로필) 모듈이 ID 전환 때 오답 노트도 함께 바꿀 수 있게 */
+  window.PF_WN = WN;
 
   /* 테스트/디버그용 읽기 전용 훅 */
   window.__mf = {
@@ -11556,7 +12646,20 @@
     wn: ()=> ({ items: WN.items(), state: WN.state(), open: WN.isOpenNow(), profile: WN.profile() }),
     openWrong: ()=>{ WN.open(); return true; },
     closeWrong: ()=>{ WN.close(); return true; },
-    wnCount: ()=> WN.items().length
+    wnCount: ()=> WN.items().length,
+    /* ID(프로필) · 캐릭터 (테스트/확인용) */
+    profile: ()=> PF.state(),
+    profiles: ()=> PF.state().list,
+    openProfile: (tab)=>{ PF.open(tab); return PF.isOpen(); },
+    closeProfile: ()=>{ PF.close(); return !PF.isOpen(); },
+    switchProfile: (id)=> PF.switchProfile(id),
+    createProfile: (id, name)=> FP_TEST_CREATE(id, name),
+    setChar: (patch)=> { PF.setChar(patch); return charNow(); },
+    char: ()=> charNow(),
+    equipItem: (cat, id)=> { PF.equip(cat, id); return JSON.parse(JSON.stringify(save.equipped)); },
+    paintChar: (cv)=> PF.paintChar(cv),
+    syncProfile: ()=> PF.sync(),
+    saveNow: ()=> PF.pushNow()
   };
 })();
 </script>
