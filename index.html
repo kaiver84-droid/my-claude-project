@@ -6685,6 +6685,10 @@
     }
     document.documentElement.style.setProperty('--hudTop', v + 'px');
   }
+  /* HUD 높이가 바뀔 때마다(칩이 늘거나 줄어들 때) 위쪽 줄 위치를 다시 잡는다 */
+  if(typeof ResizeObserver === 'function'){
+    try{ new ResizeObserver(function(){ syncTopOffset(); }).observe($('hud')); }catch(e){}
+  }
   function updateHUD(force){
     syncCoins(force);
     if(force || hudCache.score !== G.score){ $('scoreVal').textContent = G.score; hudCache.score = G.score; }
