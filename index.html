@@ -404,6 +404,23 @@
   .dex-item.boss.locked .nm{color:#93a3b8;}
   .dex-item.boss.locked .ct{color:#7d8ea3;}
   .dex-item.boss.locked canvas{opacity:.30;filter:grayscale(.7) brightness(.75);}
+  /* ---------- 희귀 보물 (다이아몬드) — 물고기 모드 전용 ---------- */
+  .dex-sec.gem .line{background:linear-gradient(90deg,rgba(80,210,255,0),#5fd8ff 45%,#ffd6f2 55%,rgba(255,170,225,0));}
+  .dex-sec.gem b{color:#0f6d96;}
+  .dex-sec .gem-count{font-size:11px;font-weight:900;color:#0f8fbf;margin-left:5px;letter-spacing:0;}
+  .dex-grid.gem{grid-template-columns:repeat(2,1fr);gap:7px;}
+  .dex-grid.gem .dex-item{padding:7px 4px 8px;}
+  .dex-grid.gem .dex-item canvas{width:98px;height:60px;}
+  .dex-grid.gem .dex-item .nm{font-size:12px;}
+  .dex-grid.gem .dex-item .ct{font-size:11px;}
+  .dex-item.gem{background:linear-gradient(#0f2b3d,#0b2233 70%,#081a27);border-color:#3fb6e0;}
+  .dex-item.gem canvas{filter:drop-shadow(0 0 7px rgba(120,230,255,.55));}
+  .dex-item.gem .nm{color:#d9f4ff;}
+  .dex-item.gem .ct{color:#7fdcff;}
+  .dex-item.gem.locked{background:#1b2333;border-color:#3b4a63;border-style:dashed;}
+  .dex-item.gem.locked .nm{color:#93a3b8;}
+  .dex-item.gem.locked .ct{color:#7d8ea3;}
+  .dex-item.gem.locked canvas{opacity:.32;filter:grayscale(.65) brightness(.8);}
   .boss-note{
     display:flex;align-items:center;justify-content:center;gap:5px;text-align:center;
     font-size:11px;font-weight:900;color:#7a2fb8;line-height:1.3;
@@ -1241,6 +1258,10 @@
           <span class="line"></span><b id="dexBossLbl">전설의 보스</b><span class="line"></span>
         </div>
         <div class="dex-grid boss" id="dexBossGrid"></div>
+        <div class="dex-sec gem" id="dexGemSec">
+          <span class="line"></span><b>희귀 보물 <span class="gem-count" id="dexGemCount">0/2</span></b><span class="line"></span>
+        </div>
+        <div class="dex-grid gem" id="dexGemGrid"></div>
         <div class="dex-legend" id="dexLegend">낚시를 하면 저절로 모여요. 희귀한 물고기일수록 점수가 커요!</div>
       </div>
     </div>
@@ -2733,6 +2754,17 @@
       [392,523,659,784,1047,1319].forEach((f,i)=>tone(f,0.3,{type:'triangle',vol:0.1,when:i*0.11}));
       tone(196,0.6,{type:'sine',vol:0.06,when:0.12});
       noiseBurst(0.5,0.13,2200);
+    },
+    /* 희귀 보물: 바다에 나타날 때의 작은 반짝임 · 건졌을 때의 보석 소리 */
+    gemAppear(){
+      tone(1568,0.13,{type:'sine',vol:0.045});
+      tone(2093,0.17,{type:'sine',vol:0.04,when:0.1});
+    },
+    gem(){
+      [1046.5,1318.5,1568,2093].forEach((f,i)=>tone(f,0.26,{type:'triangle',vol:0.085,when:i*0.06}));
+      tone(2637,0.2,{type:'sine',vol:0.045,when:0.24});
+      tone(3136,0.24,{type:'sine',vol:0.04,when:0.31});
+      noiseBurst(0.34,0.07,5200);
     }
   };
 
@@ -2794,6 +2826,16 @@
      speed:[8,12],  boss:true, tag:'은하수의 노래', aura:[190,150,255]}
   ];
   BOSSES.forEach(b=>{ b.hp = 3; });
+
+  /* ---- 희귀 보물: 물고기 모드에서만, 일반 낚시 중 '가끔' 바다에 반짝이며 나타나는 다이아몬드 ----
+     - 문제를 풀어 건지면 400~500P (상점 고가 아이템에 보태지는 큰 보너스)
+     - 포켓몬 모드·보스전에서는 나타나지 않고, 물고기 24종 풀과 보스 주기(4~5마리)는 건드리지 않는다 */
+  const DIAMONDS = [
+    {id:'diamond',     name:'다이아몬드',     pts:400, len:46, w:0, kind:'diamond', gem:'blue',
+     body:'#a9e2ff', deep:'#1b86cf', spark:'#f2ffff', glow:[110,215,255], speed:[20,32]},
+    {id:'pinkdiamond', name:'핑크 다이아몬드', pts:500, len:46, w:0, kind:'diamond', gem:'pink',
+     body:'#ffc0e6', deep:'#d13e8c', spark:'#fff0fa', glow:[255,140,205], speed:[20,32]}
+  ];
 
   /* ---------------------------------------------------------------
      테마 — 물고기 낚시 ⇄ 포켓몬 모험
@@ -3979,7 +4021,7 @@
       legend:'낚시를 하면 저절로 모여요. 아직 못 만난 물고기가 더 자주 나타나요!',
       legendAll:'모든 물고기를 다 모았어요! 정말 대단해요!',
       legendBoss:'전설의 보스를 모두 잡았어요! 낚시의 왕이에요!',
-      legendHint:'낚시를 하면 저절로 모여요. 물고기 5마리마다 전설의 보스가 나타나요!'
+      legendHint:'낚시를 하면 저절로 모여요. 물고기 5마리마다 전설의 보스가 나타나고, 가끔 반짝이는 다이아몬드도 건질 수 있어요!'
     },
     pokemon: {
       key:'pokemon', label:'포켓몬', icon:'⚡',
@@ -4060,6 +4102,7 @@
     G.fish = [];
     G.boss = null;
     G.bossFight = false;
+    G.gem = null; G.gemDry = 0;   /* 포켓몬 모드에는 희귀 보물이 없다 */
     ensureFish();
     if(G.dexOpen) buildDex();
     refreshStart();
@@ -4423,7 +4466,75 @@
   }
 
   /* 물고기 한 마리 그리기: (x,y) 중심, size = 전체 길이(px), dir 1=오른쪽 */
+  /* 희귀 보물 다이아몬드 — 파셋 컷 보석이 반짝이며 물고기처럼 헤엄친다 */
+  function drawDiamond(c, sp, x, y, size, phase, dir, alpha){
+    const u = size/44;
+    if(alpha != null && alpha < 1) c.globalAlpha = alpha;
+    const a0 = (alpha != null && alpha < 1) ? alpha : 1;
+    c.save();
+    c.translate(x, y);
+    c.scale((dir||1)*u, u);
+    c.rotate(Math.sin(phase*0.7)*0.07);
+    const tw = 0.5 + 0.5*Math.sin(phase*2.4);
+    const glow = (sp.glow || [120,220,255]).join(',');
+    const body = sp.body || '#cfeeff', deep = sp.deep || '#2f9fe0', spark = sp.spark || '#ffffff';
+    /* 보석 둘레의 빛무리 */
+    const halo = c.createRadialGradient(0,-1,2,0,-1,32);
+    halo.addColorStop(0, 'rgba(255,255,255,.55)');
+    halo.addColorStop(0.42, 'rgba(' + glow + ',.34)');
+    halo.addColorStop(1, 'rgba(' + glow + ',0)');
+    c.fillStyle = halo;
+    c.beginPath(); c.arc(0,-1,32,0,Math.PI*2); c.fill();
+    /* 몸통: 테이블(윗면) - 거들 - 팬시언(아래 꼭짓점) */
+    const outline = function(){
+      c.beginPath();
+      c.moveTo(-7,-16); c.lineTo(7,-16); c.lineTo(15,-6); c.lineTo(0,18); c.lineTo(-15,-6);
+      c.closePath();
+    };
+    const g = c.createLinearGradient(-12,-16,10,18);
+    g.addColorStop(0, '#ffffff');
+    g.addColorStop(0.3, body);
+    g.addColorStop(1, deep);
+    outline();
+    c.fillStyle = g; c.fill();
+    c.strokeStyle = 'rgba(16,74,110,.45)'; c.lineWidth = 2.2; c.stroke();
+    c.strokeStyle = 'rgba(255,255,255,.92)'; c.lineWidth = 1.1; c.stroke();
+    /* 파셋 컷 면 */
+    c.save();
+    outline(); c.clip();
+    c.strokeStyle = 'rgba(255,255,255,.66)'; c.lineWidth = 1;
+    c.beginPath();
+    c.moveTo(-15,-6); c.lineTo(15,-6);                  /* 거들 */
+    c.moveTo(-7,-16); c.lineTo(-15,-6);                  /* 크라운 왼쪽 */
+    c.moveTo(7,-16);  c.lineTo(15,-6);                   /* 크라운 오른쪽 */
+    c.moveTo(0,-6);   c.lineTo(0,18);                    /* 팬시언 중심 */
+    c.moveTo(-7,-16); c.lineTo(0,-6); c.lineTo(7,-16);   /* 테이블 아래 */
+    c.stroke();
+    c.fillStyle = 'rgba(255,255,255,.34)';
+    c.beginPath(); c.moveTo(-7,-16); c.lineTo(7,-16); c.lineTo(4.4,-9); c.lineTo(-4.4,-9); c.closePath(); c.fill();
+    c.fillStyle = 'rgba(10,70,110,.16)';
+    c.beginPath(); c.moveTo(0,-6); c.lineTo(15,-6); c.lineTo(0,18); c.closePath(); c.fill();
+    c.fillStyle = 'rgba(255,255,255,.20)';
+    c.beginPath(); c.moveTo(-15,-6); c.lineTo(0,-6); c.lineTo(0,18); c.closePath(); c.fill();
+    c.restore();
+    /* 반짝임 */
+    c.globalAlpha = a0 * (0.55 + 0.45*tw);
+    star4(c, -17, -13, 4.2 + 3*tw, spark);
+    star4(c, 13, 3, 4.6 - 1.6*tw, '#ffffff');
+    star4(c, -4, 12, 1.4 + 3.4*(1 - tw), '#ffffff');
+    c.globalAlpha = a0;
+    c.fillStyle = 'rgba(255,255,255,.85)';
+    for(let i=0;i<3;i++){
+      const a = phase*1.4 + i*2.1;
+      const rr = 13 + 4*Math.sin(phase*1.1 + i);
+      c.beginPath(); c.arc(Math.cos(a)*rr, Math.sin(a)*rr*0.8, 1.1 + 0.7*tw, 0, Math.PI*2); c.fill();
+    }
+    c.restore();
+    if(alpha != null) c.globalAlpha = 1;
+  }
+
   function drawFish(c, sp, x, y, size, phase, dir, alpha){
+    if(sp.kind === 'diamond'){ drawDiamond(c, sp, x, y, size, phase, dir, alpha); return; }
     const u = size/44;
     if(alpha!=null && alpha<1) c.globalAlpha = alpha;
     c.save();
@@ -5001,7 +5112,9 @@
     studyOpen: false, recMode:'grade', recGrade:1, quizTried:false,
     /* 보스 */
     boss: null, bossFight: false, bossHp: 0, bossMaxHp: 3,
-    fishCaught: 0, bossCaught: 0, bossSpawns: 0
+    fishCaught: 0, bossCaught: 0, bossSpawns: 0,
+    /* 희귀 보물 (다이아몬드) */
+    gem: null, gemDry: 0, gemCaught: 0
   };
   const bossMaxHpNow = () => (G.mode === 'timed' ? 1 : 3);
 
@@ -5028,7 +5141,49 @@
   function ensureFish(){ while(G.fish.length < FISH_MIN()) spawnFish(true); }
   function removeFish(f){
     const i = G.fish.indexOf(f);
-    if(i>=0) G.fish.splice(i,1);
+    if(i>=0){ G.fish.splice(i,1); return; }
+    if(G.gem === f){ G.gem = null; G.gemDry = 0; }   /* 희귀 보물도 같은 방식으로 치운다 */
+  }
+
+  /* ---------------------------------------------------------------
+     희귀 보물 (다이아몬드) — 등장 · 이동 · 포획
+     물고기처럼 헤엄치다가 20초쯤 지나면 빛나며 사라진다.
+     문제를 풀면 +400P / 핑크는 +500P. 도감 '희귀 보물' 칸에 기록된다.
+  ----------------------------------------------------------------*/
+  const GEM_LIFE = 20;          /* 바다에 머무는 시간(초) */
+  const GEM_PITY = 30;          /* 30마리 동안 안 나오면 다음 한 번은 보장 */
+  const GEM_PINK_SHARE = 0.3;   /* 다이아몬드 중 핑크(500P)의 비율 — 더 귀하다 */
+  let gemRate = 0.07;           /* 물고기를 잡을 때마다 7% 확률 (테스트에서 바꿀 수 있다) */
+  function pickGem(){
+    return Math.random() < GEM_PINK_SHARE ? DIAMONDS[1] : DIAMONDS[0];
+  }
+  /* 마지막 2초 동안 서서히 빛나며 사라진다 */
+  function gemFade(gm){ return clamp((GEM_LIFE - gm.life) / 2, 0, 1); }
+  function spawnGem(sp){
+    const s = sp || pickGem();
+    const size = s.len * SCALE * (1.0 + Math.random()*0.12);
+    const dir = Math.random() < 0.5 ? 1 : -1;
+    const minY = waterY + 46*SCALE;
+    const baseY = R(Math.round(minY), Math.round(Math.max(minY + 10, H - 96)));
+    G.gem = {
+      sp: s, size, dir, y: baseY, baseY, life: 0, wig: 0,
+      x: dir > 0 ? -size*1.05 : W + size*1.05,
+      speed: R(s.speed[0], s.speed[1]) * clamp(SCALE, 0.8, 1.3),
+      phase: Math.random()*6.28, amp: R(8, 22)*SCALE
+    };
+    G.gemDry = 0;
+    try{ sfx.gemAppear(); }catch(e){ /* 사운드 실패가 게임을 막지 않는다 */ }
+    return G.gem;
+  }
+  /* 물고기를 한 마리 잡을 때마다 한 번씩 굴린다 (물고기 모드 · 보스전이 아닐 때만) */
+  function maybeSpawnGem(){
+    if(th().key !== 'fish') return null;      /* 포켓몬 모드에는 나오지 않는다 */
+    if(G.gem) return null;                    /* 한 번에 하나만 */
+    if(G.boss || G.bossFight) return null;     /* 보스전 중에는 나오지 않는다 */
+    if(G.state !== 'playing') return null;
+    G.gemDry = (G.gemDry || 0) + 1;
+    if(G.gemDry < GEM_PITY && Math.random() >= gemRate) return null;
+    return spawnGem();
   }
 
   /* ---------------------------------------------------------------
@@ -5216,6 +5371,27 @@
     ctx.fillStyle = 'rgba(255,215,120,.9)';
     const ay = ly + h/2 + 4*SCALE + Math.abs(Math.sin(t*3))*3*SCALE;
     ctx.beginPath(); ctx.moveTo(x-5*SCALE, ay); ctx.lineTo(x+5*SCALE, ay); ctx.lineTo(x, ay+6*SCALE); ctx.closePath(); ctx.fill();
+    ctx.restore();
+  }
+  /* 희귀 보물 이름표 — 다이아몬드 위에 뜨는 작은 배지 */
+  function drawGemTag(sp, x, y, size, t, alpha){
+    const txt = sp.name + ' +' + sp.pts + 'P';
+    const fs = Math.max(9, Math.round(11.5*SCALE));
+    ctx.save();
+    ctx.globalAlpha = alpha == null ? 1 : alpha;
+    ctx.font = '900 ' + fs + 'px system-ui, -apple-system, "Apple SD Gothic Neo", sans-serif';
+    const w = ctx.measureText(txt).width + 16*SCALE;
+    const h = 18*SCALE;
+    const ly = y - size*0.62 - 13*SCALE;
+    ctx.fillStyle = 'rgba(6,44,66,.74)';
+    ctx.beginPath();
+    if(ctx.roundRect) ctx.roundRect(x-w/2, ly-h/2, w, h, h/2); else ctx.rect(x-w/2, ly-h/2, w, h);
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(140,235,255,' + (0.55 + 0.35*Math.sin(t*3.4)).toFixed(2) + ')';
+    ctx.lineWidth = 1.4*SCALE; ctx.stroke();
+    ctx.fillStyle = '#dff6ff';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(txt, x, ly + 0.5*SCALE);
     ctx.restore();
   }
 
@@ -5480,6 +5656,7 @@
     G.particles = []; G.floats = [];
     G.boss = null; G.bossFight = false; G.bossHp = 0; G.bossMaxHp = bossMaxHpNow();
     G.fishCaught = 0;
+    G.gem = null; G.gemDry = 0; G.gemCaught = 0;
     $('bossBar').classList.add('hidden');
     const qtop = $('quizCard').querySelector('.quiz-top');
     if(qtop) qtop.classList.remove('hidden');
@@ -5539,6 +5716,7 @@
   }
 
   function openQuiz(fish, isBoss, quiet){
+    const isGem = !!(fish && fish.sp && fish.sp.kind === 'diamond');
     const prob = makeProblem();
     G.quiz = prob;
     G.state = 'quiz';
@@ -5584,12 +5762,15 @@
 
     $('quizSay').textContent = isBoss
       ? `${fish.sp.name}와의 승부!`
-      : th().bite(fish.sp.name);
+      : (isGem ? ('💎 ' + fish.sp.name + ' 발견!') : th().bite(fish.sp.name));
     $('quizSaySub').textContent = isBoss
       ? (prob.blank ? '빈칸에 들어갈 수를 고르세요' : '맞히면 줄을 당길 수 있어요')
-      : (prob.blank ? '빈칸에 들어갈 수를 골라 보세요' : th().biteSub);
+      : (isGem
+          ? ('문제를 풀면 ' + josa(fish.sp.name,'을','를') + ' 건질 수 있어요!')
+          : (prob.blank ? '빈칸에 들어갈 수를 골라 보세요' : th().biteSub));
     $('hintBtnLabel').textContent = prob.hint.type === 'apples' ? '그림으로 세어보기' : '풀이 힌트';
-    $('quitQuiz').textContent = isBoss ? th().quitBoss : th().quitQuiz;
+    $('quitQuiz').textContent = isBoss ? th().quitBoss
+      : (isGem ? '그만 풀기 (다이아몬드 놓아주기)' : th().quitQuiz);
 
     const ch = $('choices');
     ch.innerHTML = '';
@@ -5689,7 +5870,8 @@
       btn.classList.add('right');
       document.querySelectorAll('.choice').forEach(b=>b.disabled = true);
       $('feedback').className = 'feedback ok';
-      $('feedback').textContent = th().correct;
+      $('feedback').textContent = (G.hooked && G.hooked.sp && G.hooked.sp.kind === 'diamond')
+        ? '정답이에요! 다이아몬드를 끌어 올려요!' : th().correct;
       save.solved++; save.correct++; persist();
       G.streak++;
       sfx.right();
@@ -5759,6 +5941,7 @@
     const fish = G.hooked;
     if(!fish) return;
     if(fish.sp.boss){ finishBossCatch(fish); return; }
+    if(fish.sp.kind === 'diamond'){ finishGemCatch(fish); return; }
     const sp = fish.sp;
     G.streak = Math.max(1, G.streak);
     const comboBonus = G.streak >= 2 ? Math.min(5, G.streak-1) * 10 : 0;
@@ -5785,6 +5968,36 @@
     G.fishCaught++;
     const need = G.mode === 'timed' ? 4 : 5;
     if(!G.boss && G.fishCaught % need === 0) spawnBoss();
+    /* 희귀 보물: 물고기를 한 마리 잡을 때마다 7% 확률로 바다에 반짝이는 다이아몬드 */
+    maybeSpawnGem();
+  }
+
+  /* 희귀 보물 포획 — 높은 보너스 포인트 + 도감 '희귀 보물' 기록 + 축하 배지 */
+  function finishGemCatch(gem){
+    const sp = gem.sp;
+    G.streak = Math.max(1, G.streak);
+    const pts = sp.pts;
+    G.score += pts;
+    save.coins += pts;                 /* 바로 쓸 수 있는 포인트로 쌓인다 */
+    G.caughtCount++;
+    G.gemCaught = (G.gemCaught || 0) + 1;
+    const book = dexBook();
+    book[sp.id] = (Number(book[sp.id])||0) + 1;   /* 물고기 도감의 '희귀 보물' 칸 */
+    if(G.score > roundBest()) roundBestSet(G.score);
+    persist();
+    updateHUD(true);
+    const gx = gem.x, gy = gem.y;
+    removeFish(gem);
+    G.hooked = null;
+    G.bob = null;
+    G.quiz = null;
+    G.state = 'playing';
+    toast(sp, pts, josa(sp.name,'을','를') + ' 건졌어요!');
+    sparkle(gx, waterY);
+    gemBurst(gx, Math.min(gy, waterY + 40));
+    showBossBanner(sp.name + ' 획득!', '+' + pts + '점 · 희귀 보물', true);
+    sfx.gem();
+    ensureFish();
   }
 
   function quitQuiz(){
@@ -5823,6 +6036,16 @@
       G.particles.push({x, y, vx:Math.cos(a)*sp, vy:Math.sin(a)*sp-40, life:0, max:0.7+Math.random()*0.4, r:2+Math.random()*2.5, c:'rgba(255,225,120,', g:120});
     }
   }
+  /* 보석이 터지는 반짝임 (하늘색 · 하양 · 핑크) */
+  function gemBurst(x,y){
+    const cols = ['rgba(198,244,255,','rgba(255,255,255,','rgba(255,190,235,'];
+    for(let i=0;i<20;i++){
+      const a = Math.random()*Math.PI*2;
+      const sp = 50 + Math.random()*130;
+      G.particles.push({x, y, vx:Math.cos(a)*sp, vy:Math.sin(a)*sp - 30, life:0,
+        max:0.7+Math.random()*0.5, r:1.6+Math.random()*2.4, c: cols[i%3], g:60});
+    }
+  }
   function floatText(x,y,text,color){
     G.floats.push({x,y,text,color,life:0,max:1.1});
   }
@@ -5840,11 +6063,11 @@
     G.dexOpen = false;
     if(G.state === 'result') $('resultWrap').classList.remove('hidden');
   }
-  function dexItem(sp, isBoss){
+  function dexItem(sp, isBoss, isGem){
     const c = dexCount(sp.id);
     const owned = c > 0;
     const box = document.createElement('div');
-    box.className = 'dex-item' + (isBoss?' boss':'') + (owned?'':' locked');
+    box.className = 'dex-item' + (isBoss?' boss':'') + (isGem?' gem':'') + (owned?'':' locked');
     if(sp.dex) box.dataset.dex = sp.dex;
     const cvs = document.createElement('canvas');
     cvs.width = 144; cvs.height = 88;
@@ -5870,7 +6093,8 @@
     const nm = document.createElement('div'); nm.className='nm';
     nm.textContent = (sp.dex ? '#' + sp.dex + ' ' : '') + (owned ? sp.name : '???');
     const ct = document.createElement('div'); ct.className='ct';
-    ct.textContent = owned ? `${c}마리 · ${sp.pts}점` : '아직 못 만났어요';
+    ct.textContent = owned ? (c + (isGem ? '개' : '마리') + ' · ' + sp.pts + '점')
+                           : (isGem ? '아직 못 건졌어요' : '아직 못 만났어요');
     box.appendChild(cvs); box.appendChild(nm); box.appendChild(ct);
     return box;
   }
@@ -5921,6 +6145,22 @@
       bgrid.classList.remove('hidden');
       T.species.forEach(sp=>{ grid.appendChild(dexItem(sp, false)); });
       T.bosses.forEach(sp=>{ bgrid.appendChild(dexItem(sp, true)); });
+    }
+    /* 희귀 보물 (물고기 모드 전용) — 물고기·보스 칸 수는 그대로 두고 따로 모은다 */
+    const gems = (T.key === 'fish') ? DIAMONDS : [];
+    const gemSec = $('dexGemSec'), ggrid = $('dexGemGrid'), gcount = $('dexGemCount');
+    if(gemSec && ggrid){
+      const list = (dexFilter === 'got')
+        ? gems.filter(function(s){ return dexCount(s.id) > 0; }) : gems;
+      const show = gems.length > 0 && dexFilter !== 'boss' && list.length > 0;
+      gemSec.classList.toggle('hidden', !show);
+      ggrid.classList.toggle('hidden', !show);
+      ggrid.innerHTML = '';
+      if(show){
+        list.forEach(function(s){ ggrid.appendChild(dexItem(s, false, true)); });
+        const gotN = gems.filter(function(s){ return dexCount(s.id) > 0; }).length;
+        if(gcount) gcount.textContent = gotN + '/' + gems.length;
+      }
     }
     $('dexLegend').textContent = kinds === allKinds
       ? T.legendAll
@@ -6164,6 +6404,19 @@
         ctx.restore();
       }
     });
+
+    /* 희귀 보물: 반짝이는 다이아몬드 (물고기 모드) */
+    if(G.gem){
+      const gm = G.gem;
+      const engaged = (G.hooked === gm) && (G.state==='casting'||G.state==='quiz'||G.state==='catching');
+      if(!engaged){
+        const fd = gemFade(gm);
+        if(fd > 0.03){
+          drawFish(ctx, gm.sp, gm.x, gm.y, gm.size, gm.phase, gm.dir, fd);
+          if(fd > 0.3) drawGemTag(gm.sp, gm.x, gm.y, gm.size, t, fd);
+        }
+      }
+    }
 
     /* 전설의 보스 (발광 오라와 함께) */
     if(G.boss){
@@ -7161,6 +7414,21 @@
         b.phase += dt*1.5;
       }
 
+      /* 희귀 보물: 물고기처럼 헤엄치고, 시간이 지나면 빛나며 사라진다 */
+      if(G.gem){
+        const gm = G.gem;
+        const engaged = (G.hooked === gm) && (G.state==='casting'||G.state==='quiz'||G.state==='catching');
+        if(!engaged){
+          gm.x += gm.dir * gm.speed * dt;
+          if(gm.dir > 0 && gm.x > W + gm.size*1.6) gm.x = -gm.size*1.6;
+          if(gm.dir < 0 && gm.x < -gm.size*1.6) gm.x = W + gm.size*1.6;
+          gm.y = clamp(gm.baseY + Math.sin(t*1.2 + gm.phase*0.6)*gm.amp, waterY+34*SCALE+8, H-94);
+        }
+        gm.phase += dt*(2.2 + gm.speed*0.05);
+        gm.life += dt;
+        if(gm.life >= GEM_LIFE && !engaged) G.gem = null;
+      }
+
       if(G.state === 'casting' && G.hooked){
         G.castT += dt*2.4;
         const tip = rodTip();
@@ -7226,6 +7494,11 @@
       const b = G.boss;
       const d = Math.hypot(b.x - p.x, (b.y - p.y)*1.05);
       if(d < Math.max(b.size*0.5, 54)){ castToBoss(); return; }
+    }
+    /* 희귀 보물은 직접 콕 집어 건진다 (낚싯대 버튼은 물고기·보스만 노린다) */
+    if(G.gem){
+      const gm = G.gem;
+      if(Math.hypot(gm.x - p.x, (gm.y - p.y)*1.1) < Math.max(gm.size*0.8, 36)){ castTo(gm); return; }
     }
     const f = fishAt(p.x, p.y);
     if(f) castTo(f);
@@ -8226,6 +8499,37 @@
     bossSpawns: ()=> G.bossSpawns,
     fishCaught: ()=> G.fishCaught,
     spawnBoss: ()=> !!spawnBoss(),
+    /* 희귀 보물 (테스트/확인용) */
+    gems: ()=> DIAMONDS.map(function(d){ return {id:d.id, name:d.name, pts:d.pts}; }),
+    gem: ()=> G.gem ? { id:G.gem.sp.id, name:G.gem.sp.name, pts:G.gem.sp.pts,
+                        x:G.gem.x, y:G.gem.y, size:G.gem.size, life:G.gem.life,
+                        fade: gemFade(G.gem) } : null,
+    gemCaught: ()=> G.gemCaught || 0,
+    gemLife: ()=> GEM_LIFE,
+    gemRate: ()=> gemRate,
+    setGemRate: (v)=>{ gemRate = (v == null) ? 0.07 : Math.max(0, Math.min(1, Number(v))); return gemRate; },
+    spawnGem: (id)=>{
+      const sp = id ? DIAMONDS.filter(function(d){ return d.id === id; })[0] : null;
+      spawnGem(sp || undefined);
+      return G.gem ? G.gem.sp.id : null;
+    },
+    clearGem: ()=>{ G.gem = null; return true; },
+    /* 등장 조건 확인용: 확률을 1로 두고 maybeSpawnGem 을 한 번 굴린다 (테스트 전용) */
+    tryGem: ()=>{
+      const r = gemRate; gemRate = 1;
+      const g = maybeSpawnGem();
+      gemRate = r;
+      return g ? g.sp.id : null;
+    },
+    /* 등장 확률 확인용: '잡기 1회당 굴림'을 n번 돌린다 (테스트 전용) */
+    gemRolls: (n)=>{
+      const total = Math.max(1, Math.floor(Number(n) || 1000));
+      let hits = 0, blue = 0, pink = 0;
+      for(let i=0;i<total;i++){
+        if(Math.random() < gemRate){ hits++; if(pickGem().id === 'pinkdiamond') pink++; else blue++; }
+      }
+      return { rolls: total, hits: hits, rate: hits/total, blue: blue, pink: pink };
+    },
     /* 상점·지갑 (테스트/확인용) */
     coins: ()=> save.coins,
     wallet: ()=> ({ coins: save.coins,
@@ -8258,7 +8562,7 @@
     },
     /* 그림 확인용: 한 종만 캔버스에 크게 그려 본다 (테스트 전용) */
     paintFish: (cv, id, size)=>{
-      const all = SPECIES.concat(BOSSES);
+      const all = SPECIES.concat(BOSSES).concat(DIAMONDS);
       const sp = all.filter(function(s){ return s.id === id; })[0];
       if(!sp) return null;
       const c2 = cv.getContext('2d');
