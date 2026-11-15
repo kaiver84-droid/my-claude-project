@@ -908,6 +908,31 @@
     .prog-grid .pg b{font-size:14px;}
   }
 
+  /* ---------- 세부 조정 (자릿수 · 받아올림/내림 · 곱셈·나눗셈) ---------- */
+  .dt-group{display:flex;flex-direction:column;gap:5px;}
+  .dt-title{display:flex;align-items:baseline;gap:5px;font-size:12.5px;font-weight:900;color:#1f4d24;letter-spacing:-.01em;}
+  .dt-title small{font-size:10px;font-weight:800;color:#6b8a5e;}
+  .dt-chips{display:flex;flex-wrap:wrap;gap:5px;}
+  .dt-chip{
+    flex:0 0 auto;min-height:33px;padding:5px 9px;border-radius:11px;white-space:nowrap;
+    background:#fff;border:2.5px solid #d6e8cc;font-family:inherit;
+    font-size:11.5px;font-weight:900;color:#20402a;cursor:pointer;letter-spacing:-.01em;
+  }
+  .dt-chip:active{transform:scale(.98);}
+  .dt-chip.on{background:linear-gradient(#a9e07e,#63ba42);border-color:#3f8a26;
+    color:#143701;box-shadow:0 2px 0 #35801f;}
+  .dt-note{font-size:10.5px;font-weight:800;color:#6b8a5e;line-height:1.3;padding:0 1px;}
+  #dtAutoNote{color:#8a6a18;}
+  .study-preview .pv-ex{
+    display:block;margin-top:3px;font-size:11.5px;font-weight:800;color:#5d7d52;line-height:1.3;
+  }
+  .study-preview .pv-ex b{font-size:13px;color:#1f4d24;letter-spacing:.01em;}
+  @media (max-height:700px){
+    .dt-chip{min-height:30px;padding:4px 7px;font-size:11px;}
+    .dt-title{font-size:12px;}
+    .study-preview .pv-ex b{font-size:12.5px;}
+  }
+
   /* ---------- 학습 설정 (시작 화면 요약 + ⚙️ 모달) ---------- */
   .study-row{
     display:flex;align-items:center;gap:8px;width:100%;text-align:left;
@@ -1345,6 +1370,47 @@
             <div class="st-sub-title">섞어서 — 어떤 문제를 섞을까요?</div>
             <button type="button" data-mix="mix2"><b>+</b><b>−</b> 덧셈 + 뺄셈만</button>
             <button type="button" data-mix="mix4"><b>+</b><b>−</b><b>×</b><b>÷</b> 사칙연산 다 섞기</button>
+          </div>
+        </div>
+        <div class="st-sec" id="detailBlock">
+          <div class="st-sec-title">세부 조정 <small>원하는 문제만 골라요</small></div>
+          <div class="dt-note hidden" id="dtAutoNote"></div>
+          <div class="dt-group" id="dtSizeGroup">
+            <div class="dt-title">수 크기 <small>덧셈·뺄셈</small></div>
+            <div class="dt-chips" id="dtSize">
+              <button type="button" class="dt-chip" data-size="auto">기본(단계 따름)</button>
+              <button type="button" class="dt-chip" data-size="1">한 자리 (1~9)</button>
+              <button type="button" class="dt-chip" data-size="2x1">두 자리 ± 한 자리</button>
+              <button type="button" class="dt-chip" data-size="2">두 자리 수 셈</button>
+              <button type="button" class="dt-chip" data-size="3">세 자리 수 포함</button>
+            </div>
+          </div>
+          <div class="dt-group" id="dtCarryGroup">
+            <div class="dt-title">받아올림·받아내림</div>
+            <div class="dt-chips" id="dtCarry">
+              <button type="button" class="dt-chip" data-carry="auto">상관없음(단계 따름)</button>
+              <button type="button" class="dt-chip" data-carry="none">받아올림·내림 없음</button>
+              <button type="button" class="dt-chip" data-carry="yes">받아올림·내림 포함</button>
+            </div>
+            <div class="dt-note hidden" id="dtCarryNote"></div>
+          </div>
+          <div class="dt-group hidden" id="dtMulGroup">
+            <div class="dt-title">곱셈</div>
+            <div class="dt-chips" id="dtMul">
+              <button type="button" class="dt-chip" data-mul="auto">기본(단계 따름)</button>
+              <button type="button" class="dt-chip" data-mul="11">구구단 (한 자리×한 자리)</button>
+              <button type="button" class="dt-chip" data-mul="21">두 자리 × 한 자리</button>
+              <button type="button" class="dt-chip" data-mul="31">세 자리 × 한 자리</button>
+            </div>
+          </div>
+          <div class="dt-group hidden" id="dtDivGroup">
+            <div class="dt-title">나눗셈</div>
+            <div class="dt-chips" id="dtDiv">
+              <button type="button" class="dt-chip" data-div="auto">기본(단계 따름)</button>
+              <button type="button" class="dt-chip" data-div="1">구구단 나눗셈 (몫 한 자리)</button>
+              <button type="button" class="dt-chip" data-div="21">두 자리 ÷ 한 자리</button>
+              <button type="button" class="dt-chip" data-div="31">세 자리 ÷ 한 자리</button>
+            </div>
           </div>
         </div>
         <div class="st-sec" id="levelBlock">
@@ -2333,15 +2399,264 @@
     if(k === 'mul') return stMul(level);
     return stDiv(level);
   }
-  function studyProblem(op, level){
+  function studyProblem(op, level, detail){
     const lv = (Number(level) === 2 || Number(level) === 3) ? Number(level) : 1;
     const o = ST_OPS.indexOf(op) >= 0 ? op : 'mix4';
-    if(o === 'add') return stAdd(lv);
-    if(o === 'sub') return stSub(lv);
-    if(o === 'mul') return stMul(lv);
-    if(o === 'div') return stDiv(lv);
-    if(o === 'mix2') return stMixed(lv, ['add','sub']);
-    return stMixed(lv, ['add','sub','mul','div']);
+    /* 세부 조정(자릿수·올림·곱셈/나눗셈 종류)까지 반영해 출제한다 */
+    const d = dtNorm(detail == null ? save.study.detail : detail);
+    if(o === 'add') return dtFamily('add', lv, d);
+    if(o === 'sub') return dtFamily('sub', lv, d);
+    if(o === 'mul') return dtFamily('mul', lv, d);
+    if(o === 'div') return dtFamily('div', lv, d);
+    if(o === 'mix2') return dtFamily(Math.random() < 0.5 ? 'add' : 'sub', lv, d);
+    return dtFamily(pick(['add','sub','mul','div']), lv, d);
+  }
+  /* =================================================================
+     세부 조정 — 자릿수 · 받아올림/내림 · 곱셈·나눗셈 종류
+     · 값이 'auto'면 예전 생성기(stAdd/stSub/stMul/stDiv)를 그대로 쓴다
+     · 고른 조합은 아래 규칙 안에서만 만든다
+       자릿수  1(한 자리) · 2x1(두 자리 ± 한 자리) · 2(두 자리 셈) · 3(세 자리 포함)
+       올림    none(받아올림·내림 없음) · yes(꼭 포함)
+       곱셈    11(구구단) · 21(두 자리×한 자리) · 31(세 자리×한 자리)
+       나눗셈  1(몫 한 자리) · 21(두 자리÷한 자리) · 31(세 자리÷한 자리)
+     - 뺄셈은 a > b (음수 없음), 나눗셈은 나머지 0
+     ================================================================= */
+  const DT_SIZES = ['auto','1','2x1','2','3'];
+  const DT_CARRYS = ['auto','none','yes'];
+  const DT_MULS = ['auto','11','21','31'];
+  const DT_DIVS = ['auto','1','21','31'];
+
+  function dtNorm(d){
+    const o = (d && typeof d === 'object') ? d : {};
+    return {
+      size:  DT_SIZES.indexOf(o.size) >= 0 ? o.size : 'auto',
+      carry: DT_CARRYS.indexOf(o.carry) >= 0 ? o.carry : 'auto',
+      mul:   DT_MULS.indexOf(o.mul) >= 0 ? o.mul : 'auto',
+      div:   DT_DIVS.indexOf(o.div) >= 0 ? o.div : 'auto'
+    };
+  }
+  /* 세부 조정이 하나라도 골라져 있는가 */
+  function dtAny(d){
+    const x = dtNorm(d);
+    return x.size !== 'auto' || x.carry !== 'auto' || x.mul !== 'auto' || x.div !== 'auto';
+  }
+  /* 자릿수를 고르지 않았을 때는 단계가 정한 자릿수를 따른다 */
+  function dtLevelSize(lv){ return lv <= 1 ? '1' : (lv === 2 ? '2' : '3'); }
+  /* 올림을 고르지 않았을 때: 1·2단계는 없음, 3단계는 있음 (한 자리 수는 항상 없음) */
+  function dtCarryMode(size, carry, lv){
+    if(carry === 'none' || carry === 'yes') return carry;
+    if(size === '1') return 'none';
+    return lv >= 3 ? 'yes' : 'none';
+  }
+
+  /* ---------- 덧셈 규칙 검산 ---------- */
+  function dtAddOK(a, b, sz, mode){
+    if(a < 1 || b < 1) return false;
+    if(sz === '1'){
+      if(a > 9 || b > 9) return false;
+      return mode === 'yes' ? (a + b >= 10) : (a + b <= 9);
+    }
+    if(sz === '2x1'){
+      if(a < 10 || a > 99 || b > 9) return false;
+      if(a % 10 < 1) return false;
+      const u = (a % 10) + b;
+      return mode === 'yes' ? u >= 10 : u <= 9;
+    }
+    if(sz === '2'){
+      if(a < 10 || a > 99 || b < 10 || b > 99) return false;
+      if(a % 10 < 1 || b % 10 < 1) return false;
+      const u = (a % 10) + (b % 10);
+      const t = Math.floor(a / 10) + Math.floor(b / 10) + (u >= 10 ? 1 : 0);
+      if(t > 9) return false;                       /* 답은 두 자리 안 */
+      return mode === 'yes' ? u >= 10 : u <= 9;
+    }
+    if(a < 100 || a > 999 || b < 10 || b > 999) return false;
+    const u = (a % 10) + (b % 10);
+    const c1 = u >= 10;
+    const t = (Math.floor(a / 10) % 10) + (Math.floor(b / 10) % 10) + (c1 ? 1 : 0);
+    const c2 = t >= 10;
+    const h = Math.floor(a / 100) + Math.floor(b / 100) + (c2 ? 1 : 0);
+    if(h > 9) return false;                         /* 답은 세 자리 안 */
+    return mode === 'yes' ? (c1 || c2) : !(c1 || c2);
+  }
+  /* ---------- 뺄셈 규칙 검산 (a > b) ---------- */
+  function dtSubOK(a, b, sz, mode){
+    if(a <= b || b < 1) return false;
+    if(sz === '1') return a <= 9 && b <= 8;
+    if(sz === '2x1'){
+      if(a < 10 || a > 99 || b > 9) return false;
+      if(a % 10 < 1) return false;
+      return mode === 'yes' ? (a % 10) < b : (a % 10) >= b;
+    }
+    if(sz === '2'){
+      if(a > 99 || b < 10 || b > 99) return false;
+      const b1 = (a % 10) < (b % 10);
+      const b2 = (Math.floor(a / 10) - (b1 ? 1 : 0)) < Math.floor(b / 10);
+      return mode === 'yes' ? (b1 || b2) : !(b1 || b2);
+    }
+    if(a < 100 || a > 999 || b > 999) return false;
+    const b1 = (a % 10) < (b % 10);
+    const b2 = ((Math.floor(a / 10) % 10) - (b1 ? 1 : 0)) < (Math.floor(b / 10) % 10);
+    const b3 = (Math.floor(a / 100) - (b2 ? 1 : 0)) < Math.floor(b / 100);
+    return mode === 'yes' ? (b1 || b2) : !(b1 || b2 || b3);
+  }
+  /* ---------- 곱셈·나눗셈 규칙 검산 ---------- */
+  function dtMulOK(a, b, kind){
+    if(b < 2 || b > 9 || a < 2) return false;
+    if(kind === '11') return a <= 9;
+    if(kind === '21') return a >= 12 && a <= 99 && (a % 10) >= 1;
+    return a >= 100 && a <= 999 && (a % 10) >= 1;
+  }
+  function dtDivOK(d, q, kind){
+    if(d < 2 || d > 9 || q < 2) return false;
+    const n = d * q;
+    if(kind === '1') return q <= 9;
+    if(kind === '21') return q >= 11 && q <= 99 && (q % 10) !== 0 && n >= 10 && n <= 99;
+    return q >= 11 && q <= 99 && (q % 10) !== 0 && n >= 100 && n <= 999;
+  }
+
+  /* ---------- 조건에 맞는 수 고르기 (실패해도 규칙을 지키는 예시로) ---------- */
+  const DT_FALLBACK_ADD = {
+    '1':   { none:[3, 5],    yes:[7, 8] },
+    '2x1': { none:[24, 3],   yes:[47, 8] },
+    '2':   { none:[42, 35],  yes:[47, 28] },
+    '3':   { none:[234, 125], yes:[437, 268] }
+  };
+  const DT_FALLBACK_SUB = {
+    '1':   { none:[9, 4],    yes:[9, 4] },
+    '2x1': { none:[48, 6],   yes:[42, 7] },
+    '2':   { none:[87, 43],  yes:[52, 47] },
+    '3':   { none:[874, 352], yes:[523, 268] }
+  };
+
+  function dtAddPair(sz, mode){
+    for(let i = 0; i < 900; i++){
+      let a, b;
+      if(sz === '1'){ a = R(1, 9); b = R(1, 9); }
+      else if(sz === '2x1'){ a = R(10, 99); b = R(1, 9); }
+      else if(sz === '2'){ a = R(10, 99); b = R(10, 99); }
+      else { a = R(100, 999); b = R(10, 999); }
+      if(dtAddOK(a, b, sz, mode)) return [a, b];
+    }
+    return DT_FALLBACK_ADD[sz][mode];
+  }
+  function dtSubPair(sz, mode){
+    for(let i = 0; i < 900; i++){
+      let a, b;
+      if(sz === '1'){ a = R(2, 9); b = R(1, a - 1); }
+      else if(sz === '2x1'){ a = R(11, 99); b = R(1, 9); }
+      else if(sz === '2'){ a = R(10, 99); b = R(10, 99); }
+      else { a = R(100, 999); b = R(10, 999); }
+      if(dtSubOK(a, b, sz, mode)) return [a, b];
+    }
+    return DT_FALLBACK_SUB[sz][mode];
+  }
+  function dtMulPair(kind){
+    for(let i = 0; i < 500; i++){
+      let a, b;
+      if(kind === '11'){ a = R(2, 9); b = R(2, 9); }
+      else if(kind === '21'){ a = R(12, 99); b = R(2, 9); }
+      else { a = R(102, 999); b = R(2, 9); }
+      if(dtMulOK(a, b, kind)) return [a, b];
+    }
+    return kind === '11' ? [4, 7] : (kind === '21' ? [24, 7] : [234, 7]);
+  }
+  function dtDivPair(kind){
+    for(let i = 0; i < 500; i++){
+      let d, q;
+      if(kind === '1'){ d = R(2, 8); q = R(2, 9); }
+      else if(kind === '21'){ d = R(2, 9); q = R(11, Math.floor(99 / d)); }
+      else { d = R(2, 9); q = R(Math.ceil(100 / d), 99); }
+      if(dtDivOK(d, q, kind)) return [d, q];
+    }
+    return kind === '1' ? [3, 4] : (kind === '21' ? [4, 13] : [4, 37]);
+  }
+
+  /* ---------- 힌트 ---------- */
+  /* 세 자리 × 한 자리: 백·십·일의 자리를 따로 곱해서 더한다 */
+  function dtMulHint(a, b){
+    if(a <= 99) return stMulHint(a, b);
+    const h = Math.floor(a / 100), t = Math.floor(a / 10) % 10, u = a % 10;
+    const steps = [];
+    if(h) steps.push({label:'백의 자리', text:(h * 100) + ' × ' + b + ' = ' + (h * 100 * b)});
+    if(t) steps.push({label:'십의 자리', text:(t * 10) + ' × ' + b + ' = ' + (t * 10 * b)});
+    if(u) steps.push({label:'일의 자리', text:u + ' × ' + b + ' = ' + (u * b)});
+    const parts = [h * 100 * b, t * 10 * b, u * b].filter(function(v){ return v > 0; });
+    steps.push({label:'더하기', text:parts.join(' + ') + ' = ' + (a * b)});
+    steps.push({label:'답', text:a + ' × ' + b + ' = ' + (a * b)});
+    return stepsHint(steps, '백의 자리부터 따로 곱한 뒤 더해요.');
+  }
+
+  /* ---------- 문제 만들기 ---------- */
+  function dtAddProb(a, b, sz, mode, level){
+    const ans = a + b;
+    if(sz === '1' && ans <= 9){
+      const items = its(a, 0).concat(its(b, 1));
+      return prob({grade:0, kind:'std_add_' + sz, ansNum:ans, choiceOpt:stOpt(ans, 1),
+        text:a + ' + ' + b + ' = ?',
+        hint: appleHint(items, '빨간 사과 ' + a + '개와 파란 사과 ' + b + '개를 모두 세어 보세요.'),
+        data:{a, b, op:'+', ans, level, dt:{size:sz, carry:mode}}});
+    }
+    return prob({grade:0, kind:'std_add_' + sz, ansNum:ans, choiceOpt:stOpt(ans, 2),
+      text:a + ' + ' + b + ' = ?',
+      hint: stAddHint(a, b),
+      data:{a, b, op:'+', ans, level, dt:{size:sz, carry:mode}}});
+  }
+  function dtSubProb(a, b, sz, mode, level){
+    const ans = a - b;
+    if(sz === '1'){
+      const items = its(a, 0);
+      for(let i = items.length - b; i < items.length; i++) items[i].m = 'crossed';
+      return prob({grade:0, kind:'std_sub_' + sz, ansNum:ans, choiceOpt:stOpt(ans, 0),
+        text:a + ' - ' + b + ' = ?',
+        hint: appleHint(items, a + '개 중에서 ' + b + '개에 X표 했어요. 남은 사과를 세어 보세요.'),
+        data:{a, b, op:'-', ans, level, dt:{size:sz, carry:'none'}}});
+    }
+    return prob({grade:0, kind:'std_sub_' + sz, ansNum:ans, choiceOpt:stOpt(ans, 0),
+      text:a + ' - ' + b + ' = ?',
+      hint: stSubHint(a, b),
+      data:{a, b, op:'-', ans, level, dt:{size:sz, carry:mode}}});
+  }
+  function dtMulProb(a, b, kind, level){
+    const ans = a * b;
+    return prob({grade:0, kind:'std_mul_' + kind, ansNum:ans, choiceOpt:stOpt(ans, 2),
+      text:a + ' × ' + b + ' = ?',
+      hint: dtMulHint(a, b),
+      data:{a, b, op:'×', ans, level, dt:{mul:kind}}});
+  }
+  function dtDivProb(d, q, kind, level){
+    const n = d * q;
+    return prob({grade:0, kind:'std_div_' + kind, ansNum:q, choiceOpt:stOpt(q, 1),
+      text:n + ' ÷ ' + d + ' = ?',
+      hint: stDivHint(d, q),
+      data:{d, q, n, op:'÷', ans:q, level, dt:{div:kind}}});
+  }
+
+  /* 한 연산만 세부 규칙으로 출제 (auto면 예전 생성기 그대로) */
+  function dtFamily(fam, lv, dt){
+    const d = dtNorm(dt);
+    if(fam === 'add'){
+      if(d.size === 'auto' && d.carry === 'auto') return stAdd(lv);
+      const sz = d.size === 'auto' ? dtLevelSize(lv) : d.size;
+      const mode = dtCarryMode(sz, d.carry, lv);
+      const p = dtAddPair(sz, mode);
+      return dtAddProb(p[0], p[1], sz, mode, lv);
+    }
+    if(fam === 'sub'){
+      if(d.size === 'auto' && d.carry === 'auto') return stSub(lv);
+      const sz = d.size === 'auto' ? dtLevelSize(lv) : d.size;
+      const mode = dtCarryMode(sz, d.carry, lv);
+      const p = dtSubPair(sz, mode);
+      return dtSubProb(p[0], p[1], sz, mode, lv);
+    }
+    if(fam === 'mul'){
+      if(d.mul === 'auto') return stMul(lv);
+      const p = dtMulPair(d.mul);
+      return dtMulProb(p[0], p[1], d.mul, lv);
+    }
+    if(d.div === 'auto') return stDiv(lv);
+    const p = dtDivPair(d.div);
+    return dtDivProb(p[0], p[1], d.div, lv);
   }
   /* =================================================================
      PROBLEM-ENGINE-END
@@ -2360,7 +2675,9 @@
     caught:{}, caughtMon:{}, solved:0, correct:0,
     best:{ free:{1:0,2:0,3:0,4:0}, timed:{1:0,2:0,3:0,4:0} },
     /* 학습 설정: mode=grade(학년 과정) / custom(연산·난이도 직접 설정) */
-    study:{ mode:'grade', op:'add', level:1 },
+    study:{ mode:'grade', op:'add', level:1,
+      /* 세부 조정: 자릿수 · 받아올림/내림 · 곱셈·나눗셈 종류 (auto = 단계 따름) */
+      detail:{ size:'auto', carry:'auto', mul:'auto', div:'auto' } },
     /* 자동 난이도(정답률 맞춤): 켜짐 여부 · 누적 풀이 · 트랙별 단계/현재 단계 기록 · 최근 정오 */
     prog:{ on:false, total:0, correct:0, gradeLv:1, customLv:1,
            att:{ grade:0, custom:0 }, cor:{ grade:0, custom:0 },
@@ -2397,7 +2714,8 @@
       save.study = {
         mode: st.mode === 'custom' ? 'custom' : 'grade',
         op: ST_OPS.indexOf(st.op) >= 0 ? st.op : 'add',
-        level: (Number(st.level) === 2 || Number(st.level) === 3) ? Number(st.level) : 1
+        level: (Number(st.level) === 2 || Number(st.level) === 3) ? Number(st.level) : 1,
+        detail: dtNorm(st.detail)
       };
       /* 자동 난이도 기록 (없거나 깨졌으면 처음 상태로) */
       const pg = (o.prog && typeof o.prog === 'object') ? o.prog : {};
@@ -5402,9 +5720,12 @@
   /* 플레이 중 상단 배지: 지금 적용 중인 학습 설정을 그대로 보여 준다 */
   function studyPill(){
     const md = G.mode === 'timed' ? '60초 도전' : th().free;
-    if(save.prog && save.prog.on) return '자동 Lv.' + PROG.level() + ' · 정답률 ' + PROG.accText();
+    if(save.prog && save.prog.on){
+      return '자동 Lv.' + PROG.level() + ' · 정답률 ' + PROG.accText()
+        + (dtAny(dtCur()) ? ' · ' + dtShortTag() : '');
+    }
     return (save.study.mode === 'custom')
-      ? studyShort()
+      ? dtBadge()
       : GRADE_INFO[G.grade].name + ' · ' + md;
   }
   /* 보유 포인트를 HUD · 시작 화면 · 상점 세 곳에 같이 맞춘다 */
@@ -5540,7 +5861,7 @@
   /* 예: 1학년 과정 · 덧셈+뺄셈 · 1단계 쉬움 */
   function studyLabelNow(){
     return save.study.mode === 'custom'
-      ? studyShort()
+      ? dtSummary()
       : GRADE_INFO[save.grade].name + ' 과정';
   }
   function refreshStudyUI(){
@@ -5570,6 +5891,7 @@
       ? ('자동 Lv.' + PROG.level() + ' · ' + PROG.label())
       : (custom ? studyShort() : GRADE_INFO[save.grade].name + ' 과정')) + '</b>';
     try{ PROG.paint(); }catch(e){}
+    try{ refreshDetailUI(); }catch(e){}
   }
   function openStudy(){
     /* 문제를 푸는 중(퀴즈·잡아 올리기)에는 열지 않는다 */
@@ -7959,6 +8281,162 @@
   PROG.init();
 
   /* ---------------------------------------------------------------
+     세부 조정 UI — 자릿수 · 받아올림/내림 · 곱셈·나눗셈 종류
+     · 고른 값은 save.study.detail 에 저장 → localStorage 에 남는다
+     · 고르는 즉시 예시 문제가 바뀌고, HUD 배지에도 짧게 보인다
+  ----------------------------------------------------------------*/
+  const DT_SIZE_NAME = {'1':'한 자리', '2x1':'두 자리+한 자리', '2':'두 자리', '3':'세 자리'};
+  const DT_MUL_NAME = {'11':'구구단', '21':'두 자리×한 자리', '31':'세 자리×한 자리'};
+  const DT_DIV_NAME = {'1':'구구단 나눗셈', '21':'두 자리÷한 자리', '31':'세 자리÷한 자리'};
+
+  function dtCur(){ return dtNorm(save.study.detail); }
+  function dtUsesAS(op){ return op === 'add' || op === 'sub' || op === 'mix2' || op === 'mix4'; }
+  function dtUsesMul(op){ return op === 'mul' || op === 'mix4'; }
+  function dtUsesDiv(op){ return op === 'div' || op === 'mix4'; }
+  function dtCarryWord(op){
+    if(op === 'sub') return '받아내림';
+    if(op === 'mix2' || op === 'mix4') return '받아올림·내림';
+    return '받아올림';
+  }
+  /* 지금 적용 중인 단계 (자동이면 자동 단계) */
+  function dtNowLevel(){
+    if(save.prog && save.prog.on) return PROG.level('custom');
+    return save.study.level;
+  }
+  /* 한 줄 요약: '두 자리 덧셈 · 받아올림 없음 · 2단계 보통' */
+  function dtSummary(){
+    const d = dtCur(), op = save.study.op;
+    const lv = studyLevelInfo(save.study.level);
+    const parts = [];
+    if(dtUsesAS(op)){
+      const nm = (d.size === 'auto')
+        ? studyOpInfo(op).name
+        : (DT_SIZE_NAME[d.size] + ' ' + (op === 'sub' ? '뺄셈' : (op === 'add' ? '덧셈' : '덧·뺄셈')));
+      parts.push(nm);
+      if(d.carry === 'none') parts.push(dtCarryWord(op) + ' 없음');
+      else if(d.carry === 'yes') parts.push(dtCarryWord(op) + ' 포함');
+    }
+    if(dtUsesMul(op) && d.mul !== 'auto') parts.push(DT_MUL_NAME[d.mul]);
+    if(dtUsesDiv(op) && d.div !== 'auto') parts.push(DT_DIV_NAME[d.div]);
+    if(!parts.length) parts.push(studyOpInfo(op).name);
+    parts.push(lv.name + ' ' + lv.tag);
+    return parts.join(' · ');
+  }
+  /* HUD 배지에 덧붙일 세부 이름 (예: '두 자리 덧셈 · 받아올림 없음') */
+  function dtShortTag(){
+    const d = dtCur(), op = save.study.op;
+    const parts = [];
+    if(dtUsesAS(op)){
+      if(d.size !== 'auto'){
+        parts.push(DT_SIZE_NAME[d.size] + (op === 'sub' ? ' 뺄셈' : (op === 'add' ? ' 덧셈' : ' 덧·뺄셈')));
+      }
+    }
+    if(dtUsesMul(op) && d.mul !== 'auto') parts.push(DT_MUL_NAME[d.mul]);
+    if(dtUsesDiv(op) && d.div !== 'auto') parts.push(DT_DIV_NAME[d.div]);
+    /* 지금 연산에 걸린 세부 조건이 없으면 연산 이름만 (예: 곱셈만 골라 둔 채 덧셈 연습) */
+    if(!parts.length) parts.push(studyOpInfo(op).name);
+    return parts.join(' · ');
+  }
+  /* HUD 배지용 짧은 이름 (예: '두 자리 덧셈 · 2단계') */
+  function dtBadge(){
+    const d = dtCur();
+    if(!dtAny(d)) return studyShort();
+    const tag = dtShortTag();
+    return (tag ? tag + ' · ' : '') + studyLevelInfo(dtNowLevel()).name;
+  }
+  /* 세부 설정 그대로 만든 예시 문제 (미리보기) */
+  function dtPreviewText(){
+    try{ return studyProblem(save.study.op, dtNowLevel()).text; }
+    catch(e){ return ''; }
+  }
+  function dtSetChips(sel, key, val){
+    Array.prototype.forEach.call(document.querySelectorAll(sel + ' .dt-chip'), function(x){
+      const on = x.dataset[key] === val;
+      x.classList.toggle('on', on);
+      x.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+  }
+  function refreshDetailUI(){
+    const block = $('detailBlock');
+    if(!block) return;
+    const custom = save.study.mode === 'custom';
+    block.classList.toggle('hidden', !custom);
+    if(!custom) return;
+    const d = dtCur(), op = save.study.op;
+    const szGrp = $('dtSizeGroup'), crGrp = $('dtCarryGroup');
+    const mulGrp = $('dtMulGroup'), divGrp = $('dtDivGroup');
+    if(szGrp) szGrp.classList.toggle('hidden', !dtUsesAS(op));
+    if(crGrp) crGrp.classList.toggle('hidden', !dtUsesAS(op));
+    if(mulGrp) mulGrp.classList.toggle('hidden', !dtUsesMul(op));
+    if(divGrp) divGrp.classList.toggle('hidden', !dtUsesDiv(op));
+
+    /* 한 자리 수 뺄셈에는 받아내림이 없다 */
+    const note = $('dtCarryNote');
+    if(note){
+      const subIn = (op === 'sub' || op === 'mix2' || op === 'mix4');
+      const msg = (d.size === '1' && subIn)
+        ? '한 자리 수 뺄셈은 받아내림이 없어요 · 덧셈에만 적용돼요'
+        : '';
+      note.textContent = msg;
+      note.classList.toggle('hidden', !msg);
+    }
+    /* 자동 난이도가 켜져 있으면 자릿수를 기본으로 두면 단계를 따라간다 */
+    const an = $('dtAutoNote');
+    if(an){
+      const on = !!(save.prog && save.prog.on);
+      an.classList.toggle('hidden', !on);
+      if(on) an.textContent = '📈 자동 난이도 켜짐 · 자릿수를 ‘기본’으로 두면 이번 단계를 따라가요';
+    }
+
+    dtSetChips('#dtSize', 'size', d.size);
+    dtSetChips('#dtCarry', 'carry', d.carry);
+    dtSetChips('#dtMul', 'mul', d.mul);
+    dtSetChips('#dtDiv', 'div', d.div);
+
+    /* 예시 문제 미리보기 — 고른 즉시 바뀐다 */
+    const pv = $('studyPreview');
+    if(pv){
+      const ex = dtPreviewText();
+      pv.innerHTML = '지금 설정: <b>' + dtSummary() + '</b>' +
+        (ex ? '<span class="pv-ex">예시: <b>' + ex + '</b></span>' : '');
+    }
+  }
+  /* 세부 조건 하나 바꾸기 */
+  function setStudyDetail(key, val){
+    const d = dtCur();
+    if(!(key in d)) return false;
+    const next = { size:d.size, carry:d.carry, mul:d.mul, div:d.div };
+    next[key] = val;
+    const n = dtNorm(next);
+    if(n[key] === d[key]) return false;
+    save.study.detail = n;
+    persist();
+    refreshStart();
+    updateHUD(true);
+    sfx.tap();
+    return true;
+  }
+  function dtInit(){
+    const block = $('detailBlock');
+    if(!block || block.dataset.wired === '1') return;
+    block.dataset.wired = '1';
+    block.addEventListener('click', function(ev){
+      let b = ev.target;
+      while(b && b !== block && !(b.classList && b.classList.contains('dt-chip'))) b = b.parentNode;
+      if(!b || b === block || !b.classList.contains('dt-chip')) return;
+      const keys = ['size', 'carry', 'mul', 'div'];
+      for(let i = 0; i < keys.length; i++){
+        const k = keys[i];
+        if(b.dataset[k] != null && b.dataset[k] !== ''){
+          setStudyDetail(k, b.dataset[k]);
+          return;
+        }
+      }
+    });
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', dtInit);
+  else dtInit();
+  /* ---------------------------------------------------------------
      시작
   ----------------------------------------------------------------*/
   loadSave();
@@ -8597,7 +9075,7 @@
     genStudy: (op, level, n)=>{
       const out = [];
       const c = Math.max(1, Math.floor(Number(n) || 1));
-      for(let i=0;i<c;i++) out.push(studyProblem(op, level));
+      for(let i=0;i<c;i++) out.push(studyProblem(op, level, dtNorm(null)));
       return out;
     },
     studyProblem: (op, level)=> studyProblem(op, level),
@@ -8621,6 +9099,18 @@
         .filter(x=>x.dataset.val !== String(G.quiz.answer) && !x.disabled)[0];
       if(b){ b.click(); return true; }
       return false;
+    },
+    /* 세부 조정 (테스트/확인용) */
+    detail: ()=> Object.assign({}, dtCur()),
+    setDetail: (key, val)=> { setStudyDetail(key, val); return Object.assign({}, dtCur()); },
+    detailSummary: ()=> dtSummary(),
+    detailBadge: ()=> dtBadge(),
+    previewText: ()=> dtPreviewText(),
+    genStudyDetail: (op, level, detail, n)=>{
+      const out = [];
+      const c = Math.max(1, Math.floor(Number(n) || 1));
+      for(let i=0;i<c;i++) out.push(studyProblem(op, level, detail));
+      return out;
     },
     /* 자동 난이도 (테스트/확인용) */
     prog: ()=> PROG.state(),
