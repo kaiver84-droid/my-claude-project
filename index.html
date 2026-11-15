@@ -8564,7 +8564,12 @@
       if(!running) return;
       const c = AC;
       if(!c){ running = false; return; }
-      if(c.state !== 'running'){ timer = setTimeout(tick, 300); return; }
+      if(c.state !== 'running'){
+        /* iOS 통화·알림 등으로 잠시 멈췄다 돌아오는 경우를 스스로 회복한다 */
+        try{ c.resume(); }catch(e){}
+        timer = setTimeout(tick, 300);
+        return;
+      }
       const now = c.currentTime;
       if(nextT < now - 0.1 || nextT > now + BAR * 1.6) nextT = now + 0.1;
       scheduleBar(bar, nextT);
@@ -8574,13 +8579,23 @@
       updateDuck();
       timer = setTimeout(tick, Math.max(40, (nextT - c.currentTime - 0.35) * 1000));
     }
+    let kickT = null;
+    /* iOS Safari 는 resume() 이 비동기라, 잠금이 막 풀리는 중이면 조금 뒤에 다시 시도한다 */
+    function waitUnlock(){
+      if(kickT) return;
+      kickT = setInterval(function(){
+        if(running || save.mute || hidden){ clearInterval(kickT); kickT = null; return; }
+        if(AC && AC.state === 'running'){ clearInterval(kickT); kickT = null; start(); }
+      }, 200);
+      setTimeout(function(){ if(kickT){ clearInterval(kickT); kickT = null; } }, 8000);
+    }
     function start(){
       if(running) return true;
       if(save.mute || hidden) return false;
       const c = audioCtx();
       if(!c) return false;
       if(c.state !== 'running'){ try{ c.resume(); }catch(e){} }
-      if(c.state !== 'running') return false;
+      if(c.state !== 'running'){ waitUnlock(); return false; }
       ensureBus(c);
       running = true;
       duck = duckFor();
@@ -8643,7 +8658,7 @@
       start: start, stop: stop, sync: sync, level: level,
       state: function(){
         return {
-          running: running, muted: !!save.mute, hidden: hidden,
+          running: running, muted: !!save.mute, hidden: hidden, waiting: !!kickT,
           duck: Math.round(duck * 1000) / 1000, bar: bar, bars: BARS, loops: loops,
           notes: notes, ctx: AC ? AC.state : 'none',
           gain: bus ? Math.round(bus.gain.value * 1000) / 1000 : 0,
